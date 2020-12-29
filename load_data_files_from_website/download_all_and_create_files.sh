@@ -1,8 +1,5 @@
 #!/bin/bash
 ./download_current_files_from_faers.sh
 ./download_legacy_files_from_faers.sh
-pushd
-cd ascii
-run-parts --regex 'create*' ..
-popd
-rm *zip
+./create_current_data_files_with_filename_column.sh
+./create_legacy_data_files_with_filename_column

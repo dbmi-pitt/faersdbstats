@@ -5,6 +5,8 @@
 # LTS Computing LLC
 ##########################################################################
 
+cd ascii
+
 # process the first file - including adding "filename" column name to the header line at the start of the file
 f="RPSR04Q1.TXT"
 thefilenamenosuffix=$(basename $f .TXT)

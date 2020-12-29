@@ -7,6 +7,8 @@
 # LTS Computing LLC
 ##########################################################################
 
+cd ascii
+
 # load the demographic format A files:
 
 # process the first format A file - including adding "filename" column name to the header line at the start of the file
@@ -48,6 +50,8 @@ DEMO10Q1.TXT  DEMO10Q2.TXT  DEMO10Q3.TXT  DEMO10Q4.TXT
 DEMO11Q1.TXT  DEMO11Q2.TXT  DEMO11Q3.TXT  DEMO11Q4.TXT
 DEMO12Q1.TXT  DEMO12Q2.TXT  DEMO12Q3.TXT
 "
+
+echo "concating fies into single file"
 for f in $FILES
 do
         thefilenamenosuffix=$(basename $f .TXT)
@@ -55,5 +59,6 @@ do
         sed 's/\r$//' $f | sed 'N;s/\n\$/\$/' | sed '1,1d' | sed "1,$ s/$/$f/" >> all_version_B_demo_legacy_data_with_filename.txt
 done
 
-# fix problem data record - remove embedded $ field separator in string
-sed -i 's/8129732$8401177$I$$8129732-9$20120126$20120206$20120210$EXP$JP-CUBIST-$E2B0000000182$CUBIST PHARMACEUTICALS, INC.$85$YR$M$Y$$$20120210$PH$$$$JAPAN$DEMO12Q1.TXT/8129732$8401177$I$$8129732-9$20120126$20120206$20120210$EXP$JP-CUBIST-E2B0000000182$CUBIST PHARMACEUTICALS, INC.$85$YR$M$Y$$$20120210$PH$$$$JAPAN$DEMO12Q1.TXT/' all_version_B_demo_legacy_data_with_filename.txt
+echo "fixing problem record"
+sed -i 's/8129732$8401177$I$$8129732-9$20120126$20120206$20120210$EXP$JP-CUBIST-$E2B0000000182$CUBIST PHARMACEUTICALS, INC.$85$YR$M$Y$$$20120210$$$$$JAPAN$DEMO12Q1.TXT/8129732$8401177$I$$8129732-9$20120126$20120206$20120210$EXP$JP-CUBIST-E2B0000000182$CUBIST PHARMACEUTICALS, INC.$85$YR$M$Y$$$20120210$$$$$JAPAN$DEMO12Q1.TXT/' all_version_B_demo_legacy_data_with_filename.txt
+
