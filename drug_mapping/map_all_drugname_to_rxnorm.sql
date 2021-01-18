@@ -49,6 +49,14 @@ from (
 drop index if exists drug_name_clean_ix;
 create index drug_name_clean_ix on drug_regex_mapping(drug_name_clean);
 
+-- FIND EXACT MATCHES FIRST
+UPDATE drug_regex_mapping a
+SET update_method = 'exact match' , concept_id = b.concept_id
+FROM staging_vocabulary.concept b
+WHERE b.vocabulary_id = 'RxNorm'
+  AND upper(b.concept_name) = a.drug_name_clean
+  and a.concept_id is null;
+
 -- remove the word tablet or "(tablet)" or the plural forms from drug name
 update drug_regex_mapping
 set drug_name_clean = regexp_replace(drug_name_clean, '(.*)(\W|^)\(TABLETS?\)|TABLETS?(\W|$)', '\1\2', 'gi') 
@@ -135,9 +143,10 @@ and drug_name_clean ~*  '.* \((.*)\)';
 
 -- find exact mapping
 UPDATE drug_regex_mapping a
-SET update_method = 'regex upper' , concept_id = b.concept_id
+SET update_method = 'regex ingredient name in parentheses' , concept_id = b.concept_id
 FROM staging_vocabulary.concept b
 WHERE b.vocabulary_id = 'RxNorm'
+AND a.concept_id IS NULL
 AND upper(b.concept_name) = a.drug_name_clean;
 
 -- remove trailing spaces or period or , characters
@@ -274,8 +283,8 @@ and a.concept_id is null;
 -- remove \nnnnn\
 update drug_regex_mapping a
 SET drug_name_clean = regexp_replace(drug_name_clean, '\/\d+\/\ *', '', 'gi') 
-where concept_id is null and 
-drug_name_original ~* '.*\/\d+\/.*';
+where concept_id is null
+and drug_name_original ~* '.*\/\d+\/.*';
 
 -- remove trailing spaces
 update drug_regex_mapping
@@ -291,6 +300,7 @@ AND upper(b.concept_name) = a.drug_name_clean
 and a.concept_id is null;
 
 -- map vitamins where only brand name or generic description is provided in drug name field
+-- this is a bit crude and heaps things like B6 VITAMIN, VITAMIN-B etc on the multivitamin heap.
 update drug_regex_mapping a
 set drug_name_clean = 'MULTIVITAMIN PREPARATION'
 where drug_name_clean like '%VITAMIN%' and drug_name_clean not like '%VITAMIN A%' and drug_name_clean not like '%VITAMIN B%'
@@ -421,7 +431,7 @@ group by drug_name_original, ingredient_list;
 update drug_regex_mapping_words c
 SET update_method = 'multiple ingredient match' , concept_name = b.concept_name, concept_id = b.concept_id 
 from (
-select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id 
+select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id
 from drug_mapping_multi_ingredient_list a
 inner join rxnorm_mapping_multi_ingredient_list b1
 on a.ingredient_list = b1.ingredient_list
@@ -513,7 +523,7 @@ group by drug_name_original, ingredient_list;
 update drug_regex_mapping_words c
 SET update_method = 'single ingredient match' , concept_name = b.concept_name, concept_id = b.concept_id 
 from (
-select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id 
+select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id
 from drug_mapping_single_ingredient_list a
 inner join rxnorm_mapping_single_ingredient_list b1
 on a.ingredient_list = b1.ingredient_list
@@ -603,7 +613,7 @@ group by drug_name_original, ingredient_list;
 update drug_regex_mapping_words c
 SET update_method = 'brand name match' , concept_name = b.concept_name, concept_id = b.concept_id 
 from (
-select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id 
+select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id
 from drug_mapping_brand_name_list a
 inner join rxnorm_mapping_brand_name_list b1
 on a.ingredient_list = b1.ingredient_list
@@ -730,6 +740,7 @@ and a.concept_id is null
 and b.concept_id is not null;
 
 -- update using drug_nda_mapping
+set search_path = faers;
 UPDATE combined_drug_mapping a
 SET  update_method = b.update_method , lookup_value = nda_ingredient, concept_id = b.concept_id
 FROM drug_nda_mapping b
@@ -740,7 +751,7 @@ and b.concept_id is not null;
 -- update using drug_usagi_mapping
 -- manually curated drug mappings
 UPDATE combined_drug_mapping a
-SET  update_method = b.update_method , lookup_value = b.concept_name, concept_id = b.concept_id
+SET  update_method = b.update_method , lookup_value = upper(b.concept_name), concept_id = b.concept_id
 FROM drug_usagi_mapping b
 WHERE upper(a.drug_name_original) = upper(b.drug_name_original)
 and a.concept_id is null

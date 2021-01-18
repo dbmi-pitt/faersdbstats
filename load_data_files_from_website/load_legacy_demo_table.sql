@@ -36,7 +36,7 @@ FILENAME varchar
 );
 truncate demo_legacy_staging_version_A;
 
-\COPY demo_legacy_staging_version_A FROM '/home/faersdbstats/load_data_files_from_website/ascii/all_version_A_demo_legacy_data_with_filename.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b' ;
+COPY demo_legacy_staging_version_A FROM '/home/faersdbstats/load_data_files_from_website/ascii/all_version_A_demo_legacy_data_with_filename.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b' ;
 select distinct filename from demo_legacy_staging_version_A order by 1 limit 10;
 
 drop table if exists demo_legacy_staging_version_B;

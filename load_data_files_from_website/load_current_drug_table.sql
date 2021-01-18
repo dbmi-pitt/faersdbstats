@@ -33,7 +33,7 @@ filename varchar
 );
 truncate drug_staging_version_A;
 
-\COPY drug_staging_version_A FROM '/home/faersdbstats/load_data_files_from_website/ascii/all_version_A_drug_data_with_filename.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b' ;
+COPY drug_staging_version_A FROM '/home/faersdbstats/load_data_files_from_website/ascii/all_version_A_drug_data_with_filename.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b' ;
 select distinct filename from drug_staging_version_A order by 1;
 
 drop table if exists drug_staging_version_B;

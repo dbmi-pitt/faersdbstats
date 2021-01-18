@@ -70,6 +70,7 @@ from standard_drug_outcome_count a;
 
 -- Only run the below query when ALL OF THE ABOVE 3 QUERIES HAVE COMPLETED!
 -- combine all the counts into a single contingency table
+set search_path = faers;
 drop table if exists standard_drug_outcome_contingency_table;
 create table standard_drug_outcome_contingency_table as		-- 1 second
 select ab.drug_concept_id, ab.outcome_concept_id, count_a, count_b, count_c, (count_d1 - count_d2) as count_d

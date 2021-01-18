@@ -25,6 +25,6 @@ from unique_all_case a
 inner join indi_legacy b
 on a.isr = b.isr
 inner join staging_vocabulary.concept c
-on upper(regexp_replace(b.indi_pt,'^ +','','gi')) = upper(c.concept_name) 
+on upper(regexp_replace(b.indi_pt,'^ +','','gi')) = upper(c.concept_name)
 and c.vocabulary_id = 'MedDRA'
 where a.isr is not null;
