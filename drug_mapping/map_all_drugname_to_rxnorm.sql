@@ -118,7 +118,7 @@ and a.concept_id is null;
 
 -- lookup active ingredient from EU drug name in parentheses
 update drug_regex_mapping a
-set update_method = 'regex EU drug name in parentheses to active ingredient', drug_name_clean = upper(b.active_substance) 
+set update_method = 'regex EU drug name in parentheses to active ingredient', drug_name_clean = upper(b.active_substance)
 from eu_drug_name_active_ingredient_mapping b
 where upper(regexp_replace(a.drug_name_clean, '.* \((.*)\)', '\1', 'gi')) = upper(b.brand_name)
 and a.concept_id is null
@@ -362,7 +362,7 @@ from (
 				select upper(concept_name) as concept_name, concept_id
 				from staging_vocabulary.concept b
 				where b.vocabulary_id = 'RxNorm'
-				and b.concept_class_id = 'Clinical Drug Form' 
+				and b.concept_class_id = 'Clinical Drug Form'
 				and concept_name like '%\/%'
 			) aa
 			order by concept_name desc
@@ -456,7 +456,7 @@ from (
 				select upper(concept_name) as concept_name, concept_id
 				from staging_vocabulary.concept b
 				where b.vocabulary_id = 'RxNorm'
-				and b.concept_class_id = 'Ingredient' 
+				and b.concept_class_id = 'Ingredient'
 			) aa
 			order by concept_name desc
 		) bb
@@ -521,7 +521,7 @@ group by drug_name_original, ingredient_list;
 
 -- map drug names containing single ingredient names to ingredient concepts
 update drug_regex_mapping_words c
-SET update_method = 'single ingredient match' , concept_name = b.concept_name, concept_id = b.concept_id 
+SET update_method = 'single ingredient match' , concept_name = b.concept_name, concept_id = b.concept_id
 from (
 select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id
 from drug_mapping_single_ingredient_list a
@@ -548,7 +548,7 @@ from (
 				select upper(concept_name) as concept_name, concept_id
 				from staging_vocabulary.concept b
 				where b.vocabulary_id = 'RxNorm'
-				and b.concept_class_id = 'Brand Name' 
+				and b.concept_class_id = 'Brand Name'
 			) aa
 			order by concept_name desc
 		) bb
@@ -611,7 +611,7 @@ group by drug_name_original, ingredient_list;
 
 -- map drug names containing brand names to brand name concepts
 update drug_regex_mapping_words c
-SET update_method = 'brand name match' , concept_name = b.concept_name, concept_id = b.concept_id 
+SET update_method = 'brand name match' , concept_name = b.concept_name, concept_id = b.concept_id
 from (
 select distinct a.drug_name_original, max(upper(b1.concept_name)) as concept_name, max(b1.concept_id) as concept_id
 from drug_mapping_brand_name_list a
@@ -630,7 +630,7 @@ and c.update_method is null and b.concept_name not in ('G.B.H. SHAMPOO', 'A.P.L.
 
 -- update the original drug regex mapping table with the brand names, multiple and single ingredient drug names 
 update drug_regex_mapping c
-SET update_method = b.update_method , drug_name_clean = b.concept_name, concept_id = b.concept_id 
+SET update_method = b.update_method , drug_name_clean = b.concept_name, concept_id = b.concept_id
 from (
 select distinct drug_name_original, concept_name, concept_id, update_method from drug_regex_mapping_words where concept_id is not null
 ) b
@@ -723,7 +723,7 @@ from (
 drop index if exists combined_drug_mapping_ix;
 create index combined_drug_mapping_ix on combined_drug_mapping(upper(drug_name_original));
 
--- update using drug_regex_mapping 
+-- update using drug_regex_mapping
 UPDATE combined_drug_mapping a
 SET  update_method = b.update_method , lookup_value = drug_name_clean, concept_id = b.concept_id
 FROM drug_regex_mapping b
@@ -760,18 +760,18 @@ and b.concept_id is not null;
 -- update unknown drugs where drug name starts with UNKNOWN
 update combined_drug_mapping 
 set update_method = 'unknown drug'
-where upper(drug_name_original) ~* '^UNKNOWN.*' 
+where upper(drug_name_original) ~* '^UNKNOWN.*'
 and update_method is null;
 
 -- update unknown drugs where drug name starts with OTHER
 update combined_drug_mapping 
 set update_method = 'unknown drug'
-where upper(drug_name_original) ~* '^OTHER.*' 
+where upper(drug_name_original) ~* '^OTHER.*'
 and update_method is null;
 
 -- update unknown drugs where drug name starts with UNSPECIFIED
 update combined_drug_mapping 
 set update_method = 'unknown drug'
-where upper(drug_name_original) ~* '^UNSPECIFIED.*' 
+where upper(drug_name_original) ~* '^UNSPECIFIED.*'
 and update_method is null;
 
