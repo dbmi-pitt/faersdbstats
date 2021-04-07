@@ -29,7 +29,8 @@ Shortened updated docs are here:
 - OHDSI CDMV5 Vocabulary
     - Load the latest available OHDSI CDMV5 Vocabulary tables into a separate PostgreSQL schema (e.g. cdmv5). The
       vocabulary data files and the PostgreSQL table load scripts are available from the OHDSI Athena website On the
-      Athena website vocabulary download page keep the pre-selected vocabularies and also select the MedDRA vocabulary (
+      Athena website vocabulary download page select the MedDRA, RxNorm, SNOMED (and if you will map to ATC also
+      download ATC) vocabulary (
       review the EULA link for MedDRA).
 - MedDRA / Snomed mapping
     - Create the meddra / snomed mapping table by running the script `create_meddra_snomed_mapping_table.sql`
