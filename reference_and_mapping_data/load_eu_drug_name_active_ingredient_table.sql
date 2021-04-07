@@ -14,8 +14,7 @@ create table eu_drug_name_active_ingredient
 	brand_name varchar,
 	eu_number varchar,
 	human_or_veterinary varchar,
-	procedure_type varchar,
-	details varchar
+	procedure_type varchar
 );
 
 -- eliminate any invalid utf8 characters using the following command
