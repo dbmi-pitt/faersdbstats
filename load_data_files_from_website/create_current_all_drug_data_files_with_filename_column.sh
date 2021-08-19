@@ -18,7 +18,8 @@ thefilename="${thefilenamenoprefix}.txt"
 # remove windows carriage return, add on the filename column name to the header line and add the filename as the last column on each line
 sed 's/\r$//' "${thefilename}"| sed '1,1 s/$/\$filename/' | sed "2,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
 
-for year in $(seq 13 20); do
+thisyear=$(date +"%y")
+for year in $(seq 13 "${thisyear}"); do
   for quarter in 1 2 3 4; do
     thefilenamenoprefix="DRUG${year}Q${quarter}"
     echo "processing ${thefilenamenoprefix}"

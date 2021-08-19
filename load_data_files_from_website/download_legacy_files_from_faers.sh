@@ -9,11 +9,15 @@ for year in $(seq 2004 2012); do
   for quarter in 1 2 3 4; do
     sleep 2
     fileyearquarter="${year}Q${quarter}"
+    if [ "${fileyearquarter}" == "2012Q4" ]; then
+      echo "Done with the legacy files"
+      exit 0
+    fi
     echo "processing ${fileyearquarter}"
     curl -L -O https://fis.fda.gov/content/Exports/aers_ascii_${fileyearquarter}.zip
     unzip aers_ascii_${fileyearquarter}.zip
-    mv README.doc "ascii/README${fileyearquarter}.doc"
-    mv "SIZE${fileyearquarter}.TXT" ascii
-    mv ascii/Asc_nts.doc "ascii/ASC_NTS${fileyearquarter}.doc"
+    rm README.doc
+    rm SIZE*.TXT
+    rm ascii/Asc_nts.doc
   done
 done
