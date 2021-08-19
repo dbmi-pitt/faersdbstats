@@ -3,8 +3,9 @@
 # Script is used as part of an EMC internal data processing pipeline, but 'should work' by itself
 # Process expects:
 #   1. vocabulary to be preloaded in schema staging_vocabulary
-#   2. required postgres variables to be set
-#   3. Java and Maven
+#   2. All the non legacy faers files to be downloaded in the faers_data_files folder
+#   3. required postgres variables to be set
+#   4. Java and Maven
 
 export PGPASSWORD=${POSTGRES_PASSWORD}
 psql -h "${POSTGRES_HOST}" -U "${POSTGRES_USER}" -c "\CREATE SCHEMA IF NOT EXISTS faers" "${POSTGRES_DATABASE}"
