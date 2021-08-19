@@ -25,7 +25,7 @@ thefilename="DEMO18Q1_new.txt"
 # remove windows carriage return, remove the header line and add the filename as the last column on each line
 sed 's/\r$//' "${thefilename}"| sed '1,1d' | sed "1,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
 
-for year in $(seq 13 20); do
+for year in $(seq 13 21); do
   for quarter in 1 2 3 4; do
     thefilenamenoprefix="DEMO${year}Q${quarter}"
     echo "processing ${thefilenamenoprefix}"

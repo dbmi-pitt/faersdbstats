@@ -38,10 +38,12 @@ cat DRUG14Q3_with_filename.txt DRUG14Q4_with_filename.txt DRUG15*_with_filename.
   DRUG17*_with_filename.txt DRUG18*_with_filename.txt DRUG19*_with_filename.txt \
   DRUG20*_with_filename.txt >all_version_B_drug_data_with_filename.txt
 
-# remove replace non utf8 characters form sourcefile with something similar.
+# remove or replace non utf8 characters form sourcefile with something similar.
 # This small java app was built using junidecode 0.3.0 https://github.com/gcardone/junidecode
 mv ../illigal-char-cleaner-1.0.jar .
-java -jar illigal-char-cleaner-1.0.jar drug_bac.txt
+java -jar illigal-char-cleaner-1.0.jar all_version_B_drug_data_with_filename.txt
 mv illigal-char-cleaner-1.0.jar ../
+mv all_version_B_drug_data_with_filename.txt all_version_B_drug_data_with_filename_backup.txt
+mv all_version_B_drug_data_with_filename_clean.txt all_version_B_drug_data_with_filename.txt
 
 echo "done!"
