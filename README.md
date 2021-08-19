@@ -52,7 +52,7 @@ From the handle_duplicate_cases folder:
 
 ### Mapping
 
-Use this small app https://github.com/mi-erasmusmc/aioli or refer to original docs
+Use this app https://github.com/mi-erasmusmc/aioli or refer to original docs in the documentation folder
 
 ### Standardization and statistic generation
 

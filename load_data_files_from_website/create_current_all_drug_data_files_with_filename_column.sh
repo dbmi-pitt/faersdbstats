@@ -41,7 +41,7 @@ cat DRUG14Q3_with_filename.txt DRUG14Q4_with_filename.txt DRUG15*_with_filename.
 # remove replace non utf8 characters form sourcefile with something similar.
 # This small java app was built using junidecode 0.3.0 https://github.com/gcardone/junidecode
 mv ../illigal-char-cleaner-1.0.jar .
-java -jar illigal-char-cleaner-1.0.jar all_version_B_drug_data_with_filename.txt
+java -jar illigal-char-cleaner-1.0.jar drug_bac.txt
 mv illigal-char-cleaner-1.0.jar ../
 
 echo "done!"

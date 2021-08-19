@@ -1,11 +1,10 @@
 #!/bin/sh
 
-HOST=127.0.0.1
-DATABASE=cem
-USER=postgres
-PASSWORD=postgres
+HOST="${POSTGRES_HOST}"
+DATABASE=${POSTGRES_DATABASE}
+USER="${POSTGRES_USER}"
 
-export PGPASSWORD=${PASSWORD}
+export PGPASSWORD=${POSTGRES_PASSWORD}
 
 psql -h ${HOST} -U ${USER} -f ./derive_standard_case_outcome_category.sql ${DATABASE}
 psql -h ${HOST} -U ${USER} -f ./derive_standard_case_indication.sql ${DATABASE}
@@ -16,20 +15,21 @@ psql -h ${HOST} -U ${USER} -f ./derive_standard_drug_outcome_contingency_table_1
 
 echo "run three time consuming queries concurrently"
 psql -h ${HOST} -U ${USER} -f ./derive_standard_drug_outcome_contingency_table_2.sql ${DATABASE} &
-pids[0]=$!
+pid1=$!
 
 psql -h ${HOST} -U ${USER} -f ./derive_standard_drug_outcome_contingency_table_3.sql ${DATABASE} &
-pids[1]=$!
+pid2=$!
 
 psql -h ${HOST} -U ${USER} -f ./derive_standard_drug_outcome_contingency_table_4.sql ${DATABASE} &
-pids[2]=$!
+pid3=$!
 
 echo "Waiting approximately 30 hours for these three processes"
 
 # wait for all the queries before running the last set
-for pid in ${pids[*]}; do
-  wait $pid
-done
+wait $pid1
+wait $pid2
+wait $pid3
+
 
 echo "done waiting"
 
