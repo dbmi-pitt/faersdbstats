@@ -42,4 +42,4 @@ cat demo12*_with_filename.txt DEMO13*_with_filename.txt DEMO14Q1_with_filename.t
 # concatenate all the version B demo files with filenames together into a single file for loading
 cat DEMO14Q3_with_filename.txt DEMO14Q4_with_filename.txt DEMO15*_with_filename.txt DEMO16*_with_filename.txt \
   DEMO17*_with_filename.txt DEMO18*_with_filename.txt DEMO19*_with_filename.txt \
-  DEMO20*_with_filename.txt >all_version_B_demo_data_with_filename.txt
+  DEMO2*_with_filename.txt >all_version_B_demo_data_with_filename.txt

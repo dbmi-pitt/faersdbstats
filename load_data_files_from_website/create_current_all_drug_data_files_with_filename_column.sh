@@ -37,7 +37,7 @@ echo "Concatting all files into a single file, may take a minute..."
 # concatenate all the version B drug files with filenames together into a single file for loading
 cat DRUG14Q3_with_filename.txt DRUG14Q4_with_filename.txt DRUG15*_with_filename.txt DRUG16*_with_filename.txt \
   DRUG17*_with_filename.txt DRUG18*_with_filename.txt DRUG19*_with_filename.txt \
-  DRUG20*_with_filename.txt >all_version_B_drug_data_with_filename.txt
+  DRUG2*_with_filename.txt >all_version_B_drug_data_with_filename.txt
 
 # remove or replace non utf8 characters form sourcefile with something similar.
 # This small java app was built using junidecode 0.3.0 https://github.com/gcardone/junidecode

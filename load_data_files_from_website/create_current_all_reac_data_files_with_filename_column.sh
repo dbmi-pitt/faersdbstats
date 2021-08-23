@@ -34,4 +34,4 @@ cat reac12q4_with_filename.txt REAC13Q1_with_filename.txt REAC13Q2_with_filename
 
 # concatenate all the version B reaction files with filenames together into a single file for loading
 cat REAC14Q3_with_filename.txt REAC14Q4_with_filename.txt REAC15*_with_filename.txt REAC16*_with_filename.txt \
-  REAC17*_with_filename.txt REAC18*_with_filename.txt REAC19*_with_filename.txt REAC20*_with_filename.txt >all_version_B_reac_data_with_filename.txt
+  REAC17*_with_filename.txt REAC18*_with_filename.txt REAC19*_with_filename.txt REAC2*_with_filename.txt >all_version_B_reac_data_with_filename.txt
