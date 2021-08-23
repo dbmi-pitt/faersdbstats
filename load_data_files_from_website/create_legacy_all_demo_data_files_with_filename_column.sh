@@ -51,7 +51,7 @@ DEMO11Q1.TXT  DEMO11Q2.TXT  DEMO11Q3.TXT  DEMO11Q4.TXT
 DEMO12Q1.TXT  DEMO12Q2.TXT  DEMO12Q3.TXT
 "
 
-echo "concating fies into single file"
+echo "concating legacy files into single file"
 for f in $FILES
 do
         thefilenamenosuffix=$(basename $f .TXT)

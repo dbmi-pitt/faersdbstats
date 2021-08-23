@@ -9,7 +9,7 @@ for year in $(seq 2004 2012); do
   for quarter in 1 2 3 4; do
     sleep 2
     fileyearquarter="${year}Q${quarter}"
-    if [ "${fileyearquarter}" == "2012Q4" ]; then
+    if [ "${fileyearquarter}" = "2012Q4" ]; then
       echo "Done with the legacy files"
       exit 0
     fi
