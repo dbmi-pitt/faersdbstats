@@ -11,7 +11,7 @@ CREATE TABLE deleted_cases
     caseid INTEGER NOT NULL
 );
 
-COPY deleted_cases FROM '/home/faersdbstats/load_data_files_from_website/deleted/all_deleted_cases.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b';
+\COPY deleted_cases FROM '/home/faersdbstats/load_data_files_from_website/deleted/all_deleted_cases.txt' WITH DELIMITER E'$' CSV HEADER QUOTE E'\b';
 
 -- Delete all deleted case from the db
 DELETE FROM demo
