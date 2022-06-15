@@ -1,10 +1,10 @@
 -- public.pdi_logging definition
 
--- Drop table
-
--- DROP TABLE public.pdi_logging;
 
 set search_path = ${DATABASE_LOG_SCHEMA};
+
+-- Drop table
+--DROP TABLE pdi_logging;
 
 CREATE TABLE IF NOT EXISTS pdi_logging (
 	channel_id varchar(255) NULL,
@@ -51,8 +51,6 @@ CREATE TABLE IF NOT EXISTS pdi_logging (
 	step_copy int4 NULL,
 	input_buffer_rows int8 NULL,
 	output_buffer_rows int8 NULL,
-
-	step_copy int4 NULL,
 	executing_server varchar(255) NULL,
 	executing_user varchar(255) NULL,
 	client varchar(255) NULL,
