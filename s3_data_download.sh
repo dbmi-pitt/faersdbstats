@@ -1,7 +1,7 @@
 #!/bin/bash
 #shell options #-s enable (set) each optname #globstar enables ** recursive dir search
 
-#source ../faers.config
+source ../faers.config
 
  #export AWS_PROFILE=user1
 
@@ -37,7 +37,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
     #download s3://..data_test to local/data_from_s3
     echo data will be downloaded to ${BASE_FILE_DIR}/data_from_s3/
-    aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
+    aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
 
     #locally loop through domains and create one staged import file ("domain".txt ie demo.txt)
     curdir=`pwd`;
@@ -86,17 +86,17 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
         #echo `pwd` it should be path/to/data_from_s3 aka BASE_FILE_DIR;
 
         #make use case for legacy data faers_or_laers
-        if [ ${LOAD_NEW_YEAR} -le 2012 ]
-        then
+        #if [ ${LOAD_NEW_YEAR} -le 2012 ]
+        #then
             #echo we have laers data
-            faers_or_laers='laers';
-        else
+        #    faers_or_laers='laers';
+        #else
             #echo we have faers data
-            faers_or_laers='faers';
-        fi
+        #    faers_or_laers='faers';
+        #fi
 
         for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
-            s3_bucket_source_path=s3://napdi-cem-sandbox-files/$faers_or_laers/data/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
+            s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
             
 
             state=`aws s3 ls $s3_bucket_source_path`
@@ -108,62 +108,14 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
                     echo 's3 source path exists'
                     #echo local path will be 
                     data_from_s3_folder_path=${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER} #${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
-                    #s3_bucket_source_path=s3://napdi-cem-sandbox-files/$faers_or_laers/data/$domain #${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
-                    #echo ${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
-
-                    #echo ' '
-                    #echo 'the source path on s3 is s3_data_folder'
-                    #echo '$s3_data_folder is'
-                    #echo $s3_data_folder
-
-                    #echo ' '
-                    #echo the local desitination path will be
-                    #echo "${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/"
-                    #aws s3 cp source destination
-                    #echo we will download into data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
-                    #echo we will leave workable file in data_from_s3/$domain
-
-                    #echo about to executeeeeeeeeeeeeeeeee
-                    #echo aws s3 cp $s3_data_folder ${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/ --recursive --exclude "*" --include "*.txt"
-                    #echo aws s3 cp $s3_bucket_source_path $s3_data_folder_path --recursive --exclude "*" --include "*.txt"
-                    
-                    #aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
-                    #aws s3 cp $s3_data_folder/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/ ${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/ --recursive --exclude "*" --include "*.txt" --debug
-
-                    #aws s3 cp s3://napdi-cem-sandbox-files/laers/data/ /home/pentaho-secondary/projects-brb265/faers/data_from_s3/ --recursive --exclude "*" --include "*.txt" --debug
-                    #aws s3 cp s3://napdi-cem-sandbox-files/laers/data/demo/2008/Q3/DEMO08Q3.TXT /home/pentaho-secondary/projects-brb265/faers/data_from_s3 #--recursive --exclude "*" --include "*.txt" --include "*.TXT" --debug
-                    #echo "${LOAD_NEW_YEAR:2:3}${LOAD_NEW_QUARTER}.TXT"
-                    YYQQTXT=${LOAD_NEW_YEAR:2:3}${LOAD_NEW_QUARTER}.TXT
                     YYQQtxt=${LOAD_NEW_YEAR:2:3}${LOAD_NEW_QUARTER}.txt
-                    #works hardcoded
-                    #aws s3 cp s3://napdi-cem-sandbox-files/laers/data/demo /home/pentaho-secondary/projects-brb265/faers/data_from_s3 --exclude "*" --include "*$YYQQtxt" --include "*$YYQQTXT" --recursive
-                    
-                    #echo 's3_bucket_source_path is'
-                    #echo $s3_bucket_source_path
-                    #echo 's3_data_folder is'
-                    #echo $data_from_s3_folder_path
 
-                    aws s3 cp $s3_bucket_source_path $data_from_s3_folder_path --exclude "*" --include "*$YYQQtxt" --include "*$YYQQTXT" --recursive
-                    #aws s3 cp s3://napdi-cem-sandbox-files/laers/data/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/DEMO08Q3.TXT /home/pentaho-secondary/projects-brb265/data_from_s3 --recursive --exclude "*" --include "*.txt" --include "*.TXT"
-                    #aws s3 cp $s3_bucket_source_path $s3_data_folder_path --recursive --exclude "*" --include "*.txt" --include "*.TXT"
-                    #mkdir $domain #throws error because aws cp created it
+                    aws s3 cp $s3_bucket_source_path $data_from_s3_folder_path --exclude "*" --include "*$YYQQtxt" --recursive
                     `pwd`
                     cd "$domain"
-                    #cd "./${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/$domain"
-                    #cd "./${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/$domain"
-                    #for name in "${BASE_FILE_DIR}"/data_from_s3/**/*.txt; do #if data_from_s3 isn't specified it might run /all_data/ and take forever
-                    #echo $(ls ./**)
-                    #for name in ../data_from_s3/$name/**.txt; do                        
-                    #for name in demo/yr/qrtr/
-                    
-                    #inner_cur_dir=`pwd`
-                    #`ls -l $inner_cur_dir`
-                    
-                    #echo 'pwd is (before loop)'
-                    #echo `pwd`
 
-                    #shopt globstar
-                    for name in ./**/*.txt ./**/*.TXT; do       
+                    #note ** requires shopt globstar
+                    for name in ./**/*.txt; do       
                         #echo 'pwd is (in for loop)'
                         #echo `pwd`                        
                         #echo 'domain is '$domain                 
@@ -189,7 +141,6 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
         #echo '$curdir is '$curdir
         cd $curdir #not sure if needed
         #break 60
-        echo 'laers with not be able to open .txt and faers .TXT results still ok'
     done; #end for domain in demo drug; do
     #done;
 fi #end if [ "${LOAD_ALL_TIME}" = 1 ]; then
