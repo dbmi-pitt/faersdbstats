@@ -1,7 +1,8 @@
 #!/bin/bash
 #shell options #-s enable (set) each optname #globstar enables ** recursive dir search
 
-source ../faers.config
+#uncomment source to debug from command line
+#source ../faers.config
 
  #export AWS_PROFILE=user1
 
@@ -86,14 +87,14 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
         #echo `pwd` it should be path/to/data_from_s3 aka BASE_FILE_DIR;
 
         #make use case for legacy data faers_or_laers
-        #if [ ${LOAD_NEW_YEAR} -le 2012 ]
-        #then
+        if [ ${LOAD_NEW_YEAR} -le 2012 ]
+        then
             #echo we have laers data
-        #    faers_or_laers='laers';
-        #else
+            faers_or_laers='laers';
+        else
             #echo we have faers data
-        #    faers_or_laers='faers';
-        #fi
+            faers_or_laers='faers';
+        fi
 
         for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
             s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
@@ -107,11 +108,11 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
                 else
                     echo 's3 source path exists'
                     #echo local path will be 
-                    data_from_s3_folder_path=${BASE_FILE_DIR}/data_from_s3/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER} #${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
+                    data_from_s3_folder_path=${BASE_FILE_DIR}/data_from_s3/$faers_or_laers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER} #${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
                     YYQQtxt=${LOAD_NEW_YEAR:2:3}${LOAD_NEW_QUARTER}.txt
 
                     aws s3 cp $s3_bucket_source_path $data_from_s3_folder_path --exclude "*" --include "*$YYQQtxt" --recursive
-                    `pwd`
+                    #`pwd`
                     cd "$domain"
 
                     #note ** requires shopt globstar

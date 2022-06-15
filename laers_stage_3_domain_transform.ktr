@@ -440,6 +440,7 @@
 - having run...
 __faers_stage_1_setup...
 __faers_stage_2_initial_data...
+__specifying either a single specific quarter from Q4 2012 or older or LOAD_ALL_TIME=1 in faers.conf
 
 in trial run all domain data files were reduced in size with...
   sed -i '15001,$ d' ther.txt
@@ -455,8 +456,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
 </note>
       <xloc>32</xloc>
       <yloc>0</yloc>
-      <width>398</width>
-      <heigth>299</heigth>
+      <width>682</width>
+      <heigth>316</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -588,7 +589,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -599,7 +600,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
+        <name>CASE</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -610,18 +611,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseversion</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>i_f_code</name>
+        <name>I_F_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -632,7 +622,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>event_dt</name>
+        <name>FOLL_SEQ</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -643,7 +633,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>mfr_dt</name>
+        <name>IMAGE</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EVENT_DT</name>
         <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
@@ -654,7 +655,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>init_fda_dt</name>
+        <name>MFR_DT</name>
         <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
@@ -665,8 +666,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>fda_dt</name>
-        <type>String</type>
+        <name>FDA_DT</name>
+        <type>Date</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -676,7 +677,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>rept_cod</name>
+        <name>REPT_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -687,52 +688,30 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>auth_num</name>
+        <name>MFR_NUM</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>53</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>mfr_num</name>
+        <name>MFR_SNDR</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>40</length>
+        <length>47</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>mfr_sndr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>20</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>lit_ref</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>age</name>
-        <type>String</type>
+        <name>AGE</name>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -742,7 +721,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>age_cod</name>
+        <name>AGE_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -753,7 +732,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>age_grp</name>
+        <name>GNDR_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -764,19 +743,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>sex</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>e_sub</name>
-        <type>String</type>
+        <name>E_SUB</name>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -786,30 +754,30 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>wt</name>
-        <type>String</type>
+        <name>WT</name>
+        <type>Number</type>
         <format>#.#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
-        <precision>2</precision>
+        <length>4</length>
+        <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>wt_cod</name>
+        <name>WT_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>rept_dt</name>
-        <type>String</type>
+        <name>REPT_DT</name>
+        <type>Date</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -819,8 +787,19 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>to_mfr</name>
+        <name>OCCP_COD</name>
         <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DEATH_DT</name>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -830,35 +809,35 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>occp_cod</name>
-        <type>String</type>
+        <name>TO_MFR</name>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>reporter_country</name>
-        <type>String</type>
+        <name>CONFID</name>
+        <type>Boolean</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>21</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>occr_country</name>
+        <name>REPORTER_COUNTRY</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>18</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -904,7 +883,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -915,7 +894,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
+        <name>DRUG_SEQ</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -926,18 +905,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>drug_seq</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>role_cod</name>
+        <name>ROLE_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -948,29 +916,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>drugname</name>
+        <name>DRUGNAME</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>21</length>
+        <length>70</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>prod_ai</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>36</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>val_vbm</name>
+        <name>VAL_VBM</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -981,51 +938,29 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>route</name>
+        <name>ROUTE</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>37</length>
+        <length>24</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>dose_vbm</name>
+        <name>DOSE_VBM</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>39</length>
+        <length>95</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>cum_dose_chr</name>
-        <type>String</type>
-        <format>#.#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>5</length>
-        <precision>1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>cum_dose_unit</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dechal</name>
+        <name>DECHAL</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1036,9 +971,31 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>rechal</name>
+        <name>RECHAL</name>
         <type>String</type>
         <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EXP_DT</name>
+        <type>Date</type>
+        <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1047,80 +1004,14 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>lot_num</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>8</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>exp_dt</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>nda_num</name>
-        <type>String</type>
+        <name>NDA_NUM</name>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dose_amt</name>
-        <type>String</type>
-        <format>#.#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>5</length>
-        <precision>2</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dose_unit</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dose_form</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>18</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dose_freq</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>6</length>
-        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1165,8 +1056,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
-        <type>Integer</type>
+        <name>ISR</name>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1176,8 +1067,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
-        <type>Integer</type>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1187,24 +1078,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>indi_drug_seq</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>indi_pt</name>
+        <name>INDI_PT</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>35</length>
+        <length>37</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1236,7 +1116,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>demo</table>
+    <table>demo_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1253,104 +1133,96 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
+        <column_name>CASE</column_name>
+        <stream_name>CASE</stream_name>
       </field>
       <field>
-        <column_name>caseversion</column_name>
-        <stream_name>caseversion</stream_name>
+        <column_name>I_F_COD</column_name>
+        <stream_name>I_F_COD</stream_name>
       </field>
       <field>
-        <column_name>i_f_code</column_name>
-        <stream_name>i_f_code</stream_name>
+        <column_name>FOLL_SEQ</column_name>
+        <stream_name>FOLL_SEQ</stream_name>
       </field>
       <field>
-        <column_name>event_dt</column_name>
-        <stream_name>event_dt</stream_name>
+        <column_name>IMAGE</column_name>
+        <stream_name>IMAGE</stream_name>
       </field>
       <field>
-        <column_name>mfr_dt</column_name>
-        <stream_name>mfr_dt</stream_name>
+        <column_name>EVENT_DT</column_name>
+        <stream_name>EVENT_DT</stream_name>
       </field>
       <field>
-        <column_name>init_fda_dt</column_name>
-        <stream_name>init_fda_dt</stream_name>
+        <column_name>MFR_DT</column_name>
+        <stream_name>MFR_DT</stream_name>
       </field>
       <field>
-        <column_name>fda_dt</column_name>
-        <stream_name>fda_dt</stream_name>
+        <column_name>FDA_DT</column_name>
+        <stream_name>FDA_DT</stream_name>
       </field>
       <field>
-        <column_name>rept_cod</column_name>
-        <stream_name>rept_cod</stream_name>
+        <column_name>REPT_COD</column_name>
+        <stream_name>REPT_COD</stream_name>
       </field>
       <field>
-        <column_name>auth_num</column_name>
-        <stream_name>auth_num</stream_name>
+        <column_name>MFR_NUM</column_name>
+        <stream_name>MFR_NUM</stream_name>
       </field>
       <field>
-        <column_name>mfr_num</column_name>
-        <stream_name>mfr_num</stream_name>
+        <column_name>MFR_SNDR</column_name>
+        <stream_name>MFR_SNDR</stream_name>
       </field>
       <field>
-        <column_name>mfr_sndr</column_name>
-        <stream_name>mfr_sndr</stream_name>
+        <column_name>AGE</column_name>
+        <stream_name>AGE</stream_name>
       </field>
       <field>
-        <column_name>lit_ref</column_name>
-        <stream_name>lit_ref</stream_name>
+        <column_name>AGE_COD</column_name>
+        <stream_name>AGE_COD</stream_name>
       </field>
       <field>
-        <column_name>age</column_name>
-        <stream_name>age</stream_name>
+        <column_name>GNDR_COD</column_name>
+        <stream_name>GNDR_COD</stream_name>
       </field>
       <field>
-        <column_name>age_cod</column_name>
-        <stream_name>age_cod</stream_name>
+        <column_name>E_SUB</column_name>
+        <stream_name>E_SUB</stream_name>
       </field>
       <field>
-        <column_name>age_grp</column_name>
-        <stream_name>age_grp</stream_name>
+        <column_name>WT</column_name>
+        <stream_name>WT</stream_name>
       </field>
       <field>
-        <column_name>sex</column_name>
-        <stream_name>sex</stream_name>
+        <column_name>WT_COD</column_name>
+        <stream_name>WT_COD</stream_name>
       </field>
       <field>
-        <column_name>e_sub</column_name>
-        <stream_name>e_sub</stream_name>
+        <column_name>REPT_DT</column_name>
+        <stream_name>REPT_DT</stream_name>
       </field>
       <field>
-        <column_name>wt</column_name>
-        <stream_name>wt</stream_name>
+        <column_name>OCCP_COD</column_name>
+        <stream_name>OCCP_COD</stream_name>
       </field>
       <field>
-        <column_name>wt_cod</column_name>
-        <stream_name>wt_cod</stream_name>
+        <column_name>DEATH_DT</column_name>
+        <stream_name>DEATH_DT</stream_name>
       </field>
       <field>
-        <column_name>rept_dt</column_name>
-        <stream_name>rept_dt</stream_name>
+        <column_name>TO_MFR</column_name>
+        <stream_name>TO_MFR</stream_name>
       </field>
       <field>
-        <column_name>to_mfr</column_name>
-        <stream_name>to_mfr</stream_name>
+        <column_name>CONFID</column_name>
+        <stream_name>CONFID</stream_name>
       </field>
       <field>
-        <column_name>occp_cod</column_name>
-        <stream_name>occp_cod</stream_name>
-      </field>
-      <field>
-        <column_name>reporter_country</column_name>
-        <stream_name>reporter_country</stream_name>
-      </field>
-      <field>
-        <column_name>occr_country</column_name>
-        <stream_name>occr_country</stream_name>
+        <column_name>REPORTER_COUNTRY</column_name>
+        <stream_name>REPORTER_COUNTRY</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1380,7 +1252,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>drug</table>
+    <table>drug_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1397,84 +1269,52 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
       </field>
       <field>
-        <column_name>drug_seq</column_name>
-        <stream_name>drug_seq</stream_name>
+        <column_name>ROLE_COD</column_name>
+        <stream_name>ROLE_COD</stream_name>
       </field>
       <field>
-        <column_name>role_cod</column_name>
-        <stream_name>role_cod</stream_name>
+        <column_name>DRUGNAME</column_name>
+        <stream_name>DRUGNAME</stream_name>
       </field>
       <field>
-        <column_name>drugname</column_name>
-        <stream_name>drugname</stream_name>
+        <column_name>VAL_VBM</column_name>
+        <stream_name>VAL_VBM</stream_name>
       </field>
       <field>
-        <column_name>prod_ai</column_name>
-        <stream_name>prod_ai</stream_name>
+        <column_name>ROUTE</column_name>
+        <stream_name>ROUTE</stream_name>
       </field>
       <field>
-        <column_name>val_vbm</column_name>
-        <stream_name>val_vbm</stream_name>
+        <column_name>DOSE_VBM</column_name>
+        <stream_name>DOSE_VBM</stream_name>
       </field>
       <field>
-        <column_name>route</column_name>
-        <stream_name>route</stream_name>
+        <column_name>DECHAL</column_name>
+        <stream_name>DECHAL</stream_name>
       </field>
       <field>
-        <column_name>dose_vbm</column_name>
-        <stream_name>dose_vbm</stream_name>
+        <column_name>RECHAL</column_name>
+        <stream_name>RECHAL</stream_name>
       </field>
       <field>
-        <column_name>cum_dose_chr</column_name>
-        <stream_name>cum_dose_chr</stream_name>
+        <column_name>LOT_NUM</column_name>
+        <stream_name>LOT_NUM</stream_name>
       </field>
       <field>
-        <column_name>cum_dose_unit</column_name>
-        <stream_name>cum_dose_unit</stream_name>
+        <column_name>EXP_DT</column_name>
+        <stream_name>EXP_DT</stream_name>
       </field>
       <field>
-        <column_name>dechal</column_name>
-        <stream_name>dechal</stream_name>
-      </field>
-      <field>
-        <column_name>rechal</column_name>
-        <stream_name>rechal</stream_name>
-      </field>
-      <field>
-        <column_name>lot_num</column_name>
-        <stream_name>lot_num</stream_name>
-      </field>
-      <field>
-        <column_name>exp_dt</column_name>
-        <stream_name>exp_dt</stream_name>
-      </field>
-      <field>
-        <column_name>nda_num</column_name>
-        <stream_name>nda_num</stream_name>
-      </field>
-      <field>
-        <column_name>dose_amt</column_name>
-        <stream_name>dose_amt</stream_name>
-      </field>
-      <field>
-        <column_name>dose_unit</column_name>
-        <stream_name>dose_unit</stream_name>
-      </field>
-      <field>
-        <column_name>dose_form</column_name>
-        <stream_name>dose_form</stream_name>
-      </field>
-      <field>
-        <column_name>dose_freq</column_name>
-        <stream_name>dose_freq</stream_name>
+        <column_name>NDA_NUM</column_name>
+        <stream_name>NDA_NUM</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1504,7 +1344,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>indi</table>
+    <table>indi_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1521,20 +1361,16 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
       </field>
       <field>
-        <column_name>indi_drug_seq</column_name>
-        <stream_name>indi_drug_seq</stream_name>
-      </field>
-      <field>
-        <column_name>indi_pt</column_name>
-        <stream_name>indi_pt</stream_name>
+        <column_name>INDI_PT</column_name>
+        <stream_name>INDI_PT</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1564,7 +1400,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>outc</table>
+    <table>outc_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1581,16 +1417,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
-      </field>
-      <field>
-        <column_name>outc_code</column_name>
-        <stream_name>outc_cod</stream_name>
+        <column_name>OUTC_COD</column_name>
+        <stream_name>OUTC_COD</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1620,7 +1452,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>reac</table>
+    <table>reac_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1637,20 +1469,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
-      </field>
-      <field>
-        <column_name>pt</column_name>
-        <stream_name>pt</stream_name>
-      </field>
-      <field>
-        <column_name>drug_rec_act</column_name>
-        <stream_name>drug_rec_act</stream_name>
+        <column_name>PT</column_name>
+        <stream_name>PT</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1680,7 +1504,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </partitioning>
     <connection>cem_sandbox</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>rpsr</table>
+    <table>rpsr_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1697,16 +1521,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
-      </field>
-      <field>
-        <column_name>rpsr_cod</column_name>
-        <stream_name>rpsr_cod</stream_name>
+        <column_name>RPSR_COD</column_name>
+        <stream_name>RPSR_COD</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1735,8 +1555,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <schema_name/>
     </partitioning>
     <connection>cem_sandbox</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>ther</table>
+    <schema>faers</schema>
+    <table>ther_legacy</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1753,32 +1573,28 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
       </field>
       <field>
-        <column_name>caseid</column_name>
-        <stream_name>caseid</stream_name>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
       </field>
       <field>
-        <column_name>dsg_drug_seq</column_name>
-        <stream_name>dsg_drug_seq</stream_name>
+        <column_name>START_DT</column_name>
+        <stream_name>START_DT</stream_name>
       </field>
       <field>
-        <column_name>start_dt</column_name>
-        <stream_name>start_dt</stream_name>
+        <column_name>END_DT</column_name>
+        <stream_name>END_DT</stream_name>
       </field>
       <field>
-        <column_name>end_dt</column_name>
-        <stream_name>end_dt</stream_name>
+        <column_name>DUR</column_name>
+        <stream_name>DUR</stream_name>
       </field>
       <field>
-        <column_name>dur</column_name>
-        <stream_name>dur</stream_name>
-      </field>
-      <field>
-        <column_name>dur_cod</column_name>
-        <stream_name>dur_cod</stream_name>
+        <column_name>DUR_COD</column_name>
+        <stream_name>DUR_COD</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1822,7 +1638,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1833,18 +1649,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>outc_cod</name>
+        <name>OUTC_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1896,7 +1701,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1907,35 +1712,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>pt</name>
+        <name>PT</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>38</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>drug_rec_act</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
+        <length>49</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1981,7 +1764,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1992,18 +1775,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>rpsr_cod</name>
+        <name>RPSR_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -2055,7 +1827,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <encoding/>
     <fields>
       <field>
-        <name>primaryid</name>
+        <name>ISR</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2066,7 +1838,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>caseid</name>
+        <name>DRUG_SEQ</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2077,42 +1849,9 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>dsg_drug_seq</name>
+        <name>START_DT</name>
         <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>start_dt</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>end_dt</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>dur</name>
-        <type>String</type>
-        <format/>
+        <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2121,13 +1860,35 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>dur_cod</name>
+        <name>END_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DUR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DUR_COD</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
