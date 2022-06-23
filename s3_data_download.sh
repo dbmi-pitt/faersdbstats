@@ -46,7 +46,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
     echo data will be downloaded to ${BASE_FILE_DIR}/data_from_s3/
     
     #aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
-    aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
+    aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
 
     #locally loop through domains and create one staged import file ("domain".txt ie demo.txt)
     data_from_s3_root_above_laers_faers=`pwd`;
@@ -61,7 +61,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
     echo outer loop pwd is `pwd`
 
         #loop through domains within faers or laers
-        for domain in demo drug; do # indi outc reac rpsr ther; do
+        for domain in demo drug indi outc reac rpsr ther; do
             echo 'domain is '$domain;
             #mkdir $domain #throws error because aws cp created it
             cd $domain
@@ -107,8 +107,8 @@ else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
         #echo 'pwd is ';
         #echo `pwd` it should be path/to/data_from_s3 aka BASE_FILE_DIR;
 
-        for domain in demo drug; do #indi outc reac rpsr ther; do # indi rpsr outc; do
-            s3_bucket_source_path=s3://napdi-cem-sandbox-files/data_test/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
+        for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
+            s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$faers_or_laers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
             
 
             state=`aws s3 ls $s3_bucket_source_path`

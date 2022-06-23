@@ -572,7 +572,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/demo/demo.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/demo/demo.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -888,7 +888,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/drug/drug.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/drug/drug.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1149,7 +1149,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/indi/indi.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/indi/indi.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1806,7 +1806,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/outc/outc.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/outc/outc.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1880,7 +1880,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/reac/reac.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/reac/reac.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1965,7 +1965,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/rpsr/rpsr.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/rpsr/rpsr.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2039,7 +2039,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/ther/ther.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/ther/ther.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>

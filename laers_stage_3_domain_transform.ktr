@@ -573,7 +573,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/demo/demo.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/demo/demo.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -667,7 +667,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>FDA_DT</name>
-        <type>Date</type>
+        <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -694,7 +694,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>53</length>
+        <length>28</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -705,13 +705,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>47</length>
+        <length>30</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>AGE</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -738,13 +738,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>1</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>E_SUB</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -755,12 +755,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>WT</name>
-        <type>Number</type>
+        <type>String</type>
         <format>#.#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -777,7 +777,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>REPT_DT</name>
-        <type>Date</type>
+        <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -799,7 +799,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>DEATH_DT</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -810,7 +810,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>TO_MFR</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -821,23 +821,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>CONFID</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>REPORTER_COUNTRY</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>18</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -867,7 +856,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/drug/drug.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/drug/drug.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -994,7 +983,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>EXP_DT</name>
-        <type>Date</type>
+        <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1005,7 +994,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <name>NDA_NUM</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1040,7 +1029,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/indi/indi.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/indi/indi.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1219,10 +1208,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <field>
         <column_name>CONFID</column_name>
         <stream_name>CONFID</stream_name>
-      </field>
-      <field>
-        <column_name>REPORTER_COUNTRY</column_name>
-        <stream_name>REPORTER_COUNTRY</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1622,7 +1607,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/outc/outc.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/outc/outc.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1685,7 +1670,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/reac/reac.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/reac/reac.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1748,7 +1733,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/rpsr/rpsr.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/rpsr/rpsr.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1811,7 +1796,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/ther/ther.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/ther/ther.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
