@@ -373,106 +373,6 @@ aws configure list</script>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>copy_tables_to_other_schemas.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>------------------------------
---
--- This SQL script copies the standard output tables and the source data tables to the "standard" and "source" schemas
---
--- LTS COMPUTING LLC
-------------------------------
-
---set search_path = standard;
-set search_path = ${DATABASE_SCHEMA};
-
---drop table if exists standard_case_indication;
-create table if not exists standard_case_indication as select * from standard_case_indication;
-
---drop table if exists standard_case_drug;
-create table if not exists standard_case_drug as select * from standard_case_drug;
-
---drop table if exists standard_case_outcome;
-create table if not exists standard_case_outcome as select * from standard_case_outcome;
-
---drop table if exists standard_case_outcome_category;
-create table if not exists standard_case_outcome_category as select * from standard_case_outcome_category;
-
---drop table if exists standard_drug_outcome_count;
-create table if not exists standard_drug_outcome_count as select * from standard_drug_outcome_count;
-
---drop table if exists standard_drug_outcome_contingency_table;
-create table if not exists standard_drug_outcome_contingency_table as select * from standard_drug_outcome_contingency_table;
-
---drop table if exists standard_drug_outcome_statistics;
-create table if not exists standard_drug_outcome_statistics as select * from standard_drug_outcome_statistics;
-
---drop table if exists standard_unique_all_case;
-create table if not exists standard_unique_all_case as select * from unique_all_case;
-
---drop table if exists standard_drug_outcome_drilldown;
-create table if not exists standard_drug_outcome_drilldown as select * from standard_drug_outcome_drilldown;
-
------------------------------------------
---set search_path = source;
-set search_path = ${DATABASE_SCHEMA};
-
---drop table if exists demo;
---create table demo as select * from demo;
-
---drop table if exists demo_legacy;
---create table demo_legacy as select * from demo_legacy;
-
---drop table if exists drug;
---create table drug as select * from drug;
-
---drop table if exists drug_legacy;
---create table drug_legacy as select * from drug_legacy;
-
---drop table if exists indi;
---create table indi as select * from indi;
-
---drop table if exists indi_legacy;
---create table indi_legacy as select * from indi_legacy;
-
---drop table if exists outc;
---create table outc as select * from outc;
-
---drop table if exists outc_legacy;
---create table outc_legacy as select * from outc_legacy;
-
---drop table if exists reac;
---create table reac as select * from reac;
-
---drop table if exists reac_legacy;
---create table reac_legacy as select * from reac_legacy;
-
---drop table if exists rpsr;
---create table rpsr as select * from rpsr;
-
---drop table if exists rpsr_legacy;
---create table rpsr_legacy as select * from rpsr_legacy;
-
---drop table if exists ther;
---create table ther as select * from ther;
-
---drop table if exists ther_legacy;
---create table ther_legacy as select * from ther_legacy;
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>1648</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>derive_standard_drug_outcome_drilldown.sql</name>
       <description/>
       <type>SQL</type>
@@ -2348,27 +2248,6 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <yloc>0</yloc>
       <width>868</width>
       <heigth>639</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>&lt;&lt; standard and source schemas?</note>
-      <xloc>288</xloc>
-      <yloc>1648</yloc>
-      <width>233</width>
-      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
