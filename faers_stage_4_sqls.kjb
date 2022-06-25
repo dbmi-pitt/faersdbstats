@@ -368,8 +368,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>560</yloc>
+      <xloc>656</xloc>
+      <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -468,8 +468,8 @@ set search_path = ${DATABASE_SCHEMA};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1696</yloc>
+      <xloc>144</xloc>
+      <yloc>1648</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -554,8 +554,8 @@ update standard_drug_outcome_drilldown a
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>1552</yloc>
+      <xloc>160</xloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -602,8 +602,8 @@ from meddra_snomed_mapping b
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1568</yloc>
+      <xloc>816</xloc>
+      <yloc>1328</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -707,7 +707,7 @@ select ab.drug_concept_id, ab.outcome_concept_id, count_a, count_b, count_c, (co
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>176</xloc>
-      <yloc>1392</yloc>
+      <yloc>1328</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -749,8 +749,8 @@ group by drug_concept_id, outcome_concept_id;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>1248</yloc>
+      <xloc>656</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -810,8 +810,8 @@ inner join reac_legacy b
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1248</yloc>
+      <xloc>384</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -858,8 +858,8 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>1104</yloc>
+      <xloc>112</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -931,8 +931,8 @@ select * from cte2
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>1104</yloc>
+      <xloc>704</xloc>
+      <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -949,77 +949,8 @@ select * from cte2
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>960</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>usagi_data</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>960</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>generate_drug_export_for_usagi.sql </name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- This SQL generates the set of unmatched drug names with a dummy source_id and a source frequency based on frequency of cases
--- In postgres SQL client save the results to a csv file and then import that csv file to usagi for manual code curation
---
--- LTS Computing LLC
---------------------------------------------
-set search_path = ${DATABASE_SCHEMA};
-select row_number() over () as source_code,
-    upper(drug_name_original) as source_code_description,
-    count(*) as frequency -- (case frequency)
-from combined_drug_mapping
-where concept_id is null
-group by upper(drug_name_original)
-order by count(*) desc;</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>800</yloc>
+      <xloc>384</xloc>
+      <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1054,79 +985,8 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>800</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>load_drug_usagi_mapping.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>------------------------------
--- Load results of USAGI manual mapping into drug_usagi_mapping table via the usagi_import table
---
--- First manually import the usagi mapping results into the usagi_import table using
--- the pgadmin SQL client table import functionality and then run the below insert query
---
--- LTS COMPUTING LLC
-------------------------------
-
-set search_path = ${DATABASE_SCHEMA};
-
-select row_number() over () as source_code, 
-upper(drug_name_original) as source_code_description, 
-count(*) as frequency -- (case frequency)
-from combined_drug_mapping where concept_id is null
-group by upper(drug_name_original)
-order by count(*) desc
-;
-
-insert into drug_usagi_mapping
-select a.source_code_description as drug_name_original , 
-b.concept_name, b.concept_class_id, cast(a.target_concept_id as integer) as concept_id, cast ('usagi' as text) as update_method
-from usagi_import a
-inner join staging_vocabulary.concept b
-on cast(a.target_concept_id as integer) = b.concept_id
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>960</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>create drug_usagi_mapping table</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>set search_path = ${DATABASE_SCHEMA};
-
---drop table if exists drug_usagi_mapping;
-CREATE TABLE if not exists drug_usagi_mapping
-(
-  drug_name_original text,
-  concept_name character varying(1000),
-  concept_class_id character varying(500),
-  concept_id integer,
-  update_method text
-);</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>672</yloc>
+      <xloc>656</xloc>
+      <yloc>880</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1909,8 +1769,8 @@ and update_method is null;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>800</yloc>
+      <xloc>112</xloc>
+      <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2106,105 +1966,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>672</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>Set job variables 2</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <attributes/>
-      <replacevars>Y</replacevars>
-      <filename>${Internal.Entry.Current.Directory}/faers.config</filename>
-      <file_variable_type>JVM</file_variable_type>
-      <fields>
-        <field>
-          <variable_name>FILE_DIR</variable_name>
-          <variable_value>${BASE_FILE_DIR}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>FAERSDBSTATS_REPO_LOCATION</variable_name>
-          <variable_value>${FAERSDBSTATS_REPO_LOCATION}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>CEM_DOWNLOAD_DATA_FOLDER</variable_name>
-          <variable_value>${CEM_DOWNLOAD_DATA_FOLDER}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>AWS_S3_BUCKET_NAME</variable_name>
-          <variable_value>${AWS_S3_BUCKET_NAME}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>AWS_S3_ACCESS_KEY</variable_name>
-          <variable_value>${AWS_S3_ACCESS_KEY}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>AWS_S3_SECRET_KEY</variable_name>
-          <variable_value>${AWS_S3_SECRET_KEY}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_HOST</variable_name>
-          <variable_value>${DATABASE_HOST}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_NAME</variable_name>
-          <variable_value>${DATABASE_NAME}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_SCHEMA</variable_name>
-          <variable_value>${DATABASE_SCHEMA}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_USERNAME</variable_name>
-          <variable_value>${DATABASE_USERNAME}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_PASSWORD</variable_name>
-          <variable_value>${DATABASE_PASSWORD}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>DATABASE_LOG_SCHEMA</variable_name>
-          <variable_value>${DATABASE_LOG_SCHEMA}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>LOAD_NEW_DATA</variable_name>
-          <variable_value>${LOAD_NEW_DATA}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>LOAD_NEW_QUARTER</variable_name>
-          <variable_value>${LOAD_NEW_QUARTER}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>LOAD_NEW_YEAR</variable_name>
-          <variable_value>${LOAD_NEW_YEAR}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>LOAD_ALL_TIME=1</variable_name>
-          <variable_value>${LOAD_ALL_TIME}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>784</xloc>
-      <yloc>528</yloc>
+      <xloc>352</xloc>
+      <yloc>880</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2217,8 +1980,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>672</yloc>
+      <xloc>128</xloc>
+      <yloc>880</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2319,8 +2082,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>560</yloc>
+      <xloc>352</xloc>
+      <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2341,8 +2104,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
-      <yloc>560</yloc>
+      <xloc>112</xloc>
+      <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2400,8 +2163,8 @@ from standard_drug_outcome_contingency_table;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>1392</yloc>
+      <xloc>544</xloc>
+      <yloc>1328</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -2418,33 +2181,6 @@ from standard_drug_outcome_contingency_table;
     <hop>
       <from>Set job variables</from>
       <to>Set AWS Credentials</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_unique_all_case.sql</from>
-      <to>create drug_usagi_mapping table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create drug_usagi_mapping table</from>
-      <to>create_usagi_import_table.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>map_all_drugname_to_rxnorm</from>
-      <to>generate_drug_export_for_usagi.sql </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2497,15 +2233,6 @@ from standard_drug_outcome_contingency_table;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_drug_usagi_mapping.sql</from>
-      <to>standardize_combined_drug_mapping.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>standardize_combined_drug_mapping.sql</from>
       <to>derive_standard_case_outcome_category.sql</to>
       <from_nr>0</from_nr>
@@ -2517,15 +2244,6 @@ from standard_drug_outcome_contingency_table;
     <hop>
       <from>Set AWS Credentials</from>
       <to>Wait for 3s</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>generate_drug_export_for_usagi.sql </from>
-      <to>load_drug_usagi_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2568,30 +2286,55 @@ from standard_drug_outcome_contingency_table;
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>derive_unique_all_case.sql</from>
+      <to>create_usagi_import_table.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>map_all_drugname_to_rxnorm</from>
+      <to>standardize_combined_drug_mapping.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
       <note>Preq's
 - AWS S3
-- Postgres
-- a database connection established within Pentaho (edit > show used environment variables... define host, db, user, pw)
+- a Postgres database connection established within Pentaho (edit > show used environment variables... define host, db, user, pw)
 - a properly configured faers.config file
 - omop data loaded into vocabulary schema (or proper license to obtain the data)
 -data's in staging_vocabulary for create_meddra_snomed_mapping.sql
+
 having run...
 faers_stage_1 then...
 faers_stage_2 then...
 faers_stage_3_domain_transform
+and
+laers_stage_3_domain_transform (if data from 2012 Q3 or older)
 
 ABOUT THIS STAGE
 -Create Legacy Database Structures (no drop; create; no truncate)				-truncates commented out
 -derive_unique_all_case.sql			-makes LAERS data like FAERS data and removes duplicates created in process
+-map_all_drugname_to_rxnorm
+-standardize_combined_drug_mapping
+-derive_standard_case_outcome_category
+-derive_standard_case_indication.sql
+-derive_standard_case_outcome.sql
+-derive_standard_drug_outcome_count.sql
+-derive_standard_drug_outcome_contingency_table.sql    -create index if not exists
+-derive_standard_drug_outcome_statistics.sql
+-map_meddra_to_snomed.sql
+-derive_standard_drug_outcome_drilldown.sql       -create table if not exists   -create index if not exists
 
-
-
-
-To-do: 
-finish and integrate with hops copy_tables_to_other_schemas.sql and usagi steps
 
 
 
@@ -2603,8 +2346,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>805</width>
-      <heigth>520</heigth>
+      <width>868</width>
+      <heigth>639</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2622,8 +2365,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
     </notepad>
     <notepad>
       <note>&lt;&lt; standard and source schemas?</note>
-      <xloc>304</xloc>
-      <yloc>1696</yloc>
+      <xloc>288</xloc>
+      <yloc>1648</yloc>
       <width>233</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
