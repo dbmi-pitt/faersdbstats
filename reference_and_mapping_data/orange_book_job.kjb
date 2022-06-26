@@ -33,12 +33,12 @@
     </parameter>
     <parameter>
       <name>FAERSDBSTATS_REPO_LOCATION</name>
-      <default_value>/home/pentaho-secondary/projects-brb265/faers/faersdbstats</default_value>
+      <default_value>${FAERSDBSTATS_REPO_LOCATION}</default_value>
       <description/>
     </parameter>
   </parameters>
   <connection>
-    <name>cem_sandbox_log</name>
+    <name>cem_sandbox</name>
     <server>napdi-pv-faers.cvafeuxzoav4.us-west-2.rds.amazonaws.com</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -91,7 +91,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -184,27 +184,27 @@
     </field>
     <field>
       <id>EXECUTING_SERVER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_SERVER</name>
     </field>
     <field>
       <id>EXECUTING_USER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_USER</name>
     </field>
     <field>
       <id>START_JOB_ENTRY</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>START_JOB_ENTRY</name>
     </field>
     <field>
       <id>CLIENT</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>CLIENT</name>
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <timeout_days>3.0</timeout_days>
@@ -285,17 +285,17 @@
     </field>
     <field>
       <id>LOG_FIELD</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>LOG_FIELD</name>
     </field>
     <field>
       <id>COPY_NR</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>COPY_NR</name>
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <timeout_days>3.0</timeout_days>

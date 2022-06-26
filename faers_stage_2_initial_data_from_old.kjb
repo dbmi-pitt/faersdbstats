@@ -13,7 +13,7 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_sandbox_stg_2</name>
+    <name>cem_sandbox</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -270,7 +270,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>cem_sandbox_stg_2</connection>
+    <connection>cem_sandbox</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <timeout_days>3.0</timeout_days>
@@ -370,31 +370,6 @@ aws configure list</script>
       <nr>0</nr>
       <xloc>624</xloc>
       <yloc>560</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>consider aws credential check about here</name>
-      <description/>
-      <type>SHELL</type>
-      <attributes/>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>864</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -552,7 +527,7 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox_stg_2</connection>
+      <connection>cem_sandbox</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -712,7 +687,7 @@ CREATE TABLE IF NOT EXISTS ther (
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox_stg_2</connection>
+      <connection>cem_sandbox</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -742,7 +717,7 @@ CREATE TABLE IF NOT EXISTS ther (
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
+      <expand_remote_job>Y</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
       <pass_export>N</pass_export>
       <run_configuration>Pentaho local</run_configuration>
@@ -791,7 +766,7 @@ WHERE z.ROW_NUM = 1;
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_sandbox_stg_2</connection>
+      <connection>cem_sandbox</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1027,7 +1002,7 @@ if "Logging" tab stops producing output restart spoon
 if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing step as if new
 
 Current Issues:
-none known
+Logging is blank
 
 </note>
       <xloc>16</xloc>

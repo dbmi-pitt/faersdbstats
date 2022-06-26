@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -179,7 +179,7 @@
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <timeout_days>3.0</timeout_days>
@@ -270,7 +270,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>cem_sandbox_log</connection>
+    <connection>cem_sandbox</connection>
     <schema>public</schema>
     <table>pdi_logging</table>
     <timeout_days>3.0</timeout_days>
