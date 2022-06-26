@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>faers_meta_set_vars</name>
+  <name>faers_stage_0_set_vars</name>
   <description/>
   <extended_description/>
   <job_version/>
