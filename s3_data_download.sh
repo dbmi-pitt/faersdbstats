@@ -2,7 +2,7 @@
 #shell options #-s enable (set) each optname #globstar enables ** recursive dir search
 
 #uncomment source to debug from command line
-source ../faers.config
+#source ../faers.config
 
 #belt and suspenders aws credentials
 export "AWS_ACCESS_KEY_ID=${AWS_S3_ACCESS_KEY}"
