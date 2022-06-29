@@ -384,69 +384,8 @@ done;
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script>#!/bin/bash
-shopt -s globstar
-cd ${BASE_FILE_DIR}
-
-#check if data_from s3 does not exist then either create it or delete and recreate it
-if [ ! -d "data_from_s3" ]; then
-	mkdir data_from_s3
-else 
-	rm -r data_from_s3
-	mkdir data_from_s3
-fi
-cd data_from_s3
-
-#if LOAD_NEW_DATA
-if [ "${LOAD_NEW_DATA}" = 1 ]; then
-#goal is for curdir to be data_from_s3
-aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${FILE_BASE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt"
-
-#else
-#for i in drug demo; do
-#    cd $i
-#    for name in ./**/*.txt; do
-#
-#aws s3 cp s3://napdi-cem-sandbox-files/data_test/ ${FILE_BASE_DIR}/data_test/ --recursive --exclude "*" --include "*.txt"
-
-#fi
-curdir=`pwd`;
-echo 'pwd is ';
-echo `pwd` it should be data_from_s3;
-for i in drug demo; do # indi rpsr outc; do
-    mkdir $i
-    cd $i
-    for name in ./**/*.txt; do
-	echo 'i is '$i;
-        if [ "$headempty" -eq 0 ]
-        then
-            #put header row into drug.txt
-            head -1 $name --silent > ../$i.txt
-            
-            headempty=1 &amp;&amp;
-            #tail outputs last -n+2 lines of a file #-q does not output the filename
-            tail -n +2 --quiet $name >> ../$i.txt
-        else
-            #tail outputs last -n+2 lines of a file #-q does not output the filename
-            tail -n +2 --quiet $name >> ../$i.txt
-        fi    
-    done;
-    cd $curdir
-done;
-
-fi
-
-
-#then download all of s3 data_test folder to data_from_s3
-
-#else
-#download specific
-
-#s3data/... .../LOAD_NEW_YEAR/LOAD_NEW_QUARTER
-
-
-#aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data_test/ /home/brb265/faers/data_test/ --recursive --exclude "*" --include "*.txt"</script>
+      <insertScript>Y</insertScript>
+      <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>

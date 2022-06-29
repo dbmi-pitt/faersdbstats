@@ -1954,11 +1954,6 @@ where caseid is null or event_dt is null or age is null or sex is null or report
           <variable_type>JVM</variable_type>
         </field>
         <field>
-          <variable_name>LOAD_NEW_DATA</variable_name>
-          <variable_value>${LOAD_NEW_DATA}</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
           <variable_name>LOAD_NEW_QUARTER</variable_name>
           <variable_value>${LOAD_NEW_QUARTER}</variable_value>
           <variable_type>JVM</variable_type>

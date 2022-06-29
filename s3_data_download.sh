@@ -39,7 +39,6 @@ else
 fi
 
 
-#if LOAD_NEW_DATA
 if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
     #download s3://..data_test to local/data_from_s3
@@ -91,7 +90,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
     echo just finished domain loop
     cd $data_from_s3_root_above_laers_faers
     done; #end for laers faers; do
-else #not LOAD_ALL_DATA equivalent to LOAD_NEW_DATA
+else #not LOAD_ALL_DATA
     echo REPLACING ALL DATA IN data_from_s3 WITH DATA FROM ${LOAD_NEW_QUARTER}  ${LOAD_NEW_YEAR}
     
         #download s3://..data_test to local/data_from_s3

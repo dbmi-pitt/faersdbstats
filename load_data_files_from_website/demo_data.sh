@@ -10,7 +10,7 @@
 . ../faers.config
 
 
-if [ ${LOAD_NEW_DATA} = "1" ];
+if [ ${LOAD_ALL_TIME} != "1" ];
 then
 # echo "new quarter is "
 # echo ${LOAD_NEW_QUARTER}
