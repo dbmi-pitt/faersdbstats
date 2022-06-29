@@ -452,12 +452,13 @@ for logging...
 
 ${BASE_FILE_DIR}/../logs/download_results.txt 
 
-
+note:
+SIZE and STAT domain are not loaded by this transform
 </note>
       <xloc>32</xloc>
       <yloc>0</yloc>
       <width>682</width>
-      <heigth>316</heigth>
+      <heigth>333</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
