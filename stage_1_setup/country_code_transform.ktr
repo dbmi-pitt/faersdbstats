@@ -466,7 +466,7 @@
     <access>Native</access>
     <database>cem_sandbox</database>
     <port>5432</port>
-    <username>brb265</username>
+    <username>${DATABASE_USERNAME}</username>
     <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
     <servername />
     <data_tablespace />
