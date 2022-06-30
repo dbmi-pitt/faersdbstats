@@ -463,7 +463,7 @@ https://www.fda.gov/drugs/drug-approvals-and-databases/orange-book-data-files
   </notepads>
   <connection>
     <name>${DATABASE_NAME}</name>
-    <server>napdi-pv-faers.cvafeuxzoav4.us-west-2.rds.amazonaws.com</server>
+    <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>

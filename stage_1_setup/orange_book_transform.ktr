@@ -461,7 +461,7 @@ inserts into nda table</note>
   </notepads>
   <connection>
     <name>${DATABASE_NAME}</name>
-    <server>napdi-pv-faers.cvafeuxzoav4.us-west-2.rds.amazonaws.com</server>
+    <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
