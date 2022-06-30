@@ -794,7 +794,7 @@ WHERE z.ROW_NUM = 1;
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${Internal.Entry.Current.Directory}/../faers.config</filename>
+      <filename>${Internal.Entry.Current.Directory}/../../faers.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>
