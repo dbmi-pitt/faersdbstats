@@ -3,3 +3,4 @@ config/aws.config
 config/pentaho.config
 config.config
 faers.config
+leftover_repo_extras/*
