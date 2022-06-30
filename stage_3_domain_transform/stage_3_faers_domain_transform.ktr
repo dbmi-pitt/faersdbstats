@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>cem_sandbox</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>cem_sandbox</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>cem_sandbox</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>cem_sandbox</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>cem_sandbox</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -474,7 +474,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </notepad>
   </notepads>
   <connection>
-    <name>cem_sandbox</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -1234,7 +1234,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>demo</table>
     <commit>1000</commit>
@@ -1378,7 +1378,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>drug</table>
     <commit>1000</commit>
@@ -1502,7 +1502,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>indi</table>
     <commit>1000</commit>
@@ -1562,7 +1562,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>outc</table>
     <commit>1000</commit>
@@ -1618,7 +1618,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>reac</table>
     <commit>1000</commit>
@@ -1678,7 +1678,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>rpsr</table>
     <commit>1000</commit>
@@ -1734,7 +1734,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>ther</table>
     <commit>1000</commit>

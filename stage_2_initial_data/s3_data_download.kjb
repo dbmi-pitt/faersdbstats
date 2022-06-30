@@ -15,7 +15,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>cem_sandbox</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <size_limit_lines>5k</size_limit_lines>

@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>cem_sandbox_conn</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>cem_sandbox_conn</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>cem_sandbox_conn</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>cem_sandbox_conn</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>cem_sandbox_conn</connection>
+        <connection>${DATABASE_NAME}</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -462,11 +462,11 @@ https://www.fda.gov/drugs/drug-approvals-and-databases/orange-book-data-files
     </notepad>
   </notepads>
   <connection>
-    <name>cem_sandbox_conn</name>
+    <name>${DATABASE_NAME}</name>
     <server>napdi-pv-faers.cvafeuxzoav4.us-west-2.rds.amazonaws.com</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem_sandbox</database>
+    <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
@@ -962,7 +962,7 @@ https://www.fda.gov/drugs/drug-approvals-and-databases/orange-book-data-files
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cem_sandbox_conn</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>faers</schema>
     <table>nda</table>
     <commit>1000</commit>
