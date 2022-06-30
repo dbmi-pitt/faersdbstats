@@ -2,7 +2,7 @@
 --
 -- LTS Computing LLC
 -----------------------------------------------------------------------------------------------
-set search_path = faers;
+set cem_pitt_2022${DATABASE_SCHEMA};
 
 drop table if exists drug_usagi_mapping;
 CREATE TABLE drug_usagi_mapping

@@ -2,7 +2,7 @@
 --
 -- LTS Computing LLC
 -----------------------------------------------------------------------------------------------
-set search_path = faers;
+set search_path = ${DATABASE_SCHEMA};
 
 drop table if exists usagi_import;
 CREATE TABLE usagi_import

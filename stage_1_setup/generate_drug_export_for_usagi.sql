@@ -3,7 +3,7 @@
 --
 -- LTS Computing LLC
 --------------------------------------------
-set search_path = faers;
+set search_path = ${DATABASE_SCHEMA};
 
 select row_number() over () as source_code, 
 upper(drug_name_original) as source_code_description, 

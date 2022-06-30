@@ -3,7 +3,7 @@
 --
 -- LTS Computing LLC
 -----------------------------------------------------------------------------------------------
-set search_path = faers;
+set search_path = ${DATABASE_SCHEMA};
 
 drop table if exists meddra_snomed_mapping;
 create table meddra_snomed_mapping as
