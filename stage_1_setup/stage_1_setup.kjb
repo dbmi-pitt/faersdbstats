@@ -800,6 +800,24 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>create_drug_usagi_mapping_table.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_drug_usagi_mapping_table.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>cem_pitt_2022</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>1232</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -937,6 +955,15 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>eu_drug_name_active_ingredient_job</from>
+      <to>create_drug_usagi_mapping_table.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -992,6 +1019,28 @@ if one will drop all and load all "fresh"</note>
       <yloc>832</yloc>
       <width>295</width>
       <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>&lt;&lt; even though drug_usagi isn't completed in this workflow
+this table structure allows for stage 4 sqls to run w/o error</note>
+      <xloc>304</xloc>
+      <yloc>1248</yloc>
+      <width>404</width>
+      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
