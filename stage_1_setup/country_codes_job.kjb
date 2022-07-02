@@ -13,62 +13,30 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
-    <server>${DATABASE_HOST}</server>
+    <name>cem_pitt_2022</name>
+    <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
+    <database>cem_pitt_2022</database>
     <port>5432</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
+    <username>rw_grp</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79bc67e195bdca</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
       </attribute>
     </attributes>
   </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <connection>cem_pitt_2022</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <size_limit_lines>5000</size_limit_lines>
     <interval>1s</interval>
     <timeout_days>3.0</timeout_days>
@@ -159,29 +127,29 @@
     </field>
     <field>
       <id>EXECUTING_SERVER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_SERVER</name>
     </field>
     <field>
       <id>EXECUTING_USER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_USER</name>
     </field>
     <field>
       <id>START_JOB_ENTRY</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>START_JOB_ENTRY</name>
     </field>
     <field>
       <id>CLIENT</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>CLIENT</name>
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <connection>cem_pitt_2022</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
@@ -260,19 +228,19 @@
     </field>
     <field>
       <id>LOG_FIELD</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>LOG_FIELD</name>
     </field>
     <field>
       <id>COPY_NR</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>COPY_NR</name>
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <connection>cem_pitt_2022</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
@@ -428,7 +396,7 @@
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/faers.config</filename>
+      <filename>${Internal.Entry.Current.Directory}/../../faers.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>
@@ -481,6 +449,31 @@
           <variable_value>${AWS_DEFAULT_REGION}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>DATABASE_SCHEMA</variable_name>
+          <variable_value>${DATABASE_SCHEMA}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_PASSWORD</variable_name>
+          <variable_value>${DATABASE_PASSWORD}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_HOST</variable_name>
+          <variable_value>${DATABASE_HOST}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_USERNAME</variable_name>
+          <variable_value>${DATABASE_USERNAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_LOG_SCHEMA</variable_name>
+          <variable_value>${DATABASE_LOG_SCHEMA}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -499,7 +492,7 @@
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_country_code_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -517,7 +510,7 @@
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

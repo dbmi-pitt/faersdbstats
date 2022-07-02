@@ -13,14 +13,14 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
-    <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
+    <password>${DATABASE_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -270,7 +270,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
@@ -511,7 +511,7 @@ create table if not exists eu_drug_name_active_ingredient
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_eu_drug_name_active_ingredient_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -529,7 +529,7 @@ create table if not exists eu_drug_name_active_ingredient
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_eu_drug_name_active_ingredient_table_part_2.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

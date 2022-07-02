@@ -11,41 +11,16 @@
   <modified_user>-</modified_user>
   <modified_date>2022/01/17 17:39:02.118</modified_date>
   <parameters>
-    <parameter>
-      <name>AWS_DEFAULT_REGION</name>
-      <default_value>${AWS_DEFAULT_REGION}</default_value>
-      <description/>
-    </parameter>
-    <parameter>
-      <name>AWS_S3_ACCESS_KEY</name>
-      <default_value>${AWS_S3_ACCESS_KEY}</default_value>
-      <description/>
-    </parameter>
-    <parameter>
-      <name>AWS_S3_BUCKET_NAME</name>
-      <default_value>${AWS_DEFAULT_REGION}</default_value>
-      <description/>
-    </parameter>
-    <parameter>
-      <name>AWS_S3_SECRET_KEY</name>
-      <default_value>${AWS_S3_SECRET_KEY}</default_value>
-      <description/>
-    </parameter>
-    <parameter>
-      <name>FAERSDBSTATS_REPO_LOCATION</name>
-      <default_value>${FAERSDBSTATS_REPO_LOCATION}</default_value>
-      <description/>
-    </parameter>
-  </parameters>
+    </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
-    <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
+    <password>${DATABASE_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -92,8 +67,8 @@
     </slaveservers>
   <job-log-table>
     <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <size_limit_lines>5000</size_limit_lines>
     <interval>1s</interval>
     <timeout_days>3.0</timeout_days>
@@ -205,8 +180,8 @@
   </job-log-table>
   <jobentry-log-table>
     <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
@@ -296,8 +271,8 @@
   </jobentry-log-table>
   <channel-log-table>
     <connection>${DATABASE_NAME}</connection>
-    <schema>public</schema>
-    <table>pdi_logging</table>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
@@ -747,7 +722,7 @@ aws configure list</script>
       <to>orange_download.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -756,7 +731,7 @@ aws configure list</script>
       <to>Set job variables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>

@@ -2,9 +2,9 @@
 <transformation>
   <info>
     <name>LoadCountryCodes</name>
-    <description />
-    <extended_description />
-    <trans_version />
+    <description/>
+    <extended_description/>
+    <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
     <directory>/</directory>
@@ -13,8 +13,8 @@
     <log>
       <trans-log-table>
         <connection>${DATABASE_NAME}</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <size_limit_lines>5000</size_limit_lines>
         <interval>1s</interval>
         <timeout_days>3.0</timeout_days>
@@ -42,37 +42,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject />
+          <subject/>
         </field>
         <field>
           <id>ERRORS</id>
@@ -111,24 +111,24 @@
         </field>
         <field>
           <id>EXECUTING_SERVER</id>
-          <enabled>N</enabled>
+          <enabled>Y</enabled>
           <name>EXECUTING_SERVER</name>
         </field>
         <field>
           <id>EXECUTING_USER</id>
-          <enabled>N</enabled>
+          <enabled>Y</enabled>
           <name>EXECUTING_USER</name>
         </field>
         <field>
           <id>CLIENT</id>
-          <enabled>N</enabled>
+          <enabled>Y</enabled>
           <name>CLIENT</name>
         </field>
       </trans-log-table>
       <perf-log-table>
         <connection>${DATABASE_NAME}</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
         <timeout_days>3.0</timeout_days>
         <field>
@@ -209,8 +209,8 @@
       </perf-log-table>
       <channel-log-table>
         <connection>${DATABASE_NAME}</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -275,8 +275,8 @@
       </channel-log-table>
       <step-log-table>
         <connection>${DATABASE_NAME}</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -345,14 +345,14 @@
         </field>
         <field>
           <id>LOG_FIELD</id>
-          <enabled>N</enabled>
+          <enabled>Y</enabled>
           <name>LOG_FIELD</name>
         </field>
       </step-log-table>
       <metrics-log-table>
         <connection>${DATABASE_NAME}</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -402,9 +402,9 @@
       </metrics-log-table>
     </log>
     <maxdate>
-      <connection />
-      <table />
-      <field />
+      <connection/>
+      <table/>
+      <field/>
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
@@ -415,7 +415,7 @@
     <feedback_shown>Y</feedback_shown>
     <feedback_size>50000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
-    <shared_objects_file />
+    <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
     <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
@@ -460,17 +460,17 @@
     </notepad>
   </notepads>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
+    <database>cem_pitt_2022</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
-    <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
-    <servername />
-    <data_tablespace />
-    <index_tablespace />
+    <password>${DATABASE_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
     <attributes>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
@@ -520,18 +520,18 @@
   <step>
     <name>Get system info</name>
     <type>SystemInfo</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
     <fields>
       </fields>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -547,26 +547,26 @@
   <step>
     <name>Job executor</name>
     <type>JobExecutor</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
     <specification_method>filename</specification_method>
-    <job_object_id />
-    <job_name />
-    <filename />
-    <directory_path />
+    <job_object_id/>
+    <job_name/>
+    <filename/>
+    <directory_path/>
     <group_size>1</group_size>
-    <group_field />
-    <group_time />
+    <group_field/>
+    <group_time/>
     <parameters>
       <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
-    <execution_result_target_step />
+    <execution_result_target_step/>
     <execution_time_field>ExecutionTime</execution_time_field>
     <execution_result_field>ExecutionResult</execution_result_field>
     <execution_errors_field>ExecutionNrErrors</execution_errors_field>
@@ -581,11 +581,11 @@
     <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
     <execution_log_text_field>ExecutionLogText</execution_log_text_field>
     <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step />
-    <result_files_target_step />
+    <result_rows_target_step/>
+    <result_files_target_step/>
     <result_files_file_name_field>FileName</result_files_file_name_field>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -601,26 +601,26 @@
   <step>
     <name>Job executor - orange_book_download_job.kjb</name>
     <type>JobExecutor</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
     <specification_method>filename</specification_method>
-    <job_object_id />
-    <job_name />
+    <job_object_id/>
+    <job_name/>
     <filename>${Internal.Entry.Current.Directory}/faers/faersdbstats/pentaho/jobs/orange_book_download_job.kjb</filename>
-    <directory_path />
+    <directory_path/>
     <group_size>1</group_size>
-    <group_field />
-    <group_time />
+    <group_field/>
+    <group_time/>
     <parameters>
       <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
-    <execution_result_target_step />
+    <execution_result_target_step/>
     <execution_time_field>ExecutionTime</execution_time_field>
     <execution_result_field>ExecutionResult</execution_result_field>
     <execution_errors_field>ExecutionNrErrors</execution_errors_field>
@@ -635,11 +635,11 @@
     <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
     <execution_log_text_field>ExecutionLogText</execution_log_text_field>
     <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step />
-    <result_files_target_step />
+    <result_rows_target_step/>
+    <result_files_target_step/>
     <result_files_file_name_field>FileName</result_files_file_name_field>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -655,20 +655,20 @@
   <step>
     <name>S3 CSV input 2</name>
     <type>S3CSVINPUT</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
     <aws_access_key>${AWS_S3_ACCESS_KEY}</aws_access_key>
     <aws_secret_key>${AWS_S3_SECRET_KEY}</aws_secret_key>
     <bucket>${AWS_S3_BUCKET_NAME}</bucket>
     <filename>${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_codes.csv</filename>
-    <filename_field />
-    <rownum_field />
+    <filename_field/>
+    <rownum_field/>
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -680,7 +680,7 @@
       <field>
         <name>country_name</name>
         <type>String</type>
-        <format />
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -691,7 +691,7 @@
       <field>
         <name>country_code</name>
         <type>String</type>
-        <format />
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -700,8 +700,8 @@
         <trim_type>none</trim_type>
       </field>
     </fields>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -717,13 +717,13 @@
   <step>
     <name>S3 file output</name>
     <type>S3FileOutputPlugin</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
     <separator>;</separator>
     <enclosure>"</enclosure>
@@ -733,10 +733,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding />
-    <endedLine />
+    <encoding/>
+    <endedLine/>
     <fileNameInField>N</fileNameInField>
-    <fileNameField />
+    <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>s3n://s3n</name>
@@ -749,18 +749,18 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format />
+      <date_time_format/>
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery />
+      <splitevery/>
     </file>
     <fields>
     </fields>
     <access_key>Encrypted </access_key>
     <secret_key>Encrypted </secret_key>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -776,35 +776,35 @@
   <step>
     <name>Table output</name>
     <type>TableOutput</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
-    <connection />
-    <schema />
-    <table />
+    <connection/>
+    <schema/>
+    <table/>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>N</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
+    <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
     <partitioning_monthly>Y</partitioning_monthly>
     <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
+    <tablename_field/>
     <tablename_in_table>Y</tablename_in_table>
     <return_keys>N</return_keys>
-    <return_field />
+    <return_field/>
     <fields>
     </fields>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -820,15 +820,15 @@
   <step>
     <name>country_code_data_load_in_country_code_table</name>
     <type>TableOutput</type>
-    <description />
+    <description/>
     <distribute>Y</distribute>
-    <custom_distribution />
+    <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name />
+      <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>faers</schema>
     <table>country_code</table>
     <commit>1000</commit>
@@ -837,14 +837,14 @@
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
+    <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
     <partitioning_monthly>Y</partitioning_monthly>
     <tablename_in_field>N</tablename_in_field>
     <tablename_field>Field_000</tablename_field>
     <tablename_in_table>Y</tablename_in_table>
     <return_keys>N</return_keys>
-    <return_field />
+    <return_field/>
     <fields>
       <field>
         <column_name>country_name</column_name>
@@ -855,8 +855,8 @@
         <stream_name>country_code</stream_name>
       </field>
     </fields>
-    <attributes />
-    <cluster_schema />
+    <attributes/>
+    <cluster_schema/>
     <remotesteps>
       <input>
       </input>
@@ -872,19 +872,19 @@
   <step_error_handling>
     <error>
       <source_step>country_code_data_load_in_country_code_table</source_step>
-      <target_step />
+      <target_step/>
       <is_enabled>Y</is_enabled>
-      <nr_valuename />
-      <descriptions_valuename />
-      <fields_valuename />
-      <codes_valuename />
-      <max_errors />
-      <max_pct_errors />
-      <min_pct_rows />
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
     </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
   <slave_transformation>N</slave_transformation>
-  <attributes />
+  <attributes/>
 </transformation>

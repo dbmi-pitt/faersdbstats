@@ -13,11 +13,11 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
+    <database>cem_pitt_2022</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
@@ -382,7 +382,7 @@ aws configure list</script>
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -404,7 +404,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -432,7 +432,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>320</xloc>
       <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
@@ -455,7 +455,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -524,7 +524,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/pentaho_log_table_creation.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -615,7 +615,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
         </field>
         <field>
           <variable_name>DATABASE_NAME</variable_name>
-          <variable_value>${DATABASE_NAME}</variable_value>
+          <variable_value>cem_pitt_2022</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -695,7 +695,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_1_setup/eu_drug_name_active_ingredient_job.kjb</filename>
+      <filename>${Internal.Entry.Current.Directory}/eu_drug_name_active_ingredient_job.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -775,6 +775,31 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <yloc>944</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>create_schemas.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_1_setup/create_schemas.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>832</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -841,26 +866,8 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Update LOG SQL</from>
-      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Create pdi_logging table</from>
       <to>Update LOG SQL</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set AWS Credentials</from>
-      <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -897,6 +904,33 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
     <hop>
       <from>upload_new_quarter_from_faers.sh</from>
       <to>country_codes_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update LOG SQL</from>
+      <to>create_schemas.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_schemas.sh</from>
+      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set AWS Credentials</from>
+      <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -954,7 +988,7 @@ Current Issues:
       <note>&lt;&lt;LOAD_ALL_TIME value from faers.config
 
 if one will drop all and load all "fresh"</note>
-      <xloc>224</xloc>
+      <xloc>464</xloc>
       <yloc>832</yloc>
       <width>295</width>
       <heigth>61</heigth>

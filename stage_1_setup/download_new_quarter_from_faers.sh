@@ -27,7 +27,7 @@ cd data_new
 fileyearquarter="${LOAD_NEW_YEAR: -2}${LOAD_NEW_QUARTER}"
 zip_url=https://fis.fda.gov/content/Exports/faers_ascii_"${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}".zip
 echo will wget this $zip_url
-wget $zip_url
+wget $zip_url 2>&1
 unzip faers_ascii_${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}.zip  2>> error.txt 1>> output.txt
 mv ASCII/ASC_NTS.pdf ASCII/ASC_NTS"${fileyearquarter}".pdf
 
