@@ -374,7 +374,7 @@ done;
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/s3_data_download.sh</filename>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_2_initial_data/s3_data_download.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -384,7 +384,7 @@ done;
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>Y</insertScript>
+      <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
