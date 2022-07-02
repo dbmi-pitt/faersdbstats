@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>cem_pitt_2022</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>cem_pitt_2022</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>cem_pitt_2022</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>cem_pitt_2022</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>cem_pitt_2022</connection>
         <schema>public</schema>
         <table>pdi_logging</table>
         <timeout_days>3.0</timeout_days>
@@ -436,7 +436,9 @@
   </info>
   <notepads>
     <notepad>
-      <note>preq's
+      <note>FAERS data load (2012 Q4 and newer)
+
+preq's
 having run
 stage_1...
 stage_2...
@@ -456,7 +458,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <xloc>464</xloc>
       <yloc>80</yloc>
       <width>398</width>
-      <heigth>299</heigth>
+      <heigth>333</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -474,11 +476,11 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     </notepad>
   </notepads>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
+    <database>cem_pitt_2022</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
@@ -1234,7 +1236,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>demo</table>
     <commit>1000</commit>
@@ -1378,7 +1380,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>drug</table>
     <commit>1000</commit>
@@ -1502,7 +1504,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>indi</table>
     <commit>1000</commit>
@@ -1562,7 +1564,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>outc</table>
     <commit>1000</commit>
@@ -1618,7 +1620,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>reac</table>
     <commit>1000</commit>
@@ -1678,7 +1680,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>rpsr</table>
     <commit>1000</commit>
@@ -1734,7 +1736,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>ther</table>
     <commit>1000</commit>

@@ -13,7 +13,7 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -179,7 +179,7 @@
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <timeout_days>3.0</timeout_days>
@@ -270,7 +270,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <timeout_days>3.0</timeout_days>
@@ -527,7 +527,7 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -687,7 +687,7 @@ CREATE TABLE IF NOT EXISTS ther (
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -766,7 +766,7 @@ WHERE z.ROW_NUM = 1;
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -834,7 +834,7 @@ WHERE z.ROW_NUM = 1;
         </field>
         <field>
           <variable_name>DATABASE_NAME</variable_name>
-          <variable_value>${DATABASE_NAME}</variable_value>
+          <variable_value>cem_pitt_2022</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -980,7 +980,7 @@ WHERE z.ROW_NUM = 1;
 
 ABOUT EACH STEP
 -omop											-most excellently creates omop data
--create meddra snomed mapping
+-create meddra snomed mapping     -must have stage_vocabulary.concept table
 -set job variables 2					-exact same as before (brings in env vars)
 -drop create domain tables		-only if LOAD_ALL_TIME (=1) then drop and create fresh tables else do nothing
 -s3 data download						-mkdir ${BASE_FILE_DIR}/data_from_s3/ then if LOAD_ALL_TIME then download all data from to ${BASE_FILE_DIR}/data_from_s3/ else specific year quarter info

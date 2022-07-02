@@ -15,12 +15,12 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection/>
-    <schema/>
-    <table/>
-    <size_limit_lines/>
-    <interval/>
-    <timeout_days/>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
+    <size_limit_lines>5k</size_limit_lines>
+    <interval>30</interval>
+    <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_JOB</id>
       <enabled>Y</enabled>
@@ -128,10 +128,10 @@
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection/>
-    <schema/>
-    <table/>
-    <timeout_days/>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
+    <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
       <enabled>Y</enabled>
@@ -219,10 +219,10 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection/>
-    <schema/>
-    <table/>
-    <timeout_days/>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
+    <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_BATCH</id>
       <enabled>Y</enabled>
@@ -666,11 +666,14 @@ attempt to choose either "RESULT" or RESULT and bring in update log...
 
 cksum file download and country_code_jobs.kjb
 
-map_all_drugname_to_rxnorm.sql</note>
+map_all_drugname_to_rxnorm.sql
+
+When logging goes blank click job metrics
+</note>
       <xloc>0</xloc>
       <yloc>16</yloc>
       <width>805</width>
-      <heigth>537</heigth>
+      <heigth>588</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

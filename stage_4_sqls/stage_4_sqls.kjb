@@ -13,11 +13,11 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_NAME}</name>
+    <name>cem_pitt_2022</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
+    <database>cem_pitt_2022</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -179,7 +179,7 @@
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <timeout_days>3.0</timeout_days>
@@ -270,7 +270,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>cem_pitt_2022</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <timeout_days>3.0</timeout_days>
@@ -450,7 +450,7 @@ update standard_drug_outcome_drilldown a
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -498,7 +498,7 @@ from meddra_snomed_mapping b
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -602,7 +602,7 @@ select ab.drug_concept_id, ab.outcome_concept_id, count_a, count_b, count_c, (co
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -645,7 +645,7 @@ group by drug_concept_id, outcome_concept_id;
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -706,7 +706,7 @@ inner join reac_legacy b
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -754,7 +754,7 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -827,7 +827,7 @@ select * from cte2
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -845,7 +845,7 @@ select * from cte2
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${Internal.Entry.Current.Directory}/standardize_combined_drug_mapping.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -881,7 +881,7 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1665,7 +1665,7 @@ and update_method is null;
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${Internal.Entry.Current.Directory}/map_all_drugname_to_rxnorm.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1862,7 +1862,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1930,7 +1930,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
         </field>
         <field>
           <variable_name>DATABASE_NAME</variable_name>
-          <variable_value>${DATABASE_NAME}</variable_value>
+          <variable_value>cem_pitt_2022</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -2054,7 +2054,7 @@ from standard_drug_outcome_contingency_table;
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
+      <connection>cem_pitt_2022</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
