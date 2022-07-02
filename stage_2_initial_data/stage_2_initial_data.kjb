@@ -998,12 +998,14 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 
 Current Issues:
 Logging is blank
-
-</note>
+-known possible solutions, 
+	--restarting pentaho/spoon, 
+	-- opening database connections in pentaho, 
+	-- looking at workspace right click properties log tab and making sure log connection defined</note>
       <xloc>16</xloc>
       <yloc>0</yloc>
       <width>1343</width>
-      <heigth>435</heigth>
+      <heigth>469</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
