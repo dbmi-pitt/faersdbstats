@@ -490,8 +490,8 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <set_logfile>Y</set_logfile>
-      <logfile>${Internal.Entry.Current.Directory}/../logs/country_code</logfile>
+      <set_logfile>N</set_logfile>
+      <logfile>${Internal.Entry.Current.Directory}/../logs/country_codes_job</logfile>
       <logext>txt</logext>
       <add_date>Y</add_date>
       <add_time>Y</add_time>
