@@ -23,14 +23,27 @@ mkdir data_new
 cd data_new
 
 # FAERS ASCII
-
-fileyearquarter="${LOAD_NEW_YEAR: -2}${LOAD_NEW_QUARTER}"
-zip_url=https://fis.fda.gov/content/Exports/faers_ascii_"${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}".zip
-echo will wget this $zip_url
-wget $zip_url 2>&1
-unzip faers_ascii_${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}.zip  2>> error.txt 1>> output.txt
-mv ASCII/ASC_NTS.pdf ASCII/ASC_NTS"${fileyearquarter}".pdf
-
+if [ ${LOAD_NEW_YEAR} -le 2012 ]
+then
+    #echo we have laers data
+    faers_or_laers='laers';
+    fileyearquarter="${LOAD_NEW_YEAR: -2}${LOAD_NEW_QUARTER,,}"
+    zip_url=https://fis.fda.gov/content/Exports/aers_ascii_"${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER,,}".zip
+    zip_filename="aers_ascii_${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER,,}.zip"
+    echo will wget this $zip_url
+    wget $zip_url 2>&1
+    unzip $zip_filename 2>> error.txt 1>> output.txt
+    mv ASCII/ASC_NTS.pdf ASCII/ASC_NTS"${fileyearquarter}".pdf
+else
+    #echo we have faers data
+    faers_or_laers='faers';
+    fileyearquarter="${LOAD_NEW_YEAR: -2}${LOAD_NEW_QUARTER}"
+    zip_url=https://fis.fda.gov/content/Exports/faers_ascii_"${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}".zip
+    echo will wget this $zip_url
+    wget $zip_url 2>&1
+    unzip faers_ascii_${LOAD_NEW_YEAR}${LOAD_NEW_QUARTER}.zip  2>> error.txt 1>> output.txt
+    mv ASCII/ASC_NTS.pdf ASCII/ASC_NTS"${fileyearquarter}".pdf
+fi
 
 echo `pwd`
 #mv FAQs.pdf ascii/FAQs"${fileyearquarter}".pdf
