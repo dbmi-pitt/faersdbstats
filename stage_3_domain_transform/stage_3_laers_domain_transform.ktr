@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_3_domain_transform</name>
+    <name>stage_3_laers_domain_transform</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -436,7 +436,9 @@
   </info>
   <notepads>
     <notepad>
-      <note>preq's
+      <note>Stage 3 LAERS Transform
+
+preq's
 - having run...
 __stage_1_setup...
 __stage_2_initial_data...
@@ -458,7 +460,7 @@ SIZE and STAT domain are not loaded by this transform
       <xloc>32</xloc>
       <yloc>0</yloc>
       <width>682</width>
-      <heigth>333</heigth>
+      <heigth>367</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
