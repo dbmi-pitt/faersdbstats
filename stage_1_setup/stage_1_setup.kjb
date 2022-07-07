@@ -726,11 +726,11 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>download_new_quarter_from_faers.sh</name>
+      <name>download_new_quarter_from_fda.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${Internal.Entry.Current.Directory}/download_new_quarter_from_faers.sh</filename>
+      <filename>${Internal.Entry.Current.Directory}/download_new_quarter_from_fda.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -751,11 +751,11 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>upload_new_quarter_from_faers.sh</name>
+      <name>upload_new_quarter_from_fda.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${Internal.Entry.Current.Directory}/upload_new_quarter_from_faers.sh</filename>
+      <filename>${Internal.Entry.Current.Directory}/upload_new_quarter_from_fda.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -903,7 +903,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
     </hop>
     <hop>
       <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>download_new_quarter_from_faers.sh</to>
+      <to>download_new_quarter_from_fda.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -911,8 +911,8 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>download_new_quarter_from_faers.sh</from>
-      <to>upload_new_quarter_from_faers.sh</to>
+      <from>download_new_quarter_from_fda.sh</from>
+      <to>upload_new_quarter_from_fda.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -920,7 +920,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>upload_new_quarter_from_faers.sh</from>
+      <from>upload_new_quarter_from_fda.sh</from>
       <to>country_codes_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
