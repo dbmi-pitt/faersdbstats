@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>LoadCountryCodes</name>
+    <name>country_code_transform</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -512,11 +512,57 @@
   </connection>
   <order>
     <hop>
+      <from>Get files rows count</from>
+      <to>Text file output - write_s3_file_rows_count_to_log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>S3 CSV input 2</from>
       <to>country_code_data_load_in_country_code_table</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Get files rows count</name>
+    <type>GetFilesRowsCount</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <files_count>N</files_count>
+    <files_count_fieldname>filescount</files_count_fieldname>
+    <rows_count_fieldname>rowscount</rows_count_fieldname>
+    <rowseparator_format>CARRIAGERETURN</rowseparator_format>
+    <row_separator/>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <filename_Field/>
+    <smartCount>Y</smartCount>
+    <file>
+      <name>${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_codes.csv</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Get system info</name>
     <type>SystemInfo</type>
@@ -656,7 +702,7 @@
     <name>S3 CSV input 2</name>
     <type>S3CSVINPUT</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -815,6 +861,63 @@
       <xloc>336</xloc>
       <yloc>192</yloc>
       <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output - write_s3_file_rows_count_to_log</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine>^ line count from s3 country codes file (s3://${AWS_S3_BUCKET_NAME}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_codes.csv (includes header row)</endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention/>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
