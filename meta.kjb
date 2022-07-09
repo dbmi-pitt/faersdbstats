@@ -646,7 +646,7 @@ Preq's
 - AWS S3
 - Postgres
 - a database connection established within Pentaho (edit > show used environment variables... define host, db, user, pw)
-- a properly configured faers.config file
+- a properly configured faers_config.config file
 - omop data loaded into vocabulary schema (or proper license to obtain the data)
 - data's in staging_vocabulary for create_meddra_snomed_mapping.sql
 

@@ -548,7 +548,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${Internal.Entry.Current.Directory}/../../faers.config</filename>
+      <filename>${Internal.Entry.Current.Directory}/../../faers_config.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>
@@ -1097,7 +1097,7 @@ Current Issues:
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>&lt;&lt;LOAD_ALL_TIME value from faers.config
+      <note>&lt;&lt;LOAD_ALL_TIME value from faers_config.config
 
 if one will drop all and load all "fresh"</note>
       <xloc>464</xloc>

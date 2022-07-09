@@ -320,7 +320,7 @@
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${BASE_FILE_DIR}/faers.config</filename>
+      <filename>${BASE_FILE_DIR}/faers_config.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>

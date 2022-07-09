@@ -428,7 +428,7 @@
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/../faers.config</filename>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/../faers_config.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>

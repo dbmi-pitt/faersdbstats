@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-source ${FAERSDBSTATS_REPO_LOCATION}/../faers.config
+source ${FAERSDBSTATS_REPO_LOCATION}/../faers_config.config
 
 export "AWS_ACCESS_KEY_ID=${AWS_S3_ACCESS_KEY}"
 #echo "AWS_S3_ACCESS_KEY = ${AWS_S3_ACCESS_KEY}"

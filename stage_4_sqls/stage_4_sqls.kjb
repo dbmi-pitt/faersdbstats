@@ -1890,7 +1890,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <type>SET_VARIABLES</type>
       <attributes/>
       <replacevars>Y</replacevars>
-      <filename>${BASE_FILE_DIR}/faers.config</filename>
+      <filename>${BASE_FILE_DIR}/faers_config.config</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>

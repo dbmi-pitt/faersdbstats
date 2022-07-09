@@ -1,8 +1,8 @@
 #!/bin/zsh
 # 
 
-#source "../../faers.config"
-source "${BASE_FILE_DIR}/faers.config"
+#source "../../faers_config.config"
+source "${BASE_FILE_DIR}/faers_config.config"
 
 # cd "../../data_new"
 cd "${BASE_FILE_DIR}/data_new"

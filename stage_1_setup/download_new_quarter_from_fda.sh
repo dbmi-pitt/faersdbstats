@@ -5,8 +5,8 @@
 # bucknelius
 ################################################################
 
-#source "../../faers.config" #for local testing
-source "${BASE_FILE_DIR}/faers.config"
+#source "../../faers_config.config" #for local testing
+source "${BASE_FILE_DIR}/faers_config.config"
 
 # 19q1| https://fis.fda.gov/content/Exports/faers_ascii_2019Q1.zip
 # 18a4| https://fis.fda.gov/content/Exports/faers_ascii_2018q4.zip
