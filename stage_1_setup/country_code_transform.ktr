@@ -439,32 +439,10 @@
       <note>from s3 data bucket... ISO_3166-1_country_codes.csv
 
 (other data's also inserted in sql in job; one to many; sql insert has similified encoding of special character letters)</note>
-      <xloc>352</xloc>
+      <xloc>256</xloc>
       <yloc>48</yloc>
       <width>766</width>
       <heigth>61</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>&lt;&lt;not sure if this will work because of running in parallel
-</note>
-      <xloc>352</xloc>
-      <yloc>496</yloc>
-      <width>383</width>
-      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -580,8 +558,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>208</yloc>
+      <xloc>512</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -607,7 +585,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>160</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -949,8 +927,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>384</yloc>
+      <xloc>512</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -969,7 +947,7 @@
     <schema>${DATABASE_SCHEMA}</schema>
     <table>country_code</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>

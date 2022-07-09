@@ -519,11 +519,11 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>Y</set_logfile>
-      <logfile>${FAERSDBSTATS_REPO_LOCATION}/../logging/orange_book_job</logfile>
+      <logfile>${FAERSDBSTATS_REPO_LOCATION}/../logs/orange_book_job</logfile>
       <logext>txt</logext>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Rowlevel</loglevel>
+      <loglevel>Minimal</loglevel>
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
@@ -683,8 +683,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <logfile>${FAERSDBSTATS_REPO_LOCATION}/../logs/eu_drug_job</logfile>
       <logext>txt</logext>
       <add_date>Y</add_date>
-      <add_time>Y</add_time>
-      <loglevel>Rowlevel</loglevel>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
@@ -875,7 +875,7 @@ chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
       <insertScript>Y</insertScript>
       <script>#!/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
-echo "LOAD_ALL_TIME=1" >> $log_location
+echo "took the LOAD_ALL_TIME=1 path in stage_1_setup workflow " >> $log_location
 echo "DROPPED ALL TABLES" >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -883,6 +883,34 @@ echo "DROPPED ALL TABLES" >> $log_location</script>
       <nr>0</nr>
       <xloc>176</xloc>
       <yloc>1008</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log LOAD_ALL_TIME=0 path taken</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo "took the LOAD_ALL_TIME=0 (red fail) path in stage_1_setup workflow " >> $log_location
+echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -948,15 +976,6 @@ echo "DROPPED ALL TABLES" >> $log_location</script>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>download_new_quarter_from_fda.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -1049,6 +1068,24 @@ echo "DROPPED ALL TABLES" >> $log_location</script>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <to>Log LOAD_ALL_TIME=0 path taken</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log LOAD_ALL_TIME=0 path taken</from>
+      <to>download_new_quarter_from_fda.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1100,9 +1137,9 @@ Current Issues:
       <note>&lt;&lt;LOAD_ALL_TIME value from faers_config.config
 
 if one will drop all and load all "fresh"</note>
-      <xloc>464</xloc>
+      <xloc>768</xloc>
       <yloc>832</yloc>
-      <width>295</width>
+      <width>343</width>
       <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>

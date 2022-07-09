@@ -583,9 +583,13 @@ aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_
 #!/usr/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 cd ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup
-echo \n >> $log_location
-echo "country code table created and 32 countries manually inserted" >> $log_location
+
 printf '\n' >> $log_location
+
+echo "country code table created and 32 countries manually inserted" >> $log_location
+
+printf '\n' >> $log_location
+
 echo "country code pwd is " `pwd`
 echo "country code input file has this number of lines " >> $log_location
 echo `pwd`
@@ -688,7 +692,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./show_country_code_coun
       <script>#!/usr/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 printf '\n' >> $log_location
-echo ${COUNTRY_CODE_ROW_NUM} " &lt; number of rows in country code table" >> $log_location</script>
+echo ${COUNTRY_CODE_ROW_NUM} " &lt; number of rows in country code table" >> $log_location
+echo ${COUNTRY_CODE_ROW_NUM_CEM_CHEX} " &lt; number of rows in cem country code table" >> $log_location
+</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -702,7 +708,8 @@ echo ${COUNTRY_CODE_ROW_NUM} " &lt; number of rows in country code table" >> $lo
       <description/>
       <type>WRITE_TO_LOG</type>
       <attributes/>
-      <logmessage>COUNTRY_CODE_ROW_NUM is ${COUNTRY_CODE_ROW_NUM}</logmessage>
+      <logmessage>COUNTRY_CODE_ROW_NUM is ${COUNTRY_CODE_ROW_NUM}
+COUNTRY_CODE_ROW_NUM_CEM_CHEX is ${COUNTRY_CODE_ROW_NUM_CEM_CHEX}</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>${COUNTRY_CODE_ROW_NUM}</logsubject>
       <parallel>N</parallel>
