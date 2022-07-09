@@ -13,14 +13,14 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem_pitt_2022</database>
+    <database>${DATABASE_NAME}</database>
     <port>5432</port>
-    <username>rw_grp</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79bc67e195bdca</password>
+    <username>${DATABASE_USERNAME}</username>
+    <password>${DATABASE_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -34,7 +34,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>cem_pitt_2022</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -147,7 +147,7 @@
     </field>
   </job-log-table>
   <jobentry-log-table>
-    <connection>cem_pitt_2022</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
@@ -238,7 +238,7 @@
     </field>
   </jobentry-log-table>
   <channel-log-table>
-    <connection>cem_pitt_2022</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <timeout_days>3.0</timeout_days>
@@ -340,35 +340,6 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Upload files to FTPS</name>
-      <description/>
-      <type>FTPS_PUT</type>
-      <attributes/>
-      <servername/>
-      <serverport>21</serverport>
-      <username/>
-      <password>Encrypted </password>
-      <remoteDirectory/>
-      <localDirectory/>
-      <wildcard/>
-      <binary>N</binary>
-      <timeout>0</timeout>
-      <remove>N</remove>
-      <only_new>N</only_new>
-      <active>N</active>
-      <proxy_host/>
-      <proxy_port/>
-      <proxy_username/>
-      <proxy_password/>
-      <connection_type>FTP_CONNECTION</connection_type>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>48</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>Start</name>
       <description/>
       <type>SPECIAL</type>
@@ -386,8 +357,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>32</yloc>
+      <xloc>96</xloc>
+      <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -479,7 +450,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>128</yloc>
+      <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -492,12 +463,12 @@
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_country_code_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>256</yloc>
+      <xloc>608</xloc>
+      <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -510,11 +481,11 @@
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
+      <xloc>576</xloc>
       <yloc>592</yloc>
       <attributes_kjc/>
     </entry>
@@ -553,8 +524,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>464</yloc>
+      <xloc>320</xloc>
+      <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -588,8 +559,196 @@ aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>352</yloc>
+      <xloc>592</xloc>
+      <yloc>368</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log country code table created</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+#!/usr/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+cd ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup
+echo \n >> $log_location
+echo "country code table created and 32 countries manually inserted" >> $log_location
+printf '\n' >> $log_location
+echo "country code pwd is " `pwd`
+echo "country code input file has this number of lines " >> $log_location
+echo `pwd`
+echo $(wc -l ../${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_codes.csv) >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>432</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log fail</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/usr/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo `country code table create failed` >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>304</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Evaluate rows number in a table</name>
+      <description/>
+      <type>EVAL_TABLE_CONTENT</type>
+      <attributes/>
+      <connection>${DATABASE_NAME}</connection>
+      <schemaname>${DATABASE_SCHEMA}</schemaname>
+      <tablename>country_code</tablename>
+      <success_condition>rows_count_equal</success_condition>
+      <limit>32</limit>
+      <is_custom_sql>N</is_custom_sql>
+      <is_usevars>N</is_usevars>
+      <custom_sql/>
+      <add_rows_result>N</add_rows_result>
+      <clear_result_rows>Y</clear_result_rows>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>304</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>country_code_table_count_sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
+psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./show_country_code_counts.sql ${CEM_POSTGRES_DATABASE}
+
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>896</xloc>
+      <yloc>528</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log COUNTRY_CODE_ROW_NUM</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/usr/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo ${COUNTRY_CODE_ROW_NUM} " &lt; number of rows in country code table" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>592</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Write to log</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <attributes/>
+      <logmessage>COUNTRY_CODE_ROW_NUM is ${COUNTRY_CODE_ROW_NUM}</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>${COUNTRY_CODE_ROW_NUM}</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>592</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>country_code_transform_set_var</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/country_code_transform_set_var.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile>${FAERSDBSTATS_REPO_LOCATION}/../logs/country_code_transform</logfile>
+      <logext>txt</logext>
+      <add_date>Y</add_date>
+      <add_time>Y</add_time>
+      <loglevel>Rowlevel</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>Y</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>Y</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>464</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -606,15 +765,6 @@ aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_
     <hop>
       <from>Set Config Variables</from>
       <to>Create country_code table (create_country_code_table.sql)</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>country_code_transform</from>
-      <to>create faers.nda (load_nda_table.sql)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -640,8 +790,80 @@ aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Create country_code table (create_country_code_table.sql)</from>
+      <from>Log country code table created</from>
       <to>country_code_transform</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create country_code table (create_country_code_table.sql)</from>
+      <to>log fail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create country_code table (create_country_code_table.sql)</from>
+      <to>Evaluate rows number in a table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Evaluate rows number in a table</from>
+      <to>Log country code table created</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Evaluate rows number in a table</from>
+      <to>log fail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log COUNTRY_CODE_ROW_NUM</from>
+      <to>create faers.nda (load_nda_table.sql)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Write to log</from>
+      <to>log COUNTRY_CODE_ROW_NUM</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>country_code_transform</from>
+      <to>country_code_transform_set_var</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>country_code_transform_set_var</from>
+      <to>Write to log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -656,8 +878,8 @@ aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_
 create_country_code_table.sql manually inserts 32 country codes
 
 </note>
-      <xloc>448</xloc>
-      <yloc>64</yloc>
+      <xloc>32</xloc>
+      <yloc>16</yloc>
       <width>445</width>
       <heigth>95</heigth>
       <fontname>Ubuntu</fontname>
