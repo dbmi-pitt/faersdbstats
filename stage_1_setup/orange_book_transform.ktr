@@ -460,7 +460,7 @@ inserts into nda table</note>
     </notepad>
   </notepads>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -960,8 +960,8 @@ inserts into nda table</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>cem_pitt_2022</connection>
-    <schema>faers</schema>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
     <table>nda</table>
     <commit>1000</commit>
     <truncate>Y</truncate>

@@ -12,11 +12,11 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem_pitt_2022</database>
+    <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
@@ -65,7 +65,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>cem_pitt_2022</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>

@@ -13,7 +13,7 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>

@@ -13,7 +13,7 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -511,7 +511,7 @@ create table if not exists eu_drug_name_active_ingredient
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_eu_drug_name_active_ingredient_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -529,7 +529,7 @@ create table if not exists eu_drug_name_active_ingredient
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_eu_drug_name_active_ingredient_table_part_2.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

@@ -13,11 +13,11 @@
   <parameters>
     </parameters>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem_pitt_2022</database>
+    <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
@@ -382,7 +382,7 @@ aws configure list</script>
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -404,7 +404,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -432,35 +432,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>336</xloc>
       <yloc>832</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>Update LOG SQL</name>
-      <description>this is needed when using w/ pentaho 9
-</description>
-      <type>SQL</type>
-      <attributes/>
-      <sql>ALTER TABLE ${DATABASE_LOG_SCHEMA}.pdi_logging ADD COLUMN "RESULT_KTL" VARCHAR(5);
-UPDATE ${DATABASE_LOG_SCHEMA}.pdi_logging SET "RESULT_KTL"="RESULT";
-ALTER TABLE ${DATABASE_LOG_SCHEMA}.pdi_logging DROP COLUMN "RESULT";
-ALTER TABLE ${DATABASE_LOG_SCHEMA}.pdi_logging RENAME "RESULT_KTL" TO "RESULT";
-
-;
-
-CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_1" ON ${DATABASE_LOG_SCHEMA}.pdi_logging(ID_BATCH);
-CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA}.pdi_logging(TRANSNAME, LOG_DATE);</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>688</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -499,7 +472,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
+      <expand_remote_job>Y</expand_remote_job>
       <create_parent_folder>Y</create_parent_folder>
       <pass_export>N</pass_export>
       <run_configuration>Pentaho local</run_configuration>
@@ -522,9 +495,9 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/pentaho_log_table_creation.sql</sqlfilename>
+      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_pentaho_log_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -615,7 +588,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
         </field>
         <field>
           <variable_name>DATABASE_NAME</variable_name>
-          <variable_value>cem_pitt_2022</variable_value>
+          <variable_value>${DATABASE_NAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -656,6 +629,11 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
         <field>
           <variable_name>CEM_ORANGE_BOOK_DOWNLOAD_FILENAME</variable_name>
           <variable_value>${CEM_ORANGE_BOOK_DOWNLOAD_FILENAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>LOG_LOCATION</variable_name>
+          <variable_value>${LOG_LOCATION}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
       </fields>
@@ -746,7 +724,7 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
+      <xloc>336</xloc>
       <yloc>944</yloc>
       <attributes_kjc/>
     </entry>
@@ -810,12 +788,101 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_drug_usagi_mapping_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
-      <connection>cem_pitt_2022</connection>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
       <yloc>1232</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Create Local TXT LOG</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/usr/bin/bash
+
+# log_filename="LOG-"$(date +%B)"-"$(date +%Y)"-load.txt"
+# log_filename="LOG-"${CURRENT_MONTH}"-"${CURRENT_YEAR}"-load.txt"
+# export LOG_FILENAME=$log_filename
+
+if [ ! -d ${BASE_FILE_DIR}/logs/ ]
+then
+  mkdir ${BASE_FILE_DIR}/logs/
+fi
+touch ${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>688</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log_init.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_1_setup/log_init.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>336</xloc>
+      <yloc>768</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log Drop All Tables</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo "LOAD_ALL_TIME=1" >> $log_location
+echo "DROPPED ALL TABLES" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>176</xloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -866,26 +933,8 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Drop all tables</from>
-      <to>country_codes_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>SUCCESS IF LOAD_ALL_TIME=1</from>
       <to>Drop all tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Create pdi_logging table</from>
-      <to>Update LOG SQL</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -929,15 +978,6 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Update LOG SQL</from>
-      <to>create_schemas.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>create_schemas.sh</from>
       <to>SUCCESS IF LOAD_ALL_TIME=1</to>
       <from_nr>0</from_nr>
@@ -958,6 +998,51 @@ CREATE INDEX IF NOT EXISTS "IDX_${DATABASE_LOG_NAME}_2" ON ${DATABASE_LOG_SCHEMA
     <hop>
       <from>eu_drug_name_active_ingredient_job</from>
       <to>create_drug_usagi_mapping_table.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create pdi_logging table</from>
+      <to>Create Local TXT LOG</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Local TXT LOG</from>
+      <to>log_init.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_init.sh</from>
+      <to>create_schemas.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Drop all tables</from>
+      <to>Log Drop All Tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log Drop All Tables</from>
+      <to>country_codes_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

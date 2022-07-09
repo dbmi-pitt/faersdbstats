@@ -12,9 +12,9 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>cem_pitt_2022</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <connection>${DATABASE_NAME}</connection>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <size_limit_lines>5000</size_limit_lines>
         <interval>1s</interval>
         <timeout_days>3.0</timeout_days>
@@ -126,9 +126,9 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>cem_pitt_2022</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <connection>${DATABASE_NAME}</connection>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
         <timeout_days>3.0</timeout_days>
         <field>
@@ -208,9 +208,9 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>cem_pitt_2022</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <connection>${DATABASE_NAME}</connection>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -274,9 +274,9 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>cem_pitt_2022</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <connection>${DATABASE_NAME}</connection>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -350,9 +350,9 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>cem_pitt_2022</connection>
-        <schema>public</schema>
-        <table>pdi_logging</table>
+        <connection>${DATABASE_NAME}</connection>
+        <schema>${DATABASE_LOG_SCHEMA}</schema>
+        <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
         <field>
           <id>ID_BATCH</id>
@@ -462,11 +462,11 @@ https://www.fda.gov/drugs/drug-approvals-and-databases/orange-book-data-files
     </notepad>
   </notepads>
   <connection>
-    <name>cem_pitt_2022</name>
+    <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem_pitt_2022</database>
+    <database>${DATABASE_NAME}</database>
     <port>5432</port>
     <username>${DATABASE_USERNAME}</username>
     <password>Encrypted 2be98afc86aa7f2e4bf298747f7bc9dcd</password>
@@ -962,8 +962,8 @@ https://www.fda.gov/drugs/drug-approvals-and-databases/orange-book-data-files
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>cem_pitt_2022</connection>
-    <schema>faers</schema>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
     <table>nda</table>
     <commit>1000</commit>
     <truncate>N</truncate>
