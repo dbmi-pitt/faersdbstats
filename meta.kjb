@@ -423,13 +423,13 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_sqls</name>
+      <name>stage_5_sqls</name>
       <description/>
       <type>JOB</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_4_sqls/stage_4_sqls.kjb</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_5_sqls/stage_5_sqls.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -572,7 +572,7 @@
     </hop>
     <hop>
       <from>stage_3_domain_transformation</from>
-      <to>stage_4_sqls</to>
+      <to>stage_5_sqls</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -658,7 +658,7 @@ stage_2_initial_data
 stage_3_faers_domain_transform (for 2012 Q4 and newer)
 and/or
 stage_3_laers_domain_transform (for 2012 Q3 and older)
-stage_4_sqls
+stage_5_sqls
 
 To-do:
 in stage_1_setup.kjb
