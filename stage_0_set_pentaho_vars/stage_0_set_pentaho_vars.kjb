@@ -393,6 +393,31 @@
           <variable_value>${LOG_FILENAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>DATABASE_TEST_HOST</variable_name>
+          <variable_value>${DATABASE_TEST_HOST}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_TEST_NAME</variable_name>
+          <variable_value>${DATABASE_TEST_NAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_TEST_SCHEMA</variable_name>
+          <variable_value>${DATABASE_TEST_SCHEMA}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_TEST_USERNAME</variable_name>
+          <variable_value>${DATABASE_TEST_USERNAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_TEST_PASSWORD</variable_name>
+          <variable_value>${DATABASE_TEST_PASSWORD}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>

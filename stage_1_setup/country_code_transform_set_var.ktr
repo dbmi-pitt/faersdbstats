@@ -511,13 +511,13 @@
     </attributes>
   </connection>
   <connection>
-    <name>check_cem</name>
+    <name>${DATABASE_TEST_NAME}</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cem</database>
+    <database>${DATABASE_TEST_NAME}</database>
     <port>5432</port>
-    <username>brb265</username>
+    <username>${DATABASE_TEST_USERNAME}</username>
     <password>Encrypted 2be98afc86aa7f2e4bc16a276dd9aaac2</password>
     <servername/>
     <data_tablespace/>
@@ -568,7 +568,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>check_cem</from>
+      <from>${DATABASE_TEST_NAME}</from>
       <to>Set variables - country_code_row_num_cem_chex</to>
       <enabled>Y</enabled>
     </hop>
@@ -669,7 +669,7 @@
     </GUI>
   </step>
   <step>
-    <name>check_cem</name>
+    <name>${DATABASE_TEST_NAME}</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -679,7 +679,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>check_cem</connection>
+    <connection>${DATABASE_TEST_NAME}</connection>
     <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.country_code</sql>
     <limit>0</limit>
     <lookup/>
