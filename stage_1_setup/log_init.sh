@@ -4,7 +4,7 @@ echo log_location is $log_location
 
 printf '\n' >> $log_location
 echo "###################################################" > $log_location
-echo "############## VALUES FROM faers.conf #############" >> $log_location
+echo "##### VALUES FROM faers_config.config #############" >> $log_location
 echo "###################################################" >> $log_location
 printf '\n' >> $log_location
 echo BASE_FILE_DIR is ${BASE_FILE_DIR}
@@ -38,12 +38,13 @@ echo "################### AWS ###########################" >> $log_location
 echo "###################################################" >> $log_location
 printf '\n' >> $log_location
 #edit values and save as aws.config
-echo AWS_S3_BUCKET_NAME is ${AWS_S3_BUCKET_NAME} >> $log_location
-echo AWS_S3_ACCESS_KEY is ${AWS_S3_ACCESS_KEY} >> $log_location
-echo AWS_ACCESS_KEY_ID is ${AWS_ACCESS_KEY_ID} >> $log_location
-echo AWS_S3_SECRET_KEY is ${AWS_S3_SECRET_KEY} >> $log_location
-echo AWS_SECRET_ACCESS_KEY is ${AWS_SECRET_ACCESS_KEY} >> $log_location
-echo AWS_DEFAULT_REGION is ${AWS_DEFAULT_REGION} >> $log_location
+aws config list >> $log_location
+# echo AWS_S3_BUCKET_NAME is ${AWS_S3_BUCKET_NAME} >> $log_location
+# echo AWS_S3_ACCESS_KEY is ${AWS_S3_ACCESS_KEY} >> $log_location
+# echo AWS_ACCESS_KEY_ID is ${AWS_ACCESS_KEY_ID} >> $log_location
+# echo AWS_S3_SECRET_KEY is ${AWS_S3_SECRET_KEY} >> $log_location
+# echo AWS_SECRET_ACCESS_KEY is ${AWS_SECRET_ACCESS_KEY} >> $log_location
+# echo AWS_DEFAULT_REGION is ${AWS_DEFAULT_REGION} >> $log_location
 
 #####################################################################
 #######################   DATABASE    ###############################

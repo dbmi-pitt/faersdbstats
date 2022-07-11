@@ -368,7 +368,7 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>672</xloc>
       <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
@@ -531,8 +531,8 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>1024</yloc>
+      <xloc>656</xloc>
+      <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -691,8 +691,8 @@ CREATE TABLE IF NOT EXISTS ther (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>752</yloc>
+      <xloc>672</xloc>
+      <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -728,8 +728,8 @@ CREATE TABLE IF NOT EXISTS ther (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1040</yloc>
+      <xloc>384</xloc>
+      <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -770,8 +770,8 @@ WHERE z.ROW_NUM = 1;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>768</yloc>
+      <xloc>384</xloc>
+      <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -784,7 +784,7 @@ WHERE z.ROW_NUM = 1;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>128</xloc>
       <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
@@ -881,7 +881,7 @@ WHERE z.ROW_NUM = 1;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>384</xloc>
       <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
@@ -905,6 +905,69 @@ WHERE z.ROW_NUM = 1;
       <nr>0</nr>
       <xloc>128</xloc>
       <yloc>560</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log Stg 2 progress</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 2_INITIAL_DATA JOB" >> $log_location
+printf '\n' >> $log_location
+echo "Created meddra_snomed_mapping" >> $log_location
+echo "create if not exist'd domain tables" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>816</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log STAGE 2 COMPLETE</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "###################################################" >> $log_location
+echo "################ STAGE 2 COMPLETE #####################" >> $log_location
+echo "###################################################" >> $log_location
+printf '\n\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>944</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -946,15 +1009,6 @@ WHERE z.ROW_NUM = 1;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create domain tables</from>
-      <to>s3_data_download</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>set AWS credentials</from>
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
@@ -966,6 +1020,33 @@ WHERE z.ROW_NUM = 1;
     <hop>
       <from>Wait for 3s</from>
       <to>create_meddra_snomed_mapping.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create domain tables</from>
+      <to>Log Stg 2 progress</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log Stg 2 progress</from>
+      <to>s3_data_download</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Legacy Database Structures</from>
+      <to>Log STAGE 2 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

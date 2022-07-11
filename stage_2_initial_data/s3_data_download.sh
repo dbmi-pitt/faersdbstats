@@ -1,8 +1,13 @@
 #!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 #shell options #-s enable (set) each optname #globstar enables ** recursive dir search
 
 #uncomment source to debug from command line
 #source ../faers_config.config
+printf '\n' >> $log_location
+echo "###################################################" >> $log_location
+echo "########### s3_data_download ######################" >> $log_location
+echo "###################################################" >> $log_location
 
 #belt and suspenders aws credentials
 export "AWS_ACCESS_KEY_ID=${AWS_S3_ACCESS_KEY}"
@@ -92,6 +97,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
     done; #end for laers faers; do
 else #not LOAD_ALL_DATA
     echo REPLACING ALL DATA IN data_from_s3 WITH DATA FROM ${LOAD_NEW_QUARTER}  ${LOAD_NEW_YEAR}
+    echo "REPLACING ALL DATA IN data_from_s3 WITH DATA FROM" ${LOAD_NEW_QUARTER}  ${LOAD_NEW_YEAR} >> $log_location
     
         #download s3://..data_test to local/data_from_s3
         #echo "data will be downloaded to..."
@@ -155,3 +161,5 @@ else #not LOAD_ALL_DATA
     done; #end for domain in demo drug; do
     #done;
 fi #end if [ "${LOAD_ALL_TIME}" = 1 ]; then
+
+echo "s3_data_download.sh done data should be located in " ${BASE_FILE_DIR} "/data_from_s3/" >> $log_location

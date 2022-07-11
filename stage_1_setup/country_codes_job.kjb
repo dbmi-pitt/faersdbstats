@@ -586,13 +586,11 @@ cd ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup
 
 printf '\n' >> $log_location
 
-echo "country code table created and 32 countries manually inserted" >> $log_location
-
-printf '\n' >> $log_location
-
 echo "country code pwd is " `pwd`
-echo "country code input file has this number of lines " >> $log_location
-echo `pwd`
+
+echo "country code table created" >> $log_location
+echo "32 countries manually inserted" >> $log_location
+echo "country code input file has this number of lines... " >> $log_location
 echo $(wc -l ../${CEM_DOWNLOAD_DATA_FOLDER}_setup/ISO_3166-1_country_codes.csv) >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
