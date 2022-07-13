@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+#source ../../faers_config.config
+
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 echo log_location is $log_location
 
@@ -38,7 +40,7 @@ echo "################### AWS ###########################" >> $log_location
 echo "###################################################" >> $log_location
 printf '\n' >> $log_location
 #edit values and save as aws.config
-aws config list >> $log_location
+echo "$(aws configure list)" >> $log_location
 # echo AWS_S3_BUCKET_NAME is ${AWS_S3_BUCKET_NAME} >> $log_location
 # echo AWS_S3_ACCESS_KEY is ${AWS_S3_ACCESS_KEY} >> $log_location
 # echo AWS_ACCESS_KEY_ID is ${AWS_ACCESS_KEY_ID} >> $log_location
