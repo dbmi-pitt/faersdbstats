@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_faers_domain_logging</name>
+    <name>stage_4_laers_domain_logging</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -436,13 +436,14 @@
   </info>
   <notepads>
     <notepad>
-      <note>FAERS data load logging (2012 Q4 and newer)
+      <note>LAERS data load logging (2012 Q3 and older)
 
 preq's
 having run
 stage_1...
 stage_2...
-stage_3_faers...
+stage_3_Laers
+
 
 for logging...
 
@@ -450,17 +451,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
 
 todo:
 
-indi
-outc
-reac
-rpsr
-ther
+
 
 </note>
       <xloc>544</xloc>
       <yloc>32</yloc>
       <width>329</width>
-      <heigth>367</heigth>
+      <heigth>316</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -602,83 +599,83 @@ ther
   </connection>
   <order>
     <hop>
-      <from>Table input - count(*) demo</from>
-      <to>Set variables - DEMO_ROW_COUNT</to>
+      <from>Table input - count(*) demo_legacy</from>
+      <to>Set variables - DEMO_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) drug</from>
-      <to>Set variables - DRUG_ROW_COUNT</to>
+      <from>Table input - count(*) drug_legacy</from>
+      <to>Set variables - DRUG_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) indi</from>
-      <to>Set variables - INDI_ROW_COUNT</to>
+      <from>Table input - count(*) indi_legacy</from>
+      <to>Set variables - INDI_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) outc</from>
-      <to>Set variables - OUTC_ROW_COUNT</to>
+      <from>Table input - count(*) outc_legacy</from>
+      <to>Set variables - OUTC_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) reac</from>
-      <to>Set variables - REAC_ROW_COUNT</to>
+      <from>Table input - count(*) reac_legacy</from>
+      <to>Set variables - REAC_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) ther</from>
-      <to>Set variables - THER_ROW_COUNT</to>
+      <from>Table input - count(*) ther_legacy</from>
+      <to>Set variables - THER_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) rpsr</from>
-      <to>Set variables - RPSR_ROW_COUNT</to>
+      <from>Table input - count(*) rpsr_legacy</from>
+      <to>Set variables - RPSR_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) drug 2</from>
-      <to>Set variables - DRUG_ROW_COUNT 2</to>
+      <from>Table input - count(*) drug_legacy 2</from>
+      <to>Set variables - DRUG_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) indi 2</from>
-      <to>Set variables - INDI_ROW_COUNT 2</to>
+      <from>Table input - count(*) indi_legacy 2</from>
+      <to>Set variables - INDI_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) outc 2</from>
-      <to>Set variables - OUTC_ROW_COUNT 2</to>
+      <from>Table input - count(*) outc_legacy 2</from>
+      <to>Set variables - OUTC_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) reac 2</from>
-      <to>Set variables - REAC_ROW_COUNT 2</to>
+      <from>Table input - count(*) reac_legacy 2</from>
+      <to>Set variables - REAC_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) rpsr 2</from>
-      <to>Set variables - RPSR_ROW_COUNT 2</to>
+      <from>Table input - count(*) rpsr_legacy 2</from>
+      <to>Set variables - RPSR_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) ther 2</from>
-      <to>Set variables - THER_ROW_COUNT 2</to>
+      <from>Table input - count(*) ther_legacy 2</from>
+      <to>Set variables - THER_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) demo 2</from>
-      <to>Set variables - DEMO_ROW_COUNT 2</to>
+      <from>Table input - count(*) demo_legacy 2</from>
+      <to>Set variables - DEMO_LEGACY_COMPARISON_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data grid - Stage_4_faers_domain_logging has started</from>
+      <from>Data grid - Stage_4_laers_domain_logging has started</from>
       <to>Text file output - Log output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data grid - Stage_4_faers_domain_logging has started</name>
+    <name>Data grid - Stage_4_laers_domain_logging has started</name>
     <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
@@ -704,7 +701,7 @@ ther
     </fields>
     <data>
       <line>
-        <item>Stage_4_faers_domain_logging</item>
+        <item>Stage_4_laers_domain_logging</item>
       </line>
       <line>
         <item/>
@@ -752,7 +749,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEMO_ROW_COUNT</name>
+    <name>Set variables - DEMO_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -765,7 +762,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DEMO_ROW_COUNT</variable_name>
+        <variable_name>DEMO_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -780,13 +777,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEMO_ROW_COUNT 2</name>
+    <name>Set variables - DEMO_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -799,7 +796,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DEMO_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>DEMO_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -814,13 +811,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_ROW_COUNT</name>
+    <name>Set variables - DRUG_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -833,7 +830,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DRUG_ROW_COUNT</variable_name>
+        <variable_name>DRUG_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -848,13 +845,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_ROW_COUNT 2</name>
+    <name>Set variables - DRUG_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -867,7 +864,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DRUG_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>DRUG_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -882,13 +879,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1040</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - INDI_ROW_COUNT</name>
+    <name>Set variables - INDI_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -901,7 +898,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>INDI_ROW_COUNT</variable_name>
+        <variable_name>INDI_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -916,13 +913,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - INDI_ROW_COUNT 2</name>
+    <name>Set variables - INDI_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -935,7 +932,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>INDI_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>INDI_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -950,13 +947,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1136</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - OUTC_ROW_COUNT</name>
+    <name>Set variables - OUTC_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -969,7 +966,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>OUTC_ROW_COUNT</variable_name>
+        <variable_name>OUTC_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -984,13 +981,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - OUTC_ROW_COUNT 2</name>
+    <name>Set variables - OUTC_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1003,7 +1000,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>OUTC_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>OUTC_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1018,13 +1015,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1232</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - REAC_ROW_COUNT</name>
+    <name>Set variables - REAC_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1037,7 +1034,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>REAC_ROW_COUNT</variable_name>
+        <variable_name>REAC_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1052,13 +1049,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - REAC_ROW_COUNT 2</name>
+    <name>Set variables - REAC_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1071,7 +1068,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>REAC_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>REAC_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1086,13 +1083,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1344</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - RPSR_ROW_COUNT</name>
+    <name>Set variables - RPSR_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1105,7 +1102,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>RPSR_ROW_COUNT</variable_name>
+        <variable_name>RPSR_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1120,13 +1117,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - RPSR_ROW_COUNT 2</name>
+    <name>Set variables - RPSR_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1139,7 +1136,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>RPSR_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>RPSR_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1154,13 +1151,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1456</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - THER_ROW_COUNT</name>
+    <name>Set variables - THER_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1173,7 +1170,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>THER_ROW_COUNT</variable_name>
+        <variable_name>THER_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1188,13 +1185,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - THER_ROW_COUNT 2</name>
+    <name>Set variables - THER_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1207,7 +1204,7 @@ ther
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>THER_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>THER_LEGACY_COMPARISON_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1222,13 +1219,13 @@ ther
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>480</xloc>
       <yloc>1568</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) demo</name>
+    <name>Table input - count(*) demo_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1239,14 +1236,38 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.demo</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.demo_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) demo</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1262,7 +1283,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) demo 2</name>
+    <name>Table input - count(*) demo_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1273,7 +1294,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.demo</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.demo_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1320,7 +1341,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) drug</name>
+    <name>Table input - count(*) drug_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1331,14 +1352,38 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) drug</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1354,7 +1399,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) drug 2</name>
+    <name>Table input - count(*) drug_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1364,15 +1409,39 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) drug_legacy 2</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1388,7 +1457,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) indi</name>
+    <name>Table input - count(*) indi_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1399,7 +1468,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.indi</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.indi_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1413,7 +1482,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) drug 2</origin>
+        <origin>Table input - count(*) indi</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1446,7 +1515,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) indi 2</name>
+    <name>Table input - count(*) indi_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1456,8 +1525,8 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.indi</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.indi_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1471,7 +1540,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) drug 2</origin>
+        <origin>Table input - count(*) indi_legacy 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1504,7 +1573,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) outc</name>
+    <name>Table input - count(*) outc_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1515,7 +1584,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.outc</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.outc_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1529,7 +1598,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) indi 2</origin>
+        <origin>Table input - count(*) outc</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1562,7 +1631,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) outc 2</name>
+    <name>Table input - count(*) outc_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1572,8 +1641,8 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.outc</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.outc_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1587,7 +1656,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) indi 2</origin>
+        <origin>Table input - count(*) outc_legacy 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1620,7 +1689,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) reac</name>
+    <name>Table input - count(*) reac_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1631,7 +1700,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1645,7 +1714,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) outc 2</origin>
+        <origin>Table input - count(*) reac</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1678,7 +1747,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) reac 2</name>
+    <name>Table input - count(*) reac_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1688,8 +1757,8 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.reac_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1703,7 +1772,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) outc 2</origin>
+        <origin>Table input - count(*) reac_legacy 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1736,7 +1805,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) rpsr</name>
+    <name>Table input - count(*) rpsr_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1747,7 +1816,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rpsr</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rpsr_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1761,7 +1830,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) ther 2</origin>
+        <origin>Table input - count(*) rpsr</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1794,7 +1863,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) rpsr 2</name>
+    <name>Table input - count(*) rpsr_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1804,8 +1873,8 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rpsr</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.rpsr_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1819,7 +1888,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) ther 2</origin>
+        <origin>Table input - count(*) rpsr_legacy 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1852,7 +1921,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) ther</name>
+    <name>Table input - count(*) ther_legacy</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1863,7 +1932,7 @@ ther
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.ther</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.ther_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1877,7 +1946,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) rpsr</origin>
+        <origin>Table input - count(*) ther</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1910,7 +1979,7 @@ ther
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) ther 2</name>
+    <name>Table input - count(*) ther_legacy 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1920,8 +1989,8 @@ ther
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.ther</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.ther_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1935,7 +2004,7 @@ ther
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) rpsr</origin>
+        <origin>Table input - count(*) ther_legacy 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1986,7 +2055,7 @@ ther
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
