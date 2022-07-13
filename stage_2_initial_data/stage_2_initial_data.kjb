@@ -1082,11 +1082,12 @@ Logging is blank
 -known possible solutions, 
 	--restarting pentaho/spoon, 
 	-- opening database connections in pentaho, 
-	-- looking at workspace right click properties log tab and making sure log connection defined</note>
+	-- looking at workspace right click properties log tab and making sure log connection defined
+-work around view job metrics and terminal window that launched ./spoon.sh</note>
       <xloc>16</xloc>
       <yloc>0</yloc>
       <width>1343</width>
-      <heigth>469</heigth>
+      <heigth>486</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
