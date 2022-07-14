@@ -711,7 +711,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) drug_mapping_multi_ingredient_list 2</from>
+      <from>Table input - count(*) drug_mapping_multi_ingredient_list</from>
       <to>Set variables - DRUG_MAPPING_MULTI_INGREDIENT_LIST</to>
       <enabled>Y</enabled>
     </hop>
@@ -929,7 +929,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>3568</yloc>
       <draw>Y</draw>
     </GUI>
@@ -997,7 +997,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>3440</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1065,8 +1065,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>453</xloc>
-      <yloc>3842</yloc>
+      <xloc>464</xloc>
+      <yloc>3840</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1099,8 +1099,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>452</xloc>
-      <yloc>3703</yloc>
+      <xloc>464</xloc>
+      <yloc>3712</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1133,7 +1133,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>3984</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1303,7 +1303,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>1824</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1439,7 +1439,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>1632</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1813,7 +1813,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>2064</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1847,7 +1847,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>1728</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1881,7 +1881,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>1952</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1949,7 +1949,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>464</xloc>
       <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2017,7 +2017,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>1136</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2085,7 +2085,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>464</xloc>
       <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2255,7 +2255,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>464</xloc>
       <yloc>912</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2289,8 +2289,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>4352</yloc>
+      <xloc>464</xloc>
+      <yloc>4368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2357,8 +2357,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>456</xloc>
-      <yloc>4252</yloc>
+      <xloc>464</xloc>
+      <yloc>4256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2391,7 +2391,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>464</xloc>
       <yloc>4112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2449,7 +2449,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>3536</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2565,7 +2565,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>3408</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2681,8 +2681,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>181</xloc>
-      <yloc>3810</yloc>
+      <xloc>192</xloc>
+      <yloc>3808</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2739,8 +2739,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>180</xloc>
-      <yloc>3671</yloc>
+      <xloc>192</xloc>
+      <yloc>3680</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2797,7 +2797,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>3952</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3011,7 +3011,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) drug_mapping_multi_ingredient_list 2</name>
+    <name>Table input - count(*) drug_mapping_multi_ingredient_list</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -3036,7 +3036,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) rxnorm_mapping_multi_ingredient_list 2</origin>
+        <origin>Table input - count(*) drug_mapping_multi_ingredient_list 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -3063,7 +3063,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>1792</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3295,7 +3295,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>1600</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3701,7 +3701,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>3296</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3933,7 +3933,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>2032</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3991,7 +3991,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>1696</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4049,7 +4049,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>1920</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4223,7 +4223,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>1104</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4281,7 +4281,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
+      <xloc>192</xloc>
       <yloc>992</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4397,7 +4397,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>192</xloc>
       <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4455,7 +4455,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
+      <xloc>192</xloc>
       <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4513,7 +4513,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>192</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4571,7 +4571,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>192</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4629,7 +4629,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>192</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4746,7 +4746,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </remotesteps>
     <GUI>
       <xloc>192</xloc>
-      <yloc>4320</yloc>
+      <yloc>4336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4861,8 +4861,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>184</xloc>
-      <yloc>4220</yloc>
+      <xloc>192</xloc>
+      <yloc>4224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4919,7 +4919,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>192</xloc>
       <yloc>4080</yloc>
       <draw>Y</draw>
     </GUI>
