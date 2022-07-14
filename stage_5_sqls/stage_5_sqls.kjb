@@ -368,8 +368,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>768</yloc>
+      <xloc>576</xloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1880,8 +1880,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>880</yloc>
+      <xloc>48</xloc>
+      <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1973,12 +1973,17 @@ where caseid is null or event_dt is null or age is null or sex is null or report
           <variable_value>${CEM_ORANGE_BOOK_DOWNLOAD_FILENAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>BASE_FILE_DIR</variable_name>
+          <variable_value>${BASE_FILE_DIR}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>768</yloc>
+      <xloc>288</xloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1999,8 +2004,8 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>768</yloc>
+      <xloc>48</xloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2062,26 +2067,107 @@ from standard_drug_outcome_contingency_table;
       <yloc>1328</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>log_math_4_pentaho.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/logs/log_math_4_pentaho.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>576</xloc>
+      <yloc>768</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log_math_4_laers_pentaho.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/logs/log_math_4_laers_pentaho.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>768</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log STAGE 5 COMPLETE</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "#######################################################" >> $log_location
+echo "################ STAGE 5 COMPLETE #####################" >> $log_location
+echo "#######################################################" >> $log_location
+printf '\n\n' >> $log_location
+echo ' PENTAHO WORK COMPLETE! ' >> $log_location
+echo ' You might have a database administrator vacuum db and reindex ' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>464</xloc>
+      <yloc>1472</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Start</from>
-      <to>Set job variables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Set job variables</from>
-      <to>Set AWS Credentials</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>derive_standard_drug_outcome_count.sql</from>
       <to>derive_standard_drug_outcome_contingency_table.sql</to>
@@ -2137,15 +2223,6 @@ from standard_drug_outcome_contingency_table;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Set AWS Credentials</from>
-      <to>Wait for 3s</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>derive_standard_drug_outcome_contingency_table.sql</from>
       <to>derive_standard_drug_outcome_statistics.sql</to>
       <from_nr>0</from_nr>
@@ -2173,15 +2250,6 @@ from standard_drug_outcome_contingency_table;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Wait for 3s</from>
-      <to>derive_unique_all_case.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>derive_unique_all_case.sql</from>
       <to>create_usagi_import_table.sql</to>
       <from_nr>0</from_nr>
@@ -2199,10 +2267,73 @@ from standard_drug_outcome_contingency_table;
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>Start</from>
+      <to>Set job variables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set job variables</from>
+      <to>Set AWS Credentials</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set AWS Credentials</from>
+      <to>Wait for 3s</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s</from>
+      <to>log_math_4_laers_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_math_4_laers_pentaho.sh</from>
+      <to>log_math_4_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_math_4_pentaho.sh</from>
+      <to>derive_unique_all_case.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_drilldown.sql</from>
+      <to>Log STAGE 5 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
-      <note>Stage 4 - Drug Mapping
+      <note>Stage 5 - Drug Mapping
 
 Prereq's
 having run...
@@ -2211,6 +2342,8 @@ stage_2 then...
 stage_3_domain_transform
 and
 stage_3_domain_transform (if data from 2012 Q3 or older)
+stage_4_faers_domain_logging
+stage_4_laers_domain_logging
 
 ABOUT THIS STAGE
 -Create Legacy Database Structures (no drop; create; no truncate)				-truncates commented out
@@ -2238,7 +2371,7 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>772</width>
-      <heigth>571</heigth>
+      <heigth>605</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
