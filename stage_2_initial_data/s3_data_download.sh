@@ -5,9 +5,7 @@ log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 #uncomment source to debug from command line
 #source ../faers_config.config
 printf '\n' >> $log_location
-echo "###################################################" >> $log_location
 echo "########### s3_data_download ######################" >> $log_location
-echo "###################################################" >> $log_location
 
 #belt and suspenders aws credentials
 export "AWS_ACCESS_KEY_ID=${AWS_S3_ACCESS_KEY}"
@@ -162,4 +160,4 @@ else #not LOAD_ALL_DATA
     #done;
 fi #end if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
-echo "s3_data_download.sh done data should be located in " ${BASE_FILE_DIR} "/data_from_s3/" >> $log_location
+echo "s3_data_download.sh done data should be located in " ${BASE_FILE_DIR}"/data_from_s3/" >> $log_location
