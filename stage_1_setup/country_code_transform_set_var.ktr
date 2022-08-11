@@ -465,7 +465,7 @@
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_COMPARISON_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_COMPARISON_PORT}</port>
     <username>${DATABASE_COMPARISON_USERNAME}</username>
     <password>Encrypted 2be98afc86aa7f2e4bc16a276dd9aaac2</password>
     <servername/>
@@ -486,7 +486,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_COMPARISON_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -516,7 +516,7 @@
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -537,7 +537,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>

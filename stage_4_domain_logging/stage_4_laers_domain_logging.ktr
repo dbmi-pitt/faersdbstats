@@ -501,7 +501,7 @@ todo:
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_COMPARISON_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_COMPARISON_PORT}</port>
     <username>${DATABASE_COMPARISON_USERNAME}</username>
     <password>${DATABASE_COMPARISON_PASSWORD}</password>
     <servername/>
@@ -522,7 +522,7 @@ todo:
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_COMPARISON_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -552,7 +552,7 @@ todo:
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -573,7 +573,7 @@ todo:
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -749,40 +749,6 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEMO_LEGACY_ROW_COUNT</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>DEMO_LEGACY_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Set variables - DEMO_LEGACY_COMPARISON_ROW_COUNT 2</name>
     <type>SetVariable</type>
     <description/>
@@ -817,7 +783,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_LEGACY_ROW_COUNT</name>
+    <name>Set variables - DEMO_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -830,7 +796,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DRUG_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>DEMO_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -846,7 +812,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>208</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -885,7 +851,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - INDI_LEGACY_ROW_COUNT</name>
+    <name>Set variables - DRUG_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -898,7 +864,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>INDI_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>DRUG_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -914,7 +880,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>304</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -953,7 +919,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - OUTC_LEGACY_ROW_COUNT</name>
+    <name>Set variables - INDI_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -966,7 +932,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>OUTC_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>INDI_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -982,7 +948,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>400</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1021,7 +987,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - REAC_LEGACY_ROW_COUNT</name>
+    <name>Set variables - OUTC_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1034,7 +1000,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>REAC_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>OUTC_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1050,7 +1016,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>512</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1089,7 +1055,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - RPSR_LEGACY_ROW_COUNT</name>
+    <name>Set variables - REAC_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1102,7 +1068,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>RPSR_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>REAC_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1118,7 +1084,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>624</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1157,7 +1123,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - THER_LEGACY_ROW_COUNT</name>
+    <name>Set variables - RPSR_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1170,7 +1136,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>THER_LEGACY_ROW_COUNT</variable_name>
+        <variable_name>RPSR_LEGACY_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1186,7 +1152,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>736</yloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1221,6 +1187,40 @@ todo:
     <GUI>
       <xloc>480</xloc>
       <yloc>1568</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - THER_LEGACY_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>THER_LEGACY_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

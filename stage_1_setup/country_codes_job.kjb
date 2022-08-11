@@ -18,7 +18,7 @@
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -27,7 +27,7 @@
     <attributes>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
     </attributes>
   </connection>
