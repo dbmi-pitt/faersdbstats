@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>stage_6_sql_counts</name>
+  <name>stage_6_sql_counts_3_of_3</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -288,61 +288,6 @@
   <shared_objects_file/>
   <entries>
     <entry>
-      <name>Reindex</name>
-      <description/>
-      <type>SHELL</type>
-      <attributes/>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>#! /bin/sh
---su postgres
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "REINDEX INDEX indi_caseid_idx" ${DATABASE_NAME}
-</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>256</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>Vacuum</name>
-      <description/>
-      <type>SHELL</type>
-      <attributes/>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql  -h ${DATABASE_HOST}  -U ${DATABASE_USERNAME} -c "vacuumdb --all" ${DATABASE_NAME}
-</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>256</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>Start</name>
       <description/>
       <type>SPECIAL</type>
@@ -361,43 +306,114 @@ psql  -h ${DATABASE_HOST}  -U ${DATABASE_USERNAME} -c "vacuumdb --all" ${DATABAS
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>64</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_6_sql_counts_log_3_of_3_script.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_6_sql_counts_trans/stage_6_sql_counts_log_3_of_3_script.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>528</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Check for stage_4 vars (just demo counts)</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>if [ -z "${DEMO_ROW_COUNT}" ]
+then
+>&amp;2 echo '${DEMO_ROW_COUNT} is empty please re-run STAGE_4_FAERS'
+fi
+
+if [ -z "${DEMO_COMPARISON_ROW_COUNT}" ]
+then
+>&amp;2 echo '${DEMO_COMPARISON_ROW_COUNT} is empty please re-run (legacy) STAGE_4_LAERS'
+fi</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>256</xloc>
+      <yloc>416</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>Vacuum</from>
-      <to>Reindex</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Start</from>
-      <to>Vacuum</to>
+      <to>Check for stage_4 vars (just demo counts)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
+    <hop>
+      <from>Check for stage_4 vars (just demo counts)</from>
+      <to>stage_6_sql_counts_log_3_of_3_script.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
-      <note>Note have db admin run 
-
-vacuumdb -all 
-
+      <note>Prereq's
+having run...
+stage_1 then...
+stage_2 then...
+stage_3_domain_transform
 and
-
- reindex database ${DATABASE_NAME}</note>
+stage_3_domain_transform (if data from 2012 Q3 or older)
+stage_4_faers_domain_logging
+stage_4_laers_domain_logging
+stage_5_sqls
+stage_6... (1 of 3) aka stage_6_sql_counts_trans_1_of_3.ktr
+stage_6... (2 of 3) aka stage_6_sql_counts_trans_comp_1_of_3.ktr</note>
       <xloc>64</xloc>
       <yloc>32</yloc>
-      <width>271</width>
-      <heigth>129</heigth>
+      <width>448</width>
+      <heigth>214</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

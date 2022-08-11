@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>stage_6_db_maintenace</name>
+  <name>stage_7_db_maintenace</name>
   <description/>
   <extended_description/>
   <job_version/>
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2022/07/06 11:26:36.769</created_date>
@@ -361,7 +362,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "REINDEX INDEX indi_caseid_i
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>496</xloc>
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
@@ -414,17 +415,117 @@ psql  -h ${DATABASE_HOST}  -U ${DATABASE_USERNAME} -c "vacuumdb --all" ${DATABAS
       <yloc>256</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Create all indexes</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE INDEX IF NOT EXISTS combined_drug_mapping_ix ON ${DATABASE_SCHEMA}.combined_drug_mapping USING btree (upper((drug_name_original)::text));
+
+CREATE INDEX IF NOT EXISTS drug_caseid_idx ON ${DATABASE_SCHEMA}.drug USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS drug_drugname_idx ON ${DATABASE_SCHEMA}.drug USING btree (drugname);
+
+CREATE INDEX IF NOT EXISTS drug_filename_idx ON ${DATABASE_SCHEMA}.drug USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS drug_primaryid_idx ON ${DATABASE_SCHEMA}.drug USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS drug_prod_ai_idx ON ${DATABASE_SCHEMA}.drug USING btree (prod_ai);
+
+CREATE INDEX IF NOT EXISTS drug_role_cod_idx ON ${DATABASE_SCHEMA}.drug USING btree (role_cod);
+
+CREATE INDEX IF NOT EXISTS drug_legacy_drugname_idx ON ${DATABASE_SCHEMA}.drug_legacy USING btree (drugname);
+
+CREATE INDEX IF NOT EXISTS drug_legacy_isr_idx ON ${DATABASE_SCHEMA}.drug_legacy USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS drug_name_clean_ix ON ${DATABASE_SCHEMA}.drug_regex_mapping USING btree (drug_name_clean);
+
+CREATE INDEX IF NOT EXISTS indi_caseid_idx ON ${DATABASE_SCHEMA}.indi USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS indi_filename_idx ON ${DATABASE_SCHEMA}.indi USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS indi_primaryid_idx ON ${DATABASE_SCHEMA}.indi USING btree (primaryid, indi_drug_seq);
+
+CREATE INDEX IF NOT EXISTS indi_legacy_isr_idx ON ${DATABASE_SCHEMA}.indi_legacy USING btree (isr, drug_seq);
+
+CREATE INDEX IF NOT EXISTS ingredient_ix ON ${DATABASE_SCHEMA}.nda USING btree (appl_no, ingredient);
+
+CREATE INDEX IF NOT EXISTS ix_reac_1 ON ${DATABASE_SCHEMA}.reac USING btree (upper((pt)::text));
+
+CREATE INDEX IF NOT EXISTS ix_reac_2 ON ${DATABASE_SCHEMA}.reac USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS reac_caseid_idx ON ${DATABASE_SCHEMA}.reac USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS reac_filename_idx ON ${DATABASE_SCHEMA}.reac USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS ix_reac_legacy_1 ON ${DATABASE_SCHEMA}.reac_legacy USING btree (upper((pt)::text));
+
+CREATE INDEX IF NOT EXISTS ix_reac_legacy_2 ON ${DATABASE_SCHEMA}.reac_legacy USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS nda_num_ix ON ${DATABASE_SCHEMA}.drug_nda_mapping USING btree (nda_num);
+
+CREATE INDEX IF NOT EXISTS outc_caseid_idx ON ${DATABASE_SCHEMA}.outc USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS outc_filename_idx ON ${DATABASE_SCHEMA}.outc USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS prod_ai_ix ON ${DATABASE_SCHEMA}.drug_ai_mapping USING btree (prod_ai);
+
+CREATE INDEX IF NOT EXISTS rpsr_caseid_idx ON ${DATABASE_SCHEMA}.rpsr USING btree (caseid, primaryid);
+
+CREATE INDEX IF NOT EXISTS rpsr_filename_idx ON ${DATABASE_SCHEMA}.rpsr USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_1 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_2 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_3 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (standard_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_1 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_2 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_3 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_combined_drug_mapping_isr_idx ON ${DATABASE_SCHEMA}.standard_combined_drug_mapping USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_combined_drug_mapping_primaryid_idx ON ${DATABASE_SCHEMA}.standard_combined_drug_mapping USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_2_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_3_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_4_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_outcome_pair_count);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id, outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix_1 ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix_2 ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_caseid_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_drug_concept_id_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_drug_outcome_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (drug_concept_id, outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_isr_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_outcome_concept_id_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (outcome_concept_id);
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Vacuum</from>
-      <to>Reindex</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>Start</from>
       <to>Vacuum</to>
@@ -433,6 +534,24 @@ psql  -h ${DATABASE_HOST}  -U ${DATABASE_USERNAME} -c "vacuumdb --all" ${DATABAS
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Vacuum</from>
+      <to>Create all indexes</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create all indexes</from>
+      <to>Reindex</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
@@ -446,8 +565,8 @@ and
  reindex database ${DATABASE_NAME}</note>
       <xloc>64</xloc>
       <yloc>32</yloc>
-      <width>271</width>
-      <heigth>129</heigth>
+      <width>284</width>
+      <heigth>134</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

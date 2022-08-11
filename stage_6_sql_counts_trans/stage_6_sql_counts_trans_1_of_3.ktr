@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_6_sql_counts_trans</name>
+    <name>stage_6_sql_counts_trans_1_of_3</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -476,11 +476,110 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>&lt;&lt;&lt; COMPARISON DATABASE</note>
-      <xloc>576</xloc>
-      <yloc>4592</yloc>
-      <width>205</width>
-      <heigth>27</heigth>
+      <note>list of variables created:
+
+DRUGNAME_LIST_ROW_COUNT
+REAC_PT_LIST_ROW_COUNT
+STANDARD_DRUG_OUTCOME_DRILLDOWN
+STANDARD_DRUG_OUTCOME_COUNT_D1_ROW_COUNT
+STANDARD_DRUG_OUTCOME_COUNT_A_COUNT_B_ROW_COUNT
+STANDARD_DRUG_OUTCOME_COUNT_C_ROW_COUNT
+STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT
+STANDARD_DRUG_OUTCOME_ROW_COUNT
+STANDARD_CASE_OUTCOME_ROW_COUNT
+STANDARD_CASE_INDICATION_ROW_COUNT
+STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT
+DRUG_REGEX_MAPPING_ROW_COUNT
+DRUG_REGEX_MAPPING_WORDS_ROW_COUNT
+RXNORM_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT
+DRUG_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT
+RXNORM_MAPPING_SINGLE_INGREDIENT_LIST_ROW_COUNT
+RXNORM_MAPPING_BRAND_NAME_LIST_ROW_COUNT
+DRUG_MAPPING_BRAND_NAME_LIST_ROW_COUNT
+DRUG_AI_MAPPING_ROW_COUNT
+NDA_INGREDIENT_ROW_COUNT
+DRUG_NDA_MAPPING_ROW_COUNT
+COMBINED_DRUG_MAPPING_ROW_COUNT
+DRUGNAME_LIST_ROW_COUNT
+REAC_PT_ROW_COUNT
+CASEDEMO_ROW_COUNT
+DRUGNAME_LEGACY_LIST_ROW_COUNT
+REAC_PT_LEGACY_LIST_ROW_COUNT
+CASEDEMO_LEGACY_ROW_COUNT
+ALL_CASEDEMO_ROW_COUNT
+DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS_ROW_COUNT
+DEFAULT_ALL_CASEDEMO_AGE_KEYS_ROW_COUNT
+DEFAULT_REPORTER_COUNTRY_KEYS_ROW_COUNT
+UNIQUE_ALL_CASEDEMO_ROW_COUNT
+UNIQUE_ALL_CASE_ROW_COUNT
+STANDARD_DRUG_OUTCOME_STATISTICS_ROW_COUNT
+STANDARD_COMBINED_DRUG_MAPPING_ROW_COUNT
+STANDARD_CASE_DRUG_ROW_COUNT
+
+
+
+
+
+
+
+
+
+
+
+
+DRUGNAME_LIST_ROW_COUNT
+REAC_PT_LIST_ROW_COUNT
+STANDARD_DRUG_OUTCOME_DRILLDOWN
+STANDARD_DRUG_OUTCOME_COUNT_D1_ROW_COUNT
+STANDARD_DRUG_OUTCOME_COUNT_A_COUNT_B_ROW_COUNT
+STANDARD_DRUG_OUTCOME_COUNT_C_ROW_COUNT
+STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT
+STANDARD_DRUG_OUTCOME_ROW_COUNT
+STANDARD_CASE_OUTCOME_ROW_COUNT
+STANDARD_CASE_INDICATION_ROW_COUNT
+STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT
+DRUG_REGEX_MAPPING_ROW_COUNT
+DRUG_REGEX_MAPPING_WORDS_ROW_COUNT
+RXNORM_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT
+DRUG_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT
+RXNORM_MAPPING_SINGLE_INGREDIENT_LIST_ROW_COUNT
+RXNORM_MAPPING_BRAND_NAME_LIST_ROW_COUNT
+DRUG_MAPPING_BRAND_NAME_LIST_ROW_COUNT
+DRUG_AI_MAPPING_ROW_COUNT
+NDA_INGREDIENT_ROW_COUNT
+DRUG_NDA_MAPPING_ROW_COUNT
+COMBINED_DRUG_MAPPING_ROW_COUNT
+DRUGNAME_LIST_ROW_COUNT
+REAC_PT_ROW_COUNT
+CASEDEMO_ROW_COUNT
+DRUGNAME_LEGACY_LIST_ROW_COUNT
+REAC_PT_LEGACY_LIST_ROW_COUNT
+CASEDEMO_LEGACY_ROW_COUNT
+ALL_CASEDEMO_ROW_COUNT
+DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS_ROW_COUNT
+DEFAULT_ALL_CASEDEMO_AGE_KEYS_ROW_COUNT
+DEFAULT_REPORTER_COUNTRY_KEYS_ROW_COUNT
+UNIQUE_ALL_CASEDEMO_ROW_COUNT
+UNIQUE_ALL_CASE_ROW_COUNT
+STANDARD_DRUG_OUTCOME_STATISTICS_ROW_COUNT
+STANDARD_COMBINED_DRUG_MAPPING_ROW_COUNT
+STANDARD_CASE_DRUG_ROW_COUNT
+
+
+
+
+
+
+
+
+
+
+
+</note>
+      <xloc>824</xloc>
+      <yloc>419</yloc>
+      <width>462</width>
+      <heigth>1710</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -497,57 +596,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <drawshadow>Y</drawshadow>
     </notepad>
   </notepads>
-  <connection>
-    <name>${DATABASE_COMPARISON_NAME}</name>
-    <server>${DATABASE_COMPARISON_HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${DATABASE_COMPARISON_NAME}</database>
-    <port>5432</port>
-    <username>${DATABASE_COMPARISON_USERNAME}</username>
-    <password>${DATABASE_COMPARISON_PASSWORD}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <connection>
     <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
@@ -601,58 +649,13 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
   </connection>
   <order>
     <hop>
-      <from>Table input - count(*) drugname_list</from>
-      <to>Set variables - DRUGNAME_LIST_ROW_COUNT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Table input - count(*) reac_pt_list</from>
       <to>Set variables - REAC_PT_LIST_ROW_COUNT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) standard_drug_outcome_drilldown</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_count_d1</from>
       <to>Set variables - STANDARD_DRUG_OUTCOME_COUNT_D1_ROW_COUNT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug 2</from>
-      <to>Set variables - DRUG_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) indi 2</from>
-      <to>Set variables - INDI_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) outc 2</from>
-      <to>Set variables - OUTC_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) reac 2</from>
-      <to>Set variables - REAC_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) rpsr 2</from>
-      <to>Set variables - RPSR_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) ther 2</from>
-      <to>Set variables - THER_ROW_COUNT 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) demo 2</from>
-      <to>Set variables - DEMO_ROW_COUNT 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -681,93 +684,13 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) standard_drug_outcome</from>
+      <from>Table input - count(*) standard_case_outcome</from>
       <to>Set variables - STANDARD_CASE_OUTCOME_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) standard_drug_indication</from>
-      <to>Set variables - STANDARD_DRUG_INDICATION_ROW_COUNT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) standard_drug_outcome_category</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_CATEGORY</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_regex_mapping</from>
-      <to>Set variables - DRUG_REGEX_MAPPING</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_regex_mapping_words</from>
-      <to>Set variables - DRUG_REGEX_MAPPING_WORDS</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) rxnorm_mapping_multi_ingredient_list</from>
-      <to>Set variables - RXNORM_MAPPING_MULTI_INGREDIENT_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_mapping_multi_ingredient_list</from>
-      <to>Set variables - DRUG_MAPPING_MULTI_INGREDIENT_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) rxnorm_mapping_single_ingredient_list</from>
-      <to>Set variables - RXNORM_MAPPING_SINGLE_INGREDIENT_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) rxnorm_mapping_brand_name_list</from>
-      <to>Set variables - RXNORM_MAPPING_BRAND_NAME_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_mapping_brand_name_list</from>
-      <to>Set variables - DRUG_MAPPING_BRAND_NAME_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_ai_mapping</from>
-      <to>Set variables - DRUG_AI_MAPPING</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) nda_ingredient</from>
-      <to>Set variables - NDA_INGREDIENT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) nda_mapping</from>
-      <to>Set variables - NDA_MAPPING</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) combined_drug_mapping</from>
-      <to>Set variables - COMBINED_DRUG_MAPPING</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_name_list</from>
-      <to>Set variables - DRUG_NAME_LIST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) react_pt</from>
-      <to>Set variables - REAC_PT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) casedemo</from>
-      <to>Set variables - CASEDEMO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input - count(*) drug_name_legacy_list</from>
-      <to>Set variables - DRUG_NAME_LEGACY_LIST</to>
+      <from>Table input - count(*) standard_case_indication</from>
+      <to>Set variables - STANDARD_CASE_INDICATION_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -776,53 +699,133 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) casedemo_legacy</from>
-      <to>Set variables - CASEDEMO_LEGACY</to>
+      <from>Table input - count(*) all_casedemo</from>
+      <to>Set variables - ALL_CASEDEMO_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) all_casedemo</from>
-      <to>Set variables - ALL_CASEDEMO</to>
+      <from>Table input - count(*) drugname_legacy_list</from>
+      <to>Set variables - DRUGNAME_LEGACY_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) casedemo</from>
+      <to>Set variables - CASEDEMO_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drugname_list</from>
+      <to>Set variables - DRUGNAME_LIST_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) default_all_casedemo_event_dt_keys</from>
-      <to>Set variables - DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS</to>
+      <to>Set variables - DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) default_all_casedemo_age_keys</from>
-      <to>Set variables - DEFAULT_ALL_CASEDEMO_AGE_KEYS</to>
+      <to>Set variables - DEFAULT_ALL_CASEDEMO_AGE_KEYS_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) default_all_reporter_country_keys</from>
-      <to>Set variables - DEFAULT_REPORTER_COUNTRY_KEYS</to>
+      <from>Table input - count(*) default_all_casedemo_reporter_country_keys</from>
+      <to>Set variables - DEFAULT_REPORTER_COUNTRY_KEYS_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) unique_all_casedemo</from>
-      <to>Set variables - UNIQUE_ALL_CASEDEMO</to>
+      <to>Set variables - UNIQUE_ALL_CASEDEMO_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) unique_all_case</from>
-      <to>Set variables - UNIQUE_ALL_CASE</to>
+      <to>Set variables - UNIQUE_ALL_CASE_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_statistics</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_STATISTICS</to>
+      <to>Set variables - STANDARD_DRUG_OUTCOME_STATISTICS_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) combined_drug_mapping</from>
+      <to>Set variables - COMBINED_DRUG_MAPPING_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_nda_mapping</from>
+      <to>Set variables - DRUG_NDA_MAPPING_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) nda_ingredient</from>
+      <to>Set variables - NDA_INGREDIENT_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_ai_mapping</from>
+      <to>Set variables - DRUG_AI_MAPPING_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_mapping_brand_name_list</from>
+      <to>Set variables - DRUG_MAPPING_BRAND_NAME_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) standard_drug_outcome_drilldown</from>
+      <to>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) standard_drug_case_outcome_category</from>
+      <to>Set variables - STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_regex_mapping</from>
+      <to>Set variables - DRUG_REGEX_MAPPING_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_combined_drug_mapping</from>
-      <to>Set variables - STANDARD_COMBINED_DRUG_MAPPING</to>
+      <to>Set variables - STANDARD_COMBINED_DRUG_MAPPING_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_case_drug</from>
-      <to>Set variables - STANDARD_CASE_DRUG</to>
+      <to>Set variables - STANDARD_CASE_DRUG_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_regex_mapping_words</from>
+      <to>Set variables - DRUG_REGEX_MAPPING_WORDS_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) rxnorm_mapping_multi_ingredient_list</from>
+      <to>Set variables - RXNORM_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) drug_mapping_multi_ingredient_list</from>
+      <to>Set variables - DRUG_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) rxnorm_mapping_single_ingredient_list</from>
+      <to>Set variables - RXNORM_MAPPING_SINGLE_INGREDIENT_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) rxnorm_mapping_brand_name_list</from>
+      <to>Set variables - RXNORM_MAPPING_BRAND_NAME_LIST_ROW_COUNT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input - count(*) casedemo_legacy</from>
+      <to>Set variables - CASEDEMO_LEGACY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -869,7 +872,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </remotesteps>
     <GUI>
       <xloc>208</xloc>
-      <yloc>5264</yloc>
+      <yloc>4496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -901,7 +904,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - ALL_CASEDEMO</name>
+    <name>Set variables - ALL_CASEDEMO_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -935,41 +938,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - CASEDEMO</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>CASEDEMO_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>3056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - CASEDEMO_LEGACY</name>
+    <name>Set variables - CASEDEMO_LEGACY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1003,7 +972,41 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - COMBINED_DRUG_MAPPING</name>
+    <name>Set variables - CASEDEMO_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>CASEDEMO_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>3056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - COMBINED_DRUG_MAPPING_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1037,7 +1040,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEFAULT_ALL_CASEDEMO_AGE_KEYS</name>
+    <name>Set variables - DEFAULT_ALL_CASEDEMO_AGE_KEYS_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1071,7 +1074,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS</name>
+    <name>Set variables - DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1105,7 +1108,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEFAULT_REPORTER_COUNTRY_KEYS</name>
+    <name>Set variables - DEFAULT_REPORTER_COUNTRY_KEYS_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1139,7 +1142,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEMO_ROW_COUNT 2</name>
+    <name>Set variables - DRUGNAME_LEGACY_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1152,7 +1155,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DEMO_COMPARISON_ROW_COUNT</variable_name>
+        <variable_name>DRUGNAME_LEGACY_LIST_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1167,8 +1170,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>4544</yloc>
+      <xloc>465</xloc>
+      <yloc>3189</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1201,13 +1204,13 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>144</yloc>
+      <xloc>464</xloc>
+      <yloc>2832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_AI_MAPPING</name>
+    <name>Set variables - DRUG_AI_MAPPING_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1241,7 +1244,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_MAPPING_BRAND_NAME_LIST</name>
+    <name>Set variables - DRUG_MAPPING_BRAND_NAME_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1275,7 +1278,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_MAPPING_MULTI_INGREDIENT_LIST</name>
+    <name>Set variables - DRUG_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1309,7 +1312,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_NAME_LEGACY_LIST</name>
+    <name>Set variables - DRUG_NDA_MAPPING_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1322,7 +1325,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DRUG_NAME_LEGACY_LIST_ROW_COUNT</variable_name>
+        <variable_name>DRUG_NDA_MAPPING_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1337,47 +1340,13 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>465</xloc>
-      <yloc>3189</yloc>
+      <xloc>464</xloc>
+      <yloc>2608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_NAME_LIST</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>DRUG_NAME_LIST_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>465</xloc>
-      <yloc>2815</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - DRUG_REGEX_MAPPING</name>
+    <name>Set variables - DRUG_REGEX_MAPPING_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1411,7 +1380,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_REGEX_MAPPING_WORDS</name>
+    <name>Set variables - DRUG_REGEX_MAPPING_WORDS_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1445,75 +1414,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>DRUG_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>4640</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - INDI_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>INDI_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>4736</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - NDA_INGREDIENT</name>
+    <name>Set variables - NDA_INGREDIENT_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1543,108 +1444,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>464</xloc>
       <yloc>2480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - NDA_MAPPING</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>NDA_MAPPING_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>2608</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - OUTC_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>OUTC_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>4832</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - REAC_PT</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>REAC_PT_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>2928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1711,81 +1510,13 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>224</yloc>
+      <xloc>464</xloc>
+      <yloc>2928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables - REAC_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>REAC_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>4944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - RPSR_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>RPSR_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>5056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - RXNORM_MAPPING_BRAND_NAME_LIST</name>
+    <name>Set variables - RXNORM_MAPPING_BRAND_NAME_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1819,7 +1550,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - RXNORM_MAPPING_MULTI_INGREDIENT_LIST</name>
+    <name>Set variables - RXNORM_MAPPING_MULTI_INGREDIENT_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1853,7 +1584,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - RXNORM_MAPPING_SINGLE_INGREDIENT_LIST</name>
+    <name>Set variables - RXNORM_MAPPING_SINGLE_INGREDIENT_LIST_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1887,7 +1618,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_CASE_DRUG</name>
+    <name>Set variables - STANDARD_CASE_DRUG_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1917,6 +1648,74 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>464</xloc>
       <yloc>1552</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - STANDARD_CASE_INDICATION_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>STANDARD_DRUG_OUTCOME_INDICATION_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>1136</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>1248</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1955,7 +1754,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_COMBINED_DRUG_MAPPING</name>
+    <name>Set variables - STANDARD_COMBINED_DRUG_MAPPING_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1985,74 +1784,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>469</xloc>
       <yloc>1459</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - STANDARD_DRUG_INDICATION_ROW_COUNT</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>STANDARD_DRUG_OUTCOME_INDICATION_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>1136</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_CATEGORY</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>STANDARD_DRUG_OUTCOME_CATEGORY_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>1248</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2193,7 +1924,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN</name>
+    <name>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -2261,7 +1992,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_STATISTICS</name>
+    <name>Set variables - STANDARD_DRUG_OUTCOME_STATISTICS_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -2295,75 +2026,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - THER_ROW_COUNT 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>THER_COMPARISON_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>5168</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - UNIQUE_ALL_CASE</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>UNIQUE_ALL_CASE_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>4256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables - UNIQUE_ALL_CASEDEMO</name>
+    <name>Set variables - UNIQUE_ALL_CASEDEMO_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -2393,6 +2056,40 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>464</xloc>
       <yloc>4112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - UNIQUE_ALL_CASE_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>UNIQUE_ALL_CASE_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>4256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2596,7 +2293,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) nda_mapping 2</origin>
+        <origin>Table input - count(*) drug_nda_mapping 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -2745,7 +2442,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) default_all_reporter_country_keys</name>
+    <name>Table input - count(*) default_all_casedemo_reporter_country_keys</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2756,7 +2453,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.default_all_reporter_country_keys</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.default_all_casedemo_reporter_country_keys</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2799,98 +2496,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>192</xloc>
       <yloc>3952</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) demo 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_COMPARISON_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.demo</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) demo 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>4544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) drug 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>4640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3069,7 +2674,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) drug_name_legacy_list</name>
+    <name>Table input - count(*) drug_nda_mapping</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -3080,7 +2685,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_name_legacy_list</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_nda_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3094,7 +2699,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) nda_mapping 2</origin>
+        <origin>Table input - count(*) drug_ai_mapping 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -3121,66 +2726,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>193</xloc>
-      <yloc>3157</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) drug_name_list</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_name_list</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) nda_mapping 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>193</xloc>
-      <yloc>2783</yloc>
+      <xloc>192</xloc>
+      <yloc>2576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3301,6 +2848,64 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
+    <name>Table input - count(*) drugname_legacy_list</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drugname_legacy_list</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) drug_nda_mapping 2</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>193</xloc>
+      <yloc>3157</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Table input - count(*) drugname_list</name>
     <type>TableInput</type>
     <description/>
@@ -3353,66 +2958,8 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) indi 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.indi</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) drug 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>4736</yloc>
+      <xloc>192</xloc>
+      <yloc>2800</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3471,180 +3018,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>192</xloc>
       <yloc>2448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) nda_mapping</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.nda_mapping</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) drug_ai_mapping 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>2576</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) outc 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.outc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) indi 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>4832</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) reac 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) outc 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>4944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3732,65 +3105,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) drug</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) react_pt</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.react_pt</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) nda_mapping 2</origin>
+        <origin>Table input - count(*) drug_nda_mapping 2</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -3819,64 +3134,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     <GUI>
       <xloc>192</xloc>
       <yloc>2896</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) rpsr 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rpsr</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) ther 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>5056</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4113,6 +3370,122 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
+    <name>Table input - count(*) standard_case_indication</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_indication</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) indi 2</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>1104</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input - count(*) standard_case_outcome</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_outcome</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>count</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input - count(*) indi 2</origin>
+        <comments>count</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/New_York</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Table input - count(*) standard_combined_drug_mapping</name>
     <type>TableInput</type>
     <description/>
@@ -4171,7 +3544,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) standard_drug_indication</name>
+    <name>Table input - count(*) standard_drug_case_outcome_category</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -4182,123 +3555,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_indication</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) indi 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>1104</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) standard_drug_outcome</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) indi 2</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>992</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input - count(*) standard_drug_outcome_category</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_category</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_outcome_category</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -4751,64 +4008,6 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) ther 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.ther</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>count</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input - count(*) rpsr</origin>
-        <comments>count</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/New_York</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>5168</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Table input - count(*) unique_all_case</name>
     <type>TableInput</type>
     <description/>
@@ -4977,7 +4176,7 @@ puts Stage_6_sql_counts_trans has started in main log file</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>5264</yloc>
+      <yloc>4496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
