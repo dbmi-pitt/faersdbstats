@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_COMPARISON_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_COMPARISON_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_COMPARISON_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_COMPARISON_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -462,8 +462,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
 puts Stage_6_sql_counts_trans has started in main log file</note>
       <xloc>512</xloc>
       <yloc>0</yloc>
-      <width>611</width>
-      <heigth>418</heigth>
+      <width>649</width>
+      <heigth>437</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -521,8 +521,8 @@ STANDARD_COMBINED_DRUG_MAPPING_ROW_COUNT
 STANDARD_CASE_DRUG_ROW_COUNT</note>
       <xloc>786</xloc>
       <yloc>571</yloc>
-      <width>462</width>
-      <heigth>673</heigth>
+      <width>490</width>
+      <heigth>712</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -540,14 +540,14 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </notepad>
   </notepads>
   <connection>
-    <name>${DATABASE_NAME}</name>
-    <server>${DATABASE_HOST}</server>
+    <name>${DATABASE_COMPARISON_NAME}</name>
+    <server>${DATABASE_COMPARISON_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${DATABASE_NAME}</database>
-    <port>5432</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>${DATABASE_PASSWORD}</password>
+    <database>${DATABASE_COMPARISON_NAME}</database>
+    <port>${DATABASE_COMPARISON_PORT}</port>
+    <username>${DATABASE_COMPARISON_USERNAME}</username>
+    <password>${DATABASE_COMPARISON_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -566,7 +566,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_COMPARISON_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -603,16 +603,16 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_drilldown</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN</to>
+      <to>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN_COMP_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_count_d1</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_COUNT_D1_ROW_COUNT</to>
+      <to>Set variables - STANDARD_DRUG_OUTCOME_COUNT_D1_COMP_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data grid - Stage_6_sql_counts_trans has started</from>
+      <from>Data grid - Stage_6_sql_counts_trans_comp has started</from>
       <to>Text file output - Log output</to>
       <enabled>Y</enabled>
     </hop>
@@ -773,7 +773,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </hop>
   </order>
   <step>
-    <name>Data grid - Stage_6_sql_counts_trans has started</name>
+    <name>Data grid - Stage_6_sql_counts_trans_comp has started</name>
     <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
@@ -799,7 +799,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </fields>
     <data>
       <line>
-        <item>Stage_6_sql_counts_trans has started</item>
+        <item>Stage_6_sql_counts_trans_comp_2_of_3 has started</item>
       </line>
       <line>
         <item/>
@@ -1833,7 +1833,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_COUNT_D1_ROW_COUNT</name>
+    <name>Set variables - STANDARD_DRUG_OUTCOME_COUNT_D1_COMP_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1867,7 +1867,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN</name>
+    <name>Set variables - STANDARD_DRUG_OUTCOME_DRILLDOWN_COMP_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -2047,8 +2047,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.all_casedemo</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.all_casedemo</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2105,8 +2105,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.casedemo</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.casedemo</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2163,8 +2163,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.casedemo_legacy</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.casedemo_legacy</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2221,8 +2221,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.combined_drug_mapping</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.combined_drug_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2279,8 +2279,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.default_all_casedemo_age_keys</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.default_all_casedemo_age_keys</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2337,8 +2337,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.default_all_casedemo_event_dt_keys</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.default_all_casedemo_event_dt_keys</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2395,8 +2395,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.default_all_casedemo_reporter_country_keys</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.default_all_casedemo_reporter_country_keys</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2453,8 +2453,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_ai_mapping</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_ai_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2511,8 +2511,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_mapping_brand_name_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_mapping_brand_name_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2569,8 +2569,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_mapping_multi_ingredient_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_mapping_multi_ingredient_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2627,8 +2627,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_nda_mapping</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_nda_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2685,8 +2685,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_regex_mapping</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_regex_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2743,8 +2743,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drug_regex_mapping_words</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drug_regex_mapping_words</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2801,8 +2801,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drugname_legacy_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drugname_legacy_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2859,8 +2859,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.drugname_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.drugname_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2917,8 +2917,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.nda_ingredient</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.nda_ingredient</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2975,8 +2975,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac_pt_legacy_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.reac_pt_legacy_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3033,8 +3033,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.reac_pt_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.reac_pt_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3091,8 +3091,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rxnorm_mapping_brand_name_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.rxnorm_mapping_brand_name_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3149,8 +3149,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rxnorm_mapping_multi_ingredient_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.rxnorm_mapping_multi_ingredient_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3207,8 +3207,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.rxnorm_mapping_single_ingredient_list</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.rxnorm_mapping_single_ingredient_list</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3265,8 +3265,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_drug</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_case_drug</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3323,8 +3323,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_indication</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_case_indication</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3381,8 +3381,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_outcome</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_case_outcome</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3439,8 +3439,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_outcome_category</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_case_outcome_category</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3497,8 +3497,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_combined_drug_mapping</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_combined_drug_mapping</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3555,8 +3555,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_contingency_table</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_contingency_table</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3613,8 +3613,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_count</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_count</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3671,8 +3671,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_count_a_count_b</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_count_a_count_b</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3729,8 +3729,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_count_c</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_count_c</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3787,8 +3787,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_count_d1</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_count_d1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3845,8 +3845,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_drilldown</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3860,7 +3860,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
         <name>count</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - count(*) drug 2</origin>
+        <origin>Table input - count(*) standard_drug_outcome_drilldown</origin>
         <comments>count</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -3903,8 +3903,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_drug_outcome_statistics</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.standard_drug_outcome_statistics</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3961,8 +3961,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.unique_all_case</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.unique_all_case</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -4019,8 +4019,8 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.unique_all_casedemo</sql>
+    <connection>${DATABASE_COMPARISON_NAME}</connection>
+    <sql>SELECT count(*) FROM ${DATABASE_COMPARISON_SCHEMA}.unique_all_casedemo</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
