@@ -18,7 +18,7 @@
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -39,7 +39,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -454,8 +454,8 @@ update standard_drug_outcome_drilldown a
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>1472</yloc>
+      <xloc>656</xloc>
+      <yloc>1904</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -502,112 +502,26 @@ from meddra_snomed_mapping b
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
-      <yloc>1328</yloc>
+      <xloc>352</xloc>
+      <yloc>1904</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_drug_outcome_contingency_table.sql</name>
+      <name>derive_standard_drug_outcome_contingency_table_part_1.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>------------------------------
---
--- This SQL script computes the 2x2 contingency table for all unique legacy and current case drug/outcome pairs in a table called standard_drug_current_outcome_contingency_table
---
---
--- LTS COMPUTING LLC
-------------------------------
-
-set search_path = ${DATABASE_SCHEMA};
-
---drop index if exists standard_drug_outcome_count_ix;
-create index if not exists standard_drug_outcome_count_ix on standard_drug_outcome_count(drug_concept_id, outcome_concept_id);
-
---drop index if exists standard_drug_outcome_count_2_ix;
-create index if not exists standard_drug_outcome_count_2_ix on standard_drug_outcome_count(drug_concept_id);
---drop index if exists standard_drug_outcome_count_3_ix;
-create index if not exists standard_drug_outcome_count_3_ix on standard_drug_outcome_count(outcome_concept_id);
---drop index if exists standard_drug_outcome_count_4_ix;
-create index if not exists standard_drug_outcome_count_4_ix on standard_drug_outcome_count(drug_outcome_pair_count);
-analyze verbose standard_drug_outcome_count;
-
--- get count_d1 
---drop table if exists standard_drug_outcome_count_d1;
-create table if not exists standard_drug_outcome_count_d1 as
-	with cte as (
-		select sum(drug_outcome_pair_count) as count_d1 from standard_drug_outcome_count 
-		)  
-	select drug_concept_id, outcome_concept_id, count_d1
-		from standard_drug_outcome_count a,  cte; -- we need the same total for all rows so do cross join!
-
---============= On a 4+ CPU postgresql server, run the following 3 queries in 3 different postgresql sessions so they run concurrently!
-
--- get count_a and count_b 
-set search_path = ${DATABASE_SCHEMA};
---drop table if exists standard_drug_outcome_count_a_count_b;
-create table if not exists standard_drug_outcome_count_a_count_b as
-	select drug_concept_id, outcome_concept_id, 
-		drug_outcome_pair_count as count_a, -- count of drug P and outcome R
-			(
-				select sum(drug_outcome_pair_count)
-				from standard_drug_outcome_count b
-				where b.drug_concept_id = a.drug_concept_id and b.outcome_concept_id &lt;&gt; a.outcome_concept_id 
-			) as count_b -- count of drug P and not(outcome R)
-	from standard_drug_outcome_count a;
-
--- get count_c 
-set search_path = ${DATABASE_SCHEMA};
-
---drop table if exists standard_drug_outcome_count_c;
-create table if not exists standard_drug_outcome_count_c as
-	select drug_concept_id, outcome_concept_id, 
-		(
-			select sum(drug_outcome_pair_count) 
-			from standard_drug_outcome_count c
-			where c.drug_concept_id &lt;&gt; a.drug_concept_id and c.outcome_concept_id = a.outcome_concept_id 
-		) as count_c -- count of not(drug P) and outcome R
-	from standard_drug_outcome_count a; 
-
--- get count d2 
-set search_path = ${DATABASE_SCHEMA};
---drop table if exists standard_drug_outcome_count_d2;
-create table if not exists standard_drug_outcome_count_d2 as
-	select drug_concept_id, outcome_concept_id, 
-	(
-		select sum(drug_outcome_pair_count)
-		from standard_drug_outcome_count d2
-		where (d2.drug_concept_id = a.drug_concept_id) or (d2.outcome_concept_id = a.outcome_concept_id)
-	) as count_d2 -- count of all cases where drug P or outcome R 
-	from standard_drug_outcome_count a;
-
---=============
-
--- Only run the below query when ALL OF THE ABOVE 3 QUERIES HAVE COMPLETED!
--- combine all the counts into a single contingency table
---drop table if exists standard_drug_outcome_contingency_table;
-create table if not exists standard_drug_outcome_contingency_table as		-- 1 second
-
-select ab.drug_concept_id, ab.outcome_concept_id, count_a, count_b, count_c, (count_d1 - count_d2) as count_d
-		from standard_drug_outcome_count_a_count_b ab
-	inner join standard_drug_outcome_count_c c
-		on ab.drug_concept_id = c.drug_concept_id and ab.outcome_concept_id = c.outcome_concept_id
-	inner join standard_drug_outcome_count_d1 d1
-		on ab.drug_concept_id = d1.drug_concept_id and ab.outcome_concept_id = d1.outcome_concept_id
-	inner join standard_drug_outcome_count_d2 d2
-		on ab.drug_concept_id = d2.drug_concept_id and ab.outcome_concept_id = d2.outcome_concept_id;
-
-</sql>
+      <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_1.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>1328</yloc>
+      <xloc>400</xloc>
+      <yloc>1600</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -625,8 +539,8 @@ select ab.drug_concept_id, ab.outcome_concept_id, count_a, count_b, count_c, (co
 
 set search_path = ${DATABASE_SCHEMA};
 
---drop table if exists standard_drug_outcome_count;
-create table if not exists standard_drug_outcome_count as
+drop table if exists standard_drug_outcome_count;
+create table standard_drug_outcome_count as
 select drug_concept_id, outcome_concept_id, count(*) as drug_outcome_pair_count, cast(null as integer) as snomed_outcome_concept_id
 from (
 	select 'PRIMARYID' || a.primaryid as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
@@ -649,8 +563,8 @@ group by drug_concept_id, outcome_concept_id;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>1184</yloc>
+      <xloc>144</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2063,8 +1977,8 @@ from standard_drug_outcome_contingency_table;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>1328</yloc>
+      <xloc>160</xloc>
+      <yloc>1888</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2156,39 +2070,244 @@ echo "#######################################################" >> $log_location
 echo "################ STAGE 5 COMPLETE #####################" >> $log_location
 echo "#######################################################" >> $log_location
 printf '\n\n' >> $log_location
-echo ' PENTAHO WORK COMPLETE! ' >> $log_location
 echo ' You might have a database administrator vacuum db and reindex ' >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>464</xloc>
-      <yloc>1472</yloc>
+      <xloc>96</xloc>
+      <yloc>2000</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_standard_drug_outcome_contingency_table_part_5.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_5.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1792</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_standard_drug_outcome_contingency_table_part_2.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_2.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1648</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_standard_drug_outcome_contingency_table_part_3.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_3.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1696</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_standard_drug_outcome_contingency_table_part_4.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_4.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1744</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Wait for 3s (2)</name>
+      <description/>
+      <type>DELAY</type>
+      <attributes/>
+      <maximumTimeout>3</maximumTimeout>
+      <scaletime>0</scaletime>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>1184</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Wait for 3s (3)</name>
+      <description/>
+      <type>DELAY</type>
+      <attributes/>
+      <maximumTimeout>3</maximumTimeout>
+      <scaletime>0</scaletime>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1296</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Wait for 3s (4)</name>
+      <description/>
+      <type>DELAY</type>
+      <attributes/>
+      <maximumTimeout>3</maximumTimeout>
+      <scaletime>0</scaletime>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>672</xloc>
+      <yloc>1552</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>create standard_drug_outcome_contingency_table from cem_ddl.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- faers.standard_drug_outcome_contingency_table definition
+
+-- Drop table
+
+-- DROP TABLE faers.standard_drug_outcome_contingency_table;
+
+set search_path = ${DATABASE_SCHEMA};
+
+CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
+	drug_concept_id int4 NULL,
+	outcome_concept_id int4 NULL,
+	count_a int8 NULL,
+	count_b numeric NULL,
+	count_c numeric NULL,
+	count_d numeric NULL
+);
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>1376</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_standard_drug_outcome_contingency_table.sql (all)</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>1440</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log took derive short route</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "################ TOOK DERIVE_* step SHORT ROUTE #####################" >> $log_location
+printf '\n\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>1520</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "################ DERIVE FAILED SO DERIVE_* step LONG ROUTE #####################" >> $log_location
+printf '\n\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1520</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>derive_standard_drug_outcome_count.sql</from>
-      <to>derive_standard_drug_outcome_contingency_table.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>create_usagi_import_table.sql</from>
       <to>map_all_drugname_to_rxnorm</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_standard_case_outcome.sql</from>
-      <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2216,24 +2335,6 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
     <hop>
       <from>standardize_combined_drug_mapping.sql</from>
       <to>derive_standard_case_outcome_category.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_standard_drug_outcome_contingency_table.sql</from>
-      <to>derive_standard_drug_outcome_statistics.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_standard_drug_outcome_statistics.sql</from>
-      <to>map_meddra_to_snomed.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2281,7 +2382,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <to>Set AWS Credentials</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -2330,6 +2431,150 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_statistics.sql</from>
+      <to>map_meddra_to_snomed.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table_part_5.sql</from>
+      <to>derive_standard_drug_outcome_statistics.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table_part_2.sql</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_3.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table_part_3.sql</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_4.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table_part_4.sql</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_5.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_case_outcome.sql</from>
+      <to>Wait for 3s (2)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (2)</from>
+      <to>derive_standard_drug_outcome_count.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_count.sql</from>
+      <to>Wait for 3s (3)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table_part_1.sql</from>
+      <to>Wait for 3s (4)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (4)</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_2.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (3)</from>
+      <to>create standard_drug_outcome_contingency_table from cem_ddl.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create standard_drug_outcome_contingency_table from cem_ddl.sql</from>
+      <to>derive_standard_drug_outcome_contingency_table.sql (all)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table.sql (all)</from>
+      <to>Log took derive short route</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log took derive short route</from>
+      <to>derive_standard_drug_outcome_statistics.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_drug_outcome_contingency_table.sql (all)</from>
+      <to>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_1.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -2370,8 +2615,29 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>772</width>
+      <width>773</width>
       <heigth>605</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>^creates standard_drug_outcome_count table</note>
+      <xloc>32</xloc>
+      <yloc>1360</yloc>
+      <width>320</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
