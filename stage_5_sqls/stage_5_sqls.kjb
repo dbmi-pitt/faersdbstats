@@ -368,8 +368,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>656</yloc>
+      <xloc>112</xloc>
+      <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1794,7 +1794,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
+      <xloc>352</xloc>
       <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
@@ -1896,7 +1896,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
+      <xloc>352</xloc>
       <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
@@ -1918,7 +1918,7 @@ where caseid is null or event_dt is null or age is null or sex is null or report
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
+      <xloc>112</xloc>
       <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
@@ -2010,8 +2010,8 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>768</yloc>
+      <xloc>112</xloc>
+      <yloc>880</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -2043,7 +2043,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
+      <xloc>656</xloc>
       <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
@@ -2246,7 +2246,7 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Log took derive short route</name>
+      <name>Log "STAGE 5 TOOK DERIVE_* step SHORT ROUTE"</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
@@ -2264,18 +2264,18 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <script>#!/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 printf '\n' >> $log_location
-echo "################ TOOK DERIVE_* step SHORT ROUTE #####################" >> $log_location
-printf '\n\n' >> $log_location</script>
+echo "################ STAGE 5 TOOK DERIVE_* step SHORT ROUTE #####################" >> $log_location
+printf '\n' >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1520</yloc>
+      <xloc>160</xloc>
+      <yloc>1536</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</name>
+      <name>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
@@ -2293,14 +2293,43 @@ printf '\n\n' >> $log_location</script>
       <script>#!/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 printf '\n' >> $log_location
-echo "################ DERIVE FAILED SO DERIVE_* step LONG ROUTE #####################" >> $log_location
-printf '\n\n' >> $log_location</script>
+echo "################ STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE #####################" >> $log_location
+printf '\n' >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
       <yloc>1520</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log "STAGE 5 STARTED"</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "################ STAGE 5 STARTED #####################" >> $log_location
+printf '\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>656</xloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -2376,15 +2405,6 @@ printf '\n\n' >> $log_location</script>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Set job variables</from>
-      <to>Set AWS Credentials</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Set AWS Credentials</from>
@@ -2541,7 +2561,7 @@ printf '\n\n' >> $log_location</script>
     </hop>
     <hop>
       <from>derive_standard_drug_outcome_contingency_table.sql (all)</from>
-      <to>Log took derive short route</to>
+      <to>Log "STAGE 5 TOOK DERIVE_* step SHORT ROUTE"</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2549,7 +2569,7 @@ printf '\n\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log took derive short route</from>
+      <from>Log "STAGE 5 TOOK DERIVE_* step SHORT ROUTE"</from>
       <to>derive_standard_drug_outcome_statistics.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -2559,7 +2579,7 @@ printf '\n\n' >> $log_location</script>
     </hop>
     <hop>
       <from>derive_standard_drug_outcome_contingency_table.sql (all)</from>
-      <to>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</to>
+      <to>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2567,8 +2587,26 @@ printf '\n\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log "DERIVE FAILED SO DERIVE_* step LONG ROUTE"</from>
+      <from>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</from>
       <to>derive_standard_drug_outcome_contingency_table_part_1.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set job variables</from>
+      <to>Log "STAGE 5 STARTED"</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log "STAGE 5 STARTED"</from>
+      <to>Set AWS Credentials</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
