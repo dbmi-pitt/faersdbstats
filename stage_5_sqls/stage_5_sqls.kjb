@@ -2322,7 +2322,7 @@ printf '\n' >> $log_location</script>
       <script>#!/bin/bash
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 printf '\n' >> $log_location
-echo "################ STAGE 5 STARTED #####################" >> $log_location
+echo "################ Stage_5_SQLs has started #####################" >> $log_location
 printf '\n' >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
