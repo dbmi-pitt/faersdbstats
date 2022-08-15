@@ -458,8 +458,8 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
 puts Stage_6_sql_counts_trans has started in main log file</note>
       <xloc>512</xloc>
       <yloc>0</yloc>
-      <width>611</width>
-      <heigth>350</heigth>
+      <width>649</width>
+      <heigth>367</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -501,7 +501,7 @@ NDA_INGREDIENT_ROW_COUNT
 DRUG_NDA_MAPPING_ROW_COUNT
 COMBINED_DRUG_MAPPING_ROW_COUNT
 DRUGNAME_LIST_ROW_COUNT
-REAC_PT_ROW_COUNT
+REAC_PT_ROW_COUNT (this table does not exist)
 CASEDEMO_ROW_COUNT
 DRUGNAME_LEGACY_LIST_ROW_COUNT
 REAC_PT_LEGACY_LIST_ROW_COUNT
@@ -579,7 +579,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
       <xloc>824</xloc>
       <yloc>419</yloc>
       <width>462</width>
-      <heigth>1710</heigth>
+      <heigth>1697</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -602,7 +602,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -623,7 +623,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -651,7 +651,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <hop>
       <from>Table input - count(*) reac_pt_list</from>
       <to>Set variables - REAC_PT_LIST_ROW_COUNT</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_count_d1</from>
@@ -659,7 +659,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data grid - Stage_6_sql_counts_trans has started</from>
+      <from>Data grid - Stage_6_sql_counts_trans_1_of_3 has started</from>
       <to>Text file output - Log output</to>
       <enabled>Y</enabled>
     </hop>
@@ -675,7 +675,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </hop>
     <hop>
       <from>Table input - count(*) standard_drug_outcome_contingency_table</from>
-      <to>Set variables - STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT</to>
+      <to>Set variables - STANDARD_DRUG_OUTCOME_CONTINGENCY_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -830,7 +830,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </hop>
   </order>
   <step>
-    <name>Data grid - Stage_6_sql_counts_trans has started</name>
+    <name>Data grid - Stage_6_sql_counts_trans_1_of_3 has started</name>
     <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
@@ -856,7 +856,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </fields>
     <data>
       <line>
-        <item>Stage_6_sql_counts_trans has started</item>
+        <item>Stage_6_sql_counts_trans_1_of_3 has started</item>
       </line>
       <line>
         <item/>
@@ -1087,7 +1087,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DEFAULT_ALL_CASEDEMO_EVENT_DT_ROW_COUNT</variable_name>
+        <variable_name>DEFAULT_ALL_CASEDEMO_EVENT_DT_KEYS_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1121,7 +1121,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>REPORTER_COUNTRY_KEYS_ROW_COUNT</variable_name>
+        <variable_name>DEFAULT_REPORTER_COUNTRY_KEYS_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1665,7 +1665,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>STANDARD_DRUG_OUTCOME_INDICATION_ROW_COUNT</variable_name>
+        <variable_name>STANDARD_CASE_INDICATION_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1788,7 +1788,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT</name>
+    <name>Set variables - STANDARD_DRUG_OUTCOME_CONTINGENCY_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
