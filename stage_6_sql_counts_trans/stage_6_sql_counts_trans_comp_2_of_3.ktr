@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>${DATABASE_COMPARISON_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>${DATABASE_COMPARISON_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>${DATABASE_COMPARISON_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>${DATABASE_COMPARISON_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>

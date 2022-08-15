@@ -53,19 +53,30 @@ echo "$(aws configure list)" >> $log_location
 #####################################################################
 printf '\n' >> $log_location
 echo "###################################################" >> $log_location
-echo "#################### DATABASE #####################" >> $log_location
+echo "#################### DATABASES ####################" >> $log_location
 echo "###################################################" >> $log_location
 printf '\n' >> $log_location
 echo DATABASE_HOST is ${DATABASE_HOST} >> $log_location
+echo DATABASE_PORT is ${DATABASE_PORT} >> $log_location
+echo DATABASE_SCHEMA is ${DATABASE_SCHEMA} >> $log_location
 echo DATABASE_NAME is ${DATABASE_NAME} >> $log_location
+echo DATABASE_USERNAME is ${DATABASE_USERNAME} >> $log_location
+echo "#################### LOG ##########################" >> $log_location
+echo DATABASE_LOG_SCHEMA is ${DATABASE_LOG_SCHEMA} >> $log_location
 echo DATABASE_LOG_TABLE is ${DATABASE_LOG_TABLE} >> $log_location
 echo DATABASE_LOG_NAME is ${DATABASE_LOG_NAME} >> $log_location
 echo DATABASE_LOG_SCHEMA is ${DATABASE_LOG_SCHEMA} >> $log_location
+echo "#################### COMPARISON ##########################" >> $log_location
+echo DATABASE_HOST is ${DATABASE_COMPARISON_HOST} >> $log_location
+echo DATABASE_PORT is ${DATABASE_COMPARISON_PORT} >> $log_location
+echo DATABASE_SCHEMA is ${DATABASE_COMPARISON_SCHEMA} >> $log_location
+echo DATABASE_NAME is ${DATABASE_COMPARISON_NAME} >> $log_location
+echo DATABASE_USERNAME is ${DATABASE_COMPARISON_USERNAME} >> $log_location
+
 # I don't think this is used
-echo DATABASE_SCHEMA is ${DATABASE_SCHEMA} >> $log_location
-echo DATABASE_USERNAME is ${DATABASE_USERNAME} >> $log_location
 # DATABASE_PASSWORD} >> $log_location
 
+printf '\n' >> $log_location
 printf '\n' >> $log_location
 echo "###################################################" >> $log_location
 echo "############   TIMEFRAME    #######################" >> $log_location

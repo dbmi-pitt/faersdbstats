@@ -15,7 +15,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_TABLE}</table>
     <size_limit_lines>5k</size_limit_lines>

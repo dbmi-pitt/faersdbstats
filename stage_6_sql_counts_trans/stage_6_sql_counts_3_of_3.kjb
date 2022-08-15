@@ -15,7 +15,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -305,8 +305,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>352</yloc>
+      <xloc>16</xloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -325,21 +325,13 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>N</insertScript>
-      <script>#!/bin/bash
-log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
-echo $log_location
-printf '\n' >> $log_location
-printf '\n' >> $log_location
-echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
-printf '\n' >> $log_location
-echo 'DEMO COUNT RESULTS' >> $log_location
-</script>
+      <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>528</yloc>
+      <xloc>496</xloc>
+      <yloc>624</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -371,8 +363,8 @@ fi</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>416</yloc>
+      <xloc>208</xloc>
+      <yloc>512</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -409,11 +401,19 @@ stage_4_faers_domain_logging
 stage_4_laers_domain_logging
 stage_5_sqls
 stage_6... (1 of 3) aka stage_6_sql_counts_trans_1_of_3.ktr
-stage_6... (2 of 3) aka stage_6_sql_counts_trans_comp_1_of_3.ktr</note>
-      <xloc>64</xloc>
+stage_6... (2 of 3) aka stage_6_sql_counts_trans_comp_1_of_3.ktr
+
+about each step
+
+ - Check for stage_4 vars (just demo counts) - checks to see if stage_4 ...faers and ...laers have been run
+
+ - stage_6_sql_counts_log_3_of_3_script.sh - outputs counts to log
+
+</note>
+      <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>448</width>
-      <heigth>214</heigth>
+      <width>686</width>
+      <heigth>350</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

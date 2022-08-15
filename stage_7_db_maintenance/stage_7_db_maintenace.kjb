@@ -18,7 +18,7 @@
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>${DATABASE_NAME}</database>
-    <port>5432</port>
+    <port>${DATABASE_PORT}</port>
     <username>${DATABASE_USERNAME}</username>
     <password>${DATABASE_PASSWORD}</password>
     <servername/>
@@ -39,7 +39,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>${DATABASE_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>

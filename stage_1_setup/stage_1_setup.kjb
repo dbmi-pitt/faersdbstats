@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_NAME}</connection>
+    <connection>${DATABASE_LOG_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -1156,7 +1156,7 @@ Current Issues:
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>1006</width>
+      <width>1009</width>
       <heigth>435</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
