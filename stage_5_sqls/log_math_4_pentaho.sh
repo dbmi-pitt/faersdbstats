@@ -37,6 +37,9 @@ then
 else
     echo "DEMO PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/demo/demo.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of demo.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
@@ -69,6 +72,9 @@ then
 else
     echo "DRUG PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/drug/drug.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of drug.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
@@ -100,6 +106,9 @@ then
 else
     echo "INDI PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/indi/indi.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of indi.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
@@ -131,6 +140,9 @@ then
 else
     echo "REAC PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/reac/reac.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of reac.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
@@ -164,6 +176,9 @@ then
 else
     echo "RPSR PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/rpsr/rpsr.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of rpsr.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
@@ -196,6 +211,9 @@ then
 else
     echo "THER PERFECTO!!!"  >> $log_location
 fi
+echo $(wc -l ${BASE_FILE_DIR}/data_from_s3/ther/ther.txt) >> $log_location
+printf '\n' >> $log_location
+echo '^wc -l of ther.txt' >> $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
 
