@@ -1986,7 +1986,7 @@ from standard_drug_outcome_contingency_table;
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>/home/pentaho-secondary/projects-brb265/faers/logs/log_math_4_pentaho.sh</filename>
+      <filename>${BASE_FILE_DIR}/stage_5_sqls/log_math_4_pentaho.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -2019,7 +2019,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>/home/pentaho-secondary/projects-brb265/faers/logs/log_math_4_laers_pentaho.sh</filename>
+      <filename>${BASE_FILE_DIR}/stage_5_sqls/log_math_4_laers_pentaho.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -2393,7 +2393,7 @@ printf '\n' >> $log_location</script>
       <to>standardize_combined_drug_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -2438,7 +2438,7 @@ printf '\n' >> $log_location</script>
       <to>derive_unique_all_case.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -2675,6 +2675,27 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>32</xloc>
       <yloc>1360</yloc>
       <width>320</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>^ disable hop before derives to log stage_4 vars</note>
+      <xloc>240</xloc>
+      <yloc>944</yloc>
+      <width>328</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
