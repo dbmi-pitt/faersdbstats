@@ -43,7 +43,7 @@ fi
 # cd data_from_s3
 
 #make use case for legacy data faers_or_laers
-if [ ${LOAD_NEW_YEAR} -le 2012 ]
+if [  [ ${LOAD_NEW_YEAR} -le 2012 ] && [ ${LOAD_NEW_QUARTER: 1} -le 3] ]
 then
     #echo we have laers data
     faers_or_laers='laers';
@@ -78,6 +78,8 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
             #locally loop through domains and create one staged import file ("domain".txt ie demo.txt)
             for domain in demo drug indi outc reac rpsr ther; do
+            #do one domain like this
+            # for domain in rpsr; do
                 echo 'domain is '$domain;
                 #mkdir $domain #throws error because aws cp created it
                 echo 'pwddd is '`pwd`;
@@ -151,14 +153,14 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                             tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
                         fi #end if [ $headempty = 0 ]; then
                                     else
-                echo 'name is short '$name
-                        echo $domain
-                        echo thefilename is $thefilename
-                        echo thefilenamedata is $thefilenamedata                    
+                        echo 'name is short '$name
+                                echo $domain
+                                echo thefilename is $thefilename
+                                echo thefilenamedata is $thefilenamedata                    
 
-                        #chop for _test ing
-                        #sed -i '11,$ d' ${domain}_test.txt
-                        #head ${domain}_test.txt #for testing
+                                #chop for _test ing
+                                #sed -i '11,$ d' ${domain}_test.txt
+                                #head ${domain}_test.txt #for testing
                     fi #end if [[ "${#thefilename}" -gt 7 ]]; then 
                 
                 done; #end .txt file loop
