@@ -19,8 +19,6 @@ aws configure list
 # echo "Pwd is "
 # pwd
 
-rm -rf ${BASE_FILE_DIR}/data
-
 echo CEM_ORANGE_BOOK_DOWNLOAD_URL is $CEM_ORANGE_BOOK_DOWNLOAD_URL
 
 mkdir ${CEM_DOWNLOAD_DATA_FOLDER}_setup
