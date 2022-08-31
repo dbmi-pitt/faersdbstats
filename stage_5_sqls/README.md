@@ -1,6 +1,11 @@
 
 
-```drop table if exists standard_drug_outcome_count;
+
+Todo:
+
+fix this
+```
+drop table if exists standard_drug_outcome_count
 create table standard_drug_outcome_count as
 select drug_concept_id,
     outcome_concept_id,
@@ -41,4 +46,4 @@ create table standard_case_drug as
     inner join staging_vocabulary.concept c
         on a.standard_concept_id = c.concept_id
             and c.concept_class_id in ('Ingredient','Clinical Drug Form')
-            and c.standard_concept = 'S';
+            and c.standard_concept = S';
