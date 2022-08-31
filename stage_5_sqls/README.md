@@ -1,9 +1,10 @@
+Stage 4 wiki link
+Stage 5 wiki link
+Stage 5 wiki link
 
+##Todo:
 
-
-Todo:
-
-fix this
+fix this...
 ```
 drop table if exists standard_drug_outcome_count
 create table standard_drug_outcome_count as
@@ -31,15 +32,18 @@ from (
             and b.isr is not null
     ) aa
 group by drug_concept_id,
-    outcome_concept_id;```
+    outcome_concept_id;
+```
 
-    -- this ^^^ is not working
-    --standard_case_drug table has data but not all fields have isr (field) data ? 
-    --standard_case_outcome has data
+this ^^^ is not working
+- `standard_case_drug` table has data but not all fields have isr (field) data ? 
+    `standard_case_outcome` has data
     --
 
 
---from stage_5 ... standardize_combined_drug_mapping.sql
+--from stage_5 ... 
+```
+standardize_combined_drug_mapping.sql
 create table standard_case_drug as
     select distinct a.primaryid, a.isr, a.drug_seq, a.role_cod, a.standard_concept_id
         from standard_combined_drug_mapping a
@@ -47,3 +51,4 @@ create table standard_case_drug as
         on a.standard_concept_id = c.concept_id
             and c.concept_class_id in ('Ingredient','Clinical Drug Form')
             and c.standard_concept = S';
+```
