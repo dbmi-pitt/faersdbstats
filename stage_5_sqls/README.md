@@ -52,3 +52,6 @@ create table standard_case_drug as
             and c.concept_class_id in ('Ingredient','Clinical Drug Form')
             and c.standard_concept = S';
 ```
+
+see /troubleshoot_scripts/stage_5_sqls_derive_standard_drug_outcome_contingency_table.ktr
+see /troubleshoot_scripts/stage_5_sqls_derive_standard_drug_outcomes.ktr
