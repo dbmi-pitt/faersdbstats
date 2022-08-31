@@ -57,11 +57,13 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
     #download s3://..data to local/data_from_s3
     echo LOAD_ALL_TIME is 1
-    echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
     
     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
     if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
+        echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
         aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+    else
+        echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
     fi
 
     data_from_s3_root_above_laers_faers=`pwd`;
@@ -75,17 +77,13 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
         cd $laers_faers;
         # echo outer loop pwd is `pwd`
 
-
             #locally loop through domains and create one staged import file ("domain".txt ie demo.txt)
             for domain in demo drug indi outc reac rpsr ther; do
             #do one domain like this
             # for domain in rpsr; do
-                echo 'domain is '$domain;
-                #mkdir $domain #throws error because aws cp created it
-                echo 'pwddd is '`pwd`;
-                echo 'ls is '`ls`
+
                 cd $domain
-                echo inner loop domain pwd is `pwd`
+                echo inner loop domain $domain pwd is `pwd`
                 echo pwd is `pwd`
                 #blow out old staged files
                     for file in ./**/*_staged_with_lfs_only.txt; do
@@ -105,23 +103,18 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                     echo 'thefilename is '$thefilename;
                     echo 'qtr is '$qtr;
 
-
+                    #if length of string  thefilename is greater than 11
                     if [[ "${#thefilename}" -gt 11 ]]; then 
+                        # echo "name is ${name}";
                         echo 'thefilename is long ENOUGHHHHHHHHHHHHHH'
                         echo 'thefilename is '$thefilename;
                         echo 'thefilenamedata is '$thefilenamedata;
-                        
-                        # echo "name is ${name}";
-                        # echo 'thefilename '$thefilename' is greater than 7 in length and is '${#thefilename}
-                        
-                        # echo 'about to append thefilenamedata of '$thefilenamedata ' to ' $name
-                        echo '################################# name10:2 is '${name:10:2};
-                        #remove CRLF and build out something like DE_lf.txt for staging purposes to avoid aws cli sync redownloading data files
+                        echo '################################# name:10:2 is '${name:10:2};
+                        #remove CRLF and build out something less than 11 chars long; like DE_lf.txt for staging purposes to avoid aws cli sync redownloading data files #note sed -z takes forever so use this
                         tr -d '\015' <$name >"${name::-4}"_staged_with_lfs_only.txt
-                                # sed -i "s|$|\$newcolumn|g" "${name::-4}"_staged_with_lfs_only.txt
+                        # add thefilenamedata to the end of each line
                         sed -i "s|$|$thefilenamedata|g" "${name::-4}"_staged_with_lfs_only.txt
-
-
+                        # if 1st line header line of domain.txt has not been created
                         if [ $headempty = 0 ]; then
                             #put header row into drug.txt
                             echo 'head is empty'
@@ -132,11 +125,12 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                             #append column header $filename
                             header+=\$filename
                             #add year and quarter
-                            header+=\$yr\$qtr                        
-                            
+                            header+=\$yr\$qtr
+
                             echo $header > ${domain}.txt                            
                             echo "${domain}.txt" is the domain.txt
 
+                            #this was need for some domains leaving here just in case
                             #replace first occurence of $thefilenamedata
                             # sed -i "0,/$thefilenamedata/{s/$thefilenamedata//}" $name
 
@@ -146,13 +140,13 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                             #replace first occurence of $thefilenamedata
                             # sed -i "0,/$thefilenamedata/{s/$thefilenamedata//}" $domain.txt
                         else
-                            echo 'head is not empty'
-                            #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename
-                            #output starting at line #2
+                            echo 'head is not empty so grabbing from line 2 on'
                             
+                            #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename
                             tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
+                            #        ^ output starting at line #2
                         fi #end if [ $headempty = 0 ]; then
-                                    else
+                    else
                         echo 'name is short '$name
                                 echo $domain
                                 echo thefilename is $thefilename
@@ -243,12 +237,10 @@ else #not LOAD_ALL_DATA
                     
                             #i need to know if this will work here for speed reasons
                             #echo this is super important
-                            echo the domain is $domain
+                            echo the domain is $faers_or_laers $domain
+                            echo the thefilename is $thefilename
                             echo the thefilenamedata is $thefilenamedata
-                            echo the thefilenamedata is $thefilenamedata
-                                                #change crlf to lf
-                            # tr -d '\015' <${domain}.txt >${domain}.txt
-                            # tr -d '\015' <${domain}.txt >${domain}.txt
+
 
                             # #add thefilenamedata to the end of every line in the file
                             # #sed "s|$|endoftheline|g" demo_lf.txt > demo_test.txt
