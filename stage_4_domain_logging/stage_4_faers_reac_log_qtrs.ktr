@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_faers_outc_log_qtrs</name>
+    <name>stage_4_faers_reac_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -436,12 +436,33 @@
   </info>
   <notepads>
     <notepad>
-      <note>Compare counts of the outc table's data grouped by year and quarter of ${DATABASE_NAME} and ${DATABASE_COMPARISON_NAME}
+      <note>Compare counts of the reac table's data grouped by year and quarter of ${DATABASE_NAME} and ${DATABASE_COMPARISON_NAME}
 databases</note>
       <xloc>272</xloc>
       <yloc>80</yloc>
       <width>909</width>
       <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>merge join helps the transform wait for data from the line_break and the table queries</note>
+      <xloc>756</xloc>
+      <yloc>334</yloc>
+      <width>586</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -562,12 +583,12 @@ databases</note>
   </connection>
   <order>
     <hop>
-      <from>Table input - cem_pitt_2022.faers.outc_table_counts.sql</from>
+      <from>Table input - cem_pitt_2022.faers.reac_table_counts.sql</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - cem.faers.outc_table_counts.sql 2</from>
+      <from>Table input - cem.faers.reac_table_counts.sql 2</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
@@ -592,21 +613,6 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dummy (do nothing)</from>
-      <to>Blocking step</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step</from>
-      <to>Text file output - log differences</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>log flagfield not identical</from>
-      <to>Dummy (do nothing)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge rows (diff)</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -621,37 +627,12 @@ databases</note>
       <to>Filter rows if flagfield is not identical</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>log flagfield not identical</from>
+      <to>Text file output - log differences</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>N</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>816</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Data grid - add line_break</name>
     <type>DataGrid</type>
@@ -685,7 +666,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>OUTC stage_4_faers_outc... results</item>
+        <item>REAC stage_4_faers_reac... results</item>
       </line>
     </data>
     <attributes/>
@@ -743,31 +724,6 @@ databases</note>
     <GUI>
       <xloc>275</xloc>
       <yloc>310</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -857,7 +813,7 @@ databases</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>outc table for this year and quarter matches comparison database </logmessage>
+    <logmessage>reac table for this year and quarter matches comparison database </logmessage>
     <fields>
       <field>
         <name>total</name>
@@ -951,8 +907,8 @@ databases</note>
       <value>domain</value>
     </values>
     <flag_field>flagfield</flag_field>
-    <reference>Table input - cem_pitt_2022.faers.outc_table_counts.sql</reference>
-    <compare>Table input - cem.faers.outc_table_counts.sql 2</compare>
+    <reference>Table input - cem_pitt_2022.faers.reac_table_counts.sql</reference>
+    <compare>Table input - cem.faers.reac_table_counts.sql 2</compare>
     <compare>
     </compare>
     <attributes/>
@@ -970,7 +926,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem.faers.outc_table_counts.sql 2</name>
+    <name>Table input - cem.faers.reac_table_counts.sql 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -982,7 +938,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
     <sql>select count(*) as total, cast(substring(filename,5,2)as int) as yr, cast(substring(filename,8,1)as int) as qtr, upper(substring(filename,0,5)) as domain
-	from faers.outc
+	from faers.reac
 	group by filename, yr, qtr
 	order by yr, qtr</sql>
     <limit>0</limit>
@@ -998,7 +954,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.outc_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.reac_table_counts.sql 2</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1021,7 +977,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.outc_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.reac_table_counts.sql 2</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1044,7 +1000,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.outc_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.reac_table_counts.sql 2</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1067,7 +1023,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem.faers.outc_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.reac_table_counts.sql 2</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1100,7 +1056,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem_pitt_2022.faers.outc_table_counts.sql</name>
+    <name>Table input - cem_pitt_2022.faers.reac_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1112,7 +1068,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <sql>select count(*) as total, yr, qtr, upper(substring(filename,0,5)) as domain
-	from faers.outc
+	from faers.reac
 	group by filename, yr, qtr
 	order by yr, qtr</sql>
     <limit>0</limit>
@@ -1128,7 +1084,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.reac_table_counts.sql</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1151,7 +1107,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.reac_table_counts.sql</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1174,7 +1130,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.reac_table_counts.sql</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1197,7 +1153,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.reac_table_counts.sql</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1240,8 +1196,8 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>N</header>
@@ -1249,7 +1205,7 @@ databases</note>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine/>
+    <endedLine>^differences</endedLine>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
@@ -1353,8 +1309,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>864</yloc>
+      <xloc>688</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1369,7 +1325,7 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
+    <separator>  </separator>
     <enclosure>"</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
@@ -1401,6 +1357,30 @@ databases</note>
     </file>
     <fields>
       <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>domain</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>total</name>
         <type>Integer</type>
         <format>0</format>
@@ -1431,18 +1411,6 @@ databases</note>
         <currency/>
         <decimal>.</decimal>
         <group>,</group>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>domain</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
         <nullif/>
         <trim_type>both</trim_type>
         <length>-1</length>

@@ -588,12 +588,12 @@ databases</note>
     </hop>
     <hop>
       <from>log flagfield not identical</from>
-      <to>Text file output</to>
+      <to>Text file output - log differences</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Log identical year qtr counts</from>
-      <to>Text file output 2</to>
+      <to>Text file output - log matches</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1018,7 +1018,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Text file output</name>
+    <name>Text file output - log differences</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>N</distribute>
@@ -1037,7 +1037,7 @@ databases</note>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine>^failures</endedLine>
+    <endedLine>^differences</endedLine>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
@@ -1056,9 +1056,21 @@ databases</note>
       <add_to_result_filenames>N</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>n+1</splitevery>
+      <splitevery>nr+1</splitevery>
     </file>
     <fields>
+      <field>
+        <name>domain</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>5</length>
+        <precision>-1</precision>
+      </field>
       <field>
         <name>total</name>
         <type>Integer</type>
@@ -1107,18 +1119,6 @@ databases</note>
         <length>-1</length>
         <precision>-1</precision>
       </field>
-      <field>
-        <name>domain</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>5</length>
-        <precision>-1</precision>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1135,7 +1135,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Text file output 2</name>
+    <name>Text file output - log matches</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1154,7 +1154,7 @@ databases</note>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine>^successes</endedLine>
+    <endedLine>^matches</endedLine>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
