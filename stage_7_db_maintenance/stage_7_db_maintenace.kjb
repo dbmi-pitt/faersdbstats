@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>stage_7_db_maintenace</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <job_status>0</job_status>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2022/07/06 11:26:36.769</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2022/07/06 11:26:36.769</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>${DATABASE_NAME}</name>
+    <server>${DATABASE_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${DATABASE_NAME}</database>
+    <port>${DATABASE_PORT}</port>
+    <username>${DATABASE_USERNAME}</username>
+    <password>${DATABASE_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${DATABASE_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection>${DATABASE_LOG_NAME}</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_NAME}</table>
+    <size_limit_lines>5000</size_limit_lines>
+    <interval>1s</interval>
+    <timeout_days>3.0</timeout_days>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Reindex</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#! /bin/sh
+--su postgres
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "REINDEX INDEX indi_caseid_idx" ${DATABASE_NAME}
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>496</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Vacuum</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql  -h ${DATABASE_HOST}  -U ${DATABASE_USERNAME} -c "vacuumdb --all" ${DATABASE_NAME}
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Start</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>64</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Create all indexes</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE INDEX IF NOT EXISTS combined_drug_mapping_ix ON ${DATABASE_SCHEMA}.combined_drug_mapping USING btree (upper((drug_name_original)::text));
+
+CREATE INDEX IF NOT EXISTS drug_caseid_idx ON ${DATABASE_SCHEMA}.drug USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS drug_drugname_idx ON ${DATABASE_SCHEMA}.drug USING btree (drugname);
+
+CREATE INDEX IF NOT EXISTS drug_filename_idx ON ${DATABASE_SCHEMA}.drug USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS drug_primaryid_idx ON ${DATABASE_SCHEMA}.drug USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS drug_prod_ai_idx ON ${DATABASE_SCHEMA}.drug USING btree (prod_ai);
+
+CREATE INDEX IF NOT EXISTS drug_role_cod_idx ON ${DATABASE_SCHEMA}.drug USING btree (role_cod);
+
+CREATE INDEX IF NOT EXISTS drug_legacy_drugname_idx ON ${DATABASE_SCHEMA}.drug_legacy USING btree (drugname);
+
+CREATE INDEX IF NOT EXISTS drug_legacy_isr_idx ON ${DATABASE_SCHEMA}.drug_legacy USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS drug_name_clean_ix ON ${DATABASE_SCHEMA}.drug_regex_mapping USING btree (drug_name_clean);
+
+CREATE INDEX IF NOT EXISTS indi_caseid_idx ON ${DATABASE_SCHEMA}.indi USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS indi_filename_idx ON ${DATABASE_SCHEMA}.indi USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS indi_primaryid_idx ON ${DATABASE_SCHEMA}.indi USING btree (primaryid, indi_drug_seq);
+
+CREATE INDEX IF NOT EXISTS indi_legacy_isr_idx ON ${DATABASE_SCHEMA}.indi_legacy USING btree (isr, drug_seq);
+
+CREATE INDEX IF NOT EXISTS ingredient_ix ON ${DATABASE_SCHEMA}.nda USING btree (appl_no, ingredient);
+
+CREATE INDEX IF NOT EXISTS ix_reac_1 ON ${DATABASE_SCHEMA}.reac USING btree (upper((pt)::text));
+
+CREATE INDEX IF NOT EXISTS ix_reac_2 ON ${DATABASE_SCHEMA}.reac USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS reac_caseid_idx ON ${DATABASE_SCHEMA}.reac USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS reac_filename_idx ON ${DATABASE_SCHEMA}.reac USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS ix_reac_legacy_1 ON ${DATABASE_SCHEMA}.reac_legacy USING btree (upper((pt)::text));
+
+CREATE INDEX IF NOT EXISTS ix_reac_legacy_2 ON ${DATABASE_SCHEMA}.reac_legacy USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS nda_num_ix ON ${DATABASE_SCHEMA}.drug_nda_mapping USING btree (nda_num);
+
+CREATE INDEX IF NOT EXISTS outc_caseid_idx ON ${DATABASE_SCHEMA}.outc USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS outc_filename_idx ON ${DATABASE_SCHEMA}.outc USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS prod_ai_ix ON ${DATABASE_SCHEMA}.drug_ai_mapping USING btree (prod_ai);
+
+CREATE INDEX IF NOT EXISTS rpsr_caseid_idx ON ${DATABASE_SCHEMA}.rpsr USING btree (caseid, primaryid);
+
+CREATE INDEX IF NOT EXISTS rpsr_filename_idx ON ${DATABASE_SCHEMA}.rpsr USING btree (filename);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_1 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_2 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_case_drug_ix_3 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (standard_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_1 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_2 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_3 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_combined_drug_mapping_isr_idx ON ${DATABASE_SCHEMA}.standard_combined_drug_mapping USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_combined_drug_mapping_primaryid_idx ON ${DATABASE_SCHEMA}.standard_combined_drug_mapping USING btree (primaryid);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_2_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_3_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_4_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_outcome_pair_count);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id, outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix_1 ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_count_ix_2 ON ${DATABASE_SCHEMA}.standard_drug_outcome_count USING btree (outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_caseid_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (caseid);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_drug_concept_id_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (drug_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_drug_outcome_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (drug_concept_id, outcome_concept_id);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_isr_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (isr);
+
+CREATE INDEX IF NOT EXISTS standard_drug_outcome_drilldown_outcome_concept_id_idx ON ${DATABASE_SCHEMA}.standard_drug_outcome_drilldown USING btree (outcome_concept_id);
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
+      <attributes_kjc/>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>Vacuum</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Vacuum</from>
+      <to>Create all indexes</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create all indexes</from>
+      <to>Reindex</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+    <notepad>
+      <note>Note have db admin run 
+
+vacuumdb -all 
+
+and
+
+ reindex database ${DATABASE_NAME}</note>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
+      <width>284</width>
+      <heigth>134</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+  </notepads>
+  <attributes/>
+</job>
