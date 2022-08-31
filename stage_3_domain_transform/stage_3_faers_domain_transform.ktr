@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -42,37 +42,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>ERRORS</id>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -438,6 +438,8 @@
     <notepad>
       <note>FAERS data load (2012 Q4 and newer)
 
+*will truncate tables
+
 preq's
 having run
 stage_1...
@@ -453,12 +455,24 @@ for logging...
 
 ${BASE_FILE_DIR}/../logs/download_results.txt 
 
+(properties logging set to log rpsr)
 
+to do
+add filename yr and qtr fields for drug, etc. domains on
+
+rebuilding ${domain}.txt notes
+1. redownload w/ s3_data_download.sh
+2. search for add_col.txt to insert columns in yr qtr ranges
+3. run something like ./s3_data_download_after_add_col.sh to rebuild ${domain}.txt
+4. head to check headers, wc -l to check record length, 
+
+# swap header (first occurence) in domain.txt file if swapped qtr yr
+sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
 </note>
       <xloc>464</xloc>
       <yloc>80</yloc>
-      <width>398</width>
-      <heigth>333</heigth>
+      <width>570</width>
+      <heigth>565</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -568,6 +582,164 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Data grid - Stage_3_faers_domain has started</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>log_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>Stage_3_faers_domain has started</item>
+      </line>
+      <line>
+        <item/>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get system info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>0</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Null if</name>
+    <type>NullIf</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>demo - CSV file input</name>
     <type>CsvInput</type>
@@ -755,7 +927,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -766,12 +938,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>1</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>sex</name>
+        <name>gndr_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -869,6 +1041,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -912,7 +1117,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <fields>
       <field>
         <name>primaryid</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -962,17 +1167,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <decimal>.</decimal>
         <group>,</group>
         <length>21</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>prod_ai</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1054,13 +1248,13 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>lot_num</name>
+        <name>lot_nbr</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>8</length>
+        <length>6</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1128,6 +1322,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <group>,</group>
         <length>6</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1215,6 +1442,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1296,10 +1556,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <stream_name>rept_cod</stream_name>
       </field>
       <field>
-        <column_name>auth_num</column_name>
-        <stream_name>auth_num</stream_name>
-      </field>
-      <field>
         <column_name>mfr_num</column_name>
         <stream_name>mfr_num</stream_name>
       </field>
@@ -1308,24 +1564,12 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <stream_name>mfr_sndr</stream_name>
       </field>
       <field>
-        <column_name>lit_ref</column_name>
-        <stream_name>lit_ref</stream_name>
-      </field>
-      <field>
         <column_name>age</column_name>
         <stream_name>age</stream_name>
       </field>
       <field>
         <column_name>age_cod</column_name>
         <stream_name>age_cod</stream_name>
-      </field>
-      <field>
-        <column_name>age_grp</column_name>
-        <stream_name>age_grp</stream_name>
-      </field>
-      <field>
-        <column_name>sex</column_name>
-        <stream_name>sex</stream_name>
       </field>
       <field>
         <column_name>e_sub</column_name>
@@ -1358,6 +1602,34 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <field>
         <column_name>occr_country</column_name>
         <stream_name>occr_country</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>auth_num</column_name>
+        <stream_name>auth_num</stream_name>
+      </field>
+      <field>
+        <column_name>lit_ref</column_name>
+        <stream_name>lit_ref</stream_name>
+      </field>
+      <field>
+        <column_name>age_grp</column_name>
+        <stream_name>age_grp</stream_name>
+      </field>
+      <field>
+        <column_name>sex</column_name>
+        <stream_name>gndr_cod</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1404,10 +1676,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <return_field/>
     <fields>
       <field>
-        <column_name>primaryid</column_name>
-        <stream_name>primaryid</stream_name>
-      </field>
-      <field>
         <column_name>caseid</column_name>
         <stream_name>caseid</stream_name>
       </field>
@@ -1422,10 +1690,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <field>
         <column_name>drugname</column_name>
         <stream_name>drugname</stream_name>
-      </field>
-      <field>
-        <column_name>prod_ai</column_name>
-        <stream_name>prod_ai</stream_name>
       </field>
       <field>
         <column_name>val_vbm</column_name>
@@ -1456,10 +1720,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <stream_name>rechal</stream_name>
       </field>
       <field>
-        <column_name>lot_num</column_name>
-        <stream_name>lot_num</stream_name>
-      </field>
-      <field>
         <column_name>exp_dt</column_name>
         <stream_name>exp_dt</stream_name>
       </field>
@@ -1482,6 +1742,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <field>
         <column_name>dose_freq</column_name>
         <stream_name>dose_freq</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1543,6 +1815,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <column_name>indi_pt</column_name>
         <stream_name>indi_pt</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1597,7 +1881,19 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       </field>
       <field>
         <column_name>outc_code</column_name>
-        <stream_name>outc_cod</stream_name>
+        <stream_name>outc_code</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1659,6 +1955,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <column_name>drug_rec_act</column_name>
         <stream_name>drug_rec_act</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1714,6 +2022,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
       <field>
         <column_name>rpsr_cod</column_name>
         <stream_name>rpsr_cod</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1787,6 +2107,18 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <column_name>dur_cod</column_name>
         <stream_name>dur_cod</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1851,7 +2183,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>outc_cod</name>
+        <name>outc_code</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1859,6 +2191,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <group>,</group>
         <length>2</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1931,13 +2296,46 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>38</length>
+        <length>40</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>drug_rec_act</name>
         <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2018,6 +2416,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <group>,</group>
         <length>3</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -2138,6 +2569,39 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2150,137 +2614,6 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
     <GUI>
       <xloc>112</xloc>
       <yloc>576</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
-    <file>
-      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>Y</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>704</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data grid - Stage_3_faers_domain has started</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>log_name</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-        <field_null_if/>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>Stage_3_faers_domain has started</item>
-      </line>
-      <line>
-        <item/>
-      </line>
-    </data>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>704</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get system info</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>0</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

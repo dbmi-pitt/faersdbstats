@@ -12,7 +12,7 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <size_limit_lines>5000</size_limit_lines>
@@ -126,7 +126,7 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <interval>1s</interval>
@@ -208,7 +208,7 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -274,7 +274,7 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -350,7 +350,7 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection>${DATABASE_NAME}</connection>
+        <connection>${DATABASE_LOG_NAME}</connection>
         <schema>${DATABASE_LOG_SCHEMA}</schema>
         <table>${DATABASE_LOG_TABLE}</table>
         <timeout_days>3.0</timeout_days>
@@ -457,7 +457,7 @@ ${BASE_FILE_DIR}/../logs/download_results.txt
 note:
 SIZE and STAT domain are not loaded by this transform
 </note>
-      <xloc>32</xloc>
+      <xloc>0</xloc>
       <yloc>0</yloc>
       <width>682</width>
       <heigth>367</heigth>
@@ -616,7 +616,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>160</xloc>
-      <yloc>944</yloc>
+      <yloc>1040</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -673,7 +673,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>432</xloc>
-      <yloc>944</yloc>
+      <yloc>1040</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -945,6 +945,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -956,7 +989,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>368</yloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1118,6 +1151,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1129,7 +1195,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1192,6 +1258,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1203,7 +1302,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>528</yloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1324,6 +1423,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>CONFID</column_name>
         <stream_name>CONFID</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1335,7 +1446,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>368</yloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1416,6 +1527,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>NDA_NUM</column_name>
         <stream_name>NDA_NUM</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1427,7 +1550,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1472,6 +1595,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>INDI_PT</column_name>
         <stream_name>INDI_PT</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1483,7 +1618,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>528</yloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1524,6 +1659,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>OUTC_COD</column_name>
         <stream_name>OUTC_COD</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1535,7 +1682,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>608</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1576,6 +1723,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>PT</column_name>
         <stream_name>PT</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1587,7 +1746,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>688</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1628,6 +1787,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>RPSR_COD</column_name>
         <stream_name>RPSR_COD</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1639,7 +1810,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>768</yloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1696,6 +1867,18 @@ SIZE and STAT domain are not loaded by this transform
         <column_name>DUR_COD</column_name>
         <stream_name>DUR_COD</stream_name>
       </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1707,7 +1890,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>848</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1759,6 +1942,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1770,7 +1986,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>608</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1822,6 +2038,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1833,7 +2082,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>688</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1885,6 +2134,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1896,7 +2178,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>768</yloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1992,6 +2274,39 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2003,7 +2318,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>848</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
