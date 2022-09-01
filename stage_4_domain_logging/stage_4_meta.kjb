@@ -306,7 +306,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>320</yloc>
+      <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -384,7 +384,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>768</yloc>
+      <yloc>976</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -423,7 +423,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>896</yloc>
+      <yloc>1104</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -462,7 +462,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1008</yloc>
+      <yloc>1216</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -501,7 +501,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1136</yloc>
+      <yloc>1344</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -540,7 +540,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1248</yloc>
+      <yloc>1456</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -579,7 +579,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1360</yloc>
+      <yloc>1568</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -660,17 +660,136 @@
       <yloc>528</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>log_math_4_laers_pentaho.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/log_math_4_laers_pentaho.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>752</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log_math_4_pentaho.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/log_math_4_pentaho.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>864</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log "STAGE 4 STARTED"</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "#######################################################" >> $log_location
+echo "################ Stage_4_meta has started #####################" >> $log_location
+echo "#######################################################" >> $log_location
+printf '\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log "STAGE 4 FINISHED"</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+printf '\n' >> $log_location
+echo "#######################################################" >> $log_location
+echo "################ Stage_4_meta COMPLETED #####################" >> $log_location
+echo "#######################################################" >> $log_location
+printf '\n' >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>1664</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
-    <hop>
-      <from>stage_4_faers_demo_log_qtrs.ktr</from>
-      <to>stage_4_faers_drug_log_qtrs.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>stage_4_faers_drug_log_qtrs.ktr</from>
       <to>stage_4_faers_indi_log_qtrs.ktr 2</to>
@@ -717,15 +836,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Start</from>
-      <to>stage_4_laers_domain_logging.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>stage_4_laers_domain_logging.ktr</from>
       <to>stage_4_faers_domain_logging.ktr</to>
       <from_nr>0</from_nr>
@@ -737,6 +847,60 @@
     <hop>
       <from>stage_4_faers_domain_logging.ktr</from>
       <to>stage_4_faers_demo_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_demo_log_qtrs.ktr</from>
+      <to>log_math_4_laers_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_math_4_laers_pentaho.sh</from>
+      <to>log_math_4_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_math_4_pentaho.sh</from>
+      <to>stage_4_faers_drug_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Start</from>
+      <to>Log "STAGE 4 STARTED"</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Log "STAGE 4 STARTED"</from>
+      <to>stage_4_laers_domain_logging.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_ther_log_qtrs.ktr 2</from>
+      <to>Log "STAGE 4 FINISHED"</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -824,6 +988,27 @@ ther</note>
       <xloc>272</xloc>
       <yloc>640</yloc>
       <width>216</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>&lt;- from here on they write to BASE_FILE_DIR/logs/LOG_FILENAME</note>
+      <xloc>272</xloc>
+      <yloc>752</yloc>
+      <width>448</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
