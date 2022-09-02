@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_6_sql_counts_trans_comp_2_of_3</name>
+    <name>stage_6_sql_counts_trans_comp</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -453,7 +453,7 @@ if LOAD_NEW...
   stage_3_faers
   stage_4_faers
 stage_5...
-stage_6_sql_counts_trans_1_of_3.ktr
+stage_6_sql_counts_trans.ktr
 
 for logging...
 
@@ -799,7 +799,7 @@ STANDARD_CASE_DRUG_ROW_COUNT</note>
     </fields>
     <data>
       <line>
-        <item>Stage_6_sql_counts_trans_comp_2_of_3 has started</item>
+        <item>Stage_6_sql_counts_trans_comp has started</item>
       </line>
       <line>
         <item/>

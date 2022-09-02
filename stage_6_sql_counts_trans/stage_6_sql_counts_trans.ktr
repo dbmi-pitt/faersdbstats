@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_6_sql_counts_trans_1_of_3</name>
+    <name>stage_6_sql_counts_trans
     <description/>
     <extended_description/>
     <trans_version/>
@@ -659,7 +659,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data grid - Stage_6_sql_counts_trans_1_of_3 has started</from>
+      <from>Data grid - Stage_6_sql_counts_transarted</from>
       <to>Text file output - Log output</to>
       <enabled>Y</enabled>
     </hop>
@@ -830,7 +830,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </hop>
   </order>
   <step>
-    <name>Data grid - Stage_6_sql_counts_trans_1_of_3 has started</name>
+    <name>Data grid - Stage_6_sql_counts_transarted</name>
     <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
@@ -856,7 +856,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </fields>
     <data>
       <line>
-        <item>Stage_6_sql_counts_trans_1_of_3 has started</item>
+        <item>Stage_6_sql_counts_transarted</item>
       </line>
       <line>
         <item/>

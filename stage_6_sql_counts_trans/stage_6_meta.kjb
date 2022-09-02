@@ -407,13 +407,13 @@ fi</script>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_trans.ktr 2</name>
+      <name>stage_6_sql_counts_trans_comp.ktr</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans_comp.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -467,7 +467,7 @@ fi</script>
     </hop>
     <hop>
       <from>stage_6_sql_counts_trans.ktr</from>
-      <to>stage_6_sql_counts_trans.ktr 2</to>
+      <to>stage_6_sql_counts_trans_comp.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -475,7 +475,7 @@ fi</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_6_sql_counts_trans.ktr 2</from>
+      <from>stage_6_sql_counts_trans_comp.ktr</from>
       <to>stage_6_sql_counts_log_script.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -499,14 +499,15 @@ stage_5_sqls
 about each step
 
  - Check for stage_4 vars (just demo counts) - checks to see if stage_4 ...faers and ...laers have been run
-
+ - stage_6_sql_counts_trans.ktr - gets counts for derived data tables and puts into pentaho variables
+ - stage_6_sql_counts_trans_comp.ktr - gets counts derived data tables from comparison database and puts into pentaho variables
  - stage_6_sql_counts_log_script.sh - outputs counts to log
 
 </note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>685</width>
-      <heigth>297</heigth>
+      <width>882</width>
+      <heigth>314</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

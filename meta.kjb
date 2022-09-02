@@ -675,13 +675,13 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans_1_of_3 transformation</name>
+      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_trans_1_of_3.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_transilename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -714,13 +714,13 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp_2_of_3  transformation</name>
+      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp  transformation</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp_2_of_3.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -753,13 +753,13 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_3_of_3 job</name>
+      <name>stage_6_sql_counts job</name>
       <description/>
       <type>JOB</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_3_of_3.kjb</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -910,8 +910,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans_1_of_3 transformation</from>
-      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp_2_of_3  transformation</to>
+      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans>
+      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp  transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -919,8 +919,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp_2_of_3  transformation</from>
-      <to>stage_6_sql_counts_3_of_3 job</to>
+      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp  transformation</from>
+      <to>stage_6_sql_counts job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -928,7 +928,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_6_sql_counts_3_of_3 job</from>
+      <from>stage_6_sql_counts job</from>
       <to>stage_7_db_maintenance</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -938,7 +938,7 @@
     </hop>
     <hop>
       <from>stage_5_sqls</from>
-      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans_1_of_3 transformation</to>
+      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

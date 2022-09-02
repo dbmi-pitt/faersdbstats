@@ -7,7 +7,7 @@ log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 echo $log_location
 printf '\n' >> $log_location
 printf '\n' >> $log_location
-echo "Stage_6_sql_counts_3_of_3 has started" >> $log_location
+echo "Stage_6_sql_counts has started" >> $log_location
 printf '\n' >> $log_location
 
 echo 'DEMO' >> $log_location
