@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>stage_6_sql_counts_3_of_3</name>
+  <name>stage_6_meta</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -310,11 +310,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_log_3_of_3_script.sh</name>
+      <name>stage_6_sql_counts_log_script.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_6_sql_counts_trans/stage_6_sql_counts_log_3_of_3_script.sh</filename>
+      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_6_sql_counts_trans/stage_6_sql_counts_log_script.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -330,8 +330,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>496</xloc>
-      <yloc>624</yloc>
+      <xloc>400</xloc>
+      <yloc>576</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -363,8 +363,86 @@ fi</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>512</yloc>
+      <xloc>256</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_6_sql_counts_trans.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>528</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_6_sql_counts_trans.ktr 2</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>576</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -380,7 +458,25 @@ fi</script>
     </hop>
     <hop>
       <from>Check for stage_4 vars (just demo counts)</from>
-      <to>stage_6_sql_counts_log_3_of_3_script.sh</to>
+      <to>stage_6_sql_counts_trans.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_6_sql_counts_trans.ktr</from>
+      <to>stage_6_sql_counts_trans.ktr 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_6_sql_counts_trans.ktr 2</from>
+      <to>stage_6_sql_counts_log_script.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -397,23 +493,20 @@ stage_2 then...
 stage_3_domain_transform
 and
 stage_3_domain_transform (if data from 2012 Q3 or older)
-stage_4_faers_domain_logging
-stage_4_laers_domain_logging
+stage_4_meta
 stage_5_sqls
-stage_6... (1 of 3) aka stage_6_sql_counts_trans_1_of_3.ktr
-stage_6... (2 of 3) aka stage_6_sql_counts_trans_comp_1_of_3.ktr
 
 about each step
 
  - Check for stage_4 vars (just demo counts) - checks to see if stage_4 ...faers and ...laers have been run
 
- - stage_6_sql_counts_log_3_of_3_script.sh - outputs counts to log
+ - stage_6_sql_counts_log_script.sh - outputs counts to log
 
 </note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>686</width>
-      <heigth>350</heigth>
+      <width>685</width>
+      <heigth>297</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
