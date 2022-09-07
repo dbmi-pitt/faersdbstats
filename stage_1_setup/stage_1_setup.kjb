@@ -552,7 +552,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>
-          <variable_name>FILE_DIR</variable_name>
+          <variable_name>BASE_FILE_DIR</variable_name>
           <variable_value>${BASE_FILE_DIR}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
@@ -750,7 +750,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>624</xloc>
-      <yloc>944</yloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -944,6 +944,34 @@ printf '\n\n' >> $log_location</script>
       <yloc>1344</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Log FDA Download Success</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo "FDA Download success... ${BASE_FILE_DIR}/data_new " >> $log_location
+echo "Will attempt to upload LOAD_NEW_QUARTER's data" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>624</xloc>
+      <yloc>912</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1003,15 +1031,6 @@ printf '\n\n' >> $log_location</script>
     <hop>
       <from>nda</from>
       <to>eu_drug_name_active_ingredient_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>download_new_quarter_from_fda.sh</from>
-      <to>upload_new_quarter_from_fda.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1120,6 +1139,24 @@ printf '\n\n' >> $log_location</script>
     <hop>
       <from>create_drug_usagi_mapping_table.sql</from>
       <to>Log STAGE 1 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log FDA Download Success</from>
+      <to>upload_new_quarter_from_fda.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>download_new_quarter_from_fda.sh</from>
+      <to>Log FDA Download Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
