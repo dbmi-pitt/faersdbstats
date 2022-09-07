@@ -67,11 +67,11 @@ echo DATABASE_LOG_TABLE is ${DATABASE_LOG_TABLE} >> $log_location
 echo DATABASE_LOG_NAME is ${DATABASE_LOG_NAME} >> $log_location
 echo DATABASE_LOG_SCHEMA is ${DATABASE_LOG_SCHEMA} >> $log_location
 echo "#################### COMPARISON ##########################" >> $log_location
-echo DATABASE_HOST is ${DATABASE_COMPARISON_HOST} >> $log_location
-echo DATABASE_PORT is ${DATABASE_COMPARISON_PORT} >> $log_location
-echo DATABASE_SCHEMA is ${DATABASE_COMPARISON_SCHEMA} >> $log_location
-echo DATABASE_NAME is ${DATABASE_COMPARISON_NAME} >> $log_location
-echo DATABASE_USERNAME is ${DATABASE_COMPARISON_USERNAME} >> $log_location
+echo DATABASE_COMPARISON_HOST is ${DATABASE_COMPARISON_HOST} >> $log_location
+echo DATABASE_COMPARISON_PORT is ${DATABASE_COMPARISON_PORT} >> $log_location
+echo DATABASE_COMPARISON_SCHEMA is ${DATABASE_COMPARISON_SCHEMA} >> $log_location
+echo DATABASE_COMPARISON_NAME is ${DATABASE_COMPARISON_NAME} >> $log_location
+echo DATABASE_COMPARISON_USERNAME is ${DATABASE_COMPARISON_USERNAME} >> $log_location
 
 # I don't think this is used
 # DATABASE_PASSWORD} >> $log_location
