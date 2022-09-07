@@ -675,13 +675,13 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans
+      <name>stage_6_sql_counts_trans/stage_6_sql_counts_trans</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_transilename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_transilename></filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -910,7 +910,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans>
+      <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans</from>
       <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp  transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -938,7 +938,7 @@
     </hop>
     <hop>
       <from>stage_5_sqls</from>
-      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans
+      <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -973,7 +973,7 @@ This job's not intended to be run.
 It is intended to provide as a conceptual overview for those familiar w/ pentaho.
 
 Preq's
-- AWS S3
+- AWS S3 
 - Postgres
 - a database connection established within Pentaho (edit > show used environment variables... define host, db, user, pw)
 - a properly configured faers_config.config file
