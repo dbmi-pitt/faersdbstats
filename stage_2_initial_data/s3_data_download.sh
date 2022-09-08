@@ -55,7 +55,7 @@ fi
 
 
 if [ "${LOAD_ALL_TIME}" = 1 ]; then
-
+mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
     #download s3://..data to local/data_from_s3
     echo LOAD_ALL_TIME is 1
     
@@ -140,13 +140,26 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                             tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
                             #replace first occurence of $thefilenamedata
                             # sed -i "0,/$thefilenamedata/{s/$thefilenamedata//}" $domain.txt
+                            #create domain log file in ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
+                                    echo $thefilename > ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    # printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    #add header line to file
+                                    echo $header >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    sed -n '2p' < "${name::-4}"_staged_with_lfs_only.txt >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
                         else
                             echo 'head is not empty so grabbing from line 2 on'
                             
                             #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename
                             tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
                             #        ^ output starting at line #2
+                            echo "${name::-4}"_staged_with_lfs_only.txt >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                            echo ' '
+                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                                    tail -2 "${name::-4}"_staged_with_lfs_only.txt>> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                                    printf "\n\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                         fi #end if [ $headempty = 0 ]; then
+                                    echo ' '
                     else
                         echo 'name is short '$name
                                 echo $domain
@@ -198,16 +211,33 @@ else #not LOAD_ALL_DATA
 #     for laers_or_faers in faers laers; do
         echo laers_or_faers is $laers_or_faers;
         # cd $laers_or_faers;
-    for laers_or_faers_dir in faers laers; do
-        echo laers_or_faers_dir is $laers_or_faers_dir;
+    # for laers_or_faers_dir in faers; do
+        # echo laers_or_faers_dir is $laers_or_faers_dir;
         echo laers_or_faers is $laers_or_faers;
-        cd $laers_or_faers_dir;
+        # cd $laers_or_faers_dir;
+        cd $laers_or_faers
         echo just cd-ed into `pwd`
+
+        #housekeeping
+                    #blow out old staged files
+                    for file in ./**/*_staged_with_lfs_only.txt; do
+                        echo 'about to rm '"$file"
+                        rm $file
+                    done;
+
+                    #blow out old staged files
+                    for file in ./**/*_new_qtr.txt; do
+                        echo 'about to rm '"$file"
+                        rm $file
+                    done;
 
         for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
         
             echo '$domain is ' $domain
             
+            domain_level=${BASE_FILE_DIR}/data_from_s3/$faers_or_laers${domain}
+            echo 'just made domain_level='${domain_level}
+
             s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$laers_or_faers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
             
             echo 'about to check if new source data is there; setting state = aws s3 ls of '$s3_bucket_source_path
@@ -229,24 +259,24 @@ else #not LOAD_ALL_DATA
                     # cd "$laers_or_faers/$domain"
 
                     #note ** requires shopt globstar
-                    #blow out old staged files
-                    for file in ./**/*_staged_with_lfs_only.txt; do
-                        echo 'about to rm '"$file"
-                        rm $file
-                    done;
+
+
+                    echo about to cd into $domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
+                    cd $domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
 
                     echo 'pwd for to search for ./**/.txt from is '`pwd`
                     echo 'about to loop for name in ./**/*.txt; do'
 
-                    cd $domain
+                    # cd $domain
                     #loop through all .txt files in domain folder
                     for name in ./**/*.txt; do
                         #substring expansion is thrown off by thefilename is 18Q1_new.txt name is ./2018/Q1/DEMO18Q1_new.txt
                         #to do make thefilename everything after the 3rd "/" #done was ${name: -12}
+                        echo 'inside the for name loop pwd is '`pwd`
                         echo the name is $name
-                        thefilename=${name: 10}
-                        year='$'${name: 4:2}
-                        qtr='$'${name: 8:1}
+                        thefilename=${name: 2}
+                        year='$'${name: 6:2}
+                        qtr='$'${name: 9:1}
                         thefilenamedata='$'"${thefilename}""$year""$qtr"
                         echo 'thefilename is '$thefilename;
                         echo 'qtr is '$qtr;
@@ -277,7 +307,9 @@ else #not LOAD_ALL_DATA
                                     #add year and quarter
                                     header+=\$yr\$qtr
 
-                                    echo $header > ${domain}.txt                            
+
+                                    echo ../../${domain}_new_qtr.txt
+                                    echo $header > ../../${domain}_new_qtr.txt
                                     echo "${domain}.txt" is the domain.txt
 
                                     #this was need for some domains leaving here just in case
@@ -286,30 +318,30 @@ else #not LOAD_ALL_DATA
 
                                     headempty=1 &&
                                     #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename                    
-                                    tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
+                                    tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> ../../${domain}_new_qtr.txt
                                     #replace first occurence of $thefilenamedata
                                     # sed -i "0,/$thefilenamedata/{s/$thefilenamedata//}" $domain.txt
 
                                     #create domain log file in ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
-                                    echo $thefilename > ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    echo $thefilename > ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                                     # printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
                                     #add header line to file
-                                    echo $header >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
-                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    echo $header >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                                     #add 2nd line of 1st file that creates
-                                    sed -n '2p' < "${name::-4}"_staged_with_lfs_only.txt >> ${domain.txt}
+                                    sed -n '2p' < "${name::-4}"_staged_with_lfs_only.txt >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                                 else
                                     echo 'head is not empty so grabbing from line 2 on'
                                     
                                     #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename
-                                    tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> $domain.txt
+                                    tail -n +2 --quiet "${name::-4}"_staged_with_lfs_only.txt >> ../../${domain}_new_qtr.txt
                                     #        ^ output starting at line #2
 
-                                    echo "${name::-4}"_staged_with_lfs_only.txt >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    echo "${name::-4}"_staged_with_lfs_only.txt >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                                     echo ' '
-                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
-                                    tail -2 "${name::-4}"_staged_with_lfs_only.txt>> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
-                                    printf "\n\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
+                                    printf "\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                                    tail -2 "${name::-4}"_staged_with_lfs_only.txt>> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
+                                    printf "\n\n" >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}_new_qtr.txt
                                 fi #end if [ $headempty = 0 ]; then
                                     echo ' '
                             else
@@ -340,17 +372,21 @@ else #not LOAD_ALL_DATA
         #echo '$curdir is '$curdir
 
         echo ' '
-        echo 'here is the first 10 lines of ' ${domain}.txt
-        head ${domain}.txt
+        echo 'here is the first 10 lines of ' ../../${domain}_new_qtr.txt
+        head ../../${domain}_new_qtr.txt
         echo ' '
 
-        echo 'about to cd up one level'
+        echo 'about to cd up 3 levels'
         #cd out out of domain and into laers_or_faers
-        cd ..
-        #break 60
+        cd ../../../
+        echo pwd after up 3 levels is `pwd`
+        echo ' '
+        echo ' '
+        echo ' '
+        # break 60
     done; #end for domain in /data/; do
     cd $data_from_s3_root_above_laers_or_faers;
-  done; #end for laers faers; do
+#   done; #end for laers faers; do
 fi #end if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
 echo "s3_data_download.sh done data should be located in " ${BASE_FILE_DIR}"/data_from_s3/" >> $log_location
