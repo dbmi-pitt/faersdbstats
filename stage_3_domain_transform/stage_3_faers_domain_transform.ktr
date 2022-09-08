@@ -657,33 +657,6 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     </GUI>
   </step>
   <step>
-    <name>Null if</name>
-    <type>NullIf</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
