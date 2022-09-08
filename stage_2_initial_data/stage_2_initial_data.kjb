@@ -798,7 +798,7 @@ WHERE z.ROW_NUM = 1;
       <file_variable_type>JVM</file_variable_type>
       <fields>
         <field>
-          <variable_name>FILE_DIR</variable_name>
+          <variable_name>BASE_FILE_DIR</variable_name>
           <variable_value>${BASE_FILE_DIR}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
@@ -1091,7 +1091,7 @@ Logging is blank
 -work around view job metrics and terminal window that launched ./spoon.sh</note>
       <xloc>16</xloc>
       <yloc>0</yloc>
-      <width>1343</width>
+      <width>1349</width>
       <heigth>486</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
