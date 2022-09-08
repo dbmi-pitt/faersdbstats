@@ -31,19 +31,23 @@ shopt -s globstar
 #for entire year 
 # for file in ./2014/**/*.txt; do
 
-for name in ./2012/**/*staged_with_lfs_only.txt; do
+for name in ./2012/**/*Q4.txt; do
     echo 'name is' $name
     cp $name ${name:0:12}_bak.txt
     #replace 5th $ with $$ put into *.txt (chopping off name's .txt w/ -4)
     # sed 's/\$/\$\$/5' $name > "${name::-4}".txt
 
     #delete column 3
-    cut --complement -d' ' -f3 rpsr.txt
+    # cut --complement -d' ' -f3 rpsr.txt
 
-    sed -i 's/\$/\$\$/3' $name
+    tr -d '\015' <$name >"${name}"_staged_with_lfs_only.txt
+
+    # sed -i 's/\$/\$\$/3' $name
    #           \      \
    # escaped $ n $$    replace 3rd one
- 
+   
+    sed 's/$/$\$/' <${name}_staged_with_lfs_only.txt > $name
+
  
     #build out header (1st line of txt file)
     # header="$(head -1 --quiet "${name::-4}".txt)"
@@ -59,6 +63,12 @@ for name in ./2012/**/*staged_with_lfs_only.txt; do
 
     #make a sm.txt file that has only 20 lines to check results
     sed '20,$ d' $name > "${name:0:10}"sm.txt
+
+    head ../../reac.txt
+    head REAC12Q4.txt
+
+    echo '... if results are what you are after comment out the aws s3 download and/or cp and/or sync and re-run ./s3_data_download.sh to rebuilt reac.txt'
+    echo 'you might also like to limit the for domain loop to just reac'
 done;
 
 
