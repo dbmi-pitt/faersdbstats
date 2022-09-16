@@ -969,7 +969,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1175,7 +1175,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1282,7 +1282,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1966,7 +1966,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2062,7 +2062,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2298,7 +2298,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
