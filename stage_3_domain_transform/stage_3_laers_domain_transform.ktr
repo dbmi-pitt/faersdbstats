@@ -476,6 +476,30 @@ SIZE and STAT domain are not loaded by this transform
       <bordercolorblue>100</bordercolorblue>
       <drawshadow>Y</drawshadow>
     </notepad>
+    <notepad>
+      <note>&lt;inserts into varchar db fields "year_var" and "qtr_var"
+
+could possibly add insert/update step to insert into db int fields or just use Postgres
+</note>
+      <xloc>432</xloc>
+      <yloc>464</yloc>
+      <width>571</width>
+      <heigth>77</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>${DATABASE_NAME}</name>
@@ -530,43 +554,58 @@ SIZE and STAT domain are not loaded by this transform
   </connection>
   <order>
     <hop>
-      <from>demo - CSV file input</from>
-      <to>load_in_demo_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>drug - CSV file input</from>
       <to>load_in_drug_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>indi - CSV file input</from>
       <to>load_in_indi_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>outc - CSV file input</from>
       <to>load_in_outc_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>reac - CSV file input</from>
       <to>load_in_reac_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>rpsr - CSV file input</from>
       <to>load_in_rpsr_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>ther - CSV file input</from>
       <to>load_in_ther_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Data grid - Stage_3_laers_domain has started</from>
       <to>Text file output - Log output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>demo - CSV file input</from>
+      <to>Filter rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>load_in_demo_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>log laers_demo_import_failed_lines</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>log laers_demo_import_failed_lines</from>
+      <to>Abort if 100 lines have failed</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -621,6 +660,472 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_demo_table</send_true_to>
+    <send_false_to>log laers_demo_import_failed_lines</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>log laers_demo_import_failed_lines</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>$</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_demo_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CASE</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>I_F_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FOLL_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>IMAGE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>9</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EVENT_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>MFR_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FDA_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>REPT_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>3</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>MFR_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>28</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>MFR_SNDR</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>30</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>AGE</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>AGE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GNDR_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>3</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>E_SUB</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>WT</name>
+        <type>String</type>
+        <format>#.#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>5</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>WT_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>3</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>REPT_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>OCCP_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DEATH_DT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>TO_MFR</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CONFID</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>REPORTER_COUNTRY</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>year</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Text file output - Log output</name>
     <type>TextFileOutput</type>
     <description/>
@@ -639,7 +1144,7 @@ SIZE and STAT domain are not loaded by this transform
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -809,7 +1314,7 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>28</length>
+        <length>39</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -820,7 +1325,7 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>30</length>
+        <length>49</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -842,7 +1347,7 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -853,7 +1358,7 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
+        <length>1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -875,8 +1380,8 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
-        <precision>1</precision>
+        <length>6</length>
+        <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -946,6 +1451,17 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
+        <name>REPORTER_COUNTRY</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>20</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
         <name>filename</name>
         <type>String</type>
         <format/>
@@ -957,24 +1473,24 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>yr</name>
-        <type>Integer</type>
-        <format/>
+        <name>year</name>
+        <type>String</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
-        <format/>
+        <type>String</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
+        <length>1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1424,15 +1940,19 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>CONFID</stream_name>
       </field>
       <field>
+        <column_name>REPORTER_COUNTRY</column_name>
+        <stream_name>REPORTER_COUNTRY</stream_name>
+      </field>
+      <field>
         <column_name>filename</column_name>
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
+        <column_name>yr_var</column_name>
+        <stream_name>year</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -2319,6 +2839,35 @@ SIZE and STAT domain are not loaded by this transform
     <GUI>
       <xloc>80</xloc>
       <yloc>944</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
