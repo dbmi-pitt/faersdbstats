@@ -636,6 +636,11 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
           <variable_value>${LOG_LOCATION}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>DATABASE_BACKUP_LOCATION</variable_name>
+          <variable_value>${DATABASE_BACKUP_LOCATION}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -1000,6 +1005,37 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>rundate=$(date "+%m%d%Y")
+#looks nice if your ${LOG_FILENAME_ROOT} is something like "LOG-Sept-2022-load"
+#pg_dump -d ${DATABASE_NAME} -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -W ${DATABASE_PASSWORD} > ${DATABASE_BACKUP_LOCATION}/${LOG_FILENAME_ROOT: 4}_${rundate}.dump
+# '/usr/bin/postgresql/10/bin/pg_dump' –U rw_grp cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09122022.dump
+# pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09132022.dump
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} "user=${DATABASE_USER} dbname=${DATABASE_NAME} password=\'${DATABASE_PASSWORD}\'" 
+pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09192022.dump</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>336</xloc>
+      <yloc>608</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1068,15 +1104,6 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     <hop>
       <from>create_schemas.sh</from>
       <to>SUCCESS IF LOAD_ALL_TIME=1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set AWS Credentials</from>
-      <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1197,6 +1224,24 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set AWS Credentials</from>
+      <to>Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Shell</from>
+      <to>Wait for 3s</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
