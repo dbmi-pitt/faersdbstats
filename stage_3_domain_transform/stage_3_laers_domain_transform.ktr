@@ -554,36 +554,6 @@ could possibly add insert/update step to insert into db int fields or just use P
   </connection>
   <order>
     <hop>
-      <from>drug - CSV file input</from>
-      <to>load_in_drug_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>indi - CSV file input</from>
-      <to>load_in_indi_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>outc - CSV file input</from>
-      <to>load_in_outc_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>reac - CSV file input</from>
-      <to>load_in_reac_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>rpsr - CSV file input</from>
-      <to>load_in_rpsr_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>ther - CSV file input</from>
-      <to>load_in_ther_table</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Data grid - Stage_3_laers_domain has started</from>
       <to>Text file output - Log output</to>
       <enabled>Y</enabled>
@@ -591,24 +561,318 @@ could possibly add insert/update step to insert into db int fields or just use P
     <hop>
       <from>demo - CSV file input</from>
       <to>Filter rows</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>load_in_demo_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>log laers_demo_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log laers_demo_import_failed_lines</from>
       <to>Abort if 100 lines have failed</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>drug - CSV file input</from>
+      <to>Filter rows - Is qtr 1, 2, 3 or 4?</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is qtr 1, 2, 3 or 4?</from>
+      <to>load_in_drug_table</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_drug_import_failed_lines</from>
+      <to>Abort if 100 lines have failed from drug</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is qtr 1, 2, 3 or 4?</from>
+      <to>log laers_drug_import_failed_lines</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>indi - CSV file input</from>
+      <to>Filter rows - Is indi qtr 1, 2, 3 or 4?</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
+      <to>load_in_indi_table</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_indi_import_failed_lines</from>
+      <to>Abort if 100 lines have failed from indi.txt</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
+      <to>log laers_indi_import_failed_lines</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_outc_import_failed_lines</from>
+      <to>Abort if 100 lines have failed from outc</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is outc qtr 1, 2, 3 or 4?</from>
+      <to>load_in_outc_table</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is outc qtr 1, 2, 3 or 4?</from>
+      <to>log laers_outc_import_failed_lines</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>outc - CSV file input</from>
+      <to>Filter rows - Is outc qtr 1, 2, 3 or 4?</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_outc_import_failed_lines 2</from>
+      <to>Abort if 100 lines have failed from reac</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>reac - CSV file input</from>
+      <to>Filter rows - Is reac qtr 1, 2, 3 or 4?</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4?</from>
+      <to>load_in_reac_table</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4?</from>
+      <to>log laers_outc_import_failed_lines 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_outc_import_failed_lines 2 2</from>
+      <to>Abort if 100 lines have failed from reac 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>rpsr - CSV file input</from>
+      <to>Filter rows - Is reac qtr 1, 2, 3 or 4? 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4? 2</from>
+      <to>load_in_rpsr_table</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4? 2</from>
+      <to>log laers_outc_import_failed_lines 2 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>log laers_outc_import_failed_lines 2 2 2</from>
+      <to>Abort if 100 lines have failed from reac 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ther - CSV file input</from>
+      <to>Filter rows - Is reac qtr 1, 2, 3 or 4? 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4? 2 2</from>
+      <to>load_in_ther_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows - Is reac qtr 1, 2, 3 or 4? 2 2</from>
+      <to>log laers_outc_import_failed_lines 2 2 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Abort if 100 lines have failed</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed from drug</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>768</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed from indi.txt</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>960</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed from outc</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>1152</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed from reac</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>1344</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Abort if 100 lines have failed from reac 2</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>100</row_threshold>
+    <message>STOPPING MORE THAN 100 FAILED</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_option>ABORT</abort_option>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>1552</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Data grid - Stage_3_laers_domain has started</name>
     <type>DataGrid</type>
@@ -654,8 +918,8 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>1040</yloc>
+      <xloc>144</xloc>
+      <yloc>1952</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -751,8 +1015,1782 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>416</yloc>
+      <xloc>96</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is indi qtr 1, 2, 3 or 4?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_indi_table</send_true_to>
+    <send_false_to>log laers_indi_import_failed_lines</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>960</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is outc qtr 1, 2, 3 or 4?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_outc_table</send_true_to>
+    <send_false_to>log laers_outc_import_failed_lines</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>1152</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is qtr 1, 2, 3 or 4?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_drug_table</send_true_to>
+    <send_false_to>log laers_drug_import_failed_lines</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>768</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is reac qtr 1, 2, 3 or 4?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_reac_table</send_true_to>
+    <send_false_to>log laers_outc_import_failed_lines 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>1344</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is reac qtr 1, 2, 3 or 4? 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_rpsr_table</send_true_to>
+    <send_false_to>log laers_outc_import_failed_lines 2 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>1552</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output - Log output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>1952</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>demo - CSV file input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/demo/demo.txt</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>$</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CASE</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>I_F_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FOLL_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>IMAGE</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>9</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EVENT_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MFR_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FDA_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>REPT_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MFR_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>39</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MFR_SNDR</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>49</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AGE</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>AGE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>GNDR_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>E_SUB</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>WT</name>
+        <type>String</type>
+        <format>#.#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
+        <precision>2</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>WT_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>REPT_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>OCCP_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DEATH_DT</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>TO_MFR</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CONFID</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>REPORTER_COUNTRY</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>20</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>year</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>drug - CSV file input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/drug/drug.txt</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>$</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ROLE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>70</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>25</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>8</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>indi - CSV file input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/indi/indi.txt</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>$</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>INDI_PT</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>37</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>880</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_demo_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>demo_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>CASE</column_name>
+        <stream_name>CASE</stream_name>
+      </field>
+      <field>
+        <column_name>I_F_COD</column_name>
+        <stream_name>I_F_COD</stream_name>
+      </field>
+      <field>
+        <column_name>FOLL_SEQ</column_name>
+        <stream_name>FOLL_SEQ</stream_name>
+      </field>
+      <field>
+        <column_name>IMAGE</column_name>
+        <stream_name>IMAGE</stream_name>
+      </field>
+      <field>
+        <column_name>EVENT_DT</column_name>
+        <stream_name>EVENT_DT</stream_name>
+      </field>
+      <field>
+        <column_name>MFR_DT</column_name>
+        <stream_name>MFR_DT</stream_name>
+      </field>
+      <field>
+        <column_name>FDA_DT</column_name>
+        <stream_name>FDA_DT</stream_name>
+      </field>
+      <field>
+        <column_name>REPT_COD</column_name>
+        <stream_name>REPT_COD</stream_name>
+      </field>
+      <field>
+        <column_name>MFR_NUM</column_name>
+        <stream_name>MFR_NUM</stream_name>
+      </field>
+      <field>
+        <column_name>MFR_SNDR</column_name>
+        <stream_name>MFR_SNDR</stream_name>
+      </field>
+      <field>
+        <column_name>AGE</column_name>
+        <stream_name>AGE</stream_name>
+      </field>
+      <field>
+        <column_name>AGE_COD</column_name>
+        <stream_name>AGE_COD</stream_name>
+      </field>
+      <field>
+        <column_name>GNDR_COD</column_name>
+        <stream_name>GNDR_COD</stream_name>
+      </field>
+      <field>
+        <column_name>E_SUB</column_name>
+        <stream_name>E_SUB</stream_name>
+      </field>
+      <field>
+        <column_name>WT</column_name>
+        <stream_name>WT</stream_name>
+      </field>
+      <field>
+        <column_name>WT_COD</column_name>
+        <stream_name>WT_COD</stream_name>
+      </field>
+      <field>
+        <column_name>REPT_DT</column_name>
+        <stream_name>REPT_DT</stream_name>
+      </field>
+      <field>
+        <column_name>OCCP_COD</column_name>
+        <stream_name>OCCP_COD</stream_name>
+      </field>
+      <field>
+        <column_name>DEATH_DT</column_name>
+        <stream_name>DEATH_DT</stream_name>
+      </field>
+      <field>
+        <column_name>TO_MFR</column_name>
+        <stream_name>TO_MFR</stream_name>
+      </field>
+      <field>
+        <column_name>CONFID</column_name>
+        <stream_name>CONFID</stream_name>
+      </field>
+      <field>
+        <column_name>REPORTER_COUNTRY</column_name>
+        <stream_name>REPORTER_COUNTRY</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>year</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_drug_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>drug_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
+      </field>
+      <field>
+        <column_name>ROLE_COD</column_name>
+        <stream_name>ROLE_COD</stream_name>
+      </field>
+      <field>
+        <column_name>DRUGNAME</column_name>
+        <stream_name>DRUGNAME</stream_name>
+      </field>
+      <field>
+        <column_name>VAL_VBM</column_name>
+        <stream_name>VAL_VBM</stream_name>
+      </field>
+      <field>
+        <column_name>ROUTE</column_name>
+        <stream_name>ROUTE</stream_name>
+      </field>
+      <field>
+        <column_name>DOSE_VBM</column_name>
+        <stream_name>DOSE_VBM</stream_name>
+      </field>
+      <field>
+        <column_name>DECHAL</column_name>
+        <stream_name>DECHAL</stream_name>
+      </field>
+      <field>
+        <column_name>RECHAL</column_name>
+        <stream_name>RECHAL</stream_name>
+      </field>
+      <field>
+        <column_name>LOT_NUM</column_name>
+        <stream_name>LOT_NUM</stream_name>
+      </field>
+      <field>
+        <column_name>EXP_DT</column_name>
+        <stream_name>EXP_DT</stream_name>
+      </field>
+      <field>
+        <column_name>NDA_NUM</column_name>
+        <stream_name>NDA_NUM</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_indi_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>faers</schema>
+    <table>indi_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
+      </field>
+      <field>
+        <column_name>INDI_PT</column_name>
+        <stream_name>INDI_PT</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>880</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_outc_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>outc_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>OUTC_COD</column_name>
+        <stream_name>OUTC_COD</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>1072</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_reac_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>reac_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>PT</column_name>
+        <stream_name>PT</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>1248</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_rpsr_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>rpsr_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>RPSR_COD</column_name>
+        <stream_name>RPSR_COD</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_ther_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>ther_legacy</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>ISR</column_name>
+        <stream_name>ISR</stream_name>
+      </field>
+      <field>
+        <column_name>DRUG_SEQ</column_name>
+        <stream_name>DRUG_SEQ</stream_name>
+      </field>
+      <field>
+        <column_name>START_DT</column_name>
+        <stream_name>START_DT</stream_name>
+      </field>
+      <field>
+        <column_name>END_DT</column_name>
+        <stream_name>END_DT</stream_name>
+      </field>
+      <field>
+        <column_name>DUR</column_name>
+        <stream_name>DUR</stream_name>
+      </field>
+      <field>
+        <column_name>DUR_COD</column_name>
+        <stream_name>DUR_COD</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>yr_var</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+      <field>
+        <column_name>qtr_var</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>1680</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1120,13 +3158,13 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>384</yloc>
+      <xloc>336</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output - Log output</name>
+    <name>log laers_drug_import_failed_lines</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1136,25 +3174,25 @@ could possibly add insert/update step to insert into db int fields or just use P
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator/>
+    <separator>$</separator>
     <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
-    <format>DOS</format>
+    <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine/>
+    <endedLine> </endedLine>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
+    <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <name>${BASE_FILE_DIR}/logs/laers_drug_import_failed_lines</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -1163,542 +3201,189 @@ could possibly add insert/update step to insert into db int fields or just use P
       <date_time_format/>
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
     </file>
     <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>1040</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>demo - CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/laers/demo/demo.txt</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>$</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
       <field>
         <name>ISR</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CASE</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>I_F_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>FOLL_SEQ</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>IMAGE</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>9</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EVENT_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MFR_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>FDA_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>REPT_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MFR_NUM</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>39</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MFR_SNDR</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>49</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>AGE</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>AGE_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>GNDR_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>E_SUB</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>WT</name>
-        <type>String</type>
-        <format>#.#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>6</length>
-        <precision>2</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>WT_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>REPT_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>OCCP_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DEATH_DT</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>TO_MFR</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CONFID</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>REPORTER_COUNTRY</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>20</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>filename</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>year</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>qtr</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>464</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>drug - CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/laers/drug/drug.txt</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>$</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>ISR</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>DRUG_SEQ</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>ROLE_COD</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>2</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>DRUGNAME</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>70</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>VAL_VBM</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>ROUTE</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>24</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>DOSE_VBM</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>95</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>DECHAL</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>RECHAL</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>LOT_NUM</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>16</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>EXP_DT</name>
         <type>String</type>
         <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>NDA_NUM</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>filename</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>12</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
     </fields>
     <attributes/>
@@ -1710,14 +3395,14 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>544</yloc>
+      <xloc>336</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>indi - CSV file input</name>
-    <type>CsvInput</type>
+    <name>log laers_indi_import_failed_lines</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1726,86 +3411,216 @@ could possibly add insert/update step to insert into db int fields or just use P
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/laers/indi/indi.txt</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
     <separator>$</separator>
-    <enclosure>"</enclosure>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_indi_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
       <field>
         <name>ISR</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>DRUG_SEQ</name>
         <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <name>INDI_PT</name>
+        <name>ROLE_COD</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>37</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>70</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>filename</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>12</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>12</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
         <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
     </fields>
     <attributes/>
@@ -1817,14 +3632,14 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>624</yloc>
+      <xloc>368</xloc>
+      <yloc>960</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>load_in_demo_table</name>
-    <type>TableOutput</type>
+    <name>log laers_outc_import_failed_lines</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1833,127 +3648,216 @@ could possibly add insert/update step to insert into db int fields or just use P
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>demo_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <separator>$</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_outc_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>CASE</column_name>
-        <stream_name>CASE</stream_name>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>I_F_COD</column_name>
-        <stream_name>I_F_COD</stream_name>
+        <name>ROLE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>FOLL_SEQ</column_name>
-        <stream_name>FOLL_SEQ</stream_name>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>70</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>IMAGE</column_name>
-        <stream_name>IMAGE</stream_name>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>EVENT_DT</column_name>
-        <stream_name>EVENT_DT</stream_name>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>MFR_DT</column_name>
-        <stream_name>MFR_DT</stream_name>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>FDA_DT</column_name>
-        <stream_name>FDA_DT</stream_name>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>REPT_COD</column_name>
-        <stream_name>REPT_COD</stream_name>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>MFR_NUM</column_name>
-        <stream_name>MFR_NUM</stream_name>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>MFR_SNDR</column_name>
-        <stream_name>MFR_SNDR</stream_name>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>AGE</column_name>
-        <stream_name>AGE</stream_name>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>AGE_COD</column_name>
-        <stream_name>AGE_COD</stream_name>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>GNDR_COD</column_name>
-        <stream_name>GNDR_COD</stream_name>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>12</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>E_SUB</column_name>
-        <stream_name>E_SUB</stream_name>
-      </field>
-      <field>
-        <column_name>WT</column_name>
-        <stream_name>WT</stream_name>
-      </field>
-      <field>
-        <column_name>WT_COD</column_name>
-        <stream_name>WT_COD</stream_name>
-      </field>
-      <field>
-        <column_name>REPT_DT</column_name>
-        <stream_name>REPT_DT</stream_name>
-      </field>
-      <field>
-        <column_name>OCCP_COD</column_name>
-        <stream_name>OCCP_COD</stream_name>
-      </field>
-      <field>
-        <column_name>DEATH_DT</column_name>
-        <stream_name>DEATH_DT</stream_name>
-      </field>
-      <field>
-        <column_name>TO_MFR</column_name>
-        <stream_name>TO_MFR</stream_name>
-      </field>
-      <field>
-        <column_name>CONFID</column_name>
-        <stream_name>CONFID</stream_name>
-      </field>
-      <field>
-        <column_name>REPORTER_COUNTRY</column_name>
-        <stream_name>REPORTER_COUNTRY</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr_var</column_name>
-        <stream_name>year</stream_name>
-      </field>
-      <field>
-        <column_name>qtr_var</column_name>
-        <stream_name>qtr</stream_name>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
     </fields>
     <attributes/>
@@ -1965,14 +3869,14 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>464</yloc>
+      <xloc>368</xloc>
+      <yloc>1152</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>load_in_drug_table</name>
-    <type>TableOutput</type>
+    <name>log laers_outc_import_failed_lines 2</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1981,83 +3885,216 @@ could possibly add insert/update step to insert into db int fields or just use P
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>drug_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <separator>$</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_outc_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>ROLE_COD</column_name>
-        <stream_name>ROLE_COD</stream_name>
+        <name>ROLE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>DRUGNAME</column_name>
-        <stream_name>DRUGNAME</stream_name>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>70</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>VAL_VBM</column_name>
-        <stream_name>VAL_VBM</stream_name>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>ROUTE</column_name>
-        <stream_name>ROUTE</stream_name>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>DOSE_VBM</column_name>
-        <stream_name>DOSE_VBM</stream_name>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>DECHAL</column_name>
-        <stream_name>DECHAL</stream_name>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>RECHAL</column_name>
-        <stream_name>RECHAL</stream_name>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>LOT_NUM</column_name>
-        <stream_name>LOT_NUM</stream_name>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>EXP_DT</column_name>
-        <stream_name>EXP_DT</stream_name>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>NDA_NUM</column_name>
-        <stream_name>NDA_NUM</stream_name>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>12</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
     </fields>
     <attributes/>
@@ -2069,14 +4106,14 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>544</yloc>
+      <xloc>368</xloc>
+      <yloc>1344</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>load_in_indi_table</name>
-    <type>TableOutput</type>
+    <name>log laers_outc_import_failed_lines 2 2</name>
+    <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2085,47 +4122,216 @@ could possibly add insert/update step to insert into db int fields or just use P
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>indi_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <separator>$</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_outc_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>INDI_PT</column_name>
-        <stream_name>INDI_PT</stream_name>
+        <name>ROLE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>70</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
       <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>12</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
       </field>
     </fields>
     <attributes/>
@@ -2137,280 +4343,8 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_outc_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>outc_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>OUTC_COD</column_name>
-        <stream_name>OUTC_COD</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>704</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_reac_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>reac_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>PT</column_name>
-        <stream_name>PT</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_rpsr_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>rpsr_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>RPSR_COD</column_name>
-        <stream_name>RPSR_COD</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>864</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_ther_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>ther_legacy</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
-      </field>
-      <field>
-        <column_name>START_DT</column_name>
-        <stream_name>START_DT</stream_name>
-      </field>
-      <field>
-        <column_name>END_DT</column_name>
-        <stream_name>END_DT</stream_name>
-      </field>
-      <field>
-        <column_name>DUR</column_name>
-        <stream_name>DUR</stream_name>
-      </field>
-      <field>
-        <column_name>DUR_COD</column_name>
-        <stream_name>DUR_COD</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>944</yloc>
+      <xloc>384</xloc>
+      <yloc>1552</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2475,7 +4409,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2486,7 +4420,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2505,8 +4439,8 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>704</yloc>
+      <xloc>96</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2571,7 +4505,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2582,7 +4516,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2601,8 +4535,8 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>784</yloc>
+      <xloc>96</xloc>
+      <yloc>1248</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2667,7 +4601,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2697,8 +4631,8 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>864</yloc>
+      <xloc>112</xloc>
+      <yloc>1456</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2807,7 +4741,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2818,7 +4752,7 @@ could possibly add insert/update step to insert into db int fields or just use P
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2837,13 +4771,13 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>944</yloc>
+      <xloc>112</xloc>
+      <yloc>1680</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Abort if 100 lines have failed</name>
+    <name>Abort if 100 lines have failed from reac 2 2</name>
     <type>Abort</type>
     <description/>
     <distribute>Y</distribute>
@@ -2866,8 +4800,342 @@ could possibly add insert/update step to insert into db int fields or just use P
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>384</yloc>
+      <xloc>672</xloc>
+      <yloc>1776</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows - Is reac qtr 1, 2, 3 or 4? 2 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_ther_table</send_true_to>
+    <send_false_to>log laers_outc_import_failed_lines 2 2 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>1776</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>log laers_outc_import_failed_lines 2 2 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>$</separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine> </endedLine>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/laers_outc_import_failed_lines</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>Y</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ISR</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DRUG_SEQ</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ROLE_COD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>2</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DRUGNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>70</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>VAL_VBM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ROUTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DOSE_VBM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>25</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RECHAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>LOT_NUM</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>8</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EXP_DT</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NDA_NUM</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>12</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>String</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>15</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>1776</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
