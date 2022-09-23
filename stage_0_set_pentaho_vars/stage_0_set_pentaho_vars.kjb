@@ -13,7 +13,7 @@
   <parameters>
     <parameter>
       <name>BASE_FILE_DIR</name>
-      <default_value>/home/pentaho-secondary/projects-brb265/faers</default_value>
+      <default_value>/home/pentaho-secondary/projects-brb265/faersdbstats_work</default_value>
       <description>Directory where </description>
     </parameter>
   </parameters>
