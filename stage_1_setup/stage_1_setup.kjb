@@ -386,8 +386,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
-      <yloc>1088</yloc>
+      <xloc>400</xloc>
+      <yloc>1264</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -408,8 +408,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>944</yloc>
+      <xloc>48</xloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -483,8 +483,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>1088</yloc>
+      <xloc>80</xloc>
+      <yloc>1264</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -538,8 +538,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1088</yloc>
+      <xloc>256</xloc>
+      <yloc>1264</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -704,8 +704,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>1088</yloc>
+      <xloc>608</xloc>
+      <yloc>1264</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -729,8 +729,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>944</yloc>
+      <xloc>384</xloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -755,7 +755,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>624</xloc>
-      <yloc>1008</yloc>
+      <yloc>1136</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -797,8 +797,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1232</yloc>
+      <xloc>112</xloc>
+      <yloc>1344</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -887,7 +887,7 @@ echo "DROPPED ALL TABLES" >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>176</xloc>
-      <yloc>1008</yloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -945,8 +945,8 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>1344</yloc>
+      <xloc>112</xloc>
+      <yloc>1456</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1002,11 +1002,11 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>384</xloc>
-      <yloc>1008</yloc>
+      <yloc>1136</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Shell</name>
+      <name>db backup</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
@@ -1034,6 +1034,80 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <nr>0</nr>
       <xloc>336</xloc>
       <yloc>608</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>download fda laers data</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/data_from_fda_scripts/download_laers_fda_data.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>1008</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>download fda faers data</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/data_from_fda_scripts/download_faers_fda_data.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>1072</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${REBUILD_ALL_TIME_DATA_LOCALLY}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1156,15 +1230,6 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log Drop All Tables</from>
-      <to>country_codes_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>SUCCESS IF LOAD_ALL_TIME=1</from>
       <to>Log LOAD_ALL_TIME=0 path taken</to>
       <from_nr>0</from_nr>
@@ -1229,7 +1294,7 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
     </hop>
     <hop>
       <from>Set AWS Credentials</from>
-      <to>Shell</to>
+      <to>db backup</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1237,11 +1302,56 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Shell</from>
+      <from>db backup</from>
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>download fda faers data</from>
+      <to>country_codes_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log Drop All Tables</from>
+      <to>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</from>
+      <to>download fda laers data</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</from>
+      <to>country_codes_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>download fda laers data</from>
+      <to>download fda faers data</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1318,9 +1428,31 @@ if one will drop all and load all "fresh"</note>
     <notepad>
       <note>&lt;&lt; even though drug_usagi isn't completed in this workflow
 this table structure allows for stage 4 sqls to run w/o error</note>
-      <xloc>304</xloc>
-      <yloc>1248</yloc>
+      <xloc>288</xloc>
+      <yloc>1360</yloc>
       <width>404</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>needs upload to s3 step
+see stage_1_setup/data_from_fda/readme.md</note>
+      <xloc>0</xloc>
+      <yloc>1136</yloc>
+      <width>324</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
