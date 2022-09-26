@@ -386,8 +386,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>1264</yloc>
+      <xloc>352</xloc>
+      <yloc>1408</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -409,7 +409,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>48</xloc>
-      <yloc>912</yloc>
+      <yloc>976</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -483,8 +483,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>1264</yloc>
+      <xloc>624</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -538,8 +538,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>1264</yloc>
+      <xloc>80</xloc>
+      <yloc>1408</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -704,8 +704,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>1264</yloc>
+      <xloc>624</xloc>
+      <yloc>1408</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -729,8 +729,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>912</yloc>
+      <xloc>672</xloc>
+      <yloc>960</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -754,8 +754,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>1136</yloc>
+      <xloc>672</xloc>
+      <yloc>1056</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -797,8 +797,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1344</yloc>
+      <xloc>128</xloc>
+      <yloc>1504</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -886,8 +886,8 @@ echo "DROPPED ALL TABLES" >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>912</yloc>
+      <xloc>224</xloc>
+      <yloc>976</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -914,8 +914,8 @@ echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>832</yloc>
+      <xloc>416</xloc>
+      <yloc>960</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -945,8 +945,8 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1456</yloc>
+      <xloc>128</xloc>
+      <yloc>1648</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -973,8 +973,8 @@ echo "Will attempt to upload LOAD_NEW_QUARTER's data" >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>912</yloc>
+      <xloc>416</xloc>
+      <yloc>1056</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1001,8 +1001,8 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>1136</yloc>
+      <xloc>656</xloc>
+      <yloc>1168</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1057,8 +1057,8 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>1008</yloc>
+      <xloc>96</xloc>
+      <yloc>1168</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1083,7 +1083,7 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>80</xloc>
-      <yloc>1072</yloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1106,8 +1106,45 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>1008</yloc>
+      <xloc>224</xloc>
+      <yloc>1088</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>fix_fda_data</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>/media/large-backup-drive/pentaho-secondary-extension/faersdbstats/stage_1_setup/fix_fda_data.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1311,15 +1348,6 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>download fda faers data</from>
-      <to>country_codes_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Log Drop All Tables</from>
       <to>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</to>
       <from_nr>0</from_nr>
@@ -1349,6 +1377,24 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
     <hop>
       <from>download fda laers data</from>
       <to>download fda faers data</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>download fda faers data</from>
+      <to>fix_fda_data</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fix_fda_data</from>
+      <to>country_codes_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1429,7 +1475,7 @@ if one will drop all and load all "fresh"</note>
       <note>&lt;&lt; even though drug_usagi isn't completed in this workflow
 this table structure allows for stage 4 sqls to run w/o error</note>
       <xloc>288</xloc>
-      <yloc>1360</yloc>
+      <yloc>1520</yloc>
       <width>404</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
@@ -1448,10 +1494,10 @@ this table structure allows for stage 4 sqls to run w/o error</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>needs upload to s3 step
+      <note>needs sync/upload to s3 step
 see stage_1_setup/data_from_fda/readme.md</note>
       <xloc>0</xloc>
-      <yloc>1136</yloc>
+      <yloc>1248</yloc>
       <width>324</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
