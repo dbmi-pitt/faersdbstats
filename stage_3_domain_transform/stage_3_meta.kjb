@@ -11,6 +11,57 @@
   <modified_date>2022/09/08 14:29:12.733</modified_date>
   <parameters>
     </parameters>
+  <connection>
+    <name>${DATABASE_NAME}</name>
+    <server>${DATABASE_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${DATABASE_NAME}</database>
+    <port>${DATABASE_PORT}</port>
+    <username>${DATABASE_USERNAME}</username>
+    <password>${DATABASE_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${DATABASE_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -574,8 +625,8 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>560</yloc>
+      <xloc>752</xloc>
+      <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -608,6 +659,112 @@ printf '\n\n' >> $log_location</script>
       <nr>0</nr>
       <xloc>1168</xloc>
       <yloc>176</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>faers put yr_var and qtr_var into yr and qtr</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>update demo
+	set qtr = qtr_var::int;
+
+update demo
+	set yr = yr_var::int;
+
+update drug
+	set qtr = qtr_var::int;
+
+update drug
+	set yr = yr_var::int;
+
+update indi
+	set qtr = qtr_var::int;
+
+update indi
+	set yr = yr_var::int;
+
+update reac
+	set qtr = qtr_var::int;
+
+update reac
+	set yr = yr_var::int;
+
+update rpsr
+	set qtr = qtr_var::int;
+
+update rpsr
+	set yr = yr_var::int;
+
+update ther
+	set qtr = qtr_var::int;
+
+update ther
+	set yr = yr_var::int;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>144</xloc>
+      <yloc>640</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>laers put yr_var and qtr_var into yr and qtr</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>update demo_legacy
+	set qtr = qtr_var::int;
+
+update demo_legacy
+	set yr = yr_var::int;
+
+update drug_legacy
+	set qtr = qtr_var::int;
+
+update drug_legacy
+	set yr = yr_var::int;
+
+update indi_legacy
+	set qtr = qtr_var::int;
+
+update indi_legacy
+	set yr = yr_var::int;
+
+update reac_legacy
+	set qtr = qtr_var::int;
+
+update reac_legacy
+	set yr = yr_var::int;
+
+update rpsr_legacy_legacy
+	set qtr = qtr_var::int;
+
+update rpsr_legacy
+	set yr = yr_var::int;
+
+update ther_legacy
+	set qtr = qtr_var::int;
+
+update ther_legacy
+	set yr = yr_var::int;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>480</xloc>
+      <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -658,8 +815,8 @@ printf '\n\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_3_domain_transformation.ktr</from>
-      <to>Log STAGE 3 COMPLETE</to>
+      <from>stage_3_faers_domain_transform_new_qtr.ktr</from>
+      <to>Log STAGE 3 COMPLETE 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -667,11 +824,29 @@ printf '\n\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_3_faers_domain_transform_new_qtr.ktr</from>
-      <to>Log STAGE 3 COMPLETE 2</to>
+      <from>stage_3_domain_transformation.ktr</from>
+      <to>faers put yr_var and qtr_var into yr and qtr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>faers put yr_var and qtr_var into yr and qtr</from>
+      <to>laers put yr_var and qtr_var into yr and qtr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>laers put yr_var and qtr_var into yr and qtr</from>
+      <to>Log STAGE 3 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
