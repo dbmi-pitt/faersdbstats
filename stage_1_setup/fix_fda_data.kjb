@@ -828,6 +828,81 @@ ${BASE_FILE_DIR}/data_from_s3_test/faers/indi/4_build_domain_import_file.sh</scr
       <yloc>1120</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>domain_headers_report_before_fixes.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/domain_headers_report_before_fixes.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>576</xloc>
+      <yloc>656</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>domain_headers_report_after_fixes.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1712</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>domain_import_file_line_count_report.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/domain_import_file_line_count_report.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>576</xloc>
+      <yloc>768</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -838,15 +913,6 @@ ${BASE_FILE_DIR}/data_from_s3_test/faers/indi/4_build_domain_import_file.sh</scr
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>set job variables</from>
-      <to>copy domain_scripts to data_from_s3</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>copy domain_scripts to data_from_s3</from>
@@ -916,7 +982,7 @@ ${BASE_FILE_DIR}/data_from_s3_test/faers/indi/4_build_domain_import_file.sh</scr
       <to>fix faers demo</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -968,6 +1034,42 @@ ${BASE_FILE_DIR}/data_from_s3_test/faers/indi/4_build_domain_import_file.sh</scr
     <hop>
       <from>fix faers indi</from>
       <to>fix faers outc</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>set job variables</from>
+      <to>domain_headers_report_before_fixes.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fix faers ther</from>
+      <to>domain_headers_report_after_fixes.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>domain_headers_report_before_fixes.sh</from>
+      <to>domain_import_file_line_count_report.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>domain_import_file_line_count_report.sh</from>
+      <to>copy domain_scripts to data_from_s3</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1056,8 +1158,8 @@ headers are not syncronized throughout faers and laers grouping (columns get add
 
 
 </note>
-      <xloc>224</xloc>
-      <yloc>240</yloc>
+      <xloc>112</xloc>
+      <yloc>400</yloc>
       <width>627</width>
       <heigth>194</heigth>
       <fontname>Ubuntu</fontname>
