@@ -479,12 +479,11 @@ SIZE and STAT domain are not loaded by this transform
     <notepad>
       <note>&lt;inserts into varchar db fields "year_var" and "qtr_var"
 
-could possibly add insert/update step to insert into db int fields or just use Postgres
-</note>
+*remember can do 1 domain at a time by disabling hops (clicking on arrows) between steps</note>
       <xloc>432</xloc>
       <yloc>464</yloc>
-      <width>571</width>
-      <heigth>77</heigth>
+      <width>613</width>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -561,12 +560,12 @@ could possibly add insert/update step to insert into db int fields or just use P
     <hop>
       <from>demo - CSV file input</from>
       <to>Filter rows</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>load_in_demo_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
@@ -576,107 +575,107 @@ could possibly add insert/update step to insert into db int fields or just use P
     <hop>
       <from>log laers_demo_import_failed_lines</from>
       <to>Abort if 100 lines have failed</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>drug - CSV file input</from>
       <to>Filter rows - Is qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is qtr 1, 2, 3 or 4?</from>
       <to>load_in_drug_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_drug_import_failed_lines</from>
       <to>Abort if 100 lines have failed from drug</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is qtr 1, 2, 3 or 4?</from>
       <to>log laers_drug_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>indi - CSV file input</from>
       <to>Filter rows - Is indi qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
       <to>load_in_indi_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_indi_import_failed_lines</from>
       <to>Abort if 100 lines have failed from indi.txt</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
       <to>log laers_indi_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_outc_import_failed_lines</from>
       <to>Abort if 100 lines have failed from outc</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is outc qtr 1, 2, 3 or 4?</from>
       <to>load_in_outc_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is outc qtr 1, 2, 3 or 4?</from>
       <to>log laers_outc_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>outc - CSV file input</from>
       <to>Filter rows - Is outc qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_reac_import_failed_lines</from>
       <to>Abort if 100 lines have failed from reac</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>reac - CSV file input</from>
       <to>Filter rows - Is reac qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is reac qtr 1, 2, 3 or 4?</from>
       <to>load_in_reac_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is reac qtr 1, 2, 3 or 4?</from>
       <to>log laers_reac_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_rpsr_import_failed_lines</from>
       <to>Abort if 100 lines have failed from reac 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>rpsr - CSV file input</from>
       <to>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
       <to>load_in_rpsr_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
       <to>log laers_rpsr_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_ther_import_failed_lines</from>
