@@ -13,10 +13,10 @@
 
 echo pwd is `pwd`
 
-source ../../faers_config.config
+# source ../../faers_config.config
 # cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta/$laers_faers/$thisdomain
 
-echo pwd now is `pwd`
+# echo pwd now is `pwd`
 # exit;
 
 # example workflow:
@@ -45,7 +45,7 @@ shopt -s globstar
 # for file in ./2004/Q1/*.txt ./2004/Q2/*.txt ; do
 
 #for entire year 
-#  for name in ./**/2004/**/*Q1.txt ./**/2004/**/*Q2.txt ./**/2004/**/*Q3.txt ./**/2004/**/*Q4.txt; do #all time
+#  for name in ./**/2014/**/*Q1.txt ./**/2014/**/*Q2.txt ./**/2014/**/*Q3.txt ./**/2014/**/*Q4.txt; do #all time
 
 #all time
 for name in ./**/*Q1.txt ./**/*Q2.txt ./**/*Q3.txt ./**/*Q4.txt; do #all time
@@ -64,15 +64,14 @@ for name in ./**/*Q1.txt ./**/*Q2.txt ./**/*Q3.txt ./**/*Q4.txt; do #all time
             # else
                 # echo 'nahdawg'
             fi
-        
 
             # # Big Step One Part B. - .TXT to .txt
             tr -d '\015' < $name > "${name::-4}"_staged_with_lfs_only.txt
-
-            # # remove 6th $ to get rid of last $ in data section
-            sed -i 's/\$//6' "${name::-4}"_staged_with_lfs_only.txt
-            
             echo ${name::-4}_staged_with_lfs_only.txt has been created
+
+            # # remove 6th $ to get rid of last $ in data section # laers issue
+            # sed -i 's/\$//6' "${name::-4}"_staged_with_lfs_only.txt
+            
             # # Big Step One Part C. - .TXT to .txt
             #     #run ./1_first_2_lineS_report_generator.sh
             # ## skipped because outc domain's good
@@ -86,10 +85,10 @@ for name in ./**/*Q1.txt ./**/*Q2.txt ./**/*Q3.txt ./**/*Q4.txt; do #all time
                 echo 'the filename is '$thefilename
                 echo '$thefilenamedata is '$thefilenamedata
                 sed "s|$|\$$thefilenamedata|g" < ${name::-4}"_staged_with_lfs_only.txt" > ${name::-4}_with_data.txt
-                pathtoname=${name: 0:9}
-                # replace first occurence of $thefilenamedata to fix the header
+                # pathtoname=${name: 0:9}
+                # # replace first occurence of $thefilenamedata to fix the header
                 sed -i "0,/$thefilenamedata/{s/$thefilenamedata/filename\$yr\$qtr/}" ${name::-4}_with_data.txt
-
+                sed -i $'s/\r$//' drug.txt
             echo ${name::-4}_with_data.txt has been created
 
         fi
@@ -102,7 +101,7 @@ echo 'you might text compare OUTC08Q1_staged_with_lfs_only.txt and OUTC08Q1_with
 
 echo 'copying and pasting a few lines to libreoffice calc will help'
 
-echo 'next step would be running ./3_build_domain_import_file.sh'
+echo 'next step would be running ./4_build_domain_import_file.sh'
 
 # echo 'attempting to run f2_report_generator.sh for you'
 # libreoffice --calc ../../f2_report_generator.sh
