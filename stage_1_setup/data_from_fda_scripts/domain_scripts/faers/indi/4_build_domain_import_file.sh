@@ -2,19 +2,19 @@
 
 # local var config
 
-thisdomain=drug
+thisdomain=indi
 
 echo pwd is     `pwd`
 
 #for adding empty columns gets run on from domain level directory
 source ../../../../faers_config.config
 cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta
-# cd ${BASE_FILE_DIR}/data_from_s3/laers/drug/
+# cd ${BASE_FILE_DIR}/data_from_s3/laers/indi/
 
 echo pwd now is `pwd`
 # exit;
 
-# aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/drug/ --include "*" --exclude "*only.txt"
+# aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/indi/ --include "*" --exclude "*only.txt"
 
 #set and echo globstar settings for ** used
 shopt -s globstar
@@ -135,7 +135,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                                     echo "${domain}.txt" is the domain.txt
                                     
                                     #headers we want
-                                    #primaryid$caseid$drug_seq$role_cod$CONFID$prod_ai$val_vbm$route$dose_vbm$cum_dose_chr$cum_dose_unit$dechal$rechal$lot_num$exp_dt$nda_num$dose_amt$dose_unit$dose_form$dose_freq
+                                    #primaryid$caseid$indi_seq$role_cod$CONFID$prod_ai$val_vbm$route$dose_vbm$cum_dose_chr$cum_dose_unit$dechal$rechal$lot_num$exp_dt$nda_num$dose_amt$dose_unit$dose_form$dose_freq
                                     headempty=1 &&
                                     #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename                    
                                     tail -n +2 --quiet ${name} >> $domain/$domain.txt
@@ -169,14 +169,14 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
 
             #replace null chars w/ space
             sed -i 's/\x0/ /g' $domain/${domain}.txt
+            
+            #fix column header miss match
+            sed -i 's/lot_nbr/lot_num/g' indi.txt
+
             head < $domain/${domain}.txt > $domain/${domain}_head_n_tail.txt
             tail < $domain/${domain}.txt >> $domain/${domain}_head_n_tail.txt
             
-            #uppercase filename
-            sed -i 's/drug12q4.txt/DRUG12q4.txt/g' drug.txt
             
-            #fix column header miss match
-            sed -i 's/lot_nbr/lot_num/g' drug.txt
             echo `wc -l $domain/${domain}.txt`
             cd $data_from_s3_root_above_laers_or_faers
         done; #end domain loop
@@ -192,6 +192,5 @@ echo 'if you would like to compare against a previous import file run head and c
 
 echo ' after ensuring '$domain'.txt import file is in the correct location check the preview step for this domain in stage 3'
 
-# echo 'this script should have taken *_staged_with_lfs_only.txt in data_from_s3/laers/drug/**/ (quarter folders) and added a 23th column and then added to the header REPORTER_COUNTRY after $CONFID ';
-# DEMO14Q1_staged_with_lfs_only.txt
-# ^this is 44 characters so you change ./s3_data_download.sh to -gt 40 to only build drug.txt from this scripts output
+# INDI14Q1_staged_with_lfs_only.txt
+# ^this is 44 characters so you change ./s3_data_download.sh to -gt 40 to only build indi.txt from this scripts output

@@ -98,14 +98,9 @@ for name in ./2012/**/*Q4.txt ./2013/**/*.txt ./2014/**/*Q1.txt ./2014/**/*Q2.tx
         #headers we want
         #primaryid$caseid$drug_seq$role_cod$CONFID$prod_ai$val_vbm$route$dose_vbm$cum_dose_chr$cum_dose_unit$dechal$rechal$lot_num$exp_dt$nda_num$dose_amt$dose_unit$dose_form$dose_freq
 
-        # sed -i 's/\$CONFID/\$CONFID\$REPORTER_COUNTRY/g' $name
-        
-        #the last \$ will create an empty column to before last 3 columns
-        # sed -i 's/\$\$\$\$\$CONFID/\$\$CONFID\$\$REPORTER_COUNTRY\$/g' $name
         #replace first occurence only to ensure it's the header
-        sed '0,/\$drugname/{s/\$drugname/\$drugname\$prod_ai/}' < ${name::-4}_added_empty_col.txt > ${name::-4}_added_new_header.txt
-            #  sed 's/CONFID/CONFID\$REPORTER_COUNTRY/g' < $name > ${name::-4}_fixed.txt
-        # sed -i 's/\$drugname\$\$val_vbm/\$drugname\$prod_ai\$val_vbm/g' $name
+        # sed '0,/\$drugname/{s/\$drugname/\$drugname\$prod_ai/}' < ${name::-4}_added_empty_col.txt > ${name::-4}_added_new_header.txt
+        
         cp ${name::-4}_added_new_header.txt $name
 
         #make a sm.txt file that has only 20 lines to check results
@@ -142,8 +137,8 @@ echo ' '
 # echo 'and the header_report_all_files.txt file in each domains folder in ' 
 echo 'compare data_2 04Q1 with data_3 04Q1'
 echo $workpwd
-# echo 'this script should have taken *_staged_with_lfs_only.txt in data_from_s3/laers/drug/**/ (quarter folders) and added a 23th column and then added to the header REPORTER_COUNTRY after $CONFID ';
-# DEMO14Q1_staged_with_lfs_only.txt
+
+# INDI14Q1_staged_with_lfs_only.txt
 # ^this is 44 characters so you change ./s3_data_download.sh to -gt 40 to only build drug.txt from this scripts output
 echo 'this script should have taken *.txt in ./faers/demo/**/ (quarter folders) and added a 9th 12 and 15th column and auth_num and lit_ref and age_grp respectively'
 echo ' '
