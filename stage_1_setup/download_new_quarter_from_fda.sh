@@ -2,7 +2,6 @@
 # this script downloads all the current ASCII format FAERS files from the FDA website
 # as of May 15th 2018
 #
-# bucknelius
 ################################################################
 
 #source "../../faers_config.config" #for local testing
