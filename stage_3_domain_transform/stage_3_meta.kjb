@@ -684,6 +684,12 @@ update indi
 update indi
 	set yr = yr_var::int;
 
+update outc
+	set qtr = qtr_var::int;
+
+update outc
+	set yr = yr_var::int;
+
 update reac
 	set qtr = qtr_var::int;
 
@@ -737,13 +743,19 @@ update indi_legacy
 update indi_legacy
 	set yr = yr_var::int;
 
+update outc_legacy
+	set qtr = qtr_var::int;
+
+update outc_legacy
+	set yr = yr_var::int;
+
 update reac_legacy
 	set qtr = qtr_var::int;
 
 update reac_legacy
 	set yr = yr_var::int;
 
-update rpsr_legacy_legacy
+update rpsr_legacy
 	set qtr = qtr_var::int;
 
 update rpsr_legacy
