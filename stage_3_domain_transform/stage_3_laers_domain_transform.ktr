@@ -480,10 +480,32 @@ SIZE and STAT domain are not loaded by this transform
       <note>&lt;inserts into varchar db fields "year_var" and "qtr_var"
 
 *remember can do 1 domain at a time by disabling hops (clicking on arrows) between steps</note>
-      <xloc>432</xloc>
+      <xloc>464</xloc>
       <yloc>464</yloc>
       <width>613</width>
       <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>these load_*'s
+TRUNCATE!</note>
+      <xloc>240</xloc>
+      <yloc>432</yloc>
+      <width>105</width>
+      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -555,7 +577,7 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>Data grid - Stage_3_laers_domain has started</from>
       <to>Text file output - Log output</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>demo - CSV file input</from>
@@ -564,13 +586,13 @@ SIZE and STAT domain are not loaded by this transform
     </hop>
     <hop>
       <from>Filter rows</from>
-      <to>load_in_demo_table</to>
+      <to>load_in_demo_legacy_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>log laers_demo_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_demo_import_failed_lines</from>
@@ -584,7 +606,7 @@ SIZE and STAT domain are not loaded by this transform
     </hop>
     <hop>
       <from>Filter rows - Is qtr 1, 2, 3 or 4?</from>
-      <to>load_in_drug_table</to>
+      <to>load_in_drug_legacy_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -600,22 +622,22 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>indi - CSV file input</from>
       <to>Filter rows - Is indi qtr 1, 2, 3 or 4?</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
-      <to>load_in_indi_table</to>
-      <enabled>Y</enabled>
+      <to>load_in_indi_legacy_table</to>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log laers_indi_import_failed_lines</from>
       <to>Abort if 100 lines have failed from indi.txt</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
       <to>log laers_indi_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log laers_outc_import_failed_lines</from>
@@ -624,7 +646,7 @@ SIZE and STAT domain are not loaded by this transform
     </hop>
     <hop>
       <from>Filter rows - Is outc qtr 1, 2, 3 or 4?</from>
-      <to>load_in_outc_table</to>
+      <to>load_in_outc_legacy_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -649,7 +671,7 @@ SIZE and STAT domain are not loaded by this transform
     </hop>
     <hop>
       <from>Filter rows - Is reac qtr 1, 2, 3 or 4?</from>
-      <to>load_in_reac_table</to>
+      <to>load_in_reac_legacy_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -660,22 +682,22 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>log laers_rpsr_import_failed_lines</from>
       <to>Abort if 100 lines have failed from reac 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>rpsr - CSV file input</from>
       <to>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
-      <to>load_in_rpsr_table</to>
-      <enabled>Y</enabled>
+      <to>load_in_rpsr_legacy_table</to>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
       <to>log laers_rpsr_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log laers_ther_import_failed_lines</from>
@@ -689,7 +711,7 @@ SIZE and STAT domain are not loaded by this transform
     </hop>
     <hop>
       <from>Filter rows - Is ther qtr 1, 2, 3 or 4?</from>
-      <to>load_in_ther_table</to>
+      <to>load_in_ther_legacy_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -962,7 +984,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_demo_table</send_true_to>
+    <send_true_to>load_in_demo_legacy_table</send_true_to>
     <send_false_to>log laers_demo_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1059,7 +1081,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_indi_table</send_true_to>
+    <send_true_to>load_in_indi_legacy_table</send_true_to>
     <send_false_to>log laers_indi_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1156,7 +1178,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_outc_table</send_true_to>
+    <send_true_to>load_in_outc_legacy_table</send_true_to>
     <send_false_to>log laers_outc_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1253,7 +1275,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_drug_table</send_true_to>
+    <send_true_to>load_in_drug_legacy_table</send_true_to>
     <send_false_to>log laers_drug_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1350,7 +1372,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_reac_table</send_true_to>
+    <send_true_to>load_in_reac_legacy_table</send_true_to>
     <send_false_to>log laers_reac_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1447,7 +1469,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_rpsr_table</send_true_to>
+    <send_true_to>load_in_rpsr_legacy_table</send_true_to>
     <send_false_to>log laers_rpsr_import_failed_lines</send_false_to>
     <compare>
       <condition>
@@ -1544,8 +1566,8 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>load_in_ther_table</send_true_to>
-    <send_false_to>log laers_outc_import_failed_lines</send_false_to>
+    <send_true_to>load_in_ther_legacy_table</send_true_to>
+    <send_false_to>log laers_ther_import_failed_lines</send_false_to>
     <compare>
       <condition>
         <negated>N</negated>
@@ -2328,7 +2350,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_demo_table</name>
+    <name>load_in_demo_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2476,7 +2498,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_drug_table</name>
+    <name>load_in_drug_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2580,7 +2602,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_indi_table</name>
+    <name>load_in_indi_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2648,7 +2670,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_outc_table</name>
+    <name>load_in_outc_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2712,7 +2734,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_reac_table</name>
+    <name>load_in_reac_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2776,7 +2798,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_rpsr_table</name>
+    <name>load_in_rpsr_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2840,7 +2862,7 @@ SIZE and STAT domain are not loaded by this transform
     </GUI>
   </step>
   <step>
-    <name>load_in_ther_table</name>
+    <name>load_in_ther_legacy_table</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -4672,7 +4694,7 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
       </field>
       <field>
-        <name>yr</name>
+        <name>yr_var</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -4684,7 +4706,7 @@ SIZE and STAT domain are not loaded by this transform
         <precision>-1</precision>
       </field>
       <field>
-        <name>qtr</name>
+        <name>qtr_var</name>
         <type>String</type>
         <format>#</format>
         <currency/>
@@ -5140,7 +5162,7 @@ SIZE and STAT domain are not loaded by this transform
   </step>
   <step_error_handling>
     <error>
-      <source_step>load_in_demo_table</source_step>
+      <source_step>load_in_demo_legacy_table</source_step>
       <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
