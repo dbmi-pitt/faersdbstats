@@ -572,11 +572,6 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge rows (diff)</from>
-      <to>Filter rows if flagfield is not identical</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filter rows if flagfield is not identical</from>
       <to>Log identical year qtr counts</to>
       <enabled>Y</enabled>
@@ -596,7 +591,66 @@ databases</note>
       <to>Text file output - log matches</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Data grid - add line_break 2</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge rows (diff)</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join</from>
+      <to>Filter rows if flagfield is not identical</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Data grid - add line_break 2</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item/>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Filter rows if flagfield is not identical</name>
     <type>FilterRows</type>
@@ -637,7 +691,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>400</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -711,7 +765,45 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>496</yloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>FULL OUTER</join_type>
+    <step1>Merge rows (diff)</step1>
+    <step2>Data grid - add line_break 2</step2>
+    <keys_1>
+      <key>total</key>
+      <key>yr</key>
+      <key>qtr</key>
+      <key>domain</key>
+      <key>flagfield</key>
+    </keys_1>
+    <keys_2>
+      <key>line_break</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1028,11 +1120,11 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1130,7 +1222,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>624</yloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1145,11 +1237,11 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1247,7 +1339,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>624</yloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1294,7 +1386,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>496</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

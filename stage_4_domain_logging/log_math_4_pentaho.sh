@@ -218,5 +218,5 @@ printf '\n' >> $log_location
 
 
 
-echo "BEGINNING OF STAGE 5_SQLS JOB" >> $log_location
+echo "BEGINNING OF STAGE_4_META LOGS" >> $log_location
 printf '\n' >> $log_location

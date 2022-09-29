@@ -345,7 +345,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>640</yloc>
+      <yloc>864</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -384,11 +384,11 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>976</yloc>
+      <yloc>992</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_faers_indi_log_qtrs.ktr 2</name>
+      <name>stage_4_faers_indi_log_qtrs.ktr</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -423,7 +423,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1104</yloc>
+      <yloc>1120</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -462,7 +462,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1216</yloc>
+      <yloc>1232</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -501,7 +501,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1344</yloc>
+      <yloc>1360</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -540,11 +540,11 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1456</yloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_faers_ther_log_qtrs.ktr 2</name>
+      <name>stage_4_faers_ther_log_qtrs.ktr</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -579,7 +579,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1568</yloc>
+      <yloc>1584</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -665,7 +665,40 @@
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/log_math_4_laers_pentaho.sh</filename>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_4_domain_logging/log_math_4_laers_pentaho.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo $log_location
+printf '\n' >> $log_location
+printf '\n' >> $log_location
+echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
+printf '\n' >> $log_location
+echo 'DEMO COUNT RESULTS' >> $log_location
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>640</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>log_math_4_pentaho.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_4_domain_logging/log_math_4_pentaho.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -691,39 +724,6 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <nr>0</nr>
       <xloc>128</xloc>
       <yloc>752</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>log_math_4_pentaho.sh</name>
-      <description/>
-      <type>SHELL</type>
-      <attributes/>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/log_math_4_pentaho.sh</filename>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script>#!/bin/bash
-log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
-echo $log_location
-printf '\n' >> $log_location
-printf '\n' >> $log_location
-echo "BEGINNING OF STAGE 4_LOGGING JOB(S)" >> $log_location
-printf '\n' >> $log_location
-echo 'DEMO COUNT RESULTS' >> $log_location
-</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>864</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -785,14 +785,287 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1664</yloc>
+      <yloc>1680</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_demo_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_demo_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>758</xloc>
+      <yloc>952</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_drug_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_drug_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>758</xloc>
+      <yloc>1080</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_indi_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_indi_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>758</xloc>
+      <yloc>1208</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_outc_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_outc_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>764</xloc>
+      <yloc>1346</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_reac_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_reac_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>764</xloc>
+      <yloc>1474</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_rpsr_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_rpsr_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>764</xloc>
+      <yloc>1586</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_4_laers_ther_log_qtrs.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/laers/stage_4_laers_ther_log_qtrs.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>764</xloc>
+      <yloc>1698</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>stage_4_faers_drug_log_qtrs.ktr</from>
-      <to>stage_4_faers_indi_log_qtrs.ktr 2</to>
+      <to>stage_4_faers_indi_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -800,7 +1073,7 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_faers_indi_log_qtrs.ktr 2</from>
+      <from>stage_4_faers_indi_log_qtrs.ktr</from>
       <to>stage_4_faers_outc_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -828,7 +1101,7 @@ printf '\n' >> $log_location</script>
     </hop>
     <hop>
       <from>stage_4_faers_rpsr_log_qtrs.ktr</from>
-      <to>stage_4_faers_ther_log_qtrs.ktr 2</to>
+      <to>stage_4_faers_ther_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -845,35 +1118,8 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_faers_domain_logging.ktr</from>
-      <to>stage_4_faers_demo_log_qtrs.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_4_faers_demo_log_qtrs.ktr</from>
-      <to>log_math_4_laers_pentaho.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>log_math_4_laers_pentaho.sh</from>
       <to>log_math_4_pentaho.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>log_math_4_pentaho.sh</from>
-      <to>stage_4_faers_drug_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -899,8 +1145,98 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_faers_ther_log_qtrs.ktr 2</from>
+      <from>stage_4_faers_ther_log_qtrs.ktr</from>
       <to>Log "STAGE 4 FINISHED"</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_domain_logging.ktr</from>
+      <to>log_math_4_laers_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_demo_log_qtrs.ktr</from>
+      <to>stage_4_faers_drug_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_demo_log_qtrs.ktr</from>
+      <to>stage_4_laers_drug_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_drug_log_qtrs.ktr</from>
+      <to>stage_4_laers_indi_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_indi_log_qtrs.ktr</from>
+      <to>stage_4_laers_outc_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_outc_log_qtrs.ktr</from>
+      <to>stage_4_laers_reac_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_reac_log_qtrs.ktr</from>
+      <to>stage_4_laers_rpsr_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_rpsr_log_qtrs.ktr</from>
+      <to>stage_4_laers_ther_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_math_4_pentaho.sh</from>
+      <to>stage_4_laers_demo_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_laers_ther_log_qtrs.ktr</from>
+      <to>stage_4_faers_demo_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -985,8 +1321,8 @@ ther</note>
     </notepad>
     <notepad>
       <note>&lt;- faers domain quarter counts</note>
-      <xloc>272</xloc>
-      <yloc>640</yloc>
+      <xloc>288</xloc>
+      <yloc>928</yloc>
       <width>216</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1006,8 +1342,8 @@ ther</note>
     </notepad>
     <notepad>
       <note>&lt;- from here on they write to BASE_FILE_DIR/logs/LOG_FILENAME</note>
-      <xloc>272</xloc>
-      <yloc>752</yloc>
+      <xloc>288</xloc>
+      <yloc>880</yloc>
       <width>448</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>

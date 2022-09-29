@@ -592,21 +592,6 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dummy (do nothing)</from>
-      <to>Blocking step</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step</from>
-      <to>Text file output - log differences</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>log flagfield not identical</from>
-      <to>Dummy (do nothing)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge rows (diff)</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -621,37 +606,12 @@ databases</note>
       <to>Filter rows if flagfield is not identical</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>log flagfield not identical</from>
+      <to>Text file output - log differences</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>N</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>816</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Data grid - add line_break</name>
     <type>DataGrid</type>
@@ -698,7 +658,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>736</yloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -741,33 +701,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>275</xloc>
-      <yloc>310</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>720</yloc>
+      <xloc>304</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -811,7 +746,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>400</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -885,7 +820,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>496</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -922,8 +857,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>336</yloc>
+      <xloc>528</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1240,23 +1175,23 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine/>
+    <endedLine>^differences</endedLine>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
       <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>Y</append>
       <split>N</split>
@@ -1266,23 +1201,11 @@ databases</note>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
       <add_to_result_filenames>N</add_to_result_filenames>
-      <pad>Y</pad>
+      <pad>N</pad>
       <fast_dump>N</fast_dump>
       <splitevery>0</splitevery>
     </file>
     <fields>
-      <field>
-        <name>line_break</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
       <field>
         <name>domain</name>
         <type>String</type>
@@ -1292,7 +1215,7 @@ databases</note>
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>5</length>
+        <length>4</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -1354,7 +1277,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>864</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1369,11 +1292,11 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1401,6 +1324,18 @@ databases</note>
     </file>
     <fields>
       <field>
+        <name>domain</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>total</name>
         <type>Integer</type>
         <format>0</format>
@@ -1426,18 +1361,6 @@ databases</note>
       </field>
       <field>
         <name>qtr</name>
-        <type>Integer</type>
-        <format>0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>domain</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1471,7 +1394,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>624</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1540,7 +1463,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>848</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1587,7 +1510,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>496</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

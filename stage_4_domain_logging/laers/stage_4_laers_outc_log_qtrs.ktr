@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_faers_ther_log_qtrs</name>
+    <name>stage_4_laers_outc_legacy_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -436,11 +436,11 @@
   </info>
   <notepads>
     <notepad>
-      <note>Compare counts of the ther table's data grouped by year and quarter of ${DATABASE_NAME} and ${DATABASE_COMPARISON_NAME}
+      <note>Compare counts of the outc_legacy table's data grouped by year and quarter of ${DATABASE_NAME} and ${DATABASE_COMPARISON_NAME}
 databases</note>
       <xloc>272</xloc>
       <yloc>80</yloc>
-      <width>909</width>
+      <width>949</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
@@ -562,12 +562,12 @@ databases</note>
   </connection>
   <order>
     <hop>
-      <from>Table input - cem_pitt_2022.faers.ther_table_counts.sql</from>
+      <from>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - cem.faers.ther_table_counts.sql 2</from>
+      <from>Table input - cem.faers.outc_legacy_table_counts.sql 2</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
@@ -582,18 +582,13 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>log flagfield not identical</from>
-      <to>Text file output - log differences</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Log identical year qtr counts</from>
       <to>Text file output - log matches</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Data grid - add line_break 2</from>
-      <to>Merge join</to>
+      <from>Data grid - add line_break</from>
+      <to>Text file output - log matches 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -602,11 +597,71 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Data grid - add line_break 2</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Merge join</from>
       <to>Filter rows if flagfield is not identical</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>log flagfield not identical</from>
+      <to>Text file output - log differences</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Data grid - add line_break</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>  </item>
+      </line>
+      <line>
+        <item/>
+      </line>
+      <line>
+        <item>outc_legacy stage_4_laers_outc_legacy... results</item>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>832</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Data grid - add line_break 2</name>
     <type>DataGrid</type>
@@ -646,7 +701,7 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>304</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
@@ -655,7 +710,7 @@ databases</note>
     <name>Filter rows if flagfield is not identical</name>
     <type>FilterRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -691,7 +746,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>496</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -726,7 +781,7 @@ databases</note>
     <name>Log identical year qtr counts</name>
     <type>WriteToLog</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -737,7 +792,7 @@ databases</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>ther table for this year and quarter matches comparison database </logmessage>
+    <logmessage>outc_legacy table for this year and quarter matches comparison database </logmessage>
     <fields>
       <field>
         <name>total</name>
@@ -765,7 +820,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>592</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -811,7 +866,7 @@ databases</note>
     <name>Merge rows (diff)</name>
     <type>MergeRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -831,8 +886,8 @@ databases</note>
       <value>domain</value>
     </values>
     <flag_field>flagfield</flag_field>
-    <reference>Table input - cem_pitt_2022.faers.ther_table_counts.sql</reference>
-    <compare>Table input - cem.faers.ther_table_counts.sql 2</compare>
+    <reference>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</reference>
+    <compare>Table input - cem.faers.outc_legacy_table_counts.sql 2</compare>
     <compare>
     </compare>
     <attributes/>
@@ -850,10 +905,10 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem.faers.ther_table_counts.sql 2</name>
+    <name>Table input - cem.faers.outc_legacy_table_counts.sql 2</name>
     <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -862,7 +917,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
     <sql>select count(*) as total, cast(substring(filename,5,2)as int) as yr, cast(substring(filename,8,1)as int) as qtr, upper(substring(filename,0,5)) as domain
-	from faers.ther
+	from faers.outc_legacy
 	group by filename, yr, qtr
 	order by yr, qtr</sql>
     <limit>0</limit>
@@ -878,7 +933,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.ther_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.outc_legacy_table_counts.sql 2</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -901,7 +956,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.ther_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.outc_legacy_table_counts.sql 2</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -924,7 +979,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.ther_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.outc_legacy_table_counts.sql 2</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -947,7 +1002,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem.faers.ther_table_counts.sql 2</origin>
+        <origin>Table input - cem.faers.outc_legacy_table_counts.sql 2</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -980,10 +1035,10 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem_pitt_2022.faers.ther_table_counts.sql</name>
+    <name>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -992,7 +1047,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <sql>select count(*) as total, yr, qtr, upper(substring(filename,0,5)) as domain
-	from faers.ther
+	from faers.outc_legacy
 	group by filename, yr, qtr
 	order by yr, qtr</sql>
     <limit>0</limit>
@@ -1008,7 +1063,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.ther_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1031,7 +1086,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.ther_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1054,7 +1109,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.ther_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1077,7 +1132,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem_pitt_2022.faers.ther_table_counts.sql</origin>
+        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1129,14 +1184,14 @@ databases</note>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
-    <endedLine>^differences</endedLine>
+    <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
       <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>Y</append>
       <split>N</split>
@@ -1148,9 +1203,21 @@ databases</note>
       <add_to_result_filenames>N</add_to_result_filenames>
       <pad>Y</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>nr+1</splitevery>
+      <splitevery>0</splitevery>
     </file>
     <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
       <field>
         <name>domain</name>
         <type>String</type>
@@ -1222,7 +1289,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>720</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1270,54 +1337,135 @@ databases</note>
     <fields>
       <field>
         <name>domain</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>total</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>qtr</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>5</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>total</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>yr</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>qtr</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
-      </field>
-      <field>
         <name>flagfield</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>line_break</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output - log matches 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> - </separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>Y</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>line_break</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1339,7 +1487,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>720</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1386,7 +1534,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>592</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

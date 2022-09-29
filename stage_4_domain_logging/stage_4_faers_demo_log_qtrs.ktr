@@ -457,6 +457,27 @@ databases</note>
       <bordercolorblue>100</bordercolorblue>
       <drawshadow>Y</drawshadow>
     </notepad>
+    <notepad>
+      <note>merge join helps the transform wait for data from the line_break and the table queries</note>
+      <xloc>608</xloc>
+      <yloc>400</yloc>
+      <width>586</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>${DATABASE_COMPARISON_NAME}</name>
@@ -572,11 +593,6 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge rows (diff)</from>
-      <to>Filter rows if flagfield is not identical</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filter rows if flagfield is not identical</from>
       <to>Log identical year qtr counts</to>
       <enabled>Y</enabled>
@@ -596,7 +612,136 @@ databases</note>
       <to>Text file output - log matches</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Data grid - add line_break 2</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge rows (diff)</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join</from>
+      <to>Filter rows if flagfield is not identical</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Data grid - add line_break</from>
+      <to>Text file output - log matches 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Text file output - log differences</from>
+      <to>Block this step until steps finish</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Data grid - add line_break 3</from>
+      <to>Text file output - log matches 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Block this step until steps finish</from>
+      <to>Data grid - add line_break 3</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Data grid - add line_break</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>  </item>
+      </line>
+      <line>
+        <item/>
+      </line>
+      <line>
+        <item>DEMO stage_4_faers_demo... results</item>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>428</xloc>
+      <yloc>885</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data grid - add line_break 2</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item/>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Filter rows if flagfield is not identical</name>
     <type>FilterRows</type>
@@ -637,7 +782,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>400</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -711,7 +856,45 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>496</yloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>FULL OUTER</join_type>
+    <step1>Merge rows (diff)</step1>
+    <step2>Data grid - add line_break 2</step2>
+    <keys_1>
+      <key>total</key>
+      <key>yr</key>
+      <key>qtr</key>
+      <key>domain</key>
+      <key>flagfield</key>
+    </keys_1>
+    <keys_2>
+      <key>line_break</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1028,11 +1211,11 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1056,9 +1239,21 @@ databases</note>
       <add_to_result_filenames>N</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>nr+1</splitevery>
+      <splitevery/>
     </file>
     <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
       <field>
         <name>domain</name>
         <type>String</type>
@@ -1068,48 +1263,48 @@ databases</note>
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>5</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>total</name>
         <type>Integer</type>
-        <format>####0;-####0</format>
+        <format/>
         <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
+        <decimal/>
+        <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>yr</name>
         <type>Integer</type>
-        <format>####0;-####0</format>
+        <format/>
         <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
+        <decimal/>
+        <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>qtr</name>
         <type>Integer</type>
-        <format>####0;-####0</format>
+        <format/>
         <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
+        <decimal/>
+        <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>flagfield</name>
-        <type>String</type>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1130,7 +1325,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>624</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1145,11 +1340,11 @@ databases</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator> - </separator>
-    <enclosure>"</enclosure>
+    <separator> </separator>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1177,7 +1372,7 @@ databases</note>
     </file>
     <fields>
       <field>
-        <name>domain</name>
+        <name>line_break</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1185,48 +1380,60 @@ databases</note>
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>5</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>total</name>
-        <type>Integer</type>
-        <format>####0;-####0</format>
+        <name>domain</name>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>15</length>
+        <length>4</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>total</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
         <precision>0</precision>
       </field>
       <field>
         <name>yr</name>
         <type>Integer</type>
-        <format>####0;-####0</format>
+        <format/>
         <currency/>
         <decimal>.</decimal>
         <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>9</length>
+        <length>-1</length>
         <precision>0</precision>
       </field>
       <field>
         <name>qtr</name>
         <type>Integer</type>
-        <format>####0;-####0</format>
+        <format/>
         <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
+        <decimal/>
+        <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
       </field>
       <field>
         <name>flagfield</name>
-        <type>String</type>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1247,7 +1454,76 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>624</yloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output - log matches 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> - </separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>Y</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>428</xloc>
+      <yloc>997</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1294,7 +1570,157 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>496</yloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <steps>
+      <step>
+        <name>Text file output - log differences</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>880</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data grid - add line_break 3</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>  </item>
+      </line>
+      <line>
+        <item/>
+      </line>
+      <line>
+        <item/>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>960</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output - log matches 2 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> - </separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>Y</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>Y</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>line_break</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

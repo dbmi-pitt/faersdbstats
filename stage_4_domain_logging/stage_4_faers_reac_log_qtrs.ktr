@@ -459,8 +459,8 @@ databases</note>
     </notepad>
     <notepad>
       <note>merge join helps the transform wait for data from the line_break and the table queries</note>
-      <xloc>756</xloc>
-      <yloc>334</yloc>
+      <xloc>592</xloc>
+      <yloc>400</yloc>
       <width>586</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -679,7 +679,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>736</yloc>
+      <yloc>816</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -722,8 +722,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>275</xloc>
-      <yloc>310</yloc>
+      <xloc>352</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -767,7 +767,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>400</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -841,7 +841,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>496</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -878,8 +878,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>336</yloc>
+      <xloc>528</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1200,7 +1200,7 @@ databases</note>
     <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1224,7 +1224,7 @@ databases</note>
       <add_to_result_filenames>N</add_to_result_filenames>
       <pad>Y</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
+      <splitevery>nr+1</splitevery>
     </file>
     <fields>
       <field>
@@ -1309,8 +1309,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>624</yloc>
+      <xloc>672</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1326,10 +1326,10 @@ databases</note>
       <schema_name/>
     </partitioning>
     <separator>  </separator>
-    <enclosure>"</enclosure>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
+    <header>Y</header>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
@@ -1439,7 +1439,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>624</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1508,7 +1508,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>848</yloc>
+      <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1555,7 +1555,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>496</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -699,7 +699,7 @@ todo:
     </fields>
     <data>
       <line>
-        <item>Stage_4_faers_domain_logging</item>
+        <item>Stage_4_faers_domain_logging.ktr ran</item>
       </line>
       <line>
         <item/>
@@ -747,40 +747,6 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - DEMO_ROW_COUNT</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>DEMO_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Set variables - DEMO_COMPARISON_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
@@ -815,7 +781,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - DRUG_ROW_COUNT</name>
+    <name>Set variables - DEMO_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -828,7 +794,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>DRUG_ROW_COUNT</variable_name>
+        <variable_name>DEMO_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -844,7 +810,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
-      <yloc>208</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -883,7 +849,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - INDI_ROW_COUNT</name>
+    <name>Set variables - DRUG_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -896,7 +862,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>INDI_ROW_COUNT</variable_name>
+        <variable_name>DRUG_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -912,7 +878,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
-      <yloc>304</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -951,7 +917,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - OUTC_ROW_COUNT</name>
+    <name>Set variables - INDI_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -964,7 +930,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>OUTC_ROW_COUNT</variable_name>
+        <variable_name>INDI_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -980,7 +946,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
-      <yloc>400</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1019,7 +985,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - REAC_ROW_COUNT</name>
+    <name>Set variables - OUTC_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1032,7 +998,7 @@ todo:
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>REAC_ROW_COUNT</variable_name>
+        <variable_name>OUTC_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -1048,7 +1014,7 @@ todo:
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
-      <yloc>512</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1083,6 +1049,40 @@ todo:
     <GUI>
       <xloc>432</xloc>
       <yloc>1344</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - REAC_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>REAC_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1155,40 +1155,6 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - THER_ROW_COUNT</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>count</field_name>
-        <variable_name>THER_ROW_COUNT</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>736</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Set variables - THER_COMPARISON_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
@@ -1219,6 +1185,40 @@ todo:
     <GUI>
       <xloc>448</xloc>
       <yloc>1568</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables - THER_ROW_COUNT</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>count</field_name>
+        <variable_name>THER_ROW_COUNT</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

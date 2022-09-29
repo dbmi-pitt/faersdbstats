@@ -46,7 +46,7 @@ printf '\n' >> $log_location
 
 
 
-echo 'REAC_LEGACY' >> $log_location
+echo 'DRUG_LEGACY' >> $log_location
 echo ${DRUG_LEGACY_ROW_COUNT} "<- " ${DATABASE_NAME}  >> $log_location
 echo ${DRUG_LEGACY_COMPARISON_ROW_COUNT} "<- " ${DATABASE_COMPARISON_NAME} >> $log_location
 if [ ${DRUG_LEGACY_ROW_COUNT} -lt ${DRUG_LEGACY_COMPARISON_ROW_COUNT} ]
@@ -71,7 +71,7 @@ elif [ ${DRUG_LEGACY_COMPARISON_ROW_COUNT} -eq 0 ]
 then
      echo 'TABLES EMPTY PLEASE INVESTIGATE; (did stage_3 run?)'  >> $log_location
 else
-    echo "REAC_LEGACY PERFECTO!!!"  >> $log_location
+    echo "DRUG_LEGACY PERFECTO!!!"  >> $log_location
 fi
 printf '\n' >> $log_location
 printf '\n' >> $log_location
