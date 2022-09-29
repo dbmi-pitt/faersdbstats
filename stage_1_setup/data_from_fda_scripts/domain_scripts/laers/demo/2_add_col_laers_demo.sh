@@ -10,7 +10,7 @@ echo pwd is `pwd`
 
 #for adding empty columns gets run on from domain level directory
 source ../../../faers_config.config
-cd ${BASE_FILE_DIR}/data_3_sync_columns/laers/demo/
+cd ${BASE_FILE_DIR}/data_from_s3/laers/demo/
 
 echo pwd now is `pwd`
 # example workflow:
@@ -72,7 +72,8 @@ for name in ./2004/**/*.txt ./2005/**/*Q1.txt ./2005/**/*Q2.txt; do #all quarter
         # tr -d '\015' <$name >"${name}"_staged_with_lfs_only.txt
 
         #add empty last column at end of each line by adding 22nd $
-        sed -i 's/\$/\$\$/22' $name        
+        #remove empty last column at end of each line by removing 21st $
+        sed -i 's/\$//21' $name        
         #           \   \      \
            # escaped $ n $$   replace 22nd one
     
