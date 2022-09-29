@@ -4,7 +4,7 @@
 echo pwd is     `pwd`
 
 #for adding empty columns gets run on from domain level directory
-source ../../faers_config.config
+source ../../../../faers_config.config
 cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta
 # cd ${BASE_FILE_DIR}/data_from_s3/laers/demo/
 
