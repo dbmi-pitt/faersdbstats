@@ -19,16 +19,17 @@ for file in ./**/**/*.txt; do
     if [ "${#file}" -eq 22 ]; then
         echo $file is 22 long
         echo 'pwd in this loop is '`pwd`
-        echo $file >> first_2_lines_report_all_files.txt
-        # sed '2,$ d' < $file >> first_2_lines_report_all_files.txt
+        echo $file >> 1_first_2_lines_report_all_files.txt
+        # sed '2,$ d' < $file >> 1_first_2_lines_report_all_files.txt
         #output first 2 lines to a file
-        head -2 $file >> first_2_lines_report_all_files.txt
-        echo ' ' >> first_2_lines_report_all_files.txt
-        echo ' ' >> first_2_lines_report_all_files.txt
+        head -2 $file >> 1_first_2_lines_report_all_files.txt
+        echo ' ' >> 1_first_2_lines_report_all_files.txt
+        echo ' ' >> 1_first_2_lines_report_all_files.txt
     else
          echo SKIPPED $file is ${#file} long
     fi
 done;
 echo ' '
 echo ' '
-echo '*** select all then copy and paste the first_2_lines_report.txt contents into libreoffice calc w/ $ delimiter (note excel is stubborn)'
+echo '*** select all then copy and paste the 1_first_2_lines_report.txt contents into libreoffice calc w/ $ delimiter (note excel is stubborn)'
+echo ' '

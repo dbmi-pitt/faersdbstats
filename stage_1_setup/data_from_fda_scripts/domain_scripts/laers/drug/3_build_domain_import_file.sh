@@ -4,11 +4,11 @@
 echo pwd is     `pwd`
 
 #for adding empty columns gets run on from domain level directory
-source ../../faers_config.config
-cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta
+# source ../../../../faers_config.config
+# cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta
 # cd ${BASE_FILE_DIR}/data_from_s3/laers/demo/
-
-echo pwd now is `pwd`
+# 
+# echo pwd now is `pwd`
 # exit;
 
 # aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/demo/ --include "*" --exclude "*only.txt"
@@ -42,10 +42,10 @@ shopt -s globstar
 
     data_from_s3_root_above_laers_or_faers=`pwd`;
 
-if [ "${LOAD_ALL_TIME}" = 1 ]; then
+# if [ "${LOAD_ALL_TIME}" = 1 ]; then
     # mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
         #download s3://..data to local/data_from_s3
-        echo LOAD_ALL_TIME is 1
+        # echo LOAD_ALL_TIME is 1
         headempty=0
     # for name in ./2012/**/*Q4.txt; do
     # for name in ./2013/**/*.txt; do
@@ -56,31 +56,39 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
         # for name in ./2004/**/*.txt ./2005/**/*Q1.txt ./2005/**/*Q2.txt; do
         headempty=0
         for domain in drug; do
+            # cd $domain
+            # echo 'domain is '$domain
+            # echo 'pwd is ' `pwd`
             # for year in 2004; do # just 2004
             for year in 2004 2005 2006 2007 2008 2009 2010 2011 2012; do 
             echo pwd in year loop is      `pwd`
-                for name in ./$domain/$year/**/*Q1_with_data.txt ./$domain/$year/**/*Q2_with_data.txt ./$domain/$year/**/*Q3_with_data.txt ./$domain/$year/**/*Q4_with_data.txt; do #all quarters needed
+            # for name in ./2012/**/*Q4.txt ./2013/**/*.txt ./2014/**/*Q1.txt  ./2014/**/*Q2.txt ; do #trouble area
+            shopt -s globstar
+            # for file in ./**/**/*.txt; do
+
+                for name in ./$year/Q1/*Q1_staged_with_lfs_only.txt ./$year/Q2/*Q2_staged_with_lfs_only.txt ./$year/Q3/*Q3_staged_with_lfs_only.txt ./$year/Q4/*Q4_staged_with_lfs_only.txt; do #all quarters needed
 
                     # for name in ./2004/**/*.txt ./2005/**/*Q1.txt ; do #for not 05 q2 but others needed
 
                     # for name in ./2004/**/*.txt ./2005/**/*Q2.txt; do
                     # for name in ./2005/**/*Q1.txt; do
                     # for name in ./2005/**/*Q2.txt; do
+                    echo '$name is '$name
                     # echo ${name} length of ${#name}
 
-                    if [ ${#name} -eq 37 ]; then
-                        echo $name is 37 chars long lets gooooooooo
-                        domain=${name:2:4}
+                    if [ ${#name} -eq 43 ]; then
+                        echo $name is ${#name} chars long lets gooooooooo
+                        # domain=${name:2:4}
                         # year=${name:7:4}
-                        yr=${name:9:2}
-                        quarter=${name:12:2}
-                        qtr=${name:13:1}
+                        yr=${year:2:2}
+                        quarter=${name:16:2}
+                        qtr=${name:17:1}
                         echo $laers_faers - $domain - $year - $quarter aka - $yr $qtr
                         # echo 'year is ' $year
                         # echo 'yr is ' $yr
-                        domain_uc=${name:2:4} #domain upper case
+                        # domain_uc=${domain:2:4} #domain upper case ./drug/2012/Q1/DRUG04Q1_staged_with_lfs_only.txt
                         #make domain lower case
-                        domain=${domain_uc,,}
+                        domain=${domain,,}
                                 echo 'name is' $name
                                 echo 'domain is' $domain
                             # if [ "${#name}" -eq 22 ]; then 
@@ -126,51 +134,52 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                                     #remove \r
                                     header="${header%%[[:cntrl:]]}"
                                     echo $header
-                                    echo $header > $domain/${domain}.txt
+                                    echo $header > ${domain}.txt
                                     echo "${domain}.txt" is the domain.txt
                                     
                                     #headers we want
                                     #primaryid$caseid$demo_seq$role_cod$CONFID$prod_ai$val_vbm$route$dose_vbm$cum_dose_chr$cum_dose_unit$dechal$rechal$lot_num$exp_dt$nda_num$dose_amt$dose_unit$dose_form$dose_freq
                                     headempty=1 &&
                                     #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename                    
-                                    tail -n +2 --quiet ${name} >> $domain/$domain.txt
+                                    tail -n +2 --quiet ${name} >> $domain.txt
                                 else #else on headempty = 0; so headempty not 0
                                     echo '$headempty is '$headempty
                                     next_header="$(head -1 --quiet ${name})"
-                                    if [ $header != $next_header ]; then
-                                        echo 'header '
-                                        echo $header
-                                        echo 'does not match'
-                                        echo $next_header
-                                        exit;
-                                    fi
+                                    # if [ $header != $next_header ]; then
+                                    #     echo 'header '
+                                    #     echo $header
+                                    #     echo 'does not match'
+                                    #     echo $next_header
+                                    #     exit;
+                                    # fi
                                     #tail outputs last -n+2 lines of a file (shows all lines of report from the second line onwards) # --quiet does not output the filename
-                                    tail -n +2 --quiet ${name} >> $domain/$domain.txt
+                                    tail -n +2 --quiet ${name} >> $domain.txt
 
                                 fi #end if [ $headempty = 0 ]; then
 
                                 #make a sm.txt file that has only 20 lines to check results
                                 # sed '20,$ d' $name > "${name:0:10}"sm.txt
                     else
-                        echo SKIPPED $name not equal to 27 chars long its ${#name}
+                        echo SKIPPED $name not equal to 32 chars long its ${#name}
                     fi #end name length
                 done; #end .txt file loop aka qtr loop
             done; #end year loop
             #reset headempty for next domain
 
             #replace null chars w/ space
-            sed -i 's/\x0/ /g' $domain/${domain}.txt
-            head < $domain/${domain}.txt > $domain/${domain}_head.txt
-            echo `wc -l $domain/${domain}.txt`
+            sed -i 's/\x0/ /g' ${domain}.txt
+            head < ${domain}.txt > ${domain}_head_n_tail.txt
+            tail < ${domain}.txt >> ${domain}_head_n_tail.txt
+            echo `wc -l ${domain}.txt`
             cd $data_from_s3_root_above_laers_or_faers
         done; #end domain loop
     
      done; #end laers_faers loop
             headempty=0
-    else
-        echo 'you must be looking to load one quarter of data'
+    # else
+    #     echo 'you must be looking to load one quarter of data'
         # done; #end domain loop
-fi #LOAD_ALL_TIME = 1
+# fi #LOAD_ALL_TIME = 1
 
 
 # echo 'this script should have taken *_staged_with_lfs_only.txt in data_from_s3/laers/demo/**/ (quarter folders) and added a 23th column and then added to the header REPORTER_COUNTRY after $CONFID ';
