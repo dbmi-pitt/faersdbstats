@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_LOG_NAME}</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -1021,13 +1021,26 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>rundate=$(date "+%m%d%Y")
-#looks nice if your ${LOG_FILENAME_ROOT} is something like "LOG-Sept-2022-load"
-#pg_dump -d ${DATABASE_NAME} -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -W ${DATABASE_PASSWORD} > ${DATABASE_BACKUP_LOCATION}/${LOG_FILENAME_ROOT: 4}_${rundate}.dump
-# '/usr/bin/postgresql/10/bin/pg_dump' –U rw_grp cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09122022.dump
-# pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09132022.dump
-psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} "user=${DATABASE_USER} dbname=${DATABASE_NAME} password=\'${DATABASE_PASSWORD}\'" 
-pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-load_09192022.dump</script>
+      <script>echo "$SHELL"
+
+run_date="$(date "+%m%d%Y")"
+
+#echo $run_date
+
+echo ${run_date}
+
+#works
+#PGPASSWORD="${DATABASE_PASSWORD}" pg_dump -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} ${DATABASE_NAME} > /media/large-backup-drive/pentaho-user-dumps/${LOG_FILENAME_ROOT}_stg_1_auto_bk_${run_date}.dump
+
+
+#note -Fc = Format custom Output a custom-format archive suitable for input into
+              # pg_restore. Together with the directory output format, this is
+              # the most flexible output format in that it allows manual
+              # selection and reordering of archived items during restore. This
+              # format is also compressed by default.
+
+PGPASSWORD="${DATABASE_PASSWORD}" pg_dump -Fc -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} ${DATABASE_NAME} > /media/large-backup-drive/pentaho-user-dumps/${LOG_FILENAME_ROOT}_stg_1_auto_bk_${run_date}.dump
+</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -1343,7 +1356,7 @@ pg_dump cem_pitt_2022 > /media/large-backup-drive/pentaho-user-dumps/Sept-2022-l
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
