@@ -666,48 +666,47 @@ printf '\n\n' >> $log_location</script>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>update demo
+      <sql>update ${DATABASE_SCHEMA}demo
 	set qtr = qtr_var::int;
 
-update demo
+update ${DATABASE_SCHEMA}demo
 	set yr = yr_var::int;
 
-update drug
+update ${DATABASE_SCHEMA}drug
 	set qtr = qtr_var::int;
 
-update drug
+update ${DATABASE_SCHEMA}drug
 	set yr = yr_var::int;
 
-update indi
+update ${DATABASE_SCHEMA}indi
 	set qtr = qtr_var::int;
 
-update indi
+update ${DATABASE_SCHEMA}indi
 	set yr = yr_var::int;
 
-update outc
+update ${DATABASE_SCHEMA}outc
 	set qtr = qtr_var::int;
 
-update outc
+update ${DATABASE_SCHEMA}outc
 	set yr = yr_var::int;
 
-update reac
+update ${DATABASE_SCHEMA}reac
 	set qtr = qtr_var::int;
 
-update reac
+update ${DATABASE_SCHEMA}reac
 	set yr = yr_var::int;
 
-update rpsr
+update ${DATABASE_SCHEMA}rpsr
 	set qtr = qtr_var::int;
 
-update rpsr
+update ${DATABASE_SCHEMA}rpsr
 	set yr = yr_var::int;
 
-update ther
+update ${DATABASE_SCHEMA}ther
 	set qtr = qtr_var::int;
 
-update ther
-	set yr = yr_var::int;
-</sql>
+update ${DATABASE_SCHEMA}ther
+	set yr = yr_var::int;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -725,46 +724,46 @@ update ther
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>update demo_legacy
+      <sql>update ${DATABASE_SCHEMA}.demo_legacy
 	set qtr = qtr_var::int;
 
-update demo_legacy
+update ${DATABASE_SCHEMA}.demo_legacy
 	set yr = yr_var::int;
 
-update drug_legacy
+update ${DATABASE_SCHEMA}.drug_legacy
 	set qtr = qtr_var::int;
 
-update drug_legacy
+update ${DATABASE_SCHEMA}.drug_legacy
 	set yr = yr_var::int;
 
-update indi_legacy
+update ${DATABASE_SCHEMA}.indi_legacy
 	set qtr = qtr_var::int;
 
-update indi_legacy
+update ${DATABASE_SCHEMA}.indi_legacy
 	set yr = yr_var::int;
 
-update outc_legacy
+update ${DATABASE_SCHEMA}.outc_legacy
 	set qtr = qtr_var::int;
 
-update outc_legacy
+update ${DATABASE_SCHEMA}.outc_legacy
 	set yr = yr_var::int;
 
-update reac_legacy
+update ${DATABASE_SCHEMA}.reac_legacy
 	set qtr = qtr_var::int;
 
-update reac_legacy
+update ${DATABASE_SCHEMA}.reac_legacy
 	set yr = yr_var::int;
 
-update rpsr_legacy
+update ${DATABASE_SCHEMA}.rpsr_legacy
 	set qtr = qtr_var::int;
 
-update rpsr_legacy
+update ${DATABASE_SCHEMA}.rpsr_legacy
 	set yr = yr_var::int;
 
-update ther_legacy
+update ${DATABASE_SCHEMA}.ther_legacy
 	set qtr = qtr_var::int;
 
-update ther_legacy
+update ${DATABASE_SCHEMA}.ther_legacy
 	set yr = yr_var::int;
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
@@ -840,7 +839,7 @@ update ther_legacy
       <to>faers put yr_var and qtr_var into yr and qtr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -858,7 +857,7 @@ update ther_legacy
       <to>Log STAGE 3 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
