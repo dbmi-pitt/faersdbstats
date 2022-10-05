@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_laers_drug_legacy_log_qtrs</name>
+    <name>stage_4_laers_drug_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -567,19 +567,9 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>log flagfield not identical</from>
-      <to>Text file output - log differences</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Log identical year qtr counts</from>
       <to>Text file output - log matches</to>
       <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Data grid - add line_break</from>
-      <to>Text file output - log matches 2</to>
-      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Comparison Table input - cem.faers.drug_legacy_table_counts.sql</from>
@@ -602,12 +592,17 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows if diff is not 0</from>
-      <to>Text file output - log matches 2 2</to>
+      <from>Data grid - add line_break</from>
+      <to>Text file output - log matches 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Text file output - log matches 2 2</from>
+      <from>log flagfield not identical</from>
+      <to>Text file output - log differences</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows if diff is not 0</from>
       <to>log flagfield not identical</to>
       <enabled>Y</enabled>
     </hop>
@@ -616,7 +611,7 @@ databases</note>
     <name>Calculator</name>
     <type>Calculator</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -828,8 +823,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>428</xloc>
-      <yloc>786</yloc>
+      <xloc>128</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -845,7 +840,7 @@ databases</note>
       <schema_name/>
     </partitioning>
     <send_true_to>Log identical year qtr counts</send_true_to>
-    <send_false_to>Text file output - log matches 2 2</send_false_to>
+    <send_false_to>log flagfield not identical</send_false_to>
     <compare>
       <condition>
         <negated>Y</negated>
@@ -1132,7 +1127,7 @@ databases</note>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
-    <footer>Y</footer>
+    <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
@@ -1153,9 +1148,9 @@ databases</note>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
       <add_to_result_filenames>N</add_to_result_filenames>
-      <pad>N</pad>
+      <pad>Y</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>nr+1</splitevery>
+      <splitevery>nr+2</splitevery>
     </file>
     <fields>
       <field>
@@ -1200,7 +1195,7 @@ databases</note>
         <format/>
         <currency/>
         <decimal/>
-        <group/>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
@@ -1212,7 +1207,7 @@ databases</note>
         <format/>
         <currency/>
         <decimal/>
-        <group>,</group>
+        <group/>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
@@ -1241,7 +1236,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>752</yloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1261,7 +1256,7 @@ databases</note>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>Y</enclosure_fix_disabled>
     <header>Y</header>
-    <footer>Y</footer>
+    <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
     <encoding>UTF-8</encoding>
@@ -1282,9 +1277,9 @@ databases</note>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
       <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
+      <pad>Y</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery>n+2</splitevery>
     </file>
     <fields>
       <field>
@@ -1329,7 +1324,7 @@ databases</note>
         <format>###,###,###</format>
         <currency/>
         <decimal/>
-        <group/>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
@@ -1414,8 +1409,8 @@ databases</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>428</xloc>
-      <yloc>898</yloc>
+      <xloc>128</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1462,126 +1457,7 @@ databases</note>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output - log matches 2 2</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator> </separator>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>UNIX</format>
-    <compression>None</compression>
-    <encoding>UTF-8</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
-    <file>
-      <name>${BASE_FILE_DIR}/logs/${LOG_FILENAME_ROOT}</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>Y</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>Y</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-      <field>
-        <name>spaces</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>528</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data grid - add line_break 2</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>spaces</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-        <field_null_if/>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>    </item>
-      </line>
-      <line>
-        <item/>
-      </line>
-      <line>
-        <item/>
-      </line>
-    </data>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>273</xloc>
-      <yloc>313</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -860,11 +860,9 @@ databases</note>
     <step1>Merge rows (diff)</step1>
     <step2>Data grid - add line_break 2</step2>
     <keys_1>
-      <key>total</key>
       <key>yr</key>
       <key>qtr</key>
       <key>domain</key>
-      <key>flagfield</key>
     </keys_1>
     <keys_2>
       <key>line_break</key>
