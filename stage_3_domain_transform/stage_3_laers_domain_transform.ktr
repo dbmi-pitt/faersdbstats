@@ -458,7 +458,7 @@ note:
 SIZE and STAT domain are not loaded by this transform
 </note>
       <xloc>0</xloc>
-      <yloc>0</yloc>
+      <yloc>64</yloc>
       <width>682</width>
       <heigth>367</heigth>
       <fontname>Ubuntu</fontname>
@@ -500,12 +500,11 @@ SIZE and STAT domain are not loaded by this transform
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>these load_*'s
-TRUNCATE!</note>
-      <xloc>240</xloc>
-      <yloc>432</yloc>
-      <width>105</width>
-      <heigth>44</heigth>
+      <note>these load_*'s TRUNCATE!</note>
+      <xloc>0</xloc>
+      <yloc>0</yloc>
+      <width>184</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -577,7 +576,7 @@ TRUNCATE!</note>
     <hop>
       <from>Data grid - Stage_3_laers_domain has started</from>
       <to>Text file output - Log output</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>demo - CSV file input</from>
@@ -622,22 +621,22 @@ TRUNCATE!</note>
     <hop>
       <from>indi - CSV file input</from>
       <to>Filter rows - Is indi qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
       <to>load_in_indi_legacy_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_indi_import_failed_lines</from>
       <to>Abort if 100 lines have failed from indi.txt</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is indi qtr 1, 2, 3 or 4?</from>
       <to>log laers_indi_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_outc_import_failed_lines</from>
@@ -657,7 +656,7 @@ TRUNCATE!</note>
     <hop>
       <from>outc - CSV file input</from>
       <to>Filter rows - Is outc qtr 1, 2, 3 or 4?</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log laers_reac_import_failed_lines</from>
@@ -682,22 +681,22 @@ TRUNCATE!</note>
     <hop>
       <from>log laers_rpsr_import_failed_lines</from>
       <to>Abort if 100 lines have failed from reac 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>rpsr - CSV file input</from>
       <to>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
       <to>load_in_rpsr_legacy_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filter rows - Is rpsr qtr 1, 2, 3 or 4?</from>
       <to>log laers_rpsr_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log laers_ther_import_failed_lines</from>
