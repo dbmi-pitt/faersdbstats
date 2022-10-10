@@ -387,7 +387,7 @@ aws configure list</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>1408</yloc>
+      <yloc>1616</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -484,7 +484,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>624</xloc>
-      <yloc>1296</yloc>
+      <yloc>1440</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -539,7 +539,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>80</xloc>
-      <yloc>1408</yloc>
+      <yloc>1616</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -705,7 +705,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>624</xloc>
-      <yloc>1408</yloc>
+      <yloc>1616</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -798,7 +798,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1504</yloc>
+      <yloc>1712</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -946,7 +946,7 @@ printf '\n\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1648</yloc>
+      <yloc>1856</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1137,8 +1137,33 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>1296</yloc>
+      <xloc>80</xloc>
+      <yloc>1440</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>s3_domain_import_files_upload.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/s3_domain_import_files_upload.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>1440</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1337,7 +1362,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1388,6 +1413,15 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     </hop>
     <hop>
       <from>fix_fda_data</from>
+      <to>s3_domain_import_files_upload.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>s3_domain_import_files_upload.sh</from>
       <to>country_codes_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1469,7 +1503,7 @@ if one will drop all and load all "fresh"</note>
       <note>&lt;&lt; even though drug_usagi isn't completed in this workflow
 this table structure allows for stage 4 sqls to run w/o error</note>
       <xloc>288</xloc>
-      <yloc>1520</yloc>
+      <yloc>1728</yloc>
       <width>404</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
@@ -1494,6 +1528,30 @@ see stage_1_setup/data_from_fda/readme.md</note>
       <yloc>1248</yloc>
       <width>324</width>
       <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>disabled because
+import files need checked
+resume with...
+run from country_codes_job step</note>
+      <xloc>128</xloc>
+      <yloc>1360</yloc>
+      <width>232</width>
+      <heigth>78</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
