@@ -1010,7 +1010,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename/>
+      <filename>${Internal.Entry.Current.Directory}/database_backup.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -1020,27 +1020,8 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>echo "$SHELL"
-
-run_date="$(date "+%m%d%Y")"
-
-#echo $run_date
-
-echo ${run_date}
-
-#works
-#PGPASSWORD="${DATABASE_PASSWORD}" pg_dump -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} ${DATABASE_NAME} > /media/large-backup-drive/pentaho-user-dumps/${LOG_FILENAME_ROOT}_stg_1_auto_bk_${run_date}.dump
-
-
-#note -Fc = Format custom Output a custom-format archive suitable for input into
-              # pg_restore. Together with the directory output format, this is
-              # the most flexible output format in that it allows manual
-              # selection and reordering of archived items during restore. This
-              # format is also compressed by default.
-
-PGPASSWORD="${DATABASE_PASSWORD}" pg_dump -Fc -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} ${DATABASE_NAME} > /media/large-backup-drive/pentaho-user-dumps/${LOG_FILENAME_ROOT}_stg_1_auto_bk_${run_date}.dump
-</script>
+      <insertScript>N</insertScript>
+      <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
