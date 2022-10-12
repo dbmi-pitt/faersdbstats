@@ -536,7 +536,7 @@
     <files_count>N</files_count>
     <files_count_fieldname>filescount</files_count_fieldname>
     <rows_count_fieldname>rowscount</rows_count_fieldname>
-    <rowseparator_format>CARRIAGERETURN</rowseparator_format>
+    <rowseparator_format>LINEFEED</rowseparator_format>
     <row_separator/>
     <isaddresult>Y</isaddresult>
     <filefield>N</filefield>

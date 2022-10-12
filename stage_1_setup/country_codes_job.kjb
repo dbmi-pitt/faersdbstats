@@ -668,8 +668,8 @@ echo 'country code table create failed not equal to 32' >> $log_location</script
       <connection>${DATABASE_NAME}</connection>
       <schemaname>${DATABASE_SCHEMA}</schemaname>
       <tablename>country_code</tablename>
-      <success_condition>rows_count_greater</success_condition>
-      <limit>127</limit>
+      <success_condition>rows_count_equal</success_condition>
+      <limit>32</limit>
       <is_custom_sql>N</is_custom_sql>
       <is_usevars>N</is_usevars>
       <custom_sql/>
@@ -723,7 +723,7 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./show_country_code_coun
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 printf '\n' >> $log_location
 echo ${COUNTRY_CODE_ROW_NUM} " &lt; number of rows in country code table" >> $log_location
-echo ${COUNTRY_CODE_ROW_NUM_CEM_CHEX} " &lt; number of rows in cem country code table" >> $log_location
+echo ${COUNTRY_CODE_ROW_NUM_CEM_CHEX} " &lt; number of rows in comparison country code table" >> $log_location
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
