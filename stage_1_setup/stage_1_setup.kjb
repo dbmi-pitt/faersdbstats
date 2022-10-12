@@ -763,7 +763,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_1_setup/create_schemas.sh</filename>
+      <filename>${Internal.Entry.Current.Directory}/create_schemas.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -842,7 +842,7 @@ chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_1_setup/log_init.sh</filename>
+      <filename>${Internal.Entry.Current.Directory}/log_init.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -1137,8 +1137,8 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>1440</yloc>
+      <xloc>32</xloc>
+      <yloc>1376</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1164,6 +1164,56 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <nr>0</nr>
       <xloc>384</xloc>
       <yloc>1440</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>back_up_s3_data_bucket.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/back_up_s3_data_bucket.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>1504</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>back_up_s3_data_bucket.sh 2</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/back_up_s3_data_bucket.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>429</xloc>
+      <yloc>1267</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1236,7 +1286,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>SUCCESS IF LOAD_ALL_TIME=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1362,7 +1412,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1385,15 +1435,6 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</from>
-      <to>country_codes_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>download fda laers data</from>
       <to>download fda faers data</to>
       <from_nr>0</from_nr>
@@ -1412,20 +1453,47 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fix_fda_data</from>
-      <to>s3_domain_import_files_upload.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>s3_domain_import_files_upload.sh</from>
       <to>country_codes_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>if REBUILD_ALL_TIME_DATA_LOCALLY = 1</from>
+      <to>back_up_s3_data_bucket.sh 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>back_up_s3_data_bucket.sh 2</from>
+      <to>country_codes_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fix_fda_data</from>
+      <to>back_up_s3_data_bucket.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>back_up_s3_data_bucket.sh</from>
+      <to>s3_domain_import_files_upload.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1549,7 +1617,7 @@ import files need checked
 resume with...
 run from country_codes_job step</note>
       <xloc>128</xloc>
-      <yloc>1360</yloc>
+      <yloc>1392</yloc>
       <width>232</width>
       <heigth>78</heigth>
       <fontname>Ubuntu</fontname>
