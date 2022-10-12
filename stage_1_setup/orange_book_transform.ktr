@@ -665,7 +665,7 @@ inserts into nda table</note>
     </partitioning>
     <aws_access_key>Encrypted 414b4943e9c0e09029fda0b2992c9d49fcaaf9ec</aws_access_key>
     <aws_secret_key>Encrypted 715a5365744e6252682b564f78525a664e31784d6847665bfdaafcb924d6958c833ff65fdba7ac83</aws_secret_key>
-    <bucket>napdi-cem-sandbox-files</bucket>
+    <bucket>${AWS_S3_BUCKET_NAME}</bucket>
     <filename>data_setup/products.txt</filename>
     <filename_field/>
     <rownum_field/>

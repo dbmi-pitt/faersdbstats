@@ -34,7 +34,7 @@ echo scripts_pwd is `pwd`
 # ___ 3. run *stage_2*./s3_data_download_after_add_col.sh on(_staged_with_lfs_only.txt)
 # ___ 4. run sed '0/$DEMO12Q4.txt$4$12$filename$yr$qtr/$filename$yr$qtr' demo.txt
 
-# aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/demo/ --include "*" --exclude "*only.txt"
+# aws s3 sync . s3://${AWS_S3_BUCKET_NAME}/data/faers/demo/ --include "*" --exclude "*only.txt"
 
 #set and echo globstar settings for ** used
 shopt -s globstar

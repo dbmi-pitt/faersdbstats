@@ -61,7 +61,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
     
     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
     if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
-        aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+        aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
     fi
 
     data_from_s3_root_above_laers_faers=`pwd`;
@@ -83,7 +83,7 @@ if [ "${LOAD_ALL_TIME}" = 1 ]; then
                         rm $file
                     done;
 
-                aws s3 cp s3://napdi-cem-sandbox-files/data/$faers_laers/$domain/ ${BASE_FILE_DIR}/data_from_s3/$faers_laers/$domain/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+                aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/$faers_laers/$domain/ ${BASE_FILE_DIR}/data_from_s3/$faers_laers/$domain/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
                 
                 echo 'domain is '$domain;
                 #mkdir $domain #throws error because aws cp created it
@@ -204,7 +204,7 @@ else #not LOAD_ALL_DATA
         #echo `pwd` it should be path/to/data_from_s3 aka BASE_FILE_DIR;
 
         for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
-            s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$faers_or_laers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
+            s3_bucket_source_path=s3://${AWS_S3_BUCKET_NAME}/data/$faers_or_laers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
             
 
             state=`aws s3 ls $s3_bucket_source_path`

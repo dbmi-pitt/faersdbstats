@@ -16,7 +16,7 @@ cd ${BASE_FILE_DIR}/faersdbstats_data/data_meta
 echo pwd now is `pwd`
 # exit;
 
-# aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/indi/ --include "*" --exclude "*only.txt"
+# aws s3 sync . s3://${AWS_S3_BUCKET_NAME}/data/faers/indi/ --include "*" --exclude "*only.txt"
 
 #set and echo globstar settings for ** used
 shopt -s globstar
@@ -40,7 +40,7 @@ shopt -s globstar
 #     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
 #     if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
 #         echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
-#         aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+#         aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
 #     else
 #         echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
 #     fi

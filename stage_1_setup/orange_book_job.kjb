@@ -512,8 +512,8 @@ export "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"
 
 aws configure list
 
-#echo "aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/orange-book-data-files/ s3://napdi-cem-sandbox-files/${CEM_DOWNLOAD_DATA_FOLDER}_setup --recursive"
-aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/orange-book-data-files/ s3://napdi-cem-sandbox-files/${CEM_DOWNLOAD_DATA_FOLDER}_setup --recursive
+#echo "aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/orange-book-data-files/ s3://${AWS_S3_BUCKET_NAME}/${CEM_DOWNLOAD_DATA_FOLDER}_setup --recursive"
+aws s3 cp ${BASE_FILE_DIR}/${CEM_DOWNLOAD_DATA_FOLDER}_setup/orange-book-data-files/ s3://${AWS_S3_BUCKET_NAME}/${CEM_DOWNLOAD_DATA_FOLDER}_setup --recursive
 
 
 

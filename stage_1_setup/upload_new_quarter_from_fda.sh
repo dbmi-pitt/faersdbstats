@@ -18,7 +18,7 @@ for i in *Q*; do
         continue;
     else 
         echo will upload $i to;
-        echo s3://napdi-cem-sandbox-files/data/faers/"${i:0:4:l}"/20"${i:4:2}"/"${i:6:2}"
-        aws s3 cp $i s3://napdi-cem-sandbox-files/data/faers/"${i:0:4:l}"/20"${i:4:2}"/"${i:6:2}"/  
+        echo s3://${AWS_S3_BUCKET_NAME}/data/faers/"${i:0:4:l}"/20"${i:4:2}"/"${i:6:2}"
+        aws s3 cp $i s3://${AWS_S3_BUCKET_NAME}/data/faers/"${i:0:4:l}"/20"${i:4:2}"/"${i:6:2}"/  
     fi
 done 

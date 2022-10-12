@@ -64,7 +64,7 @@ mkdir -p ${BASE_FILE_DIR}/logs/domain_header_report/
     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
     # if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
     #     echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
-    #     # aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+    #     # aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
     # else
     #     echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
     # fi
@@ -210,7 +210,7 @@ else #not LOAD_ALL_DATA
     # if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
     #     echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
     #     echo about to run aws s3 cp because REBUILD_ALL_TIME_DATA_LOCALLY was 1 or data_from_s3 did not exist
-    #     aws s3 cp s3://napdi-cem-sandbox-files/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+    #     aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
     # else
     #     echo REBUILD_ALL_TIME_DATA_LOCALLY is not one or ${BASE_FILE_DIR}/data_from_s3/ did not exist so skipping aws cp
     # fi
@@ -254,7 +254,7 @@ else #not LOAD_ALL_DATA
             domain_level=${BASE_FILE_DIR}/data_from_s3/$faers_or_laers${domain}
             echo 'just made domain_level='${domain_level}
 
-            s3_bucket_source_path=s3://napdi-cem-sandbox-files/data/$laers_or_faers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
+            s3_bucket_source_path=s3://${AWS_S3_BUCKET_NAME}/data/$laers_or_faers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
             
             echo 'about to check if new source data is there; setting state = aws s3 ls of '$s3_bucket_source_path
             state=`aws s3 ls $s3_bucket_source_path`

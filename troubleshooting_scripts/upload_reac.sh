@@ -26,7 +26,7 @@ cd ${BASE_FILE_DIR}/data_from_s3/faers/reac/
 # ___ 3. run *stage_2*./s3_data_download_after_add_col.sh on(_staged_with_lfs_only.txt)
 # ___ 4. run sed '0/$DRUG12Q4.txt$4$12$filename$yr$qtr/$filename$yr$qtr' drug.txt
 
-# aws s3 sync . s3://napdi-cem-sandbox-files/data/faers/demo/ --include "*" --exclude "*only.txt"
+# aws s3 sync . s3://${AWS_S3_BUCKET_NAME}/data/faers/demo/ --include "*" --exclude "*only.txt"
 
 #set and echo globstar settings for ** used
 shopt -s globstar
@@ -64,12 +64,12 @@ for name in ./2012/**/*Q4.txt ./2013/**/*.txt ./2014/**/*Q1.txt ./2014/**/*Q2.tx
         # echo ${name: 10}
         # echo ${name: 8}
         
-        # aws s3 sync ./2014/Q2/ s3://napdi-cem-sandbox-files/data/faers/reac/2014/Q2/ --exclude='*' --include='*/REAC14Q2.txt'
-        # aws s3 sync ./2012/Q4/ s3://napdi-cem-sandbox-files/data/faers/reac/2012/Q4/ --exclude='*' --include='*/REAC12Q4.txt'
+        # aws s3 sync ./2014/Q2/ s3://${AWS_S3_BUCKET_NAME}/data/faers/reac/2014/Q2/ --exclude='*' --include='*/REAC14Q2.txt'
+        # aws s3 sync ./2012/Q4/ s3://${AWS_S3_BUCKET_NAME}/data/faers/reac/2012/Q4/ --exclude='*' --include='*/REAC12Q4.txt'
         #upload our file to s3 by syncing dest (here) to target (there s3)
-        aws s3 sync .${location} s3://napdi-cem-sandbox-files/data/faers/reac${location} --exclude='*' --include="${thefilename}" --debug
-        # aws s3 sync .${location} s3://napdi-cem-sandbox-files/data/faers/reac${location} --exclude='*' --include='*/REAC12Q4.txt' --debug
-        echo aws s3 sync .${location} s3://napdi-cem-sandbox-files/data/faers/reac${location} --exclude=\'*\' --include=\'*./${thefilename}\'
+        aws s3 sync .${location} s3://${AWS_S3_BUCKET_NAME}/data/faers/reac${location} --exclude='*' --include="${thefilename}" --debug
+        # aws s3 sync .${location} s3://${AWS_S3_BUCKET_NAME}/data/faers/reac${location} --exclude='*' --include='*/REAC12Q4.txt' --debug
+        echo aws s3 sync .${location} s3://${AWS_S3_BUCKET_NAME}/data/faers/reac${location} --exclude=\'*\' --include=\'*./${thefilename}\'
     fi
     # cp $name ${name:0:12}_bak.txt
     # echo 'just made '${name:0:12}_bak.txt

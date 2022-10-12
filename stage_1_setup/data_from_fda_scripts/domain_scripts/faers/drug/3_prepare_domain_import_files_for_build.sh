@@ -30,7 +30,7 @@ echo pwd is `pwd`
 # Big Step three?
 # ___ 5. make import_file ($domain/$domain.txt)
 
-# aws s3 sync . s3://napdi-cem-sandbox-files/data/$laers_faers/$domain --include "*" --exclude "*only.txt"
+# aws s3 sync . s3://${AWS_S3_BUCKET_NAME}/data/$laers_faers/$domain --include "*" --exclude "*only.txt"
 
 #set and echo globstar settings for ** used
 shopt -s globstar
