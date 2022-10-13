@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS demo (
 	reporter_country varchar NULL,
 	occr_country varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -64,6 +66,8 @@ CREATE TABLE IF NOT EXISTS drug (
 	dose_form varchar NULL,
 	dose_freq varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -80,6 +84,8 @@ caseid varchar,
 indi_drug_seq varchar,
 indi_pt varchar,
 filename varchar,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
 qtr int NULL,
 yr int NULL
 );
@@ -96,6 +102,8 @@ CREATE TABLE IF NOT EXISTS outc (
 	caseid varchar NULL,
 	outc_code varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -113,6 +121,8 @@ CREATE TABLE IF NOT EXISTS reac (
 	pt varchar NULL,
 	drug_rec_act varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -131,6 +141,8 @@ CREATE TABLE IF NOT EXISTS rpsr (
 	caseid varchar NULL,
 	rpsr_cod varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -150,6 +162,8 @@ CREATE TABLE IF NOT EXISTS ther (
 	dur varchar NULL,
 	dur_cod varchar NULL,
 	filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );

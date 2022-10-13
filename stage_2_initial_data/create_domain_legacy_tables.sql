@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS demo_legacy (
     confid varchar NULL,
     reporter_country varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -55,6 +57,8 @@ create table IF NOT EXISTS drug_legacy
     EXP_DT varchar,
     NDA_NUM varchar,
     FILENAME varchar,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -68,6 +72,8 @@ CREATE TABLE IF NOT EXISTS indi_legacy (
     drug_seq varchar NULL,
     indi_pt varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -80,6 +86,8 @@ CREATE TABLE IF NOT EXISTS outc_legacy (
     isr varchar NULL,
     outc_cod varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -92,6 +100,8 @@ CREATE TABLE IF NOT EXISTS reac_legacy (
     isr varchar NULL,
     pt varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -117,6 +127,8 @@ CREATE TABLE IF NOT EXISTS rpsr_legacy (
     isr varchar NULL,
     rpsr_cod varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
@@ -133,6 +145,8 @@ CREATE TABLE IF NOT EXISTS ther_legacy (
     dur varchar NULL,
     dur_cod varchar NULL,
     filename varchar NULL,
+    qtr_var varchar NULL,
+    yr_var varchar NULL,
     qtr int NULL,
     yr int NULL
 );
