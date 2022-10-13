@@ -946,7 +946,7 @@ echo "create if not exist'd domain tables" >> $log_location</script>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename/>
+      <filename>${Internal.Entry.Current.Directory}/log_stage_2_complete.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -957,16 +957,7 @@ echo "create if not exist'd domain tables" >> $log_location</script>
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>#!/bin/bash
-log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
-printf '\n' >> $log_location
-echo "#######################################################" >> $log_location
-echo "################ STAGE 2 COMPLETE #####################" >> $log_location
-echo "#######################################################" >> $log_location
-printf '\n\n' >> $log_location
-echo '*note: if LOAD_ALL_DATA=1 run BOTH STAGE 3's and STAGE 4'S' >> $log_location
-echo '...also bulk of STAGE_3's and STAGE_4's transforms' logging is handled at beginning of stage 5' >> $log_location
-printf '\n\n' >> $log_location</script>
+      <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -1063,9 +1054,9 @@ printf '\n\n' >> $log_location</script>
     <notepad>
       <note>Preq's
 - having run stage_1_setup.kjb
+- having copied staging_vocabulary schema from comparison database or other source
 
 ABOUT EACH STEP
--omop											-most excellently creates omop data
 -create meddra snomed mapping     -must have stage_vocabulary.concept table
 -set job variables 2					-exact same as before (brings in env vars)
 -drop create domain tables		-only if LOAD_ALL_TIME (=1) then drop and create fresh tables else do nothing
@@ -1092,7 +1083,7 @@ Logging is blank
       <xloc>16</xloc>
       <yloc>0</yloc>
       <width>1349</width>
-      <heigth>486</heigth>
+      <heigth>484</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
