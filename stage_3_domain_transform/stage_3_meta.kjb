@@ -4,6 +4,7 @@
   <description/>
   <extended_description/>
   <job_version/>
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2022/09/08 14:29:12.733</created_date>
@@ -65,12 +66,12 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection/>
-    <schema/>
-    <table/>
-    <size_limit_lines/>
-    <interval/>
-    <timeout_days/>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_LOG_SCHEMA}</schema>
+    <table>${DATABASE_LOG_TABLE}</table>
+    <size_limit_lines>5000</size_limit_lines>
+    <interval>1s</interval>
+    <timeout_days>3.0</timeout_days>
     <field>
       <id>ID_JOB</id>
       <enabled>Y</enabled>
@@ -158,22 +159,22 @@
     </field>
     <field>
       <id>EXECUTING_SERVER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_SERVER</name>
     </field>
     <field>
       <id>EXECUTING_USER</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>EXECUTING_USER</name>
     </field>
     <field>
       <id>START_JOB_ENTRY</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>START_JOB_ENTRY</name>
     </field>
     <field>
       <id>CLIENT</id>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <name>CLIENT</name>
     </field>
   </job-log-table>
@@ -666,48 +667,48 @@ printf '\n\n' >> $log_location</script>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>update ${DATABASE_SCHEMA}demo
+      <sql>update ${DATABASE_SCHEMA}.demo
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}demo
+update ${DATABASE_SCHEMA}.demo
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}drug
+update ${DATABASE_SCHEMA}.drug
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}drug
+update ${DATABASE_SCHEMA}.drug
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}indi
+update ${DATABASE_SCHEMA}.indi
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}indi
+update ${DATABASE_SCHEMA}.indi
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}outc
+update ${DATABASE_SCHEMA}.outc
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}outc
+update ${DATABASE_SCHEMA}.outc
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}reac
+update ${DATABASE_SCHEMA}.reac
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}reac
+update ${DATABASE_SCHEMA}.reac
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}rpsr
+update ${DATABASE_SCHEMA}.rpsr
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}rpsr
+update ${DATABASE_SCHEMA}.rpsr
 	set yr = yr_var::int;
 
-update ${DATABASE_SCHEMA}ther
+update ${DATABASE_SCHEMA}.ther
 	set qtr = qtr_var::int;
 
-update ${DATABASE_SCHEMA}ther
+update ${DATABASE_SCHEMA}.ther
 	set yr = yr_var::int;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -766,7 +767,7 @@ update ${DATABASE_SCHEMA}.ther_legacy
 update ${DATABASE_SCHEMA}.ther_legacy
 	set yr = yr_var::int;
 </sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
