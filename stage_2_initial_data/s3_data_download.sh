@@ -1,5 +1,5 @@
 #!/bin/bash
-#uncomment source to debug from command line
+#uncomment source to debug from command line (for dev, might also want to comment out aws s3 sync ~ line 53)
 source ../../faers_config.config
 
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
@@ -21,6 +21,8 @@ shopt -s globstar
 shopt globstar
 cd ${BASE_FILE_DIR}
 
+run_date=$(date "+%m%d%Y")
+
 echo 'REBUILD_ALL_TIME_DATA_LOCALLY is '$REBUILD_ALL_TIME_DATA_LOCALLY
 #check if /data_from s3 does not exist then either create it or delete and recreate it
 if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
@@ -30,7 +32,6 @@ if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == 1 ] || [ ! -d "${BASE_FILE_DIR}/data_
             cd data_from_s3
             aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/ . --exclude "*" --include "*.txt" 
         else 
-            run_date=$(date "+%m%d%Y")
             echo 'data_from_s3 does exist, will rename/move it then recreate - line 33'
             if [ ! -d "data_from_s3_${run_date}" ]; then
                 echo renaming data_from_s3 to data_from_s3_${run_date}
@@ -41,11 +42,15 @@ if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == 1 ] || [ ! -d "${BASE_FILE_DIR}/data_
             mkdir data_from_s3
         fi
     else
+        cp data_from_s3 data_from_s3_b_${run_date}
         cd data_from_s3
         #download non-existant text files from s3 to data_from_s3
         echo Performing an aws s3 sync with s3://${AWS_S3_BUCKET_NAME}/data/
+        
         #note this sync does not have the --delete option so it will not remove data from the s3 bucket
+        # should be enabled for production
         aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/ . --exclude "*" --include "*.txt" 
+
 fi
 
 # cd data_from_s3
@@ -68,10 +73,10 @@ mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
     
     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
     if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
-        echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
-        aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
-    else
-        echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
+            echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
+            aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+        else
+            echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
     fi
 
     data_from_s3_root_above_laers_or_faers=`pwd`;
@@ -82,17 +87,19 @@ mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
 
     #loop through faers and laers folders
         for laers_faers in laers faers; do
+        # for laers_faers in faers; do
             echo laers_faers is $laers_faers;
             cd $data_from_s3_root_above_laers_or_faers/$laers_faers;
              echo outer loop pwd is `pwd`
 
             #locally loop through domains and create one staged import file ("domain".txt ie demo.txt)
-            for domain in demo; do # drug indi outc reac rpsr ther; do
+            for domain in demo drug indi outc reac rpsr ther; do
+            # for domain in demo; do # just demo for dev
                 #do one domain like this
                 # for domain in rpsr; do
-                # cd $domain #100% do not cd into domain
+                cd $domain # cd into domain (otherwise everything ends up in demo.txt in faers/ ?)
                 # echo `pwd`
-        #    echo aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/$laers_faers/${domain}/ . --exclude "*" --include "*.txt"
+        #      echo aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/$laers_faers/${domain}/ . --exclude "*" --include "*.txt"
         #         aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/$laers_faers/${domain}/ . --exclude "*" --include "*.txt"
 
                 echo inner loop domain $domain pwd is `pwd`
@@ -111,13 +118,13 @@ mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
                     echo `pwd`
                     firstline=$(head -1 $name)
                     echo $firstline >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
-                    thefilename=${name: 15}
-                    thefilenamebase=${name:15:8}
-                    year='$'${name: 9:2}
-                    qtr='$'${name: 13 :1}
+                    thefilename=${name: 10}
+                    thefilenamebase=${name:10:8}
+                    year='$'${name: 4:2}
+                    qtr='$'${name: 8 :1}
                     thefilenamedata='$'"${thefilename}""$year""$qtr"
                     
-                    if [[ "${#thefilename}" -gt 11 ]]; then
+                    if [[ "${#thefilename}" -gt 11 ]]; then #./2021/Q4/DEMO21Q4.txt
                         #add header line to log file
                         head -1 --quiet ${name} >> ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/${laers_or_faers}_${domain}.txt
                         # echo "name is ${name}";
@@ -176,7 +183,7 @@ mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
                         fi #end if [ $headempty = 0 ]; then
                                     echo ' '
                     else
-                        echo 'SKIPPED name is short '$name ' - ' $domain ' - thefilename is ' $thefilename
+                        echo 'SKIPPED name is short '$name ' - ' $domain ' - thefilename is ' $thefilename length of ${#thefilename}
                                 # echo thefilenamedata is $thefilenamedata
                                 echo ' '
 
@@ -211,11 +218,11 @@ else #not LOAD_ALL_DATA
         #echo "... and we will pull down quarter ->" ${LOAD_NEW_QUARTER}
     #s3 download if REBUILD_ALL_TIME_DATA_LOCALLY=1 or data_from_s3 does not exist locally
     if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" = 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
-        echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
-        echo about to run aws s3 cp because REBUILD_ALL_TIME_DATA_LOCALLY was 1 or data_from_s3 did not exist
-        aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
-    else
-        echo REBUILD_ALL_TIME_DATA_LOCALLY is not one or ${BASE_FILE_DIR}/data_from_s3/ did not exist so skipping aws cp
+            echo data should exist in ${BASE_FILE_DIR}/data_from_s3/
+            echo about to run aws s3 cp because REBUILD_ALL_TIME_DATA_LOCALLY was 1 or data_from_s3 did not exist
+            aws s3 cp s3://${AWS_S3_BUCKET_NAME}/data/ ${BASE_FILE_DIR}/data_from_s3/ --recursive --exclude "*" --include "*.txt" --exclude "*old.txt" 
+        else
+            echo REBUILD_ALL_TIME_DATA_LOCALLY is not one or ${BASE_FILE_DIR}/data_from_s3/ did not exist so skipping aws cp
     fi
 
     data_from_s3_root_above_laers_or_faers=`pwd`;
