@@ -373,7 +373,7 @@ aws configure list</script>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Create Legacy Database Structures</name>
+      <name>create legacy database structures</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -531,7 +531,7 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>656</xloc>
+      <xloc>128</xloc>
       <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
@@ -728,12 +728,12 @@ CREATE TABLE IF NOT EXISTS ther (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>672</xloc>
       <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create_meddra_snomed_mapping.sql</name>
+      <name>create_meddra_snomed_mapping.sql &amp; </name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -761,7 +761,153 @@ FROM (
       AND c.INVALID_REASON IS NULL
 ) z
 WHERE z.ROW_NUM = 1;
-</sql>
+
+--brian buck changes
+--commented out drop's and truncates
+--added "if not exists" to creates
+--index and binary tree commented out
+
+set search_path = ${DATABASE_SCHEMA};
+--demo
+
+--drop table if exists demo_legacy;
+CREATE TABLE IF NOT EXISTS demo_legacy (
+	isr varchar NULL,
+	"CASE" varchar NULL,
+	i_f_cod varchar NULL,
+	foll_seq varchar NULL,
+	image varchar NULL,
+	event_dt varchar NULL,
+	mfr_dt varchar NULL,
+	fda_dt varchar NULL,
+	rept_cod varchar NULL,
+	mfr_num varchar NULL,
+	mfr_sndr varchar NULL,
+	age varchar NULL,
+	age_cod varchar NULL,
+	gndr_cod varchar NULL,
+	e_sub varchar NULL,
+	wt varchar NULL,
+	wt_cod varchar NULL,
+	rept_dt varchar NULL,
+	occp_cod varchar NULL,
+	death_dt varchar NULL,
+	to_mfr varchar NULL,
+	confid varchar NULL,
+	reporter_country varchar NULL,
+	filename varchar NULL
+);
+--truncate demo_legacy;
+
+
+--drug
+--drop table if exists drug_legacy;
+create table IF NOT EXISTS drug_legacy
+(
+ISR varchar,
+DRUG_SEQ varchar,
+ROLE_COD varchar,
+DRUGNAME varchar,
+VAL_VBM varchar,
+ROUTE varchar,
+DOSE_VBM varchar,
+DECHAL varchar,
+RECHAL varchar,
+LOT_NUM varchar,
+EXP_DT varchar,
+NDA_NUM varchar,
+FILENAME varchar
+);
+--truncate drug_legacy;
+
+--indi
+
+--drop table if exists indi_legacy;
+CREATE TABLE IF NOT EXISTS indi_legacy (
+	isr varchar NULL,
+	drug_seq varchar NULL,
+	indi_pt varchar NULL,
+	filename varchar NULL
+);
+--truncate indi_legacy;
+
+
+--outc
+--drop table if exists outc_legacy;
+CREATE TABLE IF NOT EXISTS outc_legacy (
+	isr varchar NULL,
+	outc_cod varchar NULL,
+	filename varchar NULL
+);
+--truncate outc_legacy;
+
+
+--reac
+--drop table if exists reac_legacy;
+CREATE TABLE IF NOT EXISTS reac_legacy (
+	isr varchar NULL,
+	pt varchar NULL,
+	filename varchar NULL
+);
+
+--truncate reac_legacy;
+
+--CREATE INDEX ix_reac_legacy_1 ON reac_legacy USING btree (upper((pt)::text));
+--CREATE INDEX ix_reac_legacy_2 ON reac_legacy USING btree (isr);
+
+
+--reac_pt_legacy
+--drop table if exists reac_pt_legacy_list ;
+CREATE TABLE IF NOT EXISTS reac_pt_legacy_list (
+	isr varchar NULL,
+	reac_pt_list text NULL
+);
+--truncate reac_pt_legacy_list;
+
+
+--rpsr_legacy
+--drop table if exists rpsr_legacy;
+CREATE TABLE IF NOT EXISTS rpsr_legacy (
+	isr varchar NULL,
+	rpsr_cod varchar NULL,
+	filename varchar NULL
+);
+--truncate rpsr_legacy;
+
+
+--ther_legacy
+--drop table if exists ther_legacy ;
+CREATE TABLE IF NOT EXISTS ther_legacy (
+	isr varchar NULL,
+	drug_seq varchar NULL,
+	start_dt varchar NULL,
+	end_dt varchar NULL,
+	dur varchar NULL,
+	dur_cod varchar NULL,
+	filename varchar NULL
+);
+--truncate ther_legacy ;
+
+
+--all_casedemo
+--drop table if exists all_casedemo;
+CREATE TABLE IF NOT EXISTS all_casedemo (
+	"database" text NULL,
+	caseid varchar NULL,
+	isr varchar NULL,
+	caseversion varchar NULL,
+	i_f_code varchar NULL,
+	event_dt varchar NULL,
+	age varchar NULL,
+	sex varchar NULL,
+	reporter_country varchar NULL,
+	primaryid varchar NULL,
+	drugname_list text NULL,
+	reac_pt_list text NULL,
+	fda_dt varchar NULL,
+	imputed_field_name text NULL
+);
+--truncate all_casedemo;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -932,12 +1078,13 @@ echo "BEGINNING OF STAGE 2_INITIAL_DATA JOB" >> $log_location
 echo '#######################################################' >> $log_location
 printf '\n' >> $log_location
 echo "Created meddra_snomed_mapping" >> $log_location
-echo "create if not exist'd domain tables" >> $log_location</script>
+echo "create if not exist'd domain tables" >> $log_location
+echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>384</xloc>
       <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
@@ -987,17 +1134,8 @@ echo "create if not exist'd domain tables" >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_meddra_snomed_mapping.sql</from>
+      <from>create_meddra_snomed_mapping.sql &amp; </from>
       <to>create domain tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>s3_data_download</from>
-      <to>Create Legacy Database Structures</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1015,16 +1153,7 @@ echo "create if not exist'd domain tables" >> $log_location</script>
     </hop>
     <hop>
       <from>Wait for 3s</from>
-      <to>create_meddra_snomed_mapping.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create domain tables</from>
-      <to>Log Stg 2 progress</to>
+      <to>create_meddra_snomed_mapping.sql &amp; </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1041,7 +1170,25 @@ echo "create if not exist'd domain tables" >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Create Legacy Database Structures</from>
+      <from>create domain tables</from>
+      <to>create legacy database structures</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create legacy database structures</from>
+      <to>Log Stg 2 progress</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>s3_data_download</from>
       <to>Log STAGE 2 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1069,6 +1216,8 @@ ABOUT EACH STEP
 To-do: reestablish database connection so that meta works without having to run orange_book_job first.
 update s3 bucket location to faers and laers
 
+move the creation of legacy table structures to stage 2 step 2 (w/ other sqls)
+
 Troubleshooting Tips:
 if "Logging" tab stops producing output restart spoon
 if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing step as if new
@@ -1083,7 +1232,7 @@ Logging is blank
       <xloc>16</xloc>
       <yloc>0</yloc>
       <width>1349</width>
-      <heigth>484</heigth>
+      <heigth>517</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
