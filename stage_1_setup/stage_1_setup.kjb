@@ -946,7 +946,7 @@ printf '\n\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1856</yloc>
+      <yloc>1968</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1216,6 +1216,43 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <yloc>1267</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>omop_vocab_load</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/omop_vocab_load.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>1840</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1347,15 +1384,6 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     <hop>
       <from>Log LOAD_ALL_TIME=0 path taken</from>
       <to>download_new_quarter_from_fda.sh</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create_drug_usagi_mapping_table.sql</from>
-      <to>Log STAGE 1 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1497,6 +1525,24 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>create_drug_usagi_mapping_table.sql</from>
+      <to>omop_vocab_load</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>omop_vocab_load</from>
+      <to>Log STAGE 1 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1517,6 +1563,7 @@ SUCCESS IF LOAD_ALL_TIME=1		**USE CASE LOGIC***
 
 
 To-do:
+add the OMOP vocabulary load to this part of Stage 1 - including extending to add that natural product concepts and relationships
 
 Troubleshooting:
 
@@ -1528,7 +1575,7 @@ Current Issues:
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>1009</width>
-      <heigth>435</heigth>
+      <heigth>446</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
