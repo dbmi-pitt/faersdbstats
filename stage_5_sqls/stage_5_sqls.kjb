@@ -2417,7 +2417,7 @@ printf '\n' >> $log_location</script>
       <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -2535,17 +2535,15 @@ printf '\n' >> $log_location</script>
       <note>Stage 5 - Drug Mapping
 
 Prereq's
-having run...
-stage_1 then...
-stage_2 then...
-stage_3_domain_transform
-and
-stage_3_domain_transform (if data from 2012 Q3 or older)
-stage_4_faers_domain_logging
-stage_4_laers_domain_logging
+  having run...
+    stage_1 then...
+    stage_2 then...
+    stage_3_domain_transform
+  and
+    stage_3_domain_transform (if data from 2012 Q3 or older)
+    stage_4_meta
 
 ABOUT THIS STAGE
--Create Legacy Database Structures (no drop; create; no truncate)				-truncates commented out
 -derive_unique_all_case.sql			-makes LAERS data like FAERS data and removes duplicates created in process
 -map_all_drugname_to_rxnorm
 -standardize_combined_drug_mapping
@@ -2558,9 +2556,6 @@ ABOUT THIS STAGE
 -map_meddra_to_snomed.sql
 -derive_standard_drug_outcome_drilldown.sql       -create table if not exists   -create index if not exists
 
-
-
-
 Troubleshooting:
 if "Logging" tab stops producing output restart spoon
 if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing step as if new
@@ -2570,7 +2565,7 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>773</width>
-      <heigth>605</heigth>
+      <heigth>517</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
