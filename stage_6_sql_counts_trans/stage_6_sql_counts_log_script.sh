@@ -458,32 +458,32 @@ printf '\n' >> $log_location
 
 
 
-echo 'STANDARD_CASE_OUTCOME_ROW_COUNT' >> $log_location
-echo ${STANDARD_CASE_OUTCOME_ROW_COUNT} "<- " ${DATABASE_NAME}  >> $log_location
-echo ${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT} "<- " ${DATABASE_COMPARISON_NAME} >> $log_location
-if [ ${STANDARD_CASE_OUTCOME_ROW_COUNT} -lt ${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT} ]
+echo 'STANDARD_CASE_ADR_ROW_COUNT' >> $log_location
+echo ${STANDARD_CASE_ADR_ROW_COUNT} "<- " ${DATABASE_NAME}  >> $log_location
+echo ${STANDARD_CASE_ADR_COMP_ROW_COUNT} "<- " ${DATABASE_COMPARISON_NAME} >> $log_location
+if [ ${STANDARD_CASE_ADR_ROW_COUNT} -lt ${STANDARD_CASE_ADR_COMP_ROW_COUNT} ]
 then
-	comp_cnt=${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT}
-	cnt=${STANDARD_CASE_OUTCOME_ROW_COUNT}
+	comp_cnt=${STANDARD_CASE_ADR_COMP_ROW_COUNT}
+	cnt=${STANDARD_CASE_ADR_ROW_COUNT}
     echo $comp_cnt
     echo $cnt
 	missing_count=$(($comp_cnt-$cnt))
 	echo $missing_count " MISSING"
 	echo $missing_count " MISSING"  >> $log_location
-elif [ ${STANDARD_CASE_OUTCOME_ROW_COUNT} -gt ${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT} ]
+elif [ ${STANDARD_CASE_ADR_ROW_COUNT} -gt ${STANDARD_CASE_ADR_COMP_ROW_COUNT} ]
 then
-    comp_cnt=${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT}
-	cnt=${STANDARD_CASE_OUTCOME_ROW_COUNT}
+    comp_cnt=${STANDARD_CASE_ADR_COMP_ROW_COUNT}
+	cnt=${STANDARD_CASE_ADR_ROW_COUNT}
     missing_count=$(($cnt-$comp_cnt))
 	echo $missing_count " EXTRA"  >> $log_location
-elif [ ${STANDARD_CASE_OUTCOME_ROW_COUNT} -eq 0 ]
+elif [ ${STANDARD_CASE_ADR_ROW_COUNT} -eq 0 ]
 then
     echo "TABLES EMPTY PLEASE INVESTIGATE; (did stage_3 run?)"  >> $log_location
-elif [ ${STANDARD_CASE_OUTCOME_COMP_ROW_COUNT} -eq 0 ]
+elif [ ${STANDARD_CASE_ADR_COMP_ROW_COUNT} -eq 0 ]
 then
      echo 'TABLES EMPTY PLEASE INVESTIGATE; (did stage_3 run?)'  >> $log_location
 else
-    echo "STANDARD_CASE_OUTCOME_ROW_COUNT PERFECTO!!!"  >> $log_location
+    echo "STANDARD_CASE_ADR_ROW_COUNT PERFECTO!!!"  >> $log_location
 fi
 printf '\n' >> $log_location
 printf '\n' >> $log_location

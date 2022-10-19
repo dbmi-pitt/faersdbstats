@@ -486,7 +486,7 @@ STANDARD_DRUG_OUTCOME_COUNT_A_COUNT_B_ROW_COUNT
 STANDARD_DRUG_OUTCOME_COUNT_C_ROW_COUNT
 STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT
 STANDARD_DRUG_OUTCOME_ROW_COUNT
-STANDARD_CASE_OUTCOME_ROW_COUNT
+STANDARD_CASE_ADR_ROW_COUNT
 STANDARD_CASE_INDICATION_ROW_COUNT
 STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT
 DRUG_REGEX_MAPPING_ROW_COUNT
@@ -535,7 +535,7 @@ STANDARD_DRUG_OUTCOME_COUNT_A_COUNT_B_ROW_COUNT
 STANDARD_DRUG_OUTCOME_COUNT_C_ROW_COUNT
 STANDARD_DRUG_OUTCOME_CONTINGENCY_TABLE_ROW_COUNT
 STANDARD_DRUG_OUTCOME_ROW_COUNT
-STANDARD_CASE_OUTCOME_ROW_COUNT
+STANDARD_CASE_ADR_ROW_COUNT
 STANDARD_CASE_INDICATION_ROW_COUNT
 STANDARD_CASE_OUTCOME_CATEGORY_ROW_COUNT
 DRUG_REGEX_MAPPING_ROW_COUNT
@@ -684,8 +684,8 @@ STANDARD_CASE_DRUG_ROW_COUNT
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - count(*) standard_case_outcome</from>
-      <to>Set variables - STANDARD_CASE_OUTCOME_ROW_COUNT</to>
+      <from>Table input - count(*) standard_case_adr</from>
+      <to>Set variables - STANDARD_CASE_ADR_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1720,7 +1720,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </GUI>
   </step>
   <step>
-    <name>Set variables - STANDARD_CASE_OUTCOME_ROW_COUNT</name>
+    <name>Set variables - STANDARD_CASE_ADR_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1733,7 +1733,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     <fields>
       <field>
         <field_name>count</field_name>
-        <variable_name>STANDARD_CASE_OUTCOME_ROW_COUNT</variable_name>
+        <variable_name>STANDARD_CASE_ADR_ROW_COUNT</variable_name>
         <variable_type>JVM</variable_type>
         <default_value/>
       </field>
@@ -3428,7 +3428,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
     </GUI>
   </step>
   <step>
-    <name>Table input - count(*) standard_case_outcome</name>
+    <name>Table input - count(*) standard_case_adr</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -3439,7 +3439,7 @@ STANDARD_CASE_DRUG_ROW_COUNT
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_outcome</sql>
+    <sql>SELECT count(*) FROM ${DATABASE_SCHEMA}.standard_case_adr</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

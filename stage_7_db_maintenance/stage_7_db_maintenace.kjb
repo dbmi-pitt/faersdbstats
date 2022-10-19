@@ -480,11 +480,11 @@ CREATE INDEX IF NOT EXISTS standard_case_drug_ix_2 ON ${DATABASE_SCHEMA}.standar
 
 CREATE INDEX IF NOT EXISTS standard_case_drug_ix_3 ON ${DATABASE_SCHEMA}.standard_case_drug USING btree (standard_concept_id);
 
-CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_1 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (primaryid);
+CREATE INDEX IF NOT EXISTS standard_case_adr_ix_1 ON ${DATABASE_SCHEMA}.standard_case_adr USING btree (primaryid);
 
-CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_2 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (isr);
+CREATE INDEX IF NOT EXISTS standard_case_adr_ix_2 ON ${DATABASE_SCHEMA}.standard_case_adr USING btree (isr);
 
-CREATE INDEX IF NOT EXISTS standard_case_outcome_ix_3 ON ${DATABASE_SCHEMA}.standard_case_outcome USING btree (outcome_concept_id);
+CREATE INDEX IF NOT EXISTS standard_case_adr_ix_3 ON ${DATABASE_SCHEMA}.standard_case_adr USING btree (outcome_concept_id);
 
 CREATE INDEX IF NOT EXISTS standard_combined_drug_mapping_isr_idx ON ${DATABASE_SCHEMA}.standard_combined_drug_mapping USING btree (isr);
 

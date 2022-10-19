@@ -20,7 +20,7 @@ from (
             b.outcome_concept_id,
             cast(null as integer) as snomed_outcome_concept_id
         from standard_case_drug a
-            inner join standard_case_outcome b on a.primaryid = b.primaryid
+            inner join standard_case_adr b on a.primaryid = b.primaryid
             and a.isr is null
             and b.isr is null
         union
@@ -29,7 +29,7 @@ from (
             b.outcome_concept_id,
             cast(null as integer) as snomed_outcome_concept_id
         from standard_case_drug a
-            inner join standard_case_outcome b on a.isr = b.isr
+            inner join standard_case_adr b on a.isr = b.isr
             and a.isr is not null
             and b.isr is not null
     ) aa
@@ -39,7 +39,7 @@ group by drug_concept_id,
 
 this ^^^ is not working
 - `standard_case_drug` table has data but not all fields have isr (field) data ? 
-    `standard_case_outcome` has data
+    `standard_case_adr` has data
     --
 
 
