@@ -395,12 +395,12 @@ create index if not exists standard_case_drug_ix_2 on standard_case_drug(isr);
 --drop index if exists standard_case_drug_ix_3;
 create index if not exists standard_case_drug_ix_3 on standard_case_drug(standard_concept_id);
 
---drop index if exists standard_case_outcome_ix_1;
-create index if not exists standard_case_outcome_ix_1 on standard_case_outcome(primaryid);
---drop index if exists standard_case_outcome_ix_2;
-create index if not exists standard_case_outcome_ix_2 on standard_case_outcome(isr);
---drop index if exists standard_case_outcome_ix_3;
-create index if not exists standard_case_outcome_ix_3 on standard_case_outcome(outcome_concept_id);
+--drop index if exists standard_case_adr_ix_1;
+create index if not exists standard_case_adr_ix_1 on standard_case_adr(primaryid);
+--drop index if exists standard_case_adr_ix_2;
+create index if not exists standard_case_adr_ix_2 on standard_case_adr(isr);
+--drop index if exists standard_case_adr_ix_3;
+create index if not exists standard_case_adr_ix_3 on standard_case_adr(outcome_concept_id);
 
 --drop index if exists standard_drug_outcome_count_ix_1;
 create index if not exists standard_drug_outcome_count_ix_1 on standard_drug_outcome_count(drug_concept_id);
@@ -417,7 +417,7 @@ create table if not exists standard_drug_outcome_drilldown as
 	from standard_drug_outcome_count a
 		inner join standard_case_drug b
 			on a.drug_concept_id = b.standard_concept_id
-		inner join standard_case_outcome c
+		inner join standard_case_adr c
 			on a.outcome_concept_id = c.outcome_concept_id
 			and b.primaryid = c.primaryid
 	union
@@ -429,7 +429,7 @@ create table if not exists standard_drug_outcome_drilldown as
 	from standard_drug_outcome_count a
 		inner join standard_case_drug b
 			on a.drug_concept_id = b.standard_concept_id
-		inner join standard_case_outcome c
+		inner join standard_case_adr c
 			on a.outcome_concept_id = c.outcome_concept_id
 			and b.isr = c.isr;
 
@@ -477,8 +477,8 @@ update standard_case_indication a
 	from meddra_snomed_mapping b
 		where a.indication_concept_id = b.meddra_concept_id;
 
--- populate standard_case_outcome SNOMED-CT concepts
-update standard_case_outcome a
+-- populate standard_case_adr SNOMED-CT concepts
+update standard_case_adr a
 	set snomed_outcome_concept_id = snomed_concept_id
 from meddra_snomed_mapping b
 	where a.outcome_concept_id = b.meddra_concept_id;
@@ -545,12 +545,12 @@ select drug_concept_id, outcome_concept_id, count(*) as drug_outcome_pair_count,
 from (
 	select 'PRIMARYID' || a.primaryid as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
 	from standard_case_drug a
-	inner join standard_case_outcome b
+	inner join standard_case_adr b
 	on a.primaryid = b.primaryid and a.isr is null and b.isr is null
 	union 
 	select 'ISR' || a.isr as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
 	from standard_case_drug a
-	inner join standard_case_outcome b
+	inner join standard_case_adr b
 	on a.isr = b.isr and a.isr is not null and b.isr is not null
 ) aa
 group by drug_concept_id, outcome_concept_id;
@@ -568,14 +568,14 @@ group by drug_concept_id, outcome_concept_id;
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_case_outcome.sql</name>
+      <name>derive_standard_case_adr.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql>------------------------------
 --
 -- This SQL script converts the unique legacy LAERS and current FAERS case reactions (adverse event outcomes) MedDRA preferred terms 
--- into MedDRA concept ids in a new table called standard_case_outcome 
+-- into MedDRA concept ids in a new table called standard_case_adr 
 --
 -- LTS COMPUTING LLC
 ------------------------------
@@ -596,8 +596,8 @@ create index if not exists ix_reac_legacy_1 on reac_legacy (upper(pt));
 create index if not exists ix_reac_legacy_2 on reac_legacy (isr);
 analyze verbose reac_legacy;
 
---drop table if exists standard_case_outcome;
-create table if not exists standard_case_outcome as
+--drop table if exists standard_case_adr;
+create table if not exists standard_case_adr as
 select distinct a.primaryid, a.isr, b.pt, c.concept_id as outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
 	from unique_all_case a
 	inner join reac b
@@ -1513,7 +1513,7 @@ printf '\n' >> $log_location</script>
     </hop>
     <hop>
       <from>derive_standard_case_indication.sql</from>
-      <to>derive_standard_case_outcome.sql</to>
+      <to>derive_standard_case_adr.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1638,7 +1638,7 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_case_outcome.sql</from>
+      <from>derive_standard_case_adr.sql</from>
       <to>Wait for 3s (2)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1783,7 +1783,7 @@ ABOUT THIS STAGE
 -standardize_combined_drug_mapping
 -derive_standard_case_outcome_category
 -derive_standard_case_indication.sql
--derive_standard_case_outcome.sql
+-derive_standard_case_adr.sql
 -derive_standard_drug_outcome_count.sql
 -derive_standard_drug_outcome_contingency_table.sql    -create index if not exists
 -derive_standard_drug_outcome_statistics.sql
