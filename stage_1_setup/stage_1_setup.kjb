@@ -641,6 +641,16 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
           <variable_value>${DATABASE_BACKUP_LOCATION}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>OMOP_FILE_DIR</variable_name>
+          <variable_value>${OMOP_FILE_DIR}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>OMOP_FILE_NAME</variable_name>
+          <variable_value>${OMOP_FILE_NAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -1569,13 +1579,13 @@ Troubleshooting:
 
 Current Issues:
 
-
+Un-sure if OMOP staging_vocabulary schema will import
 
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>1009</width>
-      <heigth>446</heigth>
+      <heigth>447</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

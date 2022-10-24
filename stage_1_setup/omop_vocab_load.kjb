@@ -436,9 +436,9 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.domain" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.domain FROM '${OMOP_FILE_DIR}/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.domain" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.domain FROM '${OMOP_FILE_DIR}/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -464,9 +464,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.vocabulary" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.vocabulary FROM '${OMOP_FILE_DIR}/VOCABULARY.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}</script>
+      <script>export PGPASSWORD="${DATABASE_PASSWORD}"
+psql -h "${DATABASE_HOST}" -U "${DATABASE_USERNAME}" -c "truncate table staging_vocabulary.vocabulary" "${DATABASE_NAME}"
+psql -h "${DATABASE_HOST}" -U "${DATABASE_USERNAME}" -c "\COPY staging_vocabulary.vocabulary FROM ${OMOP_FILE_DIR}/VOCABULARY.csv WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" "${DATABASE_NAME}"</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -491,9 +491,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.concept_class" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.concept_class FROM '${OMOP_FILE_DIR}/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_class" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_class FROM '${OMOP_FILE_DIR}/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -519,9 +519,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.relationship" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.relationship FROM '${OMOP_FILE_DIR}/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.relationship" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.relationship FROM '${OMOP_FILE_DIR}/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -547,9 +547,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.drug_strength" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.drug_strength FROM '${OMOP_FILE_DIR}/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.drug_strength" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.drug_strength FROM '${OMOP_FILE_DIR}/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -575,9 +575,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.concept_synonym" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.concept_synonym FROM '${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_synonym" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_synonym FROM '${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -603,9 +603,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.concept_relationship" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -631,9 +631,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.concept_ancestor" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.concept_ancestor FROM '${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_ancestor" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_ancestor FROM '${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -659,9 +659,9 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "truncate table staging_vocabulary.concept" ${CEM_POSTGRES_DATABASE}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT.csv' WITH DELIMITER E'\t' QUOTE E'\b' CSV HEADER" ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT.csv' WITH DELIMITER E'\t' QUOTE E'\b' CSV HEADER" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -679,14 +679,14 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/VOCABULARY/drop_vocab_indexes.sql</sqlfilename>
+      <sqlfilename>${Internal.Entry.Current.Directory}/omop_vocab_scripts/drop_vocab_indexes.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>144</yloc>
+      <xloc>304</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -697,7 +697,7 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/VOCABULARY/create_vocab_indexes.sql</sqlfilename>
+      <sqlfilename>${Internal.Entry.Current.Directory}/omop_vocab_scripts/create_vocab_indexes.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -723,8 +723,8 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -c "\COPY staging_vocabular
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>export PGPASSWORD=${CEM_POSTGRES_PASSWORD}
-psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./VOCABULARY/show_record_counts.sql ${CEM_POSTGRES_DATABASE}
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -f ./omop_vocab_scripts/show_record_counts.sql ${DATABASE_NAME}
 
 </script>
       <loglevel>Basic</loglevel>
@@ -733,6 +733,153 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./VOCABULARY/show_record
       <nr>0</nr>
       <xloc>592</xloc>
       <yloc>720</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Create vocabulary tables</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>CREATE TABLE IF NOT EXISTS staging_vocabulary.concept (
+  concept_id			INTEGER			NOT NULL,
+  concept_name			VARCHAR(255)	NOT NULL,
+  domain_id				VARCHAR(20)		NOT NULL,
+  vocabulary_id			VARCHAR(20)		NOT NULL,
+  concept_class_id		VARCHAR(20)		NOT NULL,
+  standard_concept		VARCHAR(1)		NULL,
+  concept_code			VARCHAR(50)		NOT NULL,
+  valid_start_date		DATE			NOT NULL,
+  valid_end_date		DATE			NOT NULL,
+  invalid_reason		VARCHAR(1)		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.vocabulary (
+  vocabulary_id			VARCHAR(20)		NOT NULL,
+  vocabulary_name		VARCHAR(255)	NOT NULL,
+  vocabulary_reference	VARCHAR(255)	NULL,
+  vocabulary_version	VARCHAR(255)	NULL,
+  vocabulary_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.domain (
+  domain_id			VARCHAR(20)		NOT NULL,
+  domain_name		VARCHAR(255)	NOT NULL,
+  domain_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.concept_class (
+  concept_class_id			VARCHAR(20)		NOT NULL,
+  concept_class_name		VARCHAR(255)	NOT NULL,
+  concept_class_concept_id	INTEGER			NOT NULL
+)
+;
+
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.concept_relationship (
+  concept_id_1			INTEGER			NOT NULL,
+  concept_id_2			INTEGER			NOT NULL,
+  relationship_id		VARCHAR(20)		NOT NULL,
+  valid_start_date		DATE			NOT NULL,
+  valid_end_date		DATE			NOT NULL,
+  invalid_reason		VARCHAR(1)		NULL)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.relationship (
+  relationship_id			VARCHAR(20)		NOT NULL,
+  relationship_name			VARCHAR(255)	NOT NULL,
+  is_hierarchical			VARCHAR(1)		NOT NULL,
+  defines_ancestry			VARCHAR(1)		NOT NULL,
+  reverse_relationship_id	VARCHAR(20)		NOT NULL,
+  relationship_concept_id	INTEGER			NOT NULL
+)
+;
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.concept_synonym (
+  concept_id			INTEGER			NOT NULL,
+  concept_synonym_name	VARCHAR(1000)	NOT NULL,
+  language_concept_id	INTEGER			NOT NULL
+)
+;
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.concept_ancestor (
+  ancestor_concept_id		INTEGER		NOT NULL,
+  descendant_concept_id		INTEGER		NOT NULL,
+  min_levels_of_separation	INTEGER		NOT NULL,
+  max_levels_of_separation	INTEGER		NOT NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.source_to_concept_map (
+  source_code				VARCHAR(50)		NOT NULL,
+  source_concept_id			INTEGER			NOT NULL,
+  source_vocabulary_id		VARCHAR(20)		NOT NULL,
+  source_code_description	VARCHAR(255)	NULL,
+  target_concept_id			INTEGER			NOT NULL,
+  target_vocabulary_id		VARCHAR(20)		NOT NULL,
+  valid_start_date			DATE			NOT NULL,
+  valid_end_date			DATE			NOT NULL,
+  invalid_reason			VARCHAR(1)		NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.drug_strength (
+  drug_concept_id				INTEGER		NOT NULL,
+  ingredient_concept_id			INTEGER		NOT NULL,
+  amount_value					NUMERIC		NULL,
+  amount_unit_concept_id		INTEGER		NULL,
+  numerator_value				NUMERIC		NULL,
+  numerator_unit_concept_id		INTEGER		NULL,
+  denominator_value				NUMERIC		NULL,
+  denominator_unit_concept_id	INTEGER		NULL,
+  box_size						INTEGER		NULL,
+  valid_start_date				DATE		NOT NULL,
+  valid_end_date				DATE		NOT NULL,
+  invalid_reason				VARCHAR(1)	NULL
+)
+;
+
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.cohort_definition (
+  cohort_definition_id				INTEGER			NOT NULL,
+  cohort_definition_name			VARCHAR(255)	NOT NULL,
+  cohort_definition_description		TEXT	NULL,
+  definition_type_concept_id		INTEGER			NOT NULL,
+  cohort_definition_syntax			TEXT	NULL,
+  subject_concept_id				INTEGER			NOT NULL,
+  cohort_initiation_date			DATE			NULL
+)
+;
+
+CREATE TABLE IF NOT EXISTS staging_vocabulary.attribute_definition (
+  attribute_definition_id		INTEGER			NOT NULL,
+  attribute_name				VARCHAR(255)	NOT NULL,
+  attribute_description			TEXT	NULL,
+  attribute_type_concept_id		INTEGER			NOT NULL,
+  attribute_syntax				TEXT	NULL
+)
+;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>512</xloc>
+      <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -828,15 +975,6 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./VOCABULARY/show_record
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Drop staging_vocabulary indexes</from>
-      <to>Load staging VOCABULARY</to>
-      <from_nr>0</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Create staging_vocabulary indexes</from>
       <to>Show record counts</to>
       <from_nr>0</from_nr>
@@ -847,7 +985,34 @@ psql -h ${CEM_POSTGRES_HOST} -U ${CEM_POSTGRES_USER} -f ./VOCABULARY/show_record
     </hop>
     <hop>
       <from>Set job variables</from>
+      <to>Create vocabulary tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create vocabulary tables</from>
       <to>Drop staging_vocabulary indexes</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Drop staging_vocabulary indexes</from>
+      <to>Load staging VOCABULARY</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Drop staging_vocabulary indexes</from>
+      <to>Create vocabulary tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
