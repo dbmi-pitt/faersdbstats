@@ -882,6 +882,36 @@ CREATE TABLE IF NOT EXISTS staging_vocabulary.attribute_definition (
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Drop vocabulary tables </name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>drop table if exists staging_vocabulary.concept CASCADE;
+drop table if exists staging_vocabulary.concept_relationship CASCADE;
+drop table if exists staging_vocabulary.relationship CASCADE;
+drop table if exists staging_vocabulary.concept_synonym CASCADE;
+drop table if exists staging_vocabulary.concept_ancestor CASCADE;
+drop table if exists staging_vocabulary.concept_class CASCADE;
+drop table if exists staging_vocabulary.source_to_concept_map CASCADE;
+drop table if exists staging_vocabulary.drug_strength CASCADE;
+drop table if exists staging_vocabulary.cohort_definition CASCADE;
+drop table if exists staging_vocabulary.attribute_definition CASCADE;
+drop table if exists staging_vocabulary.vocabulary CASCADE;
+drop table if exists staging_vocabulary.domain CASCADE;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>175</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1030,6 +1060,40 @@ before starting this process</note>
       <yloc>16</yloc>
       <width>549</width>
       <heigth>78</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>as of 10/24/22
+
+wc -l of import files...
+
+7,250,369 CONCEPT.csv
+76,661,100 CONCEPT_ANCESTOR.csv
+416 CONCEPT_CLASS.csv
+48,213,953 CONCEPT_RELATIONSHIP.csv
+2,437,221 CONCEPT_SYNONYM.csv
+49 DOMAIN.csv
+2,918,521 DRUG_STRENGTH.csv
+657 RELATIONSHIP.csv
+89 VOCABULARY.csv
+</note>
+      <xloc>741</xloc>
+      <yloc>287</yloc>
+      <width>280</width>
+      <heigth>247</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
