@@ -1040,15 +1040,6 @@ drop table if exists staging_vocabulary.domain CASCADE;
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
-    <hop>
-      <from>Drop staging_vocabulary indexes</from>
-      <to>Create vocabulary tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
   </hops>
   <notepads>
     <notepad>
