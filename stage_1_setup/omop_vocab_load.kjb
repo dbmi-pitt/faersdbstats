@@ -775,7 +775,7 @@ CREATE TABLE IF NOT EXISTS staging_vocabulary.domain (
 
 
 CREATE TABLE IF NOT EXISTS staging_vocabulary.concept_class (
-  concept_class_id			VARCHAR(20)		NOT NULL,
+  concept_class_id			VARCHAR(100)		NOT NULL,
   concept_class_name		VARCHAR(255)	NOT NULL,
   concept_class_concept_id	INTEGER			NOT NULL
 )
