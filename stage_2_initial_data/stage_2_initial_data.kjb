@@ -410,7 +410,11 @@ CREATE TABLE IF NOT EXISTS demo_legacy (
 	to_mfr varchar NULL,
 	confid varchar NULL,
 	reporter_country varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate demo_legacy;
 
@@ -431,7 +435,11 @@ RECHAL varchar,
 LOT_NUM varchar,
 EXP_DT varchar,
 NDA_NUM varchar,
-FILENAME varchar
+FILENAME varchar,
+qtr int NULL,
+qtr_var varchar NULL,
+yr int NULL,
+yr_var varchar NULL
 );
 --truncate drug_legacy;
 
@@ -442,7 +450,11 @@ CREATE TABLE IF NOT EXISTS indi_legacy (
 	isr varchar NULL,
 	drug_seq varchar NULL,
 	indi_pt varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate indi_legacy;
 
@@ -452,7 +464,11 @@ CREATE TABLE IF NOT EXISTS indi_legacy (
 CREATE TABLE IF NOT EXISTS outc_legacy (
 	isr varchar NULL,
 	outc_cod varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate outc_legacy;
 
@@ -462,7 +478,11 @@ CREATE TABLE IF NOT EXISTS outc_legacy (
 CREATE TABLE IF NOT EXISTS reac_legacy (
 	isr varchar NULL,
 	pt varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 
 --truncate reac_legacy;
@@ -475,7 +495,11 @@ CREATE TABLE IF NOT EXISTS reac_legacy (
 --drop table if exists reac_pt_legacy_list ;
 CREATE TABLE IF NOT EXISTS reac_pt_legacy_list (
 	isr varchar NULL,
-	reac_pt_list text NULL
+	reac_pt_list text NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate reac_pt_legacy_list;
 
@@ -485,7 +509,11 @@ CREATE TABLE IF NOT EXISTS reac_pt_legacy_list (
 CREATE TABLE IF NOT EXISTS rpsr_legacy (
 	isr varchar NULL,
 	rpsr_cod varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate rpsr_legacy;
 
@@ -499,7 +527,11 @@ CREATE TABLE IF NOT EXISTS ther_legacy (
 	end_dt varchar NULL,
 	dur varchar NULL,
 	dur_cod varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate ther_legacy ;
 
@@ -574,7 +606,11 @@ CREATE TABLE IF NOT EXISTS demo (
 	occp_cod varchar NULL,
 	reporter_country varchar NULL,
 	occr_country varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate demo;
 
@@ -603,7 +639,11 @@ CREATE TABLE IF NOT EXISTS drug (
 	dose_unit varchar NULL,
 	dose_form varchar NULL,
 	dose_freq varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate drug;
 
@@ -617,7 +657,11 @@ primaryid varchar,
 caseid varchar,
 indi_drug_seq varchar,
 indi_pt varchar,
-filename varchar
+filename varchar,
+qtr int NULL,
+qtr_var varchar NULL,
+yr int NULL,
+yr_var varchar NULL
 );
 --truncate indi;
 --CREATE INDEX IF NOT EXISTS indi_caseid_idx ON frs.indi USING btree (caseid); --NOTE FRS does not exist
@@ -631,7 +675,11 @@ CREATE TABLE IF NOT EXISTS outc (
 	primaryid varchar NULL,
 	caseid varchar NULL,
 	outc_code varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate outc;
 CREATE INDEX IF NOT EXISTS outc_caseid_idx ON outc USING btree (caseid);
@@ -646,7 +694,11 @@ CREATE TABLE IF NOT EXISTS reac (
 	caseid varchar NULL,
 	pt varchar NULL,
 	drug_rec_act varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate reac ;
 CREATE INDEX IF NOT EXISTS ix_reac_1 ON reac USING btree (upper((pt)::text));
@@ -662,7 +714,11 @@ CREATE TABLE IF NOT EXISTS rpsr (
 	primaryid varchar NULL,
 	caseid varchar NULL,
 	rpsr_cod varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate rpsr;
 CREATE INDEX IF NOT EXISTS rpsr_caseid_idx ON rpsr USING btree (caseid, primaryid);
@@ -679,7 +735,11 @@ CREATE TABLE IF NOT EXISTS ther (
 	end_dt varchar NULL,
 	dur varchar NULL,
 	dur_cod varchar NULL,
-	filename varchar NULL
+	filename varchar NULL,
+	qtr int NULL,
+	qtr_var varchar NULL,
+	yr int NULL,
+	yr_var varchar NULL
 );
 --truncate ther;
 </sql>
@@ -1103,7 +1163,7 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>Y</insertScript>
+      <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
