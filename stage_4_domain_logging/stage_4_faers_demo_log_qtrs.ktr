@@ -572,12 +572,12 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Comparison Table input - cem.faers.demo_table_counts.sql</from>
+      <from>Comparison Table input - demo_table_counts.sql</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - cem_pitt_2022.faers.demo_table_counts.sql</from>
+      <from>Table input - demo_table_counts.sql</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
@@ -649,7 +649,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Comparison Table input - cem.faers.demo_table_counts.sql</name>
+    <name>Comparison Table input - demo_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -674,11 +674,11 @@ databases</note>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>total_b</name>
+        <name>total_comp</name>
         <length>15</length>
         <precision>0</precision>
         <origin>Comparison Table input - cem.faers.demo_table_counts.sql</origin>
-        <comments>total_b</comments>
+        <comments>total_comp</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -955,8 +955,8 @@ databases</note>
       <schema_name/>
     </partitioning>
     <join_type>FULL OUTER</join_type>
-    <step1>Table input - cem_pitt_2022.faers.demo_table_counts.sql</step1>
-    <step2>Comparison Table input - cem.faers.demo_table_counts.sql</step2>
+    <step1>Table input - demo_table_counts.sql</step1>
+    <step2>Comparison Table input - demo_table_counts.sql</step2>
     <keys_1>
       <key>yr_a</key>
       <key>qtr_a</key>
@@ -982,7 +982,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem_pitt_2022.faers.demo_table_counts.sql</name>
+    <name>Table input - demo_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1007,11 +1007,11 @@ databases</note>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>total_a</name>
+        <name>total_main</name>
         <length>15</length>
         <precision>0</precision>
         <origin>Table input - cem_pitt_2022.faers.demo_table_counts.sql</origin>
-        <comments>total_a</comments>
+        <comments>total_main</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
