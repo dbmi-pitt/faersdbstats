@@ -572,12 +572,12 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</from>
+      <from>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</from>
+      <from>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
@@ -649,7 +649,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</name>
+    <name>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -661,7 +661,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
     <sql>select count(*) as total_comp, cast(substring(filename,5,2)as int) as yr_b, cast(substring(filename,8,1)as int) as qtr_b, upper(substring(filename,0,5)) as domain_b
-	from faers.outc_legacy
+	from ${DATABASE_SCHEMA}.outc_legacy
 	group by filename, yr_b, qtr_b
 	order by yr_b, qtr_b</sql>
     <limit>0</limit>
@@ -677,7 +677,7 @@ databases</note>
         <name>total_b</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>total_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -700,7 +700,7 @@ databases</note>
         <name>yr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>yr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -723,7 +723,7 @@ databases</note>
         <name>qtr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>qtr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -746,7 +746,7 @@ databases</note>
         <name>domain_b</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>domain_b</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -955,8 +955,8 @@ databases</note>
       <schema_name/>
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</step1>
-    <step2>Comparison Table input - cem.faers.outc_legacy_table_counts.sql</step2>
+    <step1>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</step1>
+    <step2>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</step2>
     <keys_1>
       <key>yr_a</key>
       <key>qtr_a</key>
@@ -982,7 +982,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</name>
+    <name>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -994,7 +994,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <sql>select count(*) as total_main, yr as yr_a, qtr as qtr_a, upper(substring(filename,0,5)) as domain_a
-	from faers.outc_legacy
+	from ${DATABASE_SCHEMA}.outc_legacy
 	group by filename, yr_a, qtr_a
 	order by yr_a, qtr_a</sql>
     <limit>0</limit>
@@ -1010,7 +1010,7 @@ databases</note>
         <name>total_a</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>total_a</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1033,7 +1033,7 @@ databases</note>
         <name>yr_a</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>yr_a</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1056,7 +1056,7 @@ databases</note>
         <name>qtr_a</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>qtr_a</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1079,7 +1079,7 @@ databases</note>
         <name>domain_a</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem_pitt_2022.faers.outc_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.outc_legacy_table_counts.sql</origin>
         <comments>domain_a</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>

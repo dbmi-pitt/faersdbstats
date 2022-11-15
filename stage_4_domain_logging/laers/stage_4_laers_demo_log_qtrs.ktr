@@ -583,12 +583,12 @@ databases</note>
   </connection>
   <order>
     <hop>
-      <from>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</from>
+      <from>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input - cem.faers.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</from>
+      <from>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</from>
       <to>Merge rows (diff)</to>
       <enabled>Y</enabled>
     </hop>
@@ -905,8 +905,8 @@ databases</note>
       <value>domain</value>
     </values>
     <flag_field>flagfield</flag_field>
-    <reference>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</reference>
-    <compare>Table input - cem.faers.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</compare>
+    <reference>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</reference>
+    <compare>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</compare>
     <compare>
     </compare>
     <attributes/>
@@ -924,7 +924,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem.faers.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</name>
+    <name>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql from DATABASE_COMPARISON_NAME</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -952,7 +952,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.demo_legacy_table_counts.sql 2</origin>
+        <origin>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql 2</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -975,7 +975,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.demo_legacy_table_counts.sql 2</origin>
+        <origin>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql 2</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -998,7 +998,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem.faers.demo_legacy_table_counts.sql 2</origin>
+        <origin>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql 2</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1021,7 +1021,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem.faers.demo_legacy_table_counts.sql 2</origin>
+        <origin>Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_legacy_table_counts.sql 2</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1054,7 +1054,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</name>
+    <name>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1082,7 +1082,7 @@ databases</note>
         <name>total</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</origin>
         <comments>total</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1105,7 +1105,7 @@ databases</note>
         <name>yr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</origin>
         <comments>yr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1128,7 +1128,7 @@ databases</note>
         <name>qtr</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</origin>
         <comments>qtr</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1151,7 +1151,7 @@ databases</note>
         <name>domain</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_legacy_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_legacy_table_counts.sql</origin>
         <comments>domain</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>

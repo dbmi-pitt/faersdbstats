@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_faers_demo_log_qtrs</name>
+    <name>stage_4_${DATABASE_SCHEMA}_demo_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -661,7 +661,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
     <sql>select count(*) as total_comp, cast(substring(filename,5,2)as int) as yr_b, cast(substring(filename,8,1)as int) as qtr_b, upper(substring(filename,0,5)) as domain_b
-	from faers.demo
+	from ${DATABASE_SCHEMA}.demo
 	group by filename, yr_b, qtr_b
 	order by yr_b, qtr_b</sql>
     <limit>0</limit>
@@ -677,7 +677,7 @@ databases</note>
         <name>total_comp</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>total_comp</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -700,7 +700,7 @@ databases</note>
         <name>yr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>yr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -723,7 +723,7 @@ databases</note>
         <name>qtr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - cem.faers.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>qtr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -746,7 +746,7 @@ databases</note>
         <name>domain_b</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Comparison Table input - cem.faers.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>domain_b</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -811,7 +811,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>demo stage_4_faers_demo... results</item>
+        <item>demo stage_4_${DATABASE_SCHEMA}_demo... results</item>
       </line>
     </data>
     <attributes/>
@@ -994,7 +994,7 @@ databases</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <sql>select count(*) as total_main, yr as yr_a, qtr as qtr_a, upper(substring(filename,0,5)) as domain_a
-	from faers.demo
+	from ${DATABASE_SCHEMA}.demo
 	group by filename, yr_a, qtr_a
 	order by yr_a, qtr_a</sql>
     <limit>0</limit>
@@ -1010,7 +1010,7 @@ databases</note>
         <name>total_main</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>total_main</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1033,7 +1033,7 @@ databases</note>
         <name>yr_a</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>yr_a</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1056,7 +1056,7 @@ databases</note>
         <name>qtr_a</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>qtr_a</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1079,7 +1079,7 @@ databases</note>
         <name>domain_a</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input - cem_pitt_2022.faers.demo_table_counts.sql</origin>
+        <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
         <comments>domain_a</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
