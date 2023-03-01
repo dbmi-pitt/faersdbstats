@@ -18,13 +18,6 @@ thefilename="${thefilenamenoprefix}.txt"
 # remove windows carriage return, add on the filename column name to the header line and add the filename as the last column on each line
 sed 's/\r$//' "${thefilename}"| sed '1,1 s/$/\$filename/' | sed "2,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
 
-#Non conform file name
-thefilenamenoprefix="DEMO18Q1"
-echo "processing ${thefilenamenoprefix}"
-thefilename="DEMO18Q1_new.txt"
-# remove windows carriage return, remove the header line and add the filename as the last column on each line
-sed 's/\r$//' "${thefilename}"| sed '1,1d' | sed "1,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
-
 thisyear=$(date +"%y")
 for year in $(seq 13 "${thisyear}"); do
   for quarter in 1 2 3 4; do
@@ -35,6 +28,13 @@ for year in $(seq 13 "${thisyear}"); do
     sed 's/\r$//' "${thefilename}" | sed '1,1d' | sed "1,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
   done
 done
+
+#Non conform file name
+thefilenamenoprefix="DEMO18Q1"
+echo "processing ${thefilenamenoprefix}"
+thefilename="DEMO18Q1_new.txt"
+# remove windows carriage return, remove the header line and add the filename as the last column on each line
+sed 's/\r$//' "${thefilename}"| sed '1,1d' | sed "1,$ s/$/\$${thefilename}/" >"${thefilenamenoprefix}_with_filename.txt"
 
 # concatenate all the version A demo files with filenames together into a single file for loading
 cat demo12*_with_filename.txt DEMO13*_with_filename.txt DEMO14Q1_with_filename.txt DEMO14Q2_with_filename.txt >all_version_A_demo_data_with_filename.txt
