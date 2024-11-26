@@ -455,7 +455,7 @@ todo:
       <xloc>544</xloc>
       <yloc>32</yloc>
       <width>327</width>
-      <heigth>279</heigth>
+      <heigth>282</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -653,7 +653,7 @@ todo:
     </hop>
     <hop>
       <from>Table input - count(*) rpsr comparison</from>
-      <to>Set variables - RPSR_ROW_COUNT 2</to>
+      <to>Set variables - RPSR_COMPARISON_ROW_COUNT</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1121,7 +1121,7 @@ todo:
     </GUI>
   </step>
   <step>
-    <name>Set variables - RPSR_ROW_COUNT 2</name>
+    <name>Set variables - RPSR_COMPARISON_ROW_COUNT</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -1149,7 +1149,7 @@ todo:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>448</xloc>
       <yloc>1456</yloc>
       <draw>Y</draw>
     </GUI>
