@@ -465,11 +465,20 @@ rebuilding ${domain}.txt notes
 
 # swap header (first occurence) in domain.txt file if swapped qtr yr
 sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
+
+tables size asc (recommended to approach work w/ individual tables in order of size asc)
+faers.rpsr
+faers.outc
+faers.ther
+faers.demo
+faers.indi
+faers.drug
+faers.reac
 </note>
       <xloc>768</xloc>
       <yloc>32</yloc>
-      <width>570</width>
-      <heigth>515</heigth>
+      <width>600</width>
+      <heigth>673</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -486,11 +495,13 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^ WARNING: data loss - TRUNCATES TABLES</note>
+      <note>^ WARNING: data loss - TRUNCATES TABLES
+
+PREVIEW read an input file, a bad path will TRUNCATE table</note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>300</width>
-      <heigth>27</heigth>
+      <width>404</width>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -562,107 +573,107 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <hop>
       <from>Data grid - Stage_3_faers_domain has started</from>
       <to>Text file output</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>log faers_demo_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_demo_import_failed_lines</from>
       <to>Abort if 100 lines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>demo - CSV file input</from>
       <to>Filter rows</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows</from>
       <to>load_in_demo_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_drug_import_failed_lines</from>
       <to>Abort if 100 drug lines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>drug - CSV file input</from>
       <to>Filter rows 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows 2</from>
       <to>load_in_drug_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Filter rows 2</from>
       <to>log faers_drug_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_indi_import_failed_lines</from>
       <to>Abort if 100 indilines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>indi - CSV file input</from>
       <to>if indi qtr is 1, 2, 3 or 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if indi qtr is 1, 2, 3 or 4</from>
       <to>load_in_indi_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if indi qtr is 1, 2, 3 or 4</from>
       <to>log faers_indi_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_outc_import_failed_lines</from>
       <to>Abort if 100 outc lines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>outc - CSV file input</from>
       <to>if outc qtr is 1, 2, 3 or 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if outc qtr is 1, 2, 3 or 4</from>
       <to>load_in_outc_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if outc qtr is 1, 2, 3 or 4</from>
       <to>log faers_outc_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_reac_import_failed_lines</from>
       <to>Abort if 100 reac lines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>reac - CSV file input</from>
-      <to>if indi qtr is 1, 2, 3 or 4 2 2</to>
-      <enabled>Y</enabled>
+      <to>if reac qtr is 1, 2, 3 or 4</to>
+      <enabled>N</enabled>
     </hop>
     <hop>
-      <from>if indi qtr is 1, 2, 3 or 4 2 2</from>
+      <from>if reac qtr is 1, 2, 3 or 4</from>
       <to>load_in_reac_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
-      <from>if indi qtr is 1, 2, 3 or 4 2 2</from>
+      <from>if reac qtr is 1, 2, 3 or 4</from>
       <to>log faers_reac_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>log faers_rpsr_import_failed_lines</from>
@@ -671,38 +682,38 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     </hop>
     <hop>
       <from>rpsr - CSV file input</from>
-      <to>if indi qtr is 1, 2, 3 or 4 2 2 2</to>
+      <to>if rpsr qtr is 1, 2, 3 or 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>if indi qtr is 1, 2, 3 or 4 2 2 2</from>
+      <from>if rpsr qtr is 1, 2, 3 or 4</from>
       <to>load_in_rpsr_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>if indi qtr is 1, 2, 3 or 4 2 2 2</from>
+      <from>if rpsr qtr is 1, 2, 3 or 4</from>
       <to>log faers_rpsr_import_failed_lines</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log faers_ther_import_failed_lines</from>
       <to>Abort if 100 ther lines have failed</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>ther - CSV file input</from>
       <to>if ther qtr is 1, 2, 3 or 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if ther qtr is 1, 2, 3 or 4</from>
       <to>load_in_ther_table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>if ther qtr is 1, 2, 3 or 4</from>
       <to>log faers_ther_import_failed_lines</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
   </order>
   <step>
@@ -1974,7 +1985,104 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     </GUI>
   </step>
   <step>
-    <name>if indi qtr is 1, 2, 3 or 4 2 2</name>
+    <name>if outc qtr is 1, 2, 3 or 4</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>load_in_outc_table</send_true_to>
+    <send_false_to>log faers_outc_import_failed_lines</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>1</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>2</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>3</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>OR</operator>
+            <leftvalue>qtr</leftvalue>
+            <function>=</function>
+            <rightvalue/>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text>4</text>
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask>####0;-####0</mask>
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>752</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>if reac qtr is 1, 2, 3 or 4</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -2071,7 +2179,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     </GUI>
   </step>
   <step>
-    <name>if indi qtr is 1, 2, 3 or 4 2 2 2</name>
+    <name>if rpsr qtr is 1, 2, 3 or 4</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -2164,103 +2272,6 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <GUI>
       <xloc>112</xloc>
       <yloc>1184</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>if outc qtr is 1, 2, 3 or 4</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>load_in_outc_table</send_true_to>
-    <send_false_to>log faers_outc_import_failed_lines</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>qtr</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>1</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask>####0;-####0</mask>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>qtr</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>2</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask>####0;-####0</mask>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>qtr</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>3</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask>####0;-####0</mask>
-            </value>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>OR</operator>
-            <leftvalue>qtr</leftvalue>
-            <function>=</function>
-            <rightvalue/>
-            <value>
-              <name>constant</name>
-              <type>String</type>
-              <text>4</text>
-              <length>-1</length>
-              <precision>-1</precision>
-              <isnull>N</isnull>
-              <mask>####0;-####0</mask>
-            </value>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>752</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2649,7 +2660,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>drug</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -2785,7 +2796,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>indi</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -2857,7 +2868,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>outc</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -2925,7 +2936,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>reac</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -2997,7 +3008,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>rpsr</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
@@ -3065,7 +3076,7 @@ sed -i '0,/\$yr\$qtr/{s/\$yr\$qtr/\$qtr\$yr/}' indi.txt
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
     <table>ther</table>
-    <commit>1000</commit>
+    <commit>100000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
