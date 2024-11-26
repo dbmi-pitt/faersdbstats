@@ -745,7 +745,7 @@ select * from cte2
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>864</xloc>
       <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
@@ -763,7 +763,7 @@ select * from cte2
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>544</xloc>
       <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
@@ -1329,7 +1329,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>880</xloc>
       <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
@@ -1391,8 +1391,8 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>528</xloc>
-      <yloc>1376</yloc>
+      <xloc>880</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1507,7 +1507,7 @@ printf '\n' >> $log_location</script>
       <to>map_all_drugname_to_rxnorm</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1799,7 +1799,7 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>773</width>
-      <heigth>517</heigth>
+      <heigth>520</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1841,6 +1841,91 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>117</xloc>
       <yloc>1107</yloc>
       <width>189</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>wants to review</note>
+      <xloc>304</xloc>
+      <yloc>960</yloc>
+      <width>115</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>our natural product vocabulary goes here
+</note>
+      <xloc>160</xloc>
+      <yloc>1024</yloc>
+      <width>285</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>bring in our new de-duplication method</note>
+      <xloc>528</xloc>
+      <yloc>1168</yloc>
+      <width>272</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>bring in xiaotong's ddi stats</note>
+      <xloc>192</xloc>
+      <yloc>1984</yloc>
+      <width>195</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
