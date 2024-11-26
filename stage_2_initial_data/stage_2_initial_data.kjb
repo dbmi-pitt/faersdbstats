@@ -563,8 +563,8 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>816</yloc>
+      <xloc>112</xloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -751,8 +751,8 @@ CREATE TABLE IF NOT EXISTS ther (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>672</yloc>
+      <xloc>416</xloc>
+      <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -789,11 +789,11 @@ CREATE TABLE IF NOT EXISTS ther (
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>672</xloc>
-      <yloc>816</yloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create_meddra_snomed_mapping.sql &amp; </name>
+      <name>create_meddra_snomed_mapping.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -976,8 +976,8 @@ CREATE TABLE IF NOT EXISTS all_casedemo (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>672</yloc>
+      <xloc>128</xloc>
+      <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1145,7 +1145,7 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>384</xloc>
-      <yloc>816</yloc>
+      <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1169,8 +1169,60 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>944</yloc>
+      <xloc>672</xloc>
+      <yloc>1120</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SUCCESS IF LOAD_ALL_TIME=1</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${LOAD_ALL_TIME}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>672</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Log LOAD_ALL_TIME=0 path taken</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
+echo "took the LOAD_ALL_TIME=0 (red fail) path in stage_2 workflow " >> $log_location
+echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>672</xloc>
+      <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1194,7 +1246,7 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_meddra_snomed_mapping.sql &amp; </from>
+      <from>create_meddra_snomed_mapping.sql</from>
       <to>create domain tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1205,15 +1257,6 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
     <hop>
       <from>set AWS credentials</from>
       <to>Wait for 3s</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for 3s</from>
-      <to>create_meddra_snomed_mapping.sql &amp; </to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1256,6 +1299,42 @@ echo "create if not exist'd *_legacy database tables" >> $log_location</script>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <to>Log LOAD_ALL_TIME=0 path taken</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s</from>
+      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <to>create_meddra_snomed_mapping.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log LOAD_ALL_TIME=0 path taken</from>
+      <to>s3_data_download</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1292,7 +1371,7 @@ Logging is blank
       <xloc>16</xloc>
       <yloc>0</yloc>
       <width>1349</width>
-      <heigth>517</heigth>
+      <heigth>520</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
