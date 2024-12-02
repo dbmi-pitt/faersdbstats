@@ -1214,8 +1214,8 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>682</xloc>
-      <yloc>653</yloc>
+      <xloc>128</xloc>
+      <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1267,45 +1267,6 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <nr>0</nr>
       <xloc>1008</xloc>
       <yloc>320</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>Transformation</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1008</xloc>
-      <yloc>416</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1385,7 +1346,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_wc_l_import_files_just_rpsr.kjb all new domains wc -l</name>
+      <name>stage_4_wc_l_import_files_just_rpsr.kjb rspr domain wc -l</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -1418,7 +1379,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1360</xloc>
-      <yloc>208</yloc>
+      <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1699,7 +1660,7 @@ SET select_count_diff_pct =
       <to>log_math_4_pentaho.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1744,7 +1705,7 @@ SET select_count_diff_pct =
       <to>SUCCESS IF LOAD_ALL_TIME=1 (2nd time)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1768,24 +1729,6 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>SUCCESS IF REBUILD_ALL_TIME_DATA_LOCALLY=1</from>
-      <to>Transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Transformation</from>
-      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SUCCESS IF REBUILD_ALL_TIME_DATA_LOCALLY=1</from>
       <to>stage_4_wc_l_import_files.kjb all new domains wc -l</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1795,7 +1738,7 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>SUCCESS IF REBUILD_ALL_TIME_DATA_LOCALLY=1</from>
-      <to>stage_4_wc_l_import_files_just_rpsr.kjb all new domains wc -l</to>
+      <to>stage_4_wc_l_import_files_just_rpsr.kjb rspr domain wc -l</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -1803,7 +1746,7 @@ SET select_count_diff_pct =
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_wc_l_import_files_just_rpsr.kjb all new domains wc -l</from>
+      <from>stage_4_wc_l_import_files_just_rpsr.kjb rspr domain wc -l</from>
       <to>stage_4_faers_wc_import_log.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1850,6 +1793,24 @@ SET select_count_diff_pct =
     <hop>
       <from>stage_4_select_count_domains</from>
       <to>select_count_diff</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_domain_logging.ktr</from>
+      <to>just_rpsr_log_math_4_pentaho.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SUCCESS IF REBUILD_ALL_TIME_DATA_LOCALLY=1</from>
+      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1982,6 +1943,61 @@ updates qa table w/ new value</note>
       <yloc>768</yloc>
       <width>382</width>
       <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>this exists to "test small" (ie one domain; rpsr)
+
+
+
+
+
+recommended practice for single quarter update use case
+to start here, then do "all new domains" immediately below this</note>
+      <xloc>1168</xloc>
+      <yloc>144</yloc>
+      <width>432</width>
+      <heigth>146</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>recommended practice to "start small"
+
+
+
+
+test from here forward w/ rpsr first 
+then do the one immediately below this</note>
+      <xloc>0</xloc>
+      <yloc>608</yloc>
+      <width>272</width>
+      <heigth>129</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
