@@ -1,6 +1,20 @@
 #!/bin/bash
 #uncomment source to debug from command line (for dev, might also want to comment out aws s3 sync ~ line 53)
-source ../../faers_config.config
+
+# Source configuration file
+CONFIG_FILE="../../faers_config.config"
+if [ -f "$CONFIG_FILE" ]; then
+    source "$CONFIG_FILE"
+    echo "Configuration file loaded: $CONFIG_FILE"
+else
+    echo "Configuration file not found: $CONFIG_FILE"
+    exit 1
+fi
+
+echo 'LOAD_NEW_YEAR IS ' $LOAD_NEW_YEAR
+echo 'LOAD_NEW_QUARTER IS ' $LOAD_NEW_QUARTER
+
+
 
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
 #shell options #-s enable (set) each optname #globstar enables ** recursive dir search
