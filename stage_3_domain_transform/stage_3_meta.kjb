@@ -767,6 +767,43 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>stage_3_put_yr_var_and_qtr_var_into_yr_and_qtr_from_filename.ktr</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/stage_3_put_yr_var_and_qtr_var_into_yr_and_qtr_from_filename.ktr</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1104</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -833,15 +870,6 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_3_faers_domain_transform_new_qtr.ktr</from>
-      <to>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</from>
       <to>Log STAGE 3 COMPLETE</to>
       <from_nr>0</from_nr>
@@ -862,6 +890,24 @@ update ${DATABASE_SCHEMA}.ther_legacy
     <hop>
       <from>laers put yr_var and qtr_var into yr and qtr</from>
       <to>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_3_put_yr_var_and_qtr_var_into_yr_and_qtr_from_filename.ktr</from>
+      <to>Log STAGE 3 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_3_faers_domain_transform_new_qtr.ktr</from>
+      <to>stage_3_put_yr_var_and_qtr_var_into_yr_and_qtr_from_filename.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -935,6 +981,28 @@ you must disable every hop for 1 domain for it to not truncate that domain</note
       <yloc>256</yloc>
       <width>506</width>
       <heigth>265</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>this exists if your new qtr data is loaded multiple times
+(note: no truncation on new qtr use case)</note>
+      <xloc>640</xloc>
+      <yloc>48</yloc>
+      <width>375</width>
+      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
