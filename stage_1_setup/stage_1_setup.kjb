@@ -651,6 +651,11 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
           <variable_value>${OMOP_FILE_NAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>BACK_UP_DATABASE</variable_name>
+          <variable_value>${BACK_UP_DATABASE}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -1288,6 +1293,30 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <yloc>768</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>BACK_UP_DATABASE=1</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${BACK_UP_DATABASE}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>608</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1453,20 +1482,11 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Set AWS Credentials</from>
-      <to>db backup</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>db backup</from>
       <to>Wait for 3s</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1581,6 +1601,33 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     <hop>
       <from>create_schemas.sh</from>
       <to>SUCCESS IF LOAD_ALL_TIME=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>BACK_UP_DATABASE=1</from>
+      <to>db backup</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>BACK_UP_DATABASE=1</from>
+      <to>Create pdi_logging table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set AWS Credentials</from>
+      <to>BACK_UP_DATABASE=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1770,7 +1817,7 @@ run from country_codes_job step</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>this disabled hop should be 
+      <note>this disabled hop (from "Log FDA..." to "country_code_jobs") should be 
 re-enabled on running 
 of last quarter's update
 
@@ -1781,7 +1828,7 @@ etc.
 </note>
       <xloc>592</xloc>
       <yloc>1232</yloc>
-      <width>345</width>
+      <width>485</width>
       <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>

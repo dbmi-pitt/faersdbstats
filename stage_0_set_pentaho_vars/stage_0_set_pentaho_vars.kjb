@@ -443,6 +443,11 @@
           <variable_value>${OMOP_FILE_NAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>BACK_UP_DATABASE</variable_name>
+          <variable_value>${BACK_UP_DATABASE}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
