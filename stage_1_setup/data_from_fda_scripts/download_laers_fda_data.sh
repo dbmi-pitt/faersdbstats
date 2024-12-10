@@ -14,26 +14,26 @@ source ../faers_config.config
 #set and echo globstar settings for ** used
 shopt -s globstar 
 shopt globstar
-    if [ ! -d ${BASE_FIL_DIR}/data_from_fda ]; then
-        mkdir ${BASE_FIL_DIR}/data_from_fda
+    if [ ! -d ${BASE_FILE_DIR}/data_from_fda ]; then
+        mkdir ${BASE_FILE_DIR}/data_from_fda
     fi
-    cd ${BASE_FIL_DIR}/data_from_fda/
+    cd ${BASE_FILE_DIR}/data_from_fda/
     dir_above_laers_or_faers=`pwd`;
 for laers_faers in laers; do # faers; do 
-    if [ ! -d ${BASE_FIL_DIR}/data_from_s3/$laers_faers ]; then
-        mkdir ${BASE_FIL_DIR}/data_from_s3/$laers_faers
+    if [ ! -d ${BASE_FILE_DIR}/data_from_s3/$laers_faers ]; then
+        mkdir ${BASE_FILE_DIR}/data_from_s3/$laers_faers
         else
             # back up data_from_s3
             run_date=$(date "+%m%d%Y")
             echo 'data_from_s3 does exist, will rename/move it then recreate - line 33'
-            if [ ! -d "${BASE_FIL_DIR}/data_from_s3_${run_date}" ]; then
+            if [ ! -d "${BASE_FILE_DIR}/data_from_s3_${run_date}" ]; then
                 echo renaming data_from_s3 to data_from_s3_${run_date}
-                mv ${BASE_FIL_DIR}/data_from_s3 ${BASE_FIL_DIR}/data_from_s3_${run_date}
+                mv ${BASE_FILE_DIR}/data_from_s3 ${BASE_FILE_DIR}/data_from_s3_${run_date}
             else 
-                echo ${BASE_FIL_DIR}/data_from_s3_${run_date} already exists
+                echo ${BASE_FILE_DIR}/data_from_s3_${run_date} already exists
             fi
     fi
-    cd ${BASE_FIL_DIR}/data_from_s3/$laers_faers
+    cd ${BASE_FILE_DIR}/data_from_s3/$laers_faers
     # for domain in demo drug indi; do #outc reac rpsr ther; do
     for domain in demo drug indi outc reac rpsr ther; do
     # for domain in outc reac rpsr ther; do
