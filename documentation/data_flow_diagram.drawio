@@ -73,7 +73,7 @@
         <mxCell id="s4_a1q7PYfUpuweuDUcm-8" value="&amp;lt;some_path_to&amp;gt;&lt;span style=&quot;background-color: initial;&quot;&gt;/data_meta&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="40" y="435" width="170" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="s4_a1q7PYfUpuweuDUcm-11" value="stage 1&lt;br&gt;&amp;lt;each_domain&amp;gt;/&lt;span style=&quot;background-color: initial;&quot;&gt;4_build_domain_import_file.sh&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="s4_a1q7PYfUpuweuDUcm-11" value="stage 1 (LOAD_ALL_TIME only)&lt;div&gt;&amp;lt;each_domain&amp;gt;/&lt;span style=&quot;background-color: initial;&quot;&gt;4_build_domain_import_file.sh&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-35" y="320" width="280" height="40" as="geometry" />
         </mxCell>
         <mxCell id="s4_a1q7PYfUpuweuDUcm-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.002;entryY=0.516;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
