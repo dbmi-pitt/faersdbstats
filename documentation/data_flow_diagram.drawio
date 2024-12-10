@@ -16,13 +16,15 @@
         <mxCell id="BxyisJofKgbbL4D_qTQu-3" value="FAERSDBSTATS ETL SERVER" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="715" y="580" width="200" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BxyisJofKgbbL4D_qTQu-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="BxyisJofKgbbL4D_qTQu-4" target="BxyisJofKgbbL4D_qTQu-15">
+        <mxCell id="BxyisJofKgbbL4D_qTQu-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" target="BxyisJofKgbbL4D_qTQu-15">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="600" y="310" as="targetPoint" />
+            <mxPoint x="447.5" y="420" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="448" y="350" />
+              <mxPoint x="650" y="350" />
+            </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="BxyisJofKgbbL4D_qTQu-4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="420" width="170" height="60" as="geometry" />
         </mxCell>
         <mxCell id="BxyisJofKgbbL4D_qTQu-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BxyisJofKgbbL4D_qTQu-5" target="BxyisJofKgbbL4D_qTQu-6">
           <mxGeometry relative="1" as="geometry" />
@@ -64,6 +66,26 @@
         </mxCell>
         <mxCell id="BxyisJofKgbbL4D_qTQu-17" value="add new quarter" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="720" y="130" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s4_a1q7PYfUpuweuDUcm-9" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s4_a1q7PYfUpuweuDUcm-8" value="&amp;lt;some_path_to&amp;gt;&lt;span style=&quot;background-color: initial;&quot;&gt;/data_meta&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="435" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s4_a1q7PYfUpuweuDUcm-11" value="stage 1&lt;br&gt;&amp;lt;each_domain&amp;gt;/&lt;span style=&quot;background-color: initial;&quot;&gt;4_build_domain_import_file.sh&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-35" y="320" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s4_a1q7PYfUpuweuDUcm-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.002;entryY=0.516;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="260.0000000000001" as="sourcePoint" />
+            <mxPoint x="30.340000000000146" y="450.4799999999999" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="250" y="340" />
+              <mxPoint x="-40" y="340" />
+              <mxPoint x="-40" y="450" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
