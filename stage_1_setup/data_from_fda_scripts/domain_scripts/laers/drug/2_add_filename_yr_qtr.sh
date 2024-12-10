@@ -2,7 +2,7 @@
 
 # built from data_4/add_filename_yr_qtr.sh
 
-# move this script to ${BASE_FIL_DIR}/data_from_s3/faers/drug
+# move this script to ${BASE_FILE_DIR}/data_from_s3/faers/drug
 
 # laers drug comes w/ good column alignment, except the data sections of all files have a trailing $ which spaces line appended data out (chosen solution is to remove the 12th $)
 

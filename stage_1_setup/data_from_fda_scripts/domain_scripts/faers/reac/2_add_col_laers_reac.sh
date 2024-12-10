@@ -7,7 +7,7 @@
 
 
 
-# # move this script to ${BASE_FIL_DIR}/data_from_s3/faers/${thisdomain}
+# # move this script to ${BASE_FILE_DIR}/data_from_s3/faers/${thisdomain}
 
 # #rebuilds ${thisdomain} domain data files for '12 Q4, all '13, and '14 Q1 and Q2
 
