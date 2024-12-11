@@ -12,6 +12,57 @@
   <modified_date>2022/06/09 10:51:32.884</modified_date>
   <parameters>
     </parameters>
+  <connection>
+    <name>${DATABASE_LOG_NAME}</name>
+    <server>${DATABASE_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${DATABASE_LOG_NAME}</database>
+    <port>${DATABASE_PORT}</port>
+    <username>${DATABASE_USERNAME}</username>
+    <password>${DATABASE_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${DATABASE_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -384,45 +435,6 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_3_domain_transformation</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_3_domain_transform/stage_3_faers_domain_transform.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1120</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>stage_5_sqls</name>
       <description/>
       <type>JOB</type>
@@ -455,71 +467,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1504</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>stage_3_laers_domain_transform.ktr transformation</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_3_domain_transform/stage_3_laers_domain_transform.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>464</xloc>
-      <yloc>960</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>SUCCESS IF LOAD_ALL_TIME=1</name>
-      <description/>
-      <type>SIMPLE_EVAL</type>
-      <attributes/>
-      <valuetype>variable</valuetype>
-      <fieldname/>
-      <variablename>${LOAD_ALL_TIME}</variablename>
-      <fieldtype>string</fieldtype>
-      <mask/>
-      <comparevalue>1</comparevalue>
-      <minvalue/>
-      <maxvalue/>
-      <successcondition>equal</successcondition>
-      <successnumbercondition>equal</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
       <xloc>112</xloc>
-      <yloc>960</yloc>
+      <yloc>1088</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -593,85 +542,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1888</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>stage_4_laers_domain_logging transformation</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_4_domain_logging/stage_4_laers_domain_logging.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>448</xloc>
-      <yloc>1120</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>stage_4_faers_domain_logging transformation</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_4_domain_logging/stage_4_faers_domain_logging.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1232</yloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -709,8 +580,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1632</yloc>
+      <xloc>480</xloc>
+      <yloc>1088</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -748,8 +619,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1760</yloc>
+      <xloc>304</xloc>
+      <yloc>1264</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -786,7 +657,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>1888</yloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -796,7 +667,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_4_domain_logging/stage_4_meta.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -822,8 +693,45 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>1360</yloc>
+      <xloc>480</xloc>
+      <yloc>960</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_3_meta</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/stage_3_domain_transform/stage_3_meta.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>960</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -831,15 +739,6 @@
     <hop>
       <from>stage_1_setup job</from>
       <to>stage_2_initial_data</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_2_initial_data</from>
-      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -856,53 +755,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>stage_3_laers_domain_transform.ktr transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>stage_0_set_pentaho_vars.kjb job</from>
       <to>stage_1_setup job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>stage_3_domain_transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_3_domain_transformation</from>
-      <to>stage_4_laers_domain_logging transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>stage_3_laers_domain_transform.ktr transformation</from>
-      <to>stage_3_domain_transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_4_laers_domain_logging transformation</from>
-      <to>stage_4_faers_domain_logging transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -946,8 +800,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_faers_domain_logging transformation</from>
-      <to>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</to>
+      <from>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</from>
+      <to>stage_5_sqls</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -955,8 +809,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</from>
-      <to>stage_5_sqls</to>
+      <from>stage_2_initial_data</from>
+      <to>stage_3_meta</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_3_meta</from>
+      <to>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1004,48 +867,6 @@ When logging goes blank click job metrics
       <yloc>0</yloc>
       <width>805</width>
       <heigth>588</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>stage_4_meta.kjb does all stage_4_*</note>
-      <xloc>336</xloc>
-      <yloc>1088</yloc>
-      <width>253</width>
-      <heigth>27</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>actually run stage_3_meta.kjb (for use case logic)</note>
-      <xloc>16</xloc>
-      <yloc>928</yloc>
-      <width>337</width>
-      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
