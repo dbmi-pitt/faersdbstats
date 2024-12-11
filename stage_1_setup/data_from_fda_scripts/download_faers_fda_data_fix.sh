@@ -1,7 +1,5 @@
 #!/bin/bash
-# /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_1_setup/faersdbstats_data_scripts/download_faers_fda_data_fix.sh
-
-# to use modify the year and qtr for loops 
+# /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_1_setup/faersdbstats_data_test_scripts/download_faers_fda_data_fix.sh
 
 # Source the configuration file
 source ../../../faers_config.config
@@ -13,11 +11,11 @@ shopt -s globstar
 shopt globstar
 
 # Create the main directory
-if [ ! -d ${DATABASE_BACKUP_LOCATION}/faersdbstats_data ]; then
-    mkdir -p ${DATABASE_BACKUP_LOCATION}/faersdbstats_data
+if [ ! -d ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test ]; then
+    mkdir -p ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test
 fi
 
-cd ${DATABASE_BACKUP_LOCATION}/faersdbstats_data/
+cd ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test/
 dir_above_laers_or_faers=$(pwd)
 
 for laers_faers in faers; do 
