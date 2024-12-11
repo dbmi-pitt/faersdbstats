@@ -1,6 +1,14 @@
 #!/bin/bash
+# /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_1_setup/data_from_fda_scripts/download_faers_fda_data_fix.sh
 #uncomment source to debug from command line
-source ../faers_config.config
+# source ../faers_config.config
+source ../../../faers_config.config
+
+# cat ../../../faers_config.config
+
+echo "/n"
+echo "BASE_FILE_DIR is :$BASE_FILE_DIR"
+
 
 #from download_new_quarter_from_fda
 # faers_or_laers='laers';
@@ -19,19 +27,12 @@ shopt globstar
     fi
     cd ${BASE_FILE_DIR}/data_from_fda/
     dir_above_laers_or_faers=`pwd`;
-for laers_faers in laers; do # faers; do 
+exit;
+quit;
+# for laers_faers in laers faers; do 
+for laers_faers in faers; do # faers; do 
     if [ ! -d ${BASE_FILE_DIR}/data_from_s3/$laers_faers ]; then
         mkdir ${BASE_FILE_DIR}/data_from_s3/$laers_faers
-        else
-            # back up data_from_s3
-            run_date=$(date "+%m%d%Y")
-            echo 'data_from_s3 does exist, will rename/move it then recreate - line 33'
-            if [ ! -d "${BASE_FILE_DIR}/data_from_s3_${run_date}" ]; then
-                echo renaming data_from_s3 to data_from_s3_${run_date}
-                mv ${BASE_FILE_DIR}/data_from_s3 ${BASE_FILE_DIR}/data_from_s3_${run_date}
-            else 
-                echo ${BASE_FILE_DIR}/data_from_s3_${run_date} already exists
-            fi
     fi
     cd ${BASE_FILE_DIR}/data_from_s3/$laers_faers
     # for domain in demo drug indi; do #outc reac rpsr ther; do
@@ -41,8 +42,10 @@ for laers_faers in laers; do # faers; do
             mkdir $domain
         fi
         cd $domain
-        for THIS_YEAR in 2004 2005 2006 2007 2008 2009 2010 2011 2012; do
-            for THIS_QUARTER in Q1 Q2 Q3 Q4; do
+        # for THIS_YEAR in 2004 2005 2006 2007 2008 2009 2010 2011 2012; do
+        for THIS_YEAR in 2022; do
+            # for THIS_QUARTER in Q1 Q2 Q3 Q4; do
+            for THIS_QUARTER in Q4; do
                 echo $laers_faers - $domain - ${THIS_YEAR} - ${THIS_QUARTER}
                 LOAD_NEW_YEAR=$THIS_YEAR
                 LOAD_NEW_QUARTER=$THIS_QUARTER

@@ -2,7 +2,7 @@
 
 # built from data_4/add_filename_yr_qtr.sh
 
-# move this script to ${BASE_FIL_DIR}/data_from_s3/faers/demo
+# move this script to ${BASE_FILE_DIR}/data_from_s3/faers/demo
 
 #rebuilds demo domain data files for '12 Q4, all '13, and '14 Q1 and Q2
 
