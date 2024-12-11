@@ -1,102 +1,91 @@
 #!/bin/bash
-# /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_1_setup/faersdbstats_data_test_scripts/download_faers_fda_data_fix.sh
+# /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_1_setup/faersdbstats_data_scripts/download_faers_fda_data_fix.sh
 
-# Uncomment source to debug from command line
-# source ../faers_config.config
+# to use modify the year and qtr for loops 
+
+# Source the configuration file
 source ../../../faers_config.config
 
-# cat ../../../faers_config.config
-
-# echo "/n"
 echo "DATABASE_BACKUP_LOCATION is :$DATABASE_BACKUP_LOCATION"
 
-# Set and echo globstar settings for ** used
+# Set globstar options
 shopt -s globstar 
 shopt globstar
-    if [ ! -d ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test ]; then
-        mkdir -p ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test
-    fi
-    cd ${DATABASE_BACKUP_LOCATION}/faersdbstats_data_test/
-    dir_above_laers_or_faers=$(pwd)
-# for laers_faers in laers faers; do 
+
+# Create the main directory
+if [ ! -d ${DATABASE_BACKUP_LOCATION}/faersdbstats_data ]; then
+    mkdir -p ${DATABASE_BACKUP_LOCATION}/faersdbstats_data
+fi
+
+cd ${DATABASE_BACKUP_LOCATION}/faersdbstats_data/
+dir_above_laers_or_faers=$(pwd)
+
 for laers_faers in faers; do 
     mkdir -p $dir_above_laers_or_faers/$laers_faers
 
     cd $dir_above_laers_or_faers/$laers_faers
 
+    for THIS_YEAR in 2024; do
+        for THIS_QUARTER in Q1 Q2 Q3; do
+            echo "Processing $laers_faers - ${THIS_YEAR} - ${THIS_QUARTER}"
+            
+            zip_url="https://fis.fda.gov/content/Exports/faers_ascii_${THIS_YEAR}q${THIS_QUARTER:1}.zip"
+            zip_filename_loc="${dir_above_laers_or_faers}/faers_ascii_${THIS_YEAR}q${THIS_QUARTER:1}.zip"
 
-        # for THIS_YEAR in 2004 2005 2006 2007 2008 2009 2010 2011 2012; do
-        for THIS_YEAR in 2022; do
-            # for THIS_QUARTER in Q1 Q2 Q3 Q4; do
-            for THIS_QUARTER in Q3; do
-                echo $laers_faers - ${THIS_YEAR} - ${THIS_QUARTER}
-                LOAD_NEW_YEAR=$THIS_YEAR
-                LOAD_NEW_QUARTER=$THIS_QUARTER
-                qtr_num=${LOAD_NEW_QUARTER: 1}
-                THIS_QUARTER_num=${THIS_QUARTER: 1}
-                # echo 'THIS_QUARTER is '$THIS_QUARTER
+            # Download the ZIP file (only once)
+            if [ ! -f "$zip_filename_loc" ]; then
+                echo "Downloading: $zip_url"
+                wget $zip_url --no-clobber -O "$zip_filename_loc" 2>&1
+            else
+                echo "File already exists: $zip_filename_loc"
+            fi
 
-                # LOAD_NEW_YEAR=2004
-                mkdir -p ${LOAD_NEW_YEAR}'/Q'${qtr_num}
-                # echo 'LOAD_NEW_QUARTER is '$LOAD_NEW_QUARTER
-                # THIS_QUARTER=$LOAD_NEW_QUARTER
-                LOAD_NEW_QUARTER=$THIS_QUARTER
-                # echo ${LOAD_NEW_YEAR:-2}
+            if [ -f "$zip_filename_loc" ]; then
+                unzip_dir="${dir_above_laers_or_faers}/unzipped/${THIS_YEAR}/Q${THIS_QUARTER:1}"
+                mkdir -p "$unzip_dir"
 
-                # echo ${LOAD_NEW_QUARTER}
-                fileyearquarter="${LOAD_NEW_YEAR:-2}${LOAD_NEW_QUARTER}"
+                echo "Unzipping $zip_filename_loc to $unzip_dir"
+                unzip -n "$zip_filename_loc" -d "$unzip_dir" 2>> error.txt 1>> output.txt
 
-
-                # mkdir -p og/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/
-                # mkdir -p og/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}_downloads
-
-                # cd og/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}_downloads/                
-                # echo ${LOAD_NEW_QUARTER: 1}
-                # echo ${qtr_num}
-                # echo `pwd`
-                # zip_url=https://fis.fda.gov/content/Exports/aers_ascii_2005q1.zip
-                echo 'https://fis.fda.gov/content/Exports/faers_ascii_'${LOAD_NEW_YEAR}'q'${THIS_QUARTER_num}'.zip'
-                zip_url='https://fis.fda.gov/content/Exports/faers_ascii_'${LOAD_NEW_YEAR}'q'${THIS_QUARTER_num}'.zip'
-                echo will wget this $zip_url
-                #download data -P = to specific dir faersdbstats_data_test
-                #skip 12 Q4
-                # if [ "$THIS_YEAR" != '2012' ] && [ "$THIS_QUARTER" != 'Q4' ]; then
-                    wget $zip_url --no-clobber -P ${dir_above_laers_or_faers}/faersdbstats_data_test 2>&1
-                # else 
-                #     echo 'Skipping 2012 Q4 as instructed'
-                # fi
-                # if [ ! -d ascii ]; then
-                #   mkdir ascii
-                # fi
-                if [ ! -d $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER} ]; then
-                    mkdir -p $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}
+                if [ $? -ne 0 ]; then
+                    echo "ERROR: Failed to unzip $zip_filename_loc"
+                    exit 1
                 fi
-                zip_filename_loc=$dir_above_laers_or_faers/'faers_ascii_'${THIS_YEAR}'q'${qtr_num}'.zip'
-                #unzip -n = no overwrite
-                unzip -n $zip_filename_loc -d $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER} 2>> error.txt 1>> output.txt
-                if [ -f $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}/ascii/${domain^^}${THIS_YEAR:2}${THIS_QUARTER}.TXT ]; then
-                    mv  $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}/ascii/${domain^^}${THIS_YEAR:2}${THIS_QUARTER}.TXT $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}/${domain^^}${THIS_YEAR:2}${THIS_QUARTER}.txt
-                fi
-    # for domain in demo drug indi; do #outc reac rpsr ther; do
-    for domain in demo drug indi outc reac rpsr ther; do
-    # for domain in rpsr; do
-        mkdir -p $dir_above_laers_or_faers/$laers_faers/$domain
+            else
+                echo "ERROR: ZIP file not found: $zip_filename_loc"
+                exit 1
+            fi
 
-        cd $dir_above_laers_or_faers/$laers_faers/$domain
-                # if [ -f $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}/ascii/${domain^^}${THIS_YEAR:2}Q${THIS_QUARTER}.txt ]; then
-                #     mv  $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/${THIS_QUARTER}/ascii/${domain^^}${THIS_YEAR:2}Q${THIS_QUARTER}.txt $dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/Q${THIS_QUARTER}/${domain^^}${THIS_YEAR:2}${THIS_QUARTER}.txt
-                # fi
-                # if [ -f ${dir_above_laers_or_faers}/faersdbstats_data_test/ascii/DEMO${LOAD_NEW_YEAR}q${LOAD_NEW_QUARTER}.txt ]; then
-                #     mv ${dir_above_laers_or_faers}/faersdbstats_data_test/ascii/DEMO${LOAD_NEW_YEAR:2}${LOAD_NEW_QUARTER}.txt ascii/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}/DEMO${LOAD_NEW_YEAR:2}${LOAD_NEW_QUARTER}.txt
-                # fi
-                # echo 'about to check if this exists - ' ${dir_above_laers_or_faers}/faersdbstats_data_test/ASCII/ASC_NTS.pdf ascii/${THIS_YEAR}/${THIS_QUARTER}/ASC_NTS${fileyearquarter}.pdf
-                if [ -f ${dir_above_laers_or_faers}/faersdbstats_data_test/ASCII/ASC_NTS.pdf ]; then
-                    mv ${dir_above_laers_or_faers}/faersdbstats_data_test/ASCII/ASC_NTS.pdf ascii/${THIS_YEAR}/${LOAD_NEW_QUARTER}/ASC_NTS${fileyearquarter}.pdf
-                fi
-            done; #end quarter loop
-        cd $dir_above_laers_or_faers/$laers_faers/$domain
-        done; #end year loop
-        cd $dir_above_laers_or_faers/$laers_faers
-        done; #end domain loop
-    cd $dir_above_laers_or_faers;
-done; #end laers_faers loop
+            # Process files for each domain
+            source_dir="$unzip_dir/ASCII"
+            if [ -d "$source_dir" ]; then
+                echo "Processing files from $source_dir"
+
+                for domain in demo drug indi outc reac rpsr ther; do
+                    target_dir="$dir_above_laers_or_faers/$laers_faers/$domain/${THIS_YEAR}/Q${THIS_QUARTER:1}"
+                    mkdir -p "$target_dir"
+
+                    domain_file_pattern="${domain^^}${THIS_YEAR:2}${THIS_QUARTER}.*"
+
+                    echo "Looking for $domain_file_pattern in $source_dir"
+                    files_found=$(find "$source_dir" -type f -name "$domain_file_pattern")
+
+                    if [ -n "$files_found" ]; then
+                        for file in $files_found; do
+                            echo "Moving $file to $target_dir"
+                            mv "$file" "$target_dir/"
+                        done
+                    else
+                        echo "No files found for domain: $domain in $source_dir"
+                    fi
+                done
+            else
+                echo "ERROR: Expected directory does not exist: $source_dir"
+            fi
+
+        done # End quarter loop
+    done # End year loop
+
+    cd $dir_above_laers_or_faers
+
+done # End laers_faers loop
