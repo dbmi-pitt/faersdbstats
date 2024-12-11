@@ -13,6 +13,57 @@
   <parameters>
     </parameters>
   <connection>
+    <name>${DATABASE_LOG_NAME}</name>
+    <server>${DATABASE_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${DATABASE_LOG_NAME}</database>
+    <port>${DATABASE_PORT}</port>
+    <username>${DATABASE_USERNAME}</username>
+    <password>${DATABASE_PASSWORD}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${DATABASE_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
@@ -521,7 +572,7 @@ from meddra_snomed_mapping b
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1600</yloc>
+      <yloc>1584</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -681,71 +732,16 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>------------------------------
---
--- This SQL script derives the SNOMED-CT concept codes for the legacy LARES and current FAERS outcome (categories) in a new table called standard_case_outcome_category
--- limited to just the unique cases.
---
--- Map the outcome categories to the following SNOMED codes:
---
--- CA "Congenital Anomaly" = SNOMED concept code: 107656002, SNOMED concept: "Congenital anomaly", OHDSI concept_id = 4029540
--- DE "Death" = SNOMED concept code: 419620001, SNOMED concept: "Death" , OHDSI concept_id = 4306655
--- DS "Disability" = SNOMED concept code: 21134002, SNOMED concept: "Disability", OHDSI concept_id = 4052648
--- HO "Hospitalization - Initial or Prolonged" = SNOMED concept code: 32485007, SNOMED concept: "Hospital admission", OHDSI concept_id = 8715
--- LT "Life-Threatening" = SNOMED concept code: 442452003, SNOMED concept: "Life threatening severity" OHDSI, concept_id = 40483553
--- OT "Other" = SNOMED concept code: 10003008, SNOMED concept: "Non-specific", OHDSI concept_id = 4001594
--- RI "Required Intervention to Prevent Permanent Impairment/Damage" = SNOMED concept code: 3890004, SNOMED concept: "Treatment required for", OHDSI concept_id = 4191370
---
--- NOTE. Around 25% of the cases in the FAERS demo table and 6% of LAERS do not have an outcome in the outc table
--- so in this sql we use a left outer join and some of the outc_codes will be null.
---
--- LTS COMPUTING LLC
-------------------------------
-
-set search_path = ${DATABASE_SCHEMA};
-
---drop table if exists standard_case_outcome_category;
-create table if not exists standard_case_outcome_category as
-(
-	with cte1 as (
-	select distinct a.primaryid, a.isr, b.outc_code
-	from unique_all_case a
-	left outer join outc b
-	on a.primaryid = b.primaryid
-	where a.isr is null
-	union
-	select distinct a.primaryid, a.isr, b.outc_cod
-	from unique_all_case a
-	left outer join outc_legacy b
-	on a.isr = b.isr
-	where a.isr is not null
-	
-	),
-	cte2 as (
-	select distinct primaryid, isr, outc_code, 
-	case 
-		when (outc_code = 'CA') then 4029540 	-- SNOMED concept: "Congenital anomaly", OHDSI concept_id = 4029540
-		when (outc_code = 'DE') then 4306655 	-- SNOMED concept: "Death" , OHDSI concept_id = 4306655
-		when (outc_code = 'DS') then 4052648  	-- SNOMED concept: "Disability", OHDSI concept_id = 4052648
-		when (outc_code = 'HO') then 8715		-- SNOMED concept: "Hospital admission", OHDSI concept_id = 8715
-		when (outc_code = 'LT') then 40483553	-- SNOMED concept: "Life threatening severity" OHDSI, concept_id = 40483553
-		when (outc_code = 'OT') then 4001594	-- SNOMED concept: "Non-specific", OHDSI concept_id = 4001594
-		when (outc_code = 'RI') then 4191370	-- SNOMED concept: "Treatment required for", OHDSI concept_id = 4191370
-	end as snomed_concept_id
-	from cte1
-	)
-select * from cte2
-);
-</sql>
+      <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Entry.Current.Directory}/derive_standard_case_outcome_category.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>864</xloc>
+      <xloc>880</xloc>
       <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
@@ -826,189 +822,10 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>-- Transform the LAERS legacy demo data into the same format as the FAERS current data so we can combine demographic data across both databases and run logic to remove duplicate cases across them both
--- There is no real LAERS case version so we default to '0' to ensure that LAERS data will sort before FAERS data case version (FAERS case version is always populated and never less than '1')
--- There is no real LAERS primaryid but we generate it from CASE and case version
--- We translate LAERS country names to FAERS 2 char country codes with a join to the country_code table
---
--- We perform single imputation of missing 'key' demographic fields for multiple reports within the same case producing a new table demo_with_imputed_keys.
---
--- We followed the single imputation process in the book "Data Mining Applications in Engineering and Medicine" 
---		by Elisabetta Poluzzi1, Emanuel Raschi1, Carlo Piccinni1 and Fabrizio De Ponti1
---		ISBN 978-953-51-0720-0: 
---		See Chapter 12: Data Mining Techniques in Pharmacovigilance: Analysis of the Publicly Accessible FDA Adverse Event Reporting System (AERS)  
--- 		we use the same demographic key fields:  age, event_dt, sex, reporter_country.
--- 
--- The 'key' demographic fields are required in later processing to remove duplicate cases.
--- 
--- We will only impute single missing case demo key values for a case where there is at least one case record with a fully populated set of demo keys 
--- and we populate (impute) the value of a missing demo key field using the max value of the demo key field for the same case.
---
--- LTS Computing LLC
--------------------------------
-
-set search_path = ${DATABASE_SCHEMA};
-
--- generate a table to lookup concatenated string of current drugnames by primaryid
-drop table if exists drugname_list;
-create table drugname_list as
-select primaryid, upper(string_agg(drugname, '|' order by drugname)) as drugname_list
-from drug
-group by primaryid;
-
--- generate a table to lookup concatenated string of reaction preferred terms by primaryid
-drop table if exists reac_pt_list;
-create table reac_pt_list as
-select primaryid, upper(string_agg(pt, '|' order by pt)) as reac_pt_list
-from reac
-group by primaryid;
-
--- generate a table of current data demographics by caseid
-drop table if exists casedemo;
-create table casedemo as
-select caseid, caseversion, i_f_code, event_dt, age, sex, reporter_country, d.primaryid, drugname_list, reac_pt_list, fda_dt
-from demo d
-left outer join drugname_list dl
-on d.primaryid = dl.primaryid 
-left outer join reac_pt_list rpl
-on d.primaryid = rpl.primaryid;
-
-----------------------
-
--- generate a table to lookup concatenated string of legacy drugnames by isr
-drop table if exists drugname_legacy_list;
-create table drugname_legacy_list as
-select isr, upper(string_agg(drugname, '|' order by drugname)) as drugname_list 
-from drug_legacy
-group by isr;
-
--- generate a table to lookup concatenated string of legacy reaction preferred terms by isr
-drop table if exists reac_pt_legacy_list;
-create table reac_pt_legacy_list as
-select isr, upper(string_agg(pt, '|' order by pt)) as reac_pt_list
-from reac_legacy
-group by isr;
-
--- generate a table of legacy case demographics by case id
-drop table if exists casedemo_legacy;
-create table casedemo_legacy as
-select "CASE", i_f_cod, event_dt, age, gndr_cod, reporter_country, d.isr, drugname_list, reac_pt_list, fda_dt
-from demo_legacy d
-left outer join drugname_legacy_list dl
-on d.isr = dl.isr 
-left outer join reac_pt_legacy_list rpl
-on d.isr = rpl.isr;
-
-------------------------------
-
--- create a combined set of all case demographics with drug list and reaction (outcome) lists across all the LAERS legacy data and FAERS current data
-drop table if exists all_casedemo;
-create table all_casedemo as 
-select 'FAERS' as database, caseid, cast(null as varchar) as isr, caseversion, i_f_code, event_dt, age, sex, reporter_country, primaryid, 
-drugname_list, reac_pt_list, fda_dt, null as imputed_field_name 
-from casedemo 
-union
-select 'LAERS' as database, "CASE" as caseid, isr, cast ('0' as varchar) as caseversion, i_f_cod as i_f_code, event_dt, age, gndr_cod as sex, e.country_code as reporter_country, cast("CASE" || '0' as varchar) as primaryid, 
-drugname_list, reac_pt_list, fda_dt, null as imputed_field_name 
-from casedemo_legacy a 
-left outer join country_code e
-on upper(a.reporter_country) = upper(e.country_name);
-
-------------------------------
-
--- perform single imputation of missing 'key' demographic fields for multiple reports within the same case across all the legacy and current data
-
--- create table of default demo event_dt key value for each case where all the key fields are populated on at least one report for that case
-drop table if exists default_all_casedemo_event_dt_keys; 
-create table default_all_casedemo_event_dt_keys as 
-select caseid, age, sex, reporter_country, max(event_dt) as default_event_dt
-from all_casedemo 
-where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
-group by caseid, age, sex, reporter_country;
-
--- single imputation of missing event_dt 
-update all_casedemo a
-set event_dt = default_event_dt, imputed_field_name = 'event_dt' 
-from default_all_casedemo_event_dt_keys d
-where a.caseid = d.caseid and a.age = d.age and a.sex = d.sex and a.reporter_country = d.reporter_country
-and a.caseid is not null and a.event_dt is null and a.age is not null and a.sex is not null and a.reporter_country is not null;
-
--- create table of default demo age key value for each case where all the key fields are populated on at least one report for that case
-drop table if exists default_all_casedemo_age_keys; 
-create table default_all_casedemo_age_keys as 
-select caseid, event_dt, sex, reporter_country, max(age) as default_age
-from all_casedemo 
-where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
-group by caseid, event_dt, sex, reporter_country;
-
--- single imputation of missing age 
-update all_casedemo a 
-set age = default_age, imputed_field_name = 'age'  
-from default_all_casedemo_age_keys d
-where a.caseid = d.caseid and a.event_dt = d.event_dt and a.sex = d.sex and a.reporter_country = d.reporter_country
-and a.caseid is not null and a.event_dt is not null and a.age is null and a.sex is not null and a.reporter_country is not null;
-
--- create table of default demo gender key value for each case where all the key fields are populated on at least one report for that case
-drop table if exists default_all_casedemo_sex_keys; 
-create table default_all_casedemo_sex_keys as 
-select caseid, event_dt, age, reporter_country, max(sex) as default_sex
-from all_casedemo 
-where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
-group by caseid, event_dt, age, reporter_country;
-
--- single imputation of missing gender
-update all_casedemo a 
-set sex = default_sex, imputed_field_name = 'sex' 
-from default_all_casedemo_sex_keys d
-where a.caseid = d.caseid and a.event_dt = d.event_dt and a.age = d.age and a.reporter_country = d.reporter_country
-and a.caseid is not null and a.event_dt is not null and a.age is not null and a.sex is null and a.reporter_country is not null;
-
--- create table of default demo reporter_country key value for each case where all the key fields are populated on at least one report for that case
-drop table if exists default_all_casedemo_reporter_country_keys; 
-create table default_all_casedemo_reporter_country_keys as 
-select caseid, event_dt, age, sex, max(reporter_country) as default_reporter_country
-from all_casedemo 
-where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
-group by caseid, event_dt, age, sex;
-
--- single imputation of missing reporter_country
-update all_casedemo a
-set reporter_country = default_reporter_country, imputed_field_name = 'reporter_country'  
-from default_all_casedemo_reporter_country_keys d
-where a.caseid = d.caseid and a.event_dt = d.event_dt and a.age = d.age and a.sex = d.sex
-and a.caseid is not null and a.event_dt is not null and a.age is not null and a.sex is not null and a.reporter_country is null;
-
-------------------------------
-
--- get the latest case row for each case across both the legacy LAERS and current FAERS data based on CASE ID
-drop table if exists unique_all_casedemo;
-create table unique_all_casedemo as
-  select database, caseid, isr, caseversion, i_f_code, event_dt, age, sex, reporter_country, primaryid, drugname_list, reac_pt_list, fda_dt
-   from (
-     select *, 
-       row_number() over(partition by caseid order by primaryid desc, database desc, fda_dt desc, i_f_code, isr desc) as row_num 
-     from all_casedemo 
-   ) a where a.row_num = 1;
-
--- remove any duplicates based on fully populated matching demographic key fields and exact match on list of drugs and list of outcomes (FAERS reactions)
--- NOTE. when using this table for subsequent joins in the ETL process, join to FAERS data using primaryid and join to LAERS data using isr
-drop table if exists unique_all_case;   
-create table unique_all_case as
-select caseid, case when isr is not null then null else primaryid end as primaryid, isr 
-from (
-	select caseid, primaryid, isr, 
-	row_number() over(partition by event_dt, age, sex, reporter_country, drugname_list, reac_pt_list order by primaryid desc, database desc, fda_dt desc, i_f_code, isr desc) as row_num 
-	from unique_all_casedemo 
-	where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null and drugname_list is not null and reac_pt_list is not null
-) a where a.row_num = 1
-union 
-  select caseid, case when isr is not null then null else primaryid end as primaryid, isr 
-    from unique_all_casedemo 
-      where caseid is null or event_dt is null or age is null or sex is null or reporter_country is null or drugname_list is null or reac_pt_list is null;
-</sql>
+      <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/derive_unique_all_case.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1262,7 +1079,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1792</yloc>
+      <yloc>1840</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1298,7 +1115,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1696</yloc>
+      <yloc>1712</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1316,7 +1133,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1744</yloc>
+      <yloc>1776</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1358,7 +1175,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>672</xloc>
-      <yloc>1552</yloc>
+      <yloc>1616</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1392,7 +1209,7 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>880</xloc>
-      <yloc>1296</yloc>
+      <yloc>1376</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1651,7 +1468,7 @@ printf '\n' >> $log_location</script>
       <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1676,15 +1493,6 @@ printf '\n' >> $log_location</script>
     <hop>
       <from>Wait for 3s (4)</from>
       <to>derive_standard_drug_outcome_contingency_table_part_2.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for 3s (3)</from>
-      <to>create standard_drug_outcome_contingency_table from cem_ddl.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1816,11 +1624,12 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^creates standard_drug_outcome_count table</note>
+      <note>^creates standard_drug_outcome_count table
+also need to implement de-duplication procress</note>
       <xloc>32</xloc>
       <yloc>1360</yloc>
-      <width>320</width>
-      <heigth>27</heigth>
+      <width>330</width>
+      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1881,7 +1690,7 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
     <notepad>
       <note>our natural product vocabulary goes here
 </note>
-      <xloc>160</xloc>
+      <xloc>192</xloc>
       <yloc>1024</yloc>
       <width>285</width>
       <heigth>44</heigth>
@@ -1901,11 +1710,13 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>bring in our new de-duplication method</note>
+      <note>bring in our new de-duplication method
+
+...for new quarter</note>
       <xloc>528</xloc>
       <yloc>1168</yloc>
       <width>272</width>
-      <heigth>27</heigth>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1926,6 +1737,49 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <xloc>192</xloc>
       <yloc>1984</yloc>
       <width>195</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>these are drug-adverse-disproportionate calculations
+</note>
+      <xloc>256</xloc>
+      <yloc>1440</yloc>
+      <width>367</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>need to calculcate drug drug adverse event calculation</note>
+      <xloc>480</xloc>
+      <yloc>1312</yloc>
+      <width>371</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
