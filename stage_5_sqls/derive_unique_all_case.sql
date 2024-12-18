@@ -3,7 +3,7 @@
 -- There is no real LAERS primaryid but we generate it from CASE and case version
 -- We translate LAERS country names to FAERS 2 char country codes with a join to the country_code table
 --
--- We perform single imputation of missing 'key' demographic fields for multiple reports within the same case producing a new table demo_with_imputed_keys.
+-- (this does not happen? no demo_with_imputed_keys table) We perform single imputation of missing 'key' demographic fields for multiple reports within the same case producing a new table demo_with_imputed_keys.
 --
 -- We followed the single imputation process in the book "Data Mining Applications in Engineering and Medicine" 
 --		by Elisabetta Poluzzi1, Emanuel Raschi1, Carlo Piccinni1 and Fabrizio De Ponti1
@@ -19,7 +19,7 @@
 -- LTS Computing LLC
 -------------------------------
 set search_path = $ { DATABASE_SCHEMA };
--- generate a table to lookup concatenated string of current drugnames by primaryid
+-- generate a table, drugname_list, to lookup concatenated string of current drugnames by primaryid
 drop table if exists drugname_list;
 create table drugname_list as
 select primaryid,
@@ -32,7 +32,7 @@ select primaryid,
   ) as drugname_list
 from drug
 group by primaryid;
--- generate a table to lookup concatenated string of reaction preferred terms by primaryid
+-- generate a table, reac_pt_list, to lookup concatenated string of reaction preferred terms by primaryid
 drop table if exists reac_pt_list;
 create table reac_pt_list as
 select primaryid,
@@ -45,7 +45,7 @@ select primaryid,
   ) as reac_pt_list
 from reac
 group by primaryid;
--- generate a table of current data demographics by caseid
+-- generate a table, casedemo, of current data demographics by caseid
 drop table if exists casedemo;
 create table casedemo as
 select caseid,
@@ -63,7 +63,7 @@ from demo d
   left outer join drugname_list dl on d.primaryid = dl.primaryid
   left outer join reac_pt_list rpl on d.primaryid = rpl.primaryid;
 ----------------------
--- generate a table to lookup concatenated string of legacy drugnames by isr
+-- generate a table, drugname_legacy_list, to lookup concatenated string of legacy drugnames by isr
 drop table if exists drugname_legacy_list;
 create table drugname_legacy_list as
 select isr,
@@ -76,7 +76,7 @@ select isr,
   ) as drugname_list
 from drug_legacy
 group by isr;
--- generate a table to lookup concatenated string of legacy reaction preferred terms by isr
+-- generate a table, reac_pt_legacy_list, to lookup concatenated string of legacy reaction preferred terms by isr
 drop table if exists reac_pt_legacy_list;
 create table reac_pt_legacy_list as
 select isr,
@@ -89,7 +89,7 @@ select isr,
   ) as reac_pt_list
 from reac_legacy
 group by isr;
--- generate a table of legacy case demographics by case id
+-- generate a table, casedemo_legacy, of legacy case demographics by case id
 drop table if exists casedemo_legacy;
 create table casedemo_legacy as
 select "CASE",
@@ -106,7 +106,7 @@ from demo_legacy d
   left outer join drugname_legacy_list dl on d.isr = dl.isr
   left outer join reac_pt_legacy_list rpl on d.isr = rpl.isr;
 ------------------------------
--- create a combined set of all case demographics with drug list and reaction (outcome) lists across all the LAERS legacy data and FAERS current data
+-- create a table all_casedemo of combined set of all case demographics with drug list and reaction (outcome) lists across all the LAERS legacy data and FAERS current data
 drop table if exists all_casedemo;
 create table all_casedemo as
 select 'FAERS' as database,
@@ -175,7 +175,7 @@ where a.caseid = d.caseid
   and a.age is not null
   and a.sex is not null
   and a.reporter_country is not null;
--- create table of default demo age key value for each case where all the key fields are populated on at least one report for that case
+-- create table, default_all_casedemo_age_keys, of default demo age key value for each case where all the key fields are populated on at least one report for that case
 drop table if exists default_all_casedemo_age_keys;
 create table default_all_casedemo_age_keys as
 select caseid,
@@ -207,7 +207,7 @@ where a.caseid = d.caseid
   and a.age is null
   and a.sex is not null
   and a.reporter_country is not null;
--- create table of default demo gender key value for each case where all the key fields are populated on at least one report for that case
+-- create table, default_all_casedemo_sex_keys, of default demo gender key value for each case where all the key fields are populated on at least one report for that case
 drop table if exists default_all_casedemo_sex_keys;
 create table default_all_casedemo_sex_keys as
 select caseid,
