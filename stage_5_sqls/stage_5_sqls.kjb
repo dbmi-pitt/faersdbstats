@@ -13,57 +13,6 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_LOG_NAME}</name>
-    <server>${DATABASE_HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${DATABASE_LOG_NAME}</database>
-    <port>${DATABASE_PORT}</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>${DATABASE_PASSWORD}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${DATABASE_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
     <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
@@ -424,7 +373,7 @@ aws configure list</script>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_drug_outcome_drilldown.sql</name>
+      <name>derive_standard_drug_outcome_drilldown (inserted) sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -506,11 +455,11 @@ update standard_drug_outcome_drilldown a
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>656</xloc>
-      <yloc>1904</yloc>
+      <yloc>2240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>map_meddra_to_snomed.sql</name>
+      <name>map_meddra_to_snomed (inserted) sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -554,7 +503,7 @@ from meddra_snomed_mapping b
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>1904</yloc>
+      <yloc>2224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -572,7 +521,7 @@ from meddra_snomed_mapping b
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1584</yloc>
+      <yloc>1904</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -595,14 +544,14 @@ create table standard_drug_outcome_count as
 select drug_concept_id, outcome_concept_id, count(*) as drug_outcome_pair_count, cast(null as integer) as snomed_outcome_concept_id
 from (
 	select 'PRIMARYID' || a.primaryid as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
-	from standard_case_drug a
-	inner join standard_case_adr b
-	on a.primaryid = b.primaryid and a.isr is null and b.isr is null
-	union 
+			from standard_case_drug a
+		inner join standard_case_adr b
+			on a.primaryid = b.primaryid and a.isr is null and b.isr is null
+		union 
 	select 'ISR' || a.isr as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
-	from standard_case_drug a
-	inner join standard_case_adr b
-	on a.isr = b.isr and a.isr is not null and b.isr is not null
+			from standard_case_drug a
+		inner join standard_case_adr b
+			on a.isr = b.isr and a.isr is not null and b.isr is not null
 ) aa
 group by drug_concept_id, outcome_concept_id;
 </sql>
@@ -614,12 +563,12 @@ group by drug_concept_id, outcome_concept_id;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>1296</yloc>
+      <xloc>160</xloc>
+      <yloc>1600</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_case_adr.sql</name>
+      <name>derive_standard_case_adr (inserted) sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -675,12 +624,12 @@ inner join reac_legacy b
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>1184</yloc>
+      <xloc>576</xloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_case_indication.sql</name>
+      <name>derive_standard_case_indication (inserted) sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -723,8 +672,8 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1184</yloc>
+      <xloc>144</xloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -741,8 +690,8 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>1040</yloc>
+      <xloc>976</xloc>
+      <yloc>1360</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -759,8 +708,8 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>1040</yloc>
+      <xloc>144</xloc>
+      <yloc>1360</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -800,7 +749,7 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>map_all_drugname_to_rxnorm</name>
+      <name>map_all_drugname_to_rxnorm.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -1029,7 +978,7 @@ from standard_drug_outcome_contingency_table;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>160</xloc>
-      <yloc>1888</yloc>
+      <yloc>2208</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1061,7 +1010,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>2000</yloc>
+      <yloc>2320</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1079,7 +1028,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1840</yloc>
+      <yloc>2160</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1097,7 +1046,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1648</yloc>
+      <yloc>1968</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1115,7 +1064,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1712</yloc>
+      <yloc>2032</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1133,7 +1082,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1776</yloc>
+      <yloc>2096</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1146,8 +1095,8 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>1184</yloc>
+      <xloc>976</xloc>
+      <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1160,8 +1109,8 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>1296</yloc>
+      <xloc>528</xloc>
+      <yloc>1600</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1175,7 +1124,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>672</xloc>
-      <yloc>1616</yloc>
+      <yloc>1936</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1208,8 +1157,8 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>1376</yloc>
+      <xloc>864</xloc>
+      <yloc>1632</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1227,7 +1176,7 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>208</xloc>
-      <yloc>1440</yloc>
+      <yloc>1760</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1256,7 +1205,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>160</xloc>
-      <yloc>1536</yloc>
+      <yloc>1856</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1285,7 +1234,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1520</yloc>
+      <yloc>1840</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1317,11 +1266,145 @@ printf '\n' >> $log_location</script>
       <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>natural product vocabulary workflow step 3</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- from https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports
+
+--- APPROACH FOR NON-AWS --- RUN AS SUPER USER ON THE DATABASE OF INTEREST
+alter table staging_vocabulary.concept disable trigger all;
+alter table staging_vocabulary.vocabulary disable trigger all;
+alter table staging_vocabulary.domain  disable trigger all;
+alter table staging_vocabulary.concept_class disable trigger all;
+alter table staging_vocabulary.relationship disable trigger all;
+alter table staging_vocabulary.concept_relationship disable trigger all;
+
+DELETE FROM staging_vocabulary.concept cascade WHERE concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.vocabulary cascade WHERE vocabulary_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.domain cascade WHERE domain_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.concept_class cascade WHERE concept_class_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.relationship cascade WHERE relationship_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.concept_relationship cascade WHERE relationship_id like 'napdi_%';
+
+alter table staging_vocabulary.concept enable trigger all;
+alter table staging_vocabulary.vocabulary enable trigger all;
+alter table staging_vocabulary.domain  enable trigger all;
+alter table staging_vocabulary.concept_class enable trigger all;
+alter table staging_vocabulary.relationship enable trigger all;
+alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>736</xloc>
+      <yloc>1056</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>natural product vocabulary workflow step 1</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- update GSRS NPs, common names, and constituents in lb_to_common_names_tsv, test_srs_np, and test_srs_np_constituent (currently in the scratch_sanya schema of the GSRS database). See GSRS database query notes
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>1072</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>natural product vocabulary workflow step 2</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- update the manually curated NP spelling variations in np_faers_reference_set (currently in the scratch_sanya schema of the CEM database)</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>584</xloc>
+      <yloc>1093</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>natural product vocabulary workflow step 4</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- run the SQL NP terminology additions script
+-- https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/napdi_np_vocab_workflow_DEC_2022_Israel_mappings.sql
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>368</xloc>
+      <yloc>1200</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>natural product vocabulary workflow step 5</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- test that the vocabulary is working and makes sense using queries like the following:</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
+      <yloc>1264</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${BASE_FILE_DIR}/faersdbstats/stage_5_sqls/faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1264</xloc>
+      <yloc>1488</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
       <from>create_usagi_import_table.sql</from>
-      <to>map_all_drugname_to_rxnorm</to>
+      <to>map_all_drugname_to_rxnorm.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -1329,8 +1412,8 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_case_indication.sql</from>
-      <to>derive_standard_case_adr.sql</to>
+      <from>derive_standard_case_indication (inserted) sql</from>
+      <to>derive_standard_case_adr (inserted) sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1339,7 +1422,7 @@ printf '\n' >> $log_location</script>
     </hop>
     <hop>
       <from>derive_standard_case_outcome_category.sql</from>
-      <to>derive_standard_case_indication.sql</to>
+      <to>derive_standard_case_indication (inserted) sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1356,8 +1439,8 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>map_meddra_to_snomed.sql</from>
-      <to>derive_standard_drug_outcome_drilldown.sql</to>
+      <from>map_meddra_to_snomed (inserted) sql</from>
+      <to>derive_standard_drug_outcome_drilldown (inserted) sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1367,15 +1450,6 @@ printf '\n' >> $log_location</script>
     <hop>
       <from>derive_unique_all_case.sql</from>
       <to>create_usagi_import_table.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>map_all_drugname_to_rxnorm</from>
-      <to>standardize_combined_drug_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1401,7 +1475,7 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_drug_outcome_drilldown.sql</from>
+      <from>derive_standard_drug_outcome_drilldown (inserted) sql</from>
       <to>Log STAGE 5 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1411,7 +1485,7 @@ printf '\n' >> $log_location</script>
     </hop>
     <hop>
       <from>derive_standard_drug_outcome_statistics.sql</from>
-      <to>map_meddra_to_snomed.sql</to>
+      <to>map_meddra_to_snomed (inserted) sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1455,17 +1529,8 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_case_adr.sql</from>
+      <from>derive_standard_case_adr (inserted) sql</from>
       <to>Wait for 3s (2)</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for 3s (2)</from>
-      <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1486,7 +1551,7 @@ printf '\n' >> $log_location</script>
       <to>Wait for 3s (4)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1549,7 +1614,7 @@ printf '\n' >> $log_location</script>
       <to>Log "STAGE 5 STARTED"</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1565,6 +1630,42 @@ printf '\n' >> $log_location</script>
     <hop>
       <from>Wait for 3s</from>
       <to>derive_unique_all_case.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>map_all_drugname_to_rxnorm.sql</from>
+      <to>natural product vocabulary workflow step 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>natural product vocabulary workflow step 3</from>
+      <to>standardize_combined_drug_mapping.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (2)</from>
+      <to>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</from>
+      <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1625,11 +1726,12 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
     </notepad>
     <notepad>
       <note>^creates standard_drug_outcome_count table
-also need to implement de-duplication procress</note>
-      <xloc>32</xloc>
-      <yloc>1360</yloc>
-      <width>330</width>
-      <heigth>44</heigth>
+implement de-duplication procress after this?
+</note>
+      <xloc>16</xloc>
+      <yloc>1664</yloc>
+      <width>320</width>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1647,8 +1749,8 @@ also need to implement de-duplication procress</note>
     </notepad>
     <notepad>
       <note>^combined_drug_mapping</note>
-      <xloc>117</xloc>
-      <yloc>1107</yloc>
+      <xloc>16</xloc>
+      <yloc>1104</yloc>
       <width>189</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1689,11 +1791,18 @@ also need to implement de-duplication procress</note>
     </notepad>
     <notepad>
       <note>our natural product vocabulary goes here
-</note>
-      <xloc>192</xloc>
-      <yloc>1024</yloc>
-      <width>285</width>
-      <heigth>44</heigth>
+
+
+
+
+
+are we going to pentaho 
+workflow this "workflow" 
+https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports#workflow? </note>
+      <xloc>320</xloc>
+      <yloc>1040</yloc>
+      <width>600</width>
+      <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1710,13 +1819,19 @@ also need to implement de-duplication procress</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>bring in our new de-duplication method
+      <note>bring in our new de-duplication method (references vigibase but we didn't update that...)
 
-...for new quarter</note>
-      <xloc>528</xloc>
-      <yloc>1168</yloc>
-      <width>272</width>
-      <heigth>61</heigth>
+...for new quarter
+
+
+TODO put
+https://github.com/rkboyce/NaPDI-pv/blob/master/deduplication-strategy/review-of-deduplication-analysis-from-dec-2022.sql
+into stage 6
+</note>
+      <xloc>1056</xloc>
+      <yloc>1456</yloc>
+      <width>859</width>
+      <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1735,7 +1850,7 @@ also need to implement de-duplication procress</note>
     <notepad>
       <note>bring in xiaotong's ddi stats</note>
       <xloc>192</xloc>
-      <yloc>1984</yloc>
+      <yloc>2304</yloc>
       <width>195</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1754,12 +1869,40 @@ also need to implement de-duplication procress</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>these are drug-adverse-disproportionate calculations
+      <note>these are drug-adverse-disproportionate calculations                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </note>
-      <xloc>256</xloc>
-      <yloc>1440</yloc>
-      <width>367</width>
-      <heigth>44</heigth>
+      <xloc>16</xloc>
+      <yloc>1760</yloc>
+      <width>451</width>
+      <heigth>520</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1777,8 +1920,8 @@ also need to implement de-duplication procress</note>
     </notepad>
     <notepad>
       <note>need to calculcate drug drug adverse event calculation</note>
-      <xloc>480</xloc>
-      <yloc>1312</yloc>
+      <xloc>640</xloc>
+      <yloc>1616</yloc>
       <width>371</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>

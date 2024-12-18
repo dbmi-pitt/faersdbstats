@@ -4,3 +4,5 @@ config/pentaho.config
 config.config
 faers_config.config
 leftover_repo_extras/*
+**.*.bak
+stage_4_domain_logging/generate_wc_l_import_file_rpsr.bak

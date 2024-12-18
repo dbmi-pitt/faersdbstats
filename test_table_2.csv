@@ -1,0 +1,11 @@
+primaryid,test_col_1,test_col_2,filename,qtr_var,yr_var,qtr,yr
+1,Value1_1,Value2_1,file1,Q1,2023,1,2023
+2,Value1_2,Value2_2,file2,Q2,2023,2,2023
+3,Value1_3,Value2_3,file3,Q3,2023,3,2023
+4,Value1_4,Value2_4,file4,Q4,2023,4,2023
+5,Value1_5,Value2_5,file5,Q1,2024,1,2024
+6,Value1_6,Value2_6,file6,Q2,2024,2,2024
+7,Value1_7,Value2_7,file7,Q3,2024,3,2024
+8,Value1_8,Value2_8,file8,Q4,2024,4,2024
+9,Value1_9,Value2_9,file9,Q1,2025,1,2025
+10,Value1_10,Value2_10,file10,Q2,2025,2,2025
