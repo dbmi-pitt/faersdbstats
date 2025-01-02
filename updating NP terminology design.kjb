@@ -587,6 +587,43 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <yloc>1552</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>GSRS Job</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${BASE_FILE_DIR}/GSRS/gsrs_load.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
+      <yloc>1760</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -660,6 +697,24 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>aws delete approach</from>
+      <to>GSRS Job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>non-aws delete approach</from>
+      <to>GSRS Job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
@@ -974,7 +1029,7 @@ https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#overview
 
 which links to
 https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#add-to-omop-concept-table-for-standardization</note>
-      <xloc>512</xloc>
+      <xloc>352</xloc>
       <yloc>1968</yloc>
       <width>905</width>
       <heigth>112</heigth>
@@ -1004,6 +1059,81 @@ note did not parameterize schemas</note>
       <yloc>1552</yloc>
       <width>664</width>
       <heigth>112</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Create and load GSRS db
+
+TODO create ./stage_5/GSRS/gsrs_load.kjb
+
+...would contain...
+addition of GSRS_DB_VARS to .config
+download source files
+load data from source files (transform > text file input)</note>
+      <xloc>490</xloc>
+      <yloc>1761</yloc>
+      <width>375</width>
+      <heigth>146</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Clone the GSRS Repository:
+
+git clone https://github.com/ncats/gsrs3-main-deployment.git
+Navigate to the Database Scripts Directory:
+
+cd gsrs3-main-deployment/substances/database/sql/PostgreSQL/GSRS_3.1/
+Review and Execute the SQL Scripts:
+
+Schema Setup:
+psql -U your_username -d your_database -f GSRS_3.1_PostgreSQL_FULL.sql
+Insert Version Information:
+psql -U your_username -d your_database -f InsertVersionInfo.sql
+Load Data:
+
+If you have data files (e.g., CSVs), use the \COPY command in PostgreSQL to load data into the respective tables.
+Example:
+sql
+Copy code
+\COPY table_name FROM '/path/to/data.csv' WITH (FORMAT csv, HEADER true);
+Verify the Database Setup:
+
+Connect to your database:
+psql -U your_username -d your_database
+List tables to ensure they are created:
+sql
+Copy code
+\dt</note>
+      <xloc>1296</xloc>
+      <yloc>1712</yloc>
+      <width>754</width>
+      <heigth>469</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
