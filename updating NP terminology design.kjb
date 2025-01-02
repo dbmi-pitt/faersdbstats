@@ -458,6 +458,135 @@
       <yloc>976</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>SUCCESS IF DATABASE_HOST contains 'aws'</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${DATABASE_HOST}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>aws</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>contains</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>217</xloc>
+      <yloc>1429</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>aws delete approach</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>--- APROACH FOR AWS --- RUN AS RDS_SUPERUSER ON THE DATABASE OF INTEREST (and be prepared to wait a long while because it has to reset constraints!)
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_class" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_domain" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_vocabulary"  DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_ancestor ALTER CONSTRAINT "fpk_concept_ancestor_concept_1" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_ancestor ALTER CONSTRAINT "fpk_concept_ancestor_concept_2" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_class ALTER CONSTRAINT "fpk_concept_class_concept" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.vocabulary ALTER CONSTRAINT "fpk_vocabulary_concept" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.domain ALTER CONSTRAINT "fpk_domain_concept"  DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_relationship ALTER CONSTRAINT "fpk_concept_relationship_c_1" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_relationship ALTER CONSTRAINT "fpk_conlcept_relationship_c_2" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.concept_synonymn ALTER CONSTRAINT "fpk_concept_synonym_concept" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_concept_1"  DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_concept_2" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_1"  DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_2" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_3" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.relationship ALTER CONSTRAINT "fpk_relationship_concept" DEFERRABLE INITIALLY DEFERRED;
+alter table staging_vocabulary.source_to_concept_map ALTER CONSTRAINT "fpk_source_to_concept_map_c_1" DEFERRABLE INITIALLY DEFERRED;
+
+
+BEGIN;
+DELETE FROM staging_vocabulary.concept cascade WHERE concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.vocabulary cascade WHERE vocabulary_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.domain cascade WHERE domain_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.concept_class cascade WHERE concept_class_concept_id BETWEEN -9999999 AND -7000000 ;
+END;
+
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_class" NOT DEFERRABLE;
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_domain" NOT DEFERRABLE;
+alter table staging_vocabulary.concept ALTER CONSTRAINT "fpk_concept_vocabulary"  NOT DEFERRABLE;
+alter table staging_vocabulary.concept_ancestor ALTER CONSTRAINT "fpk_concept_ancestor_concept_1" NOT DEFERRABLE;
+alter table staging_vocabulary.concept_ancestor ALTER CONSTRAINT "fpk_concept_ancestor_concept_2" NOT DEFERRABLE;
+alter table staging_vocabulary.concept_class ALTER CONSTRAINT "fpk_concept_class_concept" NOT DEFERRABLE;
+alter table staging_vocabulary.vocabulary ALTER CONSTRAINT "fpk_vocabulary_concept" NOT DEFERRABLE;
+alter table staging_vocabulary.domain ALTER CONSTRAINT "fpk_domain_concept"  NOT DEFERRABLE;
+alter table staging_vocabulary.concept_relationship ALTER CONSTRAINT "fpk_concept_relationship_c_1" NOT DEFERRABLE;
+alter table staging_vocabulary.concept_relationship ALTER CONSTRAINT "fpk_conlcept_relationship_c_2" NOT DEFERRABLE;
+alter table staging_vocabulary.concept_synonymn ALTER CONSTRAINT "fpk_concept_synonym_concept" NOT DEFERRABLE;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_concept_1"  NOT DEFERRABLE;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_concept_2" NOT DEFERRABLE;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_1"  NOT DEFERRABLE;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_2" NOT DEFERRABLE;
+alter table staging_vocabulary.drug_strength ALTER CONSTRAINT "fpk_drug_strength_unit_3" NOT DEFERRABLE;
+alter table staging_vocabulary.relationship ALTER CONSTRAINT "fpk_relationship_concept" NOT DEFERRABLE;
+alter table staging_vocabulary.source_to_concept_map ALTER CONSTRAINT "fpk_source_to_concept_map_c_1" NOT DEFERRABLE;
+
+---</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>1552</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>non-aws delete approach</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>--- APPROACH FOR NON-AWS --- RUN AS SUPER USER ON THE DATABASE OF INTEREST
+alter table staging_vocabulary.concept disable trigger all;
+alter table staging_vocabulary.vocabulary disable trigger all;
+alter table staging_vocabulary.domain  disable trigger all;
+alter table staging_vocabulary.concept_class disable trigger all;
+alter table staging_vocabulary.relationship disable trigger all;
+alter table staging_vocabulary.concept_relationship disable trigger all;
+
+DELETE FROM staging_vocabulary.concept cascade WHERE concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.vocabulary cascade WHERE vocabulary_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.domain cascade WHERE domain_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.concept_class cascade WHERE concept_class_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.relationship cascade WHERE relationship_concept_id BETWEEN -9999999 AND -7000000 ;
+DELETE FROM staging_vocabulary.concept_relationship cascade WHERE relationship_id like 'napdi_%';
+
+alter table staging_vocabulary.concept enable trigger all;
+alter table staging_vocabulary.vocabulary enable trigger all;
+alter table staging_vocabulary.domain  enable trigger all;
+alter table staging_vocabulary.concept_class enable trigger all;
+alter table staging_vocabulary.relationship enable trigger all;
+alter table staging_vocabulary.concept_relationship enable trigger all;
+
+-----------------</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>1552</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -503,6 +632,33 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Siamese network work?</from>
+      <to>SUCCESS IF DATABASE_HOST contains 'aws'</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>SUCCESS IF DATABASE_HOST contains 'aws'</from>
+      <to>aws delete approach</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SUCCESS IF DATABASE_HOST contains 'aws'</from>
+      <to>non-aws delete approach</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
@@ -589,8 +745,8 @@ in lb_to_common_names_tsv,
 (currently in the scratch_sanya schema of the GSRS database). 
 
 See GSRS database query notes</note>
-      <xloc>416</xloc>
-      <yloc>1552</yloc>
+      <xloc>512</xloc>
+      <yloc>2160</yloc>
       <width>425</width>
       <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
@@ -818,9 +974,35 @@ https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#overview
 
 which links to
 https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#add-to-omop-concept-table-for-standardization</note>
-      <xloc>445</xloc>
-      <yloc>1408</yloc>
+      <xloc>512</xloc>
+      <yloc>1968</yloc>
       <width>905</width>
+      <heigth>112</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>delete GSRS's custom concept ids  (-9,999,999 to -7,000,000)
+
+source: https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/README.md
+
+
+note did not parameterize schemas</note>
+      <xloc>464</xloc>
+      <yloc>1552</yloc>
+      <width>664</width>
       <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
