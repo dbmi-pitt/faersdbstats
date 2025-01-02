@@ -339,24 +339,6 @@
   <shared_objects_file/>
   <entries>
     <entry>
-      <name>delete negative sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql/>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>320</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>GSRS_data_extract_FDA_UNII.sql</name>
       <description/>
       <type>SQL</type>
@@ -372,28 +354,6 @@
       <nr>0</nr>
       <xloc>192</xloc>
       <yloc>672</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>go get new GSRS Data</name>
-      <description/>
-      <type>SPECIAL</type>
-      <attributes/>
-      <start>N</start>
-      <dummy>Y</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>480</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -478,8 +438,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>217</xloc>
-      <yloc>1429</yloc>
+      <xloc>208</xloc>
+      <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -544,7 +504,7 @@ alter table staging_vocabulary.source_to_concept_map ALTER CONSTRAINT "fpk_sourc
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>1552</yloc>
+      <yloc>208</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -584,7 +544,7 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>1552</yloc>
+      <yloc>208</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -620,30 +580,52 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>1760</yloc>
+      <xloc>192</xloc>
+      <yloc>336</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>1968</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Start</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>48</xloc>
+      <yloc>16</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
-    <hop>
-      <from>delete negative sql</from>
-      <to>go get new GSRS Data</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>go get new GSRS Data</from>
-      <to>GSRS_data_extract_FDA_UNII.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
     <hop>
       <from>GSRS_data_extract_FDA_UNII.sql</from>
       <to>generateNPWorkbooks.py</to>
@@ -670,15 +652,6 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Siamese network work?</from>
-      <to>SUCCESS IF DATABASE_HOST contains 'aws'</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>SUCCESS IF DATABASE_HOST contains 'aws'</from>
@@ -716,6 +689,24 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
+    <hop>
+      <from>Start</from>
+      <to>SUCCESS IF DATABASE_HOST contains 'aws'</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>GSRS Job</from>
+      <to>GSRS_data_extract_FDA_UNII.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -728,8 +719,8 @@ commands used to create sql step names
 cat -n &lt;filename> | grep -E 'create table'
 
 cat -n &lt;filename> | grep -E '^\s*[0-9]+\s*--|create table</note>
-      <xloc>864</xloc>
-      <yloc>96</yloc>
+      <xloc>928</xloc>
+      <yloc>0</yloc>
       <width>591</width>
       <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
@@ -799,9 +790,9 @@ in lb_to_common_names_tsv,
 
 (currently in the scratch_sanya schema of the GSRS database). 
 
-See GSRS database query notes</note>
-      <xloc>512</xloc>
-      <yloc>2160</yloc>
+See GSRS database query notes &lt; where are these notes?</note>
+      <xloc>448</xloc>
+      <yloc>1952</yloc>
       <width>425</width>
       <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
@@ -844,8 +835,8 @@ https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#overview
     </notepad>
     <notepad>
       <note>get GSRS data download</note>
-      <xloc>403</xloc>
-      <yloc>525</yloc>
+      <xloc>400</xloc>
+      <yloc>368</yloc>
       <width>173</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1023,14 +1014,14 @@ https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#iteratio
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>RESUME SUMMARIZING FROM "Create OMOP/OHDSI standard vocabulary with new 'napdi' concepts."
+      <note>FROM "Create OMOP/OHDSI standard vocabulary with new 'napdi' concepts."
 from
 https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#overview-of-string-mapping-and-vocabulary-construction
 
 which links to
 https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#add-to-omop-concept-table-for-standardization</note>
-      <xloc>352</xloc>
-      <yloc>1968</yloc>
+      <xloc>1440</xloc>
+      <yloc>384</yloc>
       <width>905</width>
       <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
@@ -1056,7 +1047,7 @@ source: https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/R
 
 note did not parameterize schemas</note>
       <xloc>464</xloc>
-      <yloc>1552</yloc>
+      <yloc>176</yloc>
       <width>664</width>
       <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
@@ -1075,7 +1066,9 @@ note did not parameterize schemas</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>Create and load GSRS db
+      <note>
+
+Create and load GSRS db
 
 TODO create ./stage_5/GSRS/gsrs_load.kjb
 
@@ -1083,10 +1076,10 @@ TODO create ./stage_5/GSRS/gsrs_load.kjb
 addition of GSRS_DB_VARS to .config
 download source files
 load data from source files (transform > text file input)</note>
-      <xloc>490</xloc>
-      <yloc>1761</yloc>
+      <xloc>0</xloc>
+      <yloc>352</yloc>
       <width>375</width>
-      <heigth>146</heigth>
+      <heigth>180</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1130,8 +1123,8 @@ List tables to ensure they are created:
 sql
 Copy code
 \dt</note>
-      <xloc>1296</xloc>
-      <yloc>1712</yloc>
+      <xloc>1248</xloc>
+      <yloc>512</yloc>
       <width>754</width>
       <heigth>469</heigth>
       <fontname>Ubuntu</fontname>
