@@ -408,8 +408,8 @@ source ../faers_config.config
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>384</yloc>
+      <xloc>224</xloc>
+      <yloc>2496</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -473,8 +473,8 @@ alter table staging_vocabulary.source_to_concept_map ALTER CONSTRAINT "fpk_sourc
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>512</yloc>
+      <xloc>96</xloc>
+      <yloc>2624</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -513,8 +513,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>512</yloc>
+      <xloc>352</xloc>
+      <yloc>2624</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -743,6 +743,472 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <yloc>1584</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>job of queries from napdi_np_vocab_workflow_SPRING_2023.sql</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename/>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
+      <yloc>2160</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>scratch/np-vocabulary-mappings-rxnorm.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>/*add mappings for NP names and constituents to RxNorm concepts (if any)*/
+drop table scratch_sanya.np_const_to_rxnorm;
+ 
+drop table scratch_sanya.np_rxnorm_substring_temp 
+
+create table if not exists scratch_sanya.np_to_rxnorm (
+concept_id_rxnorm int4 not null,
+concept_id_napdi int4 not null,
+concept_name_rxnorm varchar,
+concept_name_napdi varchar,
+concept_class_id_rxnorm varchar,
+concept_code varchar,
+valid_start_date date,
+valid_end_date date
+);
+
+create table if not exists scratch_sanya.np_const_to_rxnorm (
+concept_id_rxnorm int4 not null,
+concept_id_napdi int4 not null,
+concept_name_rxnorm varchar,
+concept_name_napdi varchar,
+concept_class_id_rxnorm varchar,
+concept_code varchar,
+valid_start_date date,
+valid_end_date date
+);
+
+create table if not exists scratch_sanya.np_rxnorm_substring_temp (
+concept_id_rxnorm int4 not null,
+concept_id_napdi int4 not null,
+concept_name_rxnorm varchar,
+concept_name_napdi varchar,
+concept_class_id_rxnorm varchar,
+concept_class_id_napdi varchar,
+concept_code varchar,
+valid_start_date date,
+valid_end_date date
+);
+
+--test query to find RxNorm concepts - exact matches constituents (N=123)
+with nps as ( 
+ select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+ concept_class_id np_concept_class_id
+ from staging_vocabulary.concept c 
+ where c.vocabulary_id ='NAPDI'
+) 
+insert into scratch_sanya.np_const_to_rxnorm
+(concept_id_rxnorm, concept_name_rxnorm, concept_id_napdi, concept_name_napdi, concept_class_id_rxnorm,
+concept_code, valid_start_date, valid_end_date)
+select c2.concept_id concept_id_rxnorm, c2.concept_name concept_name_rxnorm, nps.concept_id_napdi, 
+nps.concept_name_napdi, c2.concept_class_id concept_class_id_rxnorm, nps.concept_code, 
+c2.valid_start_date, c2.valid_end_date
+from staging_vocabulary.concept c2 inner join nps on upper(c2.concept_name) = nps.concept_name_napdi
+where vocabulary_id ='RxNorm' and nps.np_concept_class_id = 'NaPDI NP Constituent'
+;
+
+--rxnorm np name matches (N=7)
+with nps as ( 
+ select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+ concept_class_id np_concept_class_id
+ from staging_vocabulary.concept c 
+ where c.vocabulary_id ='NAPDI'
+) 
+insert into scratch_sanya.np_to_rxnorm 
+(concept_id_rxnorm, concept_name_rxnorm, concept_id_napdi, concept_name_napdi, concept_class_id_rxnorm,
+concept_code, valid_start_date, valid_end_date)
+select c2.concept_id concept_id_rxnorm, c2.concept_name concept_name_rxnorm, nps.concept_id_napdi, 
+nps.concept_name_napdi, c2.concept_class_id concept_class_id_rxnorm, nps.concept_code, 
+c2.valid_start_date, c2.valid_end_date
+from staging_vocabulary.concept c2 inner join nps on upper(c2.concept_name) = nps.concept_name_napdi
+where vocabulary_id ='RxNorm' and nps.np_concept_class_id != 'NaPDI NP Constituent'
+;
+
+--for all NPs - substring match
+with nps as (
+select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+   concept_class_id concept_class_id_napdi
+from staging_vocabulary.concept c 
+where c.vocabulary_id ='NAPDI'
+and c.concept_class_id != 'NaPDI NP Spelling Variation'
+), rxns as (
+ select distinct c2.concept_id concept_id_rxnorm, c2.vocabulary_id, c2.standard_concept,
+    upper(c2.concept_name) concept_name_rxnorm, c2.concept_class_id concept_class_id_rxnorm,
+    c2.valid_start_date, c2.valid_end_date
+ from staging_vocabulary.concept c2 
+ where c2.vocabulary_id = 'RxNorm'
+)
+insert into scratch_oct2022_np_vocab.np_rxnorm_substring_temp (concept_id_rxnorm,
+ concept_name_rxnorm, concept_id_napdi, concept_name_napdi, concept_class_id_rxnorm,
+ concept_class_id_napdi, concept_code, valid_start_date, valid_end_date)
+select distinct rxns.concept_id_rxnorm, rxns.concept_name_rxnorm, nps.concept_id_napdi,
+  nps.concept_name_napdi, rxns.concept_class_id_rxnorm, nps.concept_class_id_napdi, nps.concept_code,
+  rxns.valid_start_date, rxns.valid_end_date
+from rxns inner join nps on (
+                               rxns.concept_name_rxnorm like concat('% ',nps.concept_name_napdi) or
+                               rxns.concept_name_rxnorm like concat(nps.concept_name_napdi,' %') or
+                               rxns.concept_name_rxnorm like concat('% ',nps.concept_name_napdi,' %')
+                             )
+;
+
+--N=20,216 (includes non-exact matches, filtering done below)
+insert into scratch_sanya.np_to_rxnorm (concept_id_rxnorm, concept_id_napdi, concept_name_rxnorm,
+concept_name_napdi, concept_class_id_rxnorm, concept_code, valid_start_date, valid_end_date)
+select npx.concept_id_rxnorm, npx.concept_id_napdi, npx.concept_name_rxnorm, npx.concept_name_napdi,
+npx.concept_class_id_rxnorm, npx.concept_code, npx.valid_start_date, npx.valid_end_date 
+from scratch_sanya.np_rxnorm_substring_temp npx
+where npx.concept_class_id_napdi != 'NaPDI NP Constituent'
+
+--N=11,308
+insert into scratch_sanya.np_const_to_rxnorm (concept_id_rxnorm, concept_id_napdi, concept_name_rxnorm,
+concept_name_napdi, concept_class_id_rxnorm, concept_code, valid_start_date, valid_end_date)
+select npx.concept_id_rxnorm, npx.concept_id_napdi, npx.concept_name_rxnorm, npx.concept_name_napdi,
+npx.concept_class_id_rxnorm, npx.concept_code, npx.valid_start_date, npx.valid_end_date 
+from scratch_sanya.np_rxnorm_substring_temp npx
+where npx.concept_class_id_napdi = 'NaPDI NP Constituent'
+
+--add relationship in vocabulary - constituent_maps_to, np_maps_to
+--add to vocabulary.concept
+create temporary sequence if not exists napdi_concept_sequence as integer increment by -1 maxvalue -7005067;
+
+INSERT INTO staging_vocabulary.concept (concept_id, concept_name, domain_id, vocabulary_id, concept_class_id, standard_concept, concept_code, 
+										valid_start_date, valid_end_date, invalid_reason) 
+VALUES (nextval('napdi_concept_sequence'), 'napdi_np_maps_to', 'Metadata', 'Relationship', 'Relationship', '', 'OMOP generated', 
+										'2000-01-01', '2099-02-22', '');
+									
+INSERT INTO staging_vocabulary.concept (concept_id, concept_name, domain_id, vocabulary_id, concept_class_id, standard_concept, concept_code, 
+										valid_start_date, valid_end_date, invalid_reason) 
+VALUES (nextval('napdi_concept_sequence'), 'napdi_const_maps_to', 'Metadata', 'Relationship', 'Relationship', '', 'OMOP generated', 
+										'2000-01-01', '2099-02-22', '')
+;
+
+--add to vocabulary.relationship
+insert into staging_vocabulary.relationship (relationship_id, relationship_name, is_hierarchical, defines_ancestry, reverse_relationship_id, relationship_concept_id)
+with rel as (select c.concept_id rel_id from staging_vocabulary.concept c where c.concept_name = 'napdi_np_maps_to')
+select 'napdi_np_maps_to', 'NaPDI NP maps to', 0, 0, 0, rel_id 
+from rel
+;  
+
+insert into staging_vocabulary.relationship (relationship_id, relationship_name, is_hierarchical, defines_ancestry, reverse_relationship_id, relationship_concept_id)
+with rel as (select c.concept_id rel_id from staging_vocabulary.concept c where c.concept_name = 'napdi_np_maps_to')
+select 'napdi_const_maps_to', 'NaPDI constituent maps to', 0, 0, 0, rel_id 
+from rel
+; 
+
+--Filtering mappings before adding to vocabulary
+
+--remove BALM, JU, MATE, RAPE, RAPE SEED after review
+delete from scratch_sanya.np_to_rxnorm 
+where concept_id_napdi in (-7000171, -7000259, -7000470, -7000562, -7000172)
+
+--how to include filtering done in rxnorm-mappings-string-match.ipynb?? filters out non exact matches (N=)
+--also include rxnorm-faers-match queries?
+
+--Add to concept_relationship: Exact+substring match of NP names
+insert into staging_vocabulary.concept_relationship (concept_id_1, concept_id_2, relationship_id, 
+valid_start_date, valid_end_date, invalid_reason)
+select concept_id_napdi, concept_id_rxnorm,  'napdi_np_maps_to', valid_start_date, valid_end_date, ''
+from scratch_sanya.np_to_rxnorm
+
+--Add to concept_relationship: Exact+substring match of constituents
+insert into staging_vocabulary.concept_relationship (concept_id_1, concept_id_2, relationship_id, 
+valid_start_date, valid_end_date, invalid_reason)
+select concept_id_napdi, concept_id_rxnorm,  'napdi_const_maps_to', valid_start_date, valid_end_date, ''
+from scratch_sanya.np_const_to_rxnorm
+
+
+/**BELOW QUERIES NOT FOR VOCAB - ASSESS MAPPINGS AFTER REVEW**/
+
+--Generate tables for review
+select distinct ntr.concept_id_napdi, ntr.concept_id_rxnorm, ntr.concept_name_napdi, ntr.concept_name_rxnorm from scratch_sanya.np_to_rxnorm ntr 
+
+select distinct ntr.concept_name_napdi, count(*) from scratch_sanya.np_to_rxnorm ntr 
+group by ntr.concept_name_napdi 
+
+--Query to find codes used in FAERS data
+select t.drug_concept_id, count(distinct t.rid)
+from (
+ ( 
+ select drug_concept_id, primaryid rid
+ from faers.standard_drug_outcome_drilldown sdod 
+  inner join scratch_sanya.np_rxnorm_faers_match nrfm on sdod.drug_concept_id = nrfm.concept_id_rxnorm 
+  where primaryid is not null 
+    and isr is null
+ )
+ union
+ ( 
+ select drug_concept_id, isr rid
+ from faers.standard_drug_outcome_drilldown sdod 
+  inner join scratch_sanya.np_rxnorm_faers_match nrfm on sdod.drug_concept_id = nrfm.concept_id_rxnorm 
+  where primaryid is not null 
+    and isr is not null
+ )
+) t
+group by t.drug_concept_id
+
+--queries to get RxNorm mappings - add to example queries on GitHub
+select * from staging_vocabulary.concept c 
+where c.concept_id = '-7001523'
+
+select * from staging_vocabulary.concept c where concept_class_id = 'Cinnamon';
+
+--cinnamon
+select c1.concept_name, c1.concept_id,  c2.concept_name, c2.concept_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+where cr.relationship_id = 'napdi_np_maps_to'
+and c1.concept_id = -7000976
+
+--ginger
+select c1.concept_name, c1.concept_id,  c2.concept_name, c2.concept_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+where cr.relationship_id = 'napdi_np_maps_to'
+and c1.concept_id = -7001032
+
+--all NP mappings to RxNorm
+select c1.concept_name, c1.concept_id,  c2.concept_name, c2.concept_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+where cr.relationship_id = 'napdi_np_maps_to'
+
+--cinnamon constituents
+select distinct c1.concept_name, c1.concept_id,  c3.concept_name, c3.concept_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr1 on c1.concept_id = cr1.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr1.concept_id_2
+     inner join staging_vocabulary.concept_relationship cr2 on c2.concept_id = cr2.concept_id_1
+     inner join staging_vocabulary.concept c3 on c3.concept_id = cr2.concept_id_2
+where cr1.relationship_id = 'napdi_is_pt_of'
+   and cr2.relationship_id = 'napdi_has_const'
+   and c1.concept_id = '-7000976'
+
+--cinnamon constituents RxNorm mappings
+with cinn_cons as (
+select c1.concept_name np_name, c1.concept_id np_id,  c2.concept_name np_const_name, c2.concept_id np_const_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+where cr.relationship_id = 'napdi_has_const'
+   and c1.concept_id = -7001529
+)
+select cinn_cons.np_id, cinn_cons.np_name, cr2.concept_id_1 napdi_const_id, cinn_cons.np_const_name, 
+cr2.concept_id_2 rxnorm_id, c.concept_name rxnorm_name
+from staging_vocabulary.concept_relationship cr2 
+inner join cinn_cons on cinn_cons.np_const_id = cr2.concept_id_1 
+inner join staging_vocabulary.concept c on c.concept_id = cr2.concept_id_2 
+where cr2.relationship_id = 'napdi_const_maps_to'
+
+--constituent mappings sample
+select distinct c2.concept_name, c2.concept_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+where cr.relationship_id = 'napdi_pt'
+
+with np_cons as (
+select distinct c1.concept_name np_name, c1.concept_id np_id, c3.concept_name np_const_name, c3.concept_id np_const_id
+from staging_vocabulary.concept c1 
+	 inner join staging_vocabulary.concept_relationship cr1 on c1.concept_id = cr1.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr1.concept_id_2
+     inner join staging_vocabulary.concept_relationship cr2 on c2.concept_id = cr2.concept_id_1
+     inner join staging_vocabulary.concept c3 on c3.concept_id = cr2.concept_id_2
+where cr1.relationship_id = 'napdi_is_pt_of'
+   and cr2.relationship_id = 'napdi_has_const'
+   and c1.concept_id in (-7000976, -7001047, -7001077, -7001021, -7000976, -7001198, -7001224,
+   -7001012, -7000966, -7001032, -7001092, -7001008, -7001117, -7000994, -7001153, -7001114,
+   -7001156, -7001087, -7001025, -7001083, -7001209, -7001094, -7001050)
+)
+select np_cons.np_id, np_cons.np_name, cr2.concept_id_1 np_const_id, np_cons.np_const_name, 
+cr2.concept_id_2 rxnorm_id, c.concept_name rxnorm_name
+from staging_vocabulary.concept_relationship cr2 
+inner join np_cons on np_cons.np_const_id = cr2.concept_id_1 
+inner join staging_vocabulary.concept c on c.concept_id = cr2.concept_id_2 
+where cr2.relationship_id = 'napdi_const_maps_to'
+
+---SCRATCH
+
+--N=14,755 (Ingredient)
+--N=3,151 (Precise Ingredient)
+select count(*) from staging_vocabulary.concept c 
+where c.vocabulary_id = 'RxNorm' and c.concept_class_id = 'Precise Ingredient'
+
+--N=18
+select distinct c.concept_class_id  from staging_vocabulary.concept c 
+where c.vocabulary_id = 'RxNorm'
+
+--N=2,289 (total is 5061 with spelling variations)
+select count(*) from staging_vocabulary.concept c 
+where c.vocabulary_id = 'NAPDI' and c.concept_class_id != 'NaPDI NP Spelling Variation'
+
+--DO - find all strings from 14755+3151 with 2289 possible sub strings
+--find all RxNorm NP concepts - Latin binomial, common names, constituents
+--very very long with all matches
+with nps as ( 
+ select distinct concept_name np_name
+ from staging_vocabulary.concept c 
+ where c.vocabulary_id ='NAPDI'
+)
+select * 
+from staging_vocabulary.concept c2 
+inner join nps on upper(c2.concept_name) like concat('%',nps.np_name,'%')
+where c2.vocabulary_id = 'RxNorm' and nps.np_name = 'GREEN TEA'
+;
+
+select * from staging_vocabulary.concept c 
+where c.vocabulary_id = 'RxNorm' and upper(c.concept_name) like concat('%', 'GREEN TEA', '%')
+
+select * from staging_vocabulary.concept c
+where c.concept_id = -7005067
+
+select * from scratch_feb2022_np_vocab.lb_to_constituent ltc 
+where ltc.latin_binomial = 'Camellia sinensis'
+
+select * from scratch_feb2022_np_vocab.lb_to_common_name_and_pt ltcnap 
+where ltcnap.pt = 'Tao'
+
+with pt_lb_mapping as ( 
+  select distinct c1.concept_name pt, regexp_replace(c2.concept_name, '.*\[(.*)\]','\1' ) lb
+  from staging_vocabulary.concept c1 
+     inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+  where cr.relationship_id = 'napdi_is_pt_of'
+)
+select distinct pt_lb_mapping.lb, regexp_replace(c2.concept_name, '\[.*\]','' ) mappings
+from staging_vocabulary.concept c1 
+     inner join staging_vocabulary.concept_relationship cr on c1.concept_id = cr.concept_id_1  
+     inner join staging_vocabulary.concept c2 on c2.concept_id = cr.concept_id_2
+     inner join pt_lb_mapping on c1.concept_name = pt_lb_mapping.pt
+where cr.relationship_id = 'napdi_is_pt_of'
+order by  pt_lb_mapping.lb
+;
+
+select * from staging_vocabulary.concept c 
+where c.vocabulary_id = 'RxNorm'
+
+select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+concept_class_id concept_class_id_napdi
+from staging_vocabulary.concept c 
+where c.vocabulary_id ='NAPDI'
+and c.concept_class_id != 'NaPDI NP Spelling Variation' and c.concept_class_id = 'Feverfew'
+
+--substring match to rxnorm - save to temp (no extra cost for non indexed fields)
+with nps as ( 
+select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+concept_class_id concept_class_id_napdi
+from staging_vocabulary.concept c 
+where c.vocabulary_id ='NAPDI'
+and c.concept_class_id != 'NaPDI NP Spelling Variation'
+), rxns as (
+ select distinct c2.concept_id concept_id_rxnorm, c2.vocabulary_id, c2.standard_concept, 
+ upper(c2.concept_name) concept_name_rxnorm, c2.concept_class_id concept_class_id_rxnorm,
+ c2.valid_start_date, c2.valid_end_date
+ from staging_vocabulary.concept c2 
+ where c2.vocabulary_id = 'RxNorm'
+)
+insert into scratch_sanya.np_rxnorm_substring_temp
+(concept_id_rxnorm, concept_name_rxnorm, concept_id_napdi, concept_name_napdi, concept_class_id_rxnorm,
+concept_class_id_napdi, concept_code, valid_start_date, valid_end_date)
+select rxns.concept_id_rxnorm, rxns.concept_name_rxnorm, nps.concept_id_napdi, 
+nps.concept_name_napdi, rxns.concept_class_id_rxnorm, nps.concept_class_id_napdi, nps.concept_code, 
+rxns.valid_start_date, rxns.valid_end_date
+from rxns inner join nps on rxns.concept_name_rxnorm like concat('%',nps.concept_name_napdi,'%')  
+where nps.concept_name_napdi = 'GREEN TEA'
+;
+
+with nps as ( 
+select distinct upper(regexp_replace(c.concept_name, '\[.*\]','' )) concept_name_napdi, concept_id concept_id_napdi, concept_code,
+concept_class_id concept_class_id_napdi
+from staging_vocabulary.concept c 
+where c.vocabulary_id ='NAPDI'
+and c.concept_class_id != 'NaPDI NP Spelling Variation'
+), rxns as (
+ select distinct c2.concept_id concept_id_rxnorm, c2.vocabulary_id, c2.standard_concept, 
+ upper(c2.concept_name) concept_name_rxnorm, c2.concept_class_id concept_class_id_rxnorm,
+ c2.valid_start_date, c2.valid_end_date
+ from staging_vocabulary.concept c2 
+ where c2.vocabulary_id = 'RxNorm'
+)
+insert into scratch_sanya.np_rxnorm_substring_temp (concept_id_rxnorm, 
+concept_name_rxnorm, concept_id_napdi, concept_name_napdi, concept_class_id_rxnorm, 
+concept_class_id_napdi, concept_code, valid_start_date, valid_end_date)
+select rxns.concept_id_rxnorm, rxns.concept_name_rxnorm, nps.concept_id_napdi, 
+nps.concept_name_napdi, rxns.concept_class_id_rxnorm, nps.concept_class_id_napdi, nps.concept_code, 
+rxns.valid_start_date, rxns.valid_end_date
+from rxns inner join nps on rxns.concept_name_rxnorm like concat('%',nps.concept_name_napdi,'%')
+;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>2912</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Dummy</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>N</start>
+      <dummy>Y</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>3136</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -753,15 +1219,6 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>download and unzip unii files - Shell</from>
-      <to>SUCCESS IF DATABASE_HOST contains 'aws'</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>SUCCESS IF DATABASE_HOST contains 'aws'</from>
@@ -780,24 +1237,6 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>non-aws delete approach</from>
-      <to>GSRS Job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>aws delete approach</from>
-      <to>GSRS Job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>GSRS Job</from>
@@ -865,6 +1304,51 @@ alter table staging_vocabulary.concept_relationship enable trigger all;
     <hop>
       <from>Applying levenshtein distance to pull possible NP strings SQL</from>
       <to>Siamese network work?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Siamese network work?</from>
+      <to>job of queries from napdi_np_vocab_workflow_SPRING_2023.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>job of queries from napdi_np_vocab_workflow_SPRING_2023.sql</from>
+      <to>SUCCESS IF DATABASE_HOST contains 'aws'</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>aws delete approach</from>
+      <to>scratch/np-vocabulary-mappings-rxnorm.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>non-aws delete approach</from>
+      <to>scratch/np-vocabulary-mappings-rxnorm.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>scratch/np-vocabulary-mappings-rxnorm.sql</from>
+      <to>Dummy</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -984,7 +1468,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>5. Create OMOP/OHDSI standard vocabulary with new 'napdi' concepts.</note>
       <xloc>544</xloc>
-      <yloc>1984</yloc>
+      <yloc>2032</yloc>
       <width>483</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1005,7 +1489,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>6. NP vocabulary concepts are mapped to RxNorm concepts used in FAERS.</note>
       <xloc>544</xloc>
-      <yloc>2064</yloc>
+      <yloc>2864</yloc>
       <width>509</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1026,7 +1510,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>7. (Update 2023) - New FAERS 'HERBALS' strings added to vocabulary after manual mapping.</note>
       <xloc>544</xloc>
-      <yloc>2160</yloc>
+      <yloc>3072</yloc>
       <width>622</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1047,7 +1531,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>8. (Update 2023) - Combination products included in vocabulary and mapped to preferred NP terms.</note>
       <xloc>544</xloc>
-      <yloc>2240</yloc>
+      <yloc>3328</yloc>
       <width>676</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1068,7 +1552,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>9. Use vocabulary to find natural product terms and constituents</note>
       <xloc>544</xloc>
-      <yloc>2320</yloc>
+      <yloc>3408</yloc>
       <width>439</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1089,7 +1573,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>10. Use vocabulary to generate signals for natural product reports.</note>
       <xloc>544</xloc>
-      <yloc>2400</yloc>
+      <yloc>3488</yloc>
       <width>454</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1110,7 +1594,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>11. Concepts and relationships in latest vocabulary version</note>
       <xloc>544</xloc>
-      <yloc>2480</yloc>
+      <yloc>3568</yloc>
       <width>400</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1131,7 +1615,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>12. Notes on WHO-Drug dictionary and comparison with NaPDI vocabulary (see vigibase_etl wiki).</note>
       <xloc>544</xloc>
-      <yloc>2560</yloc>
+      <yloc>3648</yloc>
       <width>656</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1192,14 +1676,14 @@ in the Global Substance Registration System (GSRS).</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>delete GSRS's custom concept ids  (-9,999,999 to -7,000,000)
+      <note>5C delete GSRS's custom concept ids  (-9,999,999 to -7,000,000)
 
 source: https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/README.md
 
 
 note did not parameterize schemas</note>
-      <xloc>576</xloc>
-      <yloc>512</yloc>
+      <xloc>592</xloc>
+      <yloc>2496</yloc>
       <width>664</width>
       <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
@@ -1382,6 +1866,183 @@ https://github.com/pentaho-labs/pentaho-cpython-plugin
       <yloc>1552</yloc>
       <width>495</width>
       <heigth>435</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>...note removing NaPDI concept id's -9,999,999 to -7,000,000 is done at the beginning (2.  ...)</note>
+      <xloc>586</xloc>
+      <yloc>2100</yloc>
+      <width>611</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>5B Questions:
+- is this "deprecated"? 
+- where's the np_faers_reference_set table? ...latest in cem_pitt_2022.scratch_dec2022_np_vocab ? 
+- does 5A's napdi_np_vocab_workflow_SPRING_2023.sql cover what was mentioned in "5B"?
+
+commented out of np-terminology-imports/napdi_np_vocab_workflow_SPRING_2023.sql
+with this commit
+https://github.com/rkboyce/NaPDI-pv/commit/ace1ddf9a467485fa77b96c32bad8e73165d0da0
+
+yet existed in
+np-terminology-imports\napdi_np_vocab_workflow_DEC_2022_Israel_mappings.sql</note>
+      <xloc>592</xloc>
+      <yloc>2272</yloc>
+      <width>670</width>
+      <heigth>197</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>5A (to 5D)
+
+
+
+
+https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/napdi_np_vocab_workflow_SPRING_2023.sql</note>
+      <xloc>0</xloc>
+      <yloc>2144</yloc>
+      <width>826</width>
+      <heigth>112</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>5D run the SQL script NP terminology ETL
+
+Questions:
+- should 5A through 5D be their own jobs?</note>
+      <xloc>592</xloc>
+      <yloc>2640</yloc>
+      <width>285</width>
+      <heigth>78</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>5E
+
+Questions
+- to what degree is this QA is worth automating? (https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#5e-test-that-the-vocabulary-is-working-and-makes-sense-using-queries-like-the-following)
+- how to do this QA ?</note>
+      <xloc>597</xloc>
+      <yloc>2752</yloc>
+      <width>1441</width>
+      <heigth>95</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Questions:
+- are we  updating RxNorm? 
+- should we always work from a scratch_&lt;MMYY>_np_vocab schema?
+- where did "np_to_rxnorm_annotated" go? (https://pitt.sharepoint.com/:u:/r/sites/TRIADSlab-NaPDIPharmacovigilance/Shared%20Documents/NaPDI%20Pharmacovigilance/NP-FAERS-herbal-string-mappings/combination-products-annotation/np_to_rxnorm_annotated_20230404.tsv?csf=1&amp;web=1&amp;e=iZ1Vph)
+- how are relationships included?</note>
+      <xloc>583</xloc>
+      <yloc>2925</yloc>
+      <width>2080</width>
+      <heigth>95</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>- how were they mapped?
+- where'd the document go?
+	- https://pitt.sharepoint.com/sites/TRIADSlab-NaPDIPharmacovigilance/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTRIADSlab%2DNaPDIPharmacovigilance%2FShared%20Documents%2FNaPDI%20Pharmacovigilance%2FNP%2DFAERS%2Dherbal%2Dstring%2Dmappings%2FFAERS%2Dherbal%2Dstrings%2Dannotated%5F20230404%2Etsv
+- where's cdm.drug_name_original? (guessing ing cem_&lt;prod> before cem_pitt_2022)
+	- scratch_signals_q12004_thru_q32021's in cem_pitt_2022</note>
+      <xloc>596</xloc>
+      <yloc>3124</yloc>
+      <width>2434</width>
+      <heigth>95</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
