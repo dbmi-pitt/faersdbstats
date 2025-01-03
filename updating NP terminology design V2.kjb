@@ -1209,6 +1209,68 @@ from rxns inner join nps on rxns.concept_name_rxnorm like concat('%',nps.concept
       <yloc>3136</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Dummy 2</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>N</start>
+      <dummy>Y</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>3360</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Dummy 2 2</name>
+      <description/>
+      <type>SPECIAL</type>
+      <attributes/>
+      <start>N</start>
+      <dummy>Y</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>3536</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>NP-AE-signals-new-vocab-04212022.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- https://github.com/rkboyce/NaPDI-pv/blob/master/npdi-signal-detection/NP-AE-signals-new-vocab-04212022.sql</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>3744</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1354,6 +1416,33 @@ from rxns inner join nps on rxns.concept_name_rxnorm like concat('%',nps.concept
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Dummy</from>
+      <to>Dummy 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Dummy 2</from>
+      <to>Dummy 2 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Dummy 2 2</from>
+      <to>NP-AE-signals-new-vocab-04212022.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
@@ -1531,7 +1620,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>8. (Update 2023) - Combination products included in vocabulary and mapped to preferred NP terms.</note>
       <xloc>544</xloc>
-      <yloc>3328</yloc>
+      <yloc>3280</yloc>
       <width>676</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1552,7 +1641,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>9. Use vocabulary to find natural product terms and constituents</note>
       <xloc>544</xloc>
-      <yloc>3408</yloc>
+      <yloc>3488</yloc>
       <width>439</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1573,7 +1662,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>10. Use vocabulary to generate signals for natural product reports.</note>
       <xloc>544</xloc>
-      <yloc>3488</yloc>
+      <yloc>3680</yloc>
       <width>454</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1594,7 +1683,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>11. Concepts and relationships in latest vocabulary version</note>
       <xloc>544</xloc>
-      <yloc>3568</yloc>
+      <yloc>3888</yloc>
       <width>400</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -1615,7 +1704,7 @@ in the Global Substance Registration System (GSRS).</note>
     <notepad>
       <note>12. Notes on WHO-Drug dictionary and comparison with NaPDI vocabulary (see vigibase_etl wiki).</note>
       <xloc>544</xloc>
-      <yloc>3648</yloc>
+      <yloc>4144</yloc>
       <width>656</width>
       <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
@@ -2043,6 +2132,116 @@ Questions
       <yloc>3124</yloc>
       <width>2434</width>
       <heigth>95</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Questions:
+
+- Where'd the annotation guide go?
+  - 	- https://pitt.sharepoint.com/sites/TRIADSlab-NaPDIPharmacovigilance/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTRIADSlab%2DNaPDIPharmacovigilance%2FShared%20Documents%2FNaPDI%20Pharmacovigilance%2FNP%2DFAERS%2Dherbal%2Dstring%2Dmappings%2FFAERS%2Dherbal%2Dstrings%2Dannotated%5F20230404%2Etsv</note>
+      <xloc>610</xloc>
+      <yloc>3331</yloc>
+      <width>2434</width>
+      <heigth>78</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>These are more QA / Use case demos</note>
+      <xloc>608</xloc>
+      <yloc>3552</yloc>
+      <width>256</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>note these schemas are database dependent and schemas might not exist</note>
+      <xloc>577</xloc>
+      <yloc>3757</yloc>
+      <width>501</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>relationship reference documentation
+
+w/ potential QA queries</note>
+      <xloc>576</xloc>
+      <yloc>3967</yloc>
+      <width>265</width>
+      <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>I think we've moved past WHODDX</note>
+      <xloc>587</xloc>
+      <yloc>4203</yloc>
+      <width>240</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
