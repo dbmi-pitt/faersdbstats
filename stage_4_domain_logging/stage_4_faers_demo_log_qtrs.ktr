@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_${DATABASE_SCHEMA}_demo_log_qtrs</name>
+    <name>stage_4_faers_demo_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
