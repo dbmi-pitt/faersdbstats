@@ -478,57 +478,6 @@ SIZE and STAT domain are not loaded by this transform
     </notepad>
   </notepads>
   <connection>
-    <name>${DATABASE_LOG_NAME}</name>
-    <server>${DATABASE_HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${DATABASE_LOG_NAME}</database>
-    <port>${DATABASE_PORT}</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>${DATABASE_PASSWORD}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${DATABASE_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
     <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
@@ -1009,12 +958,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1215,12 +1164,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1322,7 +1271,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1479,11 +1428,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1583,11 +1532,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1651,11 +1600,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1715,11 +1664,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1779,11 +1728,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1843,11 +1792,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1923,11 +1872,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr</column_name>
+        <column_name>yr_var</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr</column_name>
+        <column_name>qtr_var</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -2006,12 +1955,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2102,12 +2051,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2198,12 +2147,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2338,12 +2287,12 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>Integer</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
