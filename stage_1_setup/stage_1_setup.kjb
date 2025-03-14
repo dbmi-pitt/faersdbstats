@@ -1322,7 +1322,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/stage_1_setup/domain_scripts/download_faers_fda_data_fix.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_1_setup/data_from_fda_scripts/download_faers_fda_data_fix.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -1421,7 +1421,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>Create Local TXT LOG</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1583,7 +1583,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>s3_domain_import_files_upload.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
