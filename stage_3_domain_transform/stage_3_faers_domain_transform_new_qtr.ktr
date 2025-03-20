@@ -442,13 +442,11 @@ preq's
 - having run...
 __stage_1_setup...
 __stage_2_initial_data...
-__specifying either a single specific quarter from Q4 2012 or older or LOAD_ALL_TIME=1 in faers.conf
+__specifying either a single specific quarter from Q4 2012 or newer or LOAD_ALL_TIME=0 in faers.conf
 
 in trial run all domain data files were reduced in size with...
   sed -i '15001,$ d' ther_new_qtr.txt
 ^example for ther domain
-
-THIS IS faers FOR LEGACY DATA
 
 for logging...
 
@@ -459,8 +457,8 @@ SIZE and STAT domain are not loaded by this transform
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>682</width>
-      <heigth>367</heigth>
+      <width>687</width>
+      <heigth>333</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -530,16 +528,6 @@ SIZE and STAT domain are not loaded by this transform
   </connection>
   <order>
     <hop>
-      <from>demo - CSV file input</from>
-      <to>load_in_demo_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>drug - CSV file input</from>
-      <to>load_in_drug_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>indi - CSV file input</from>
       <to>load_in_indi_table</to>
       <enabled>Y</enabled>
@@ -547,6 +535,21 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>outc - CSV file input</from>
       <to>load_in_outc_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Data grid - Stage_3_faers_domain has started</from>
+      <to>Text file output - Log output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>demo - CSV file input</from>
+      <to>load_in_demo_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>drug - CSV file input</from>
+      <to>load_in_drug_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -562,11 +565,6 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>ther - CSV file input</from>
       <to>load_in_ther_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Data grid - Stage_3_faers_domain has started</from>
-      <to>Text file output - Log output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -615,8 +613,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>1040</yloc>
+      <xloc>144</xloc>
+      <yloc>1280</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -672,8 +670,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>1040</yloc>
+      <xloc>416</xloc>
+      <yloc>1280</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -989,7 +987,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>464</yloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1195,7 +1193,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>544</yloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1210,7 +1208,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/indi/indi_new_qtr.txt</filename>
+    <filename>/home/pentaho-secondary/projects-brb265-2024/faersdbstats/data_from_s3/faers/indi/indi_new_qtr.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1302,7 +1300,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>624</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1319,7 +1317,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>demo_legacy</table>
+    <table>demo</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1445,8 +1443,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>464</yloc>
+      <xloc>304</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1463,7 +1461,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>drug_legacy</table>
+    <table>drug</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1549,8 +1547,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>544</yloc>
+      <xloc>304</xloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1567,9 +1565,9 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>indi_legacy</table>
+    <table>indi</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -1600,11 +1598,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr_var</column_name>
+        <column_name>yr</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr_var</column_name>
+        <column_name>qtr</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1618,7 +1616,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>624</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1635,7 +1633,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>outc_legacy</table>
+    <table>outc</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1664,11 +1662,11 @@ SIZE and STAT domain are not loaded by this transform
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr_var</column_name>
+        <column_name>yr</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr_var</column_name>
+        <column_name>qtr</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1682,7 +1680,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>704</yloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1699,7 +1697,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>reac_legacy</table>
+    <table>reac</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1746,7 +1744,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>784</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1763,7 +1761,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>rpsr_legacy</table>
+    <table>rpsr</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1810,7 +1808,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>864</yloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1827,7 +1825,7 @@ SIZE and STAT domain are not loaded by this transform
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_SCHEMA}</schema>
-    <table>ther_legacy</table>
+    <table>ther</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1890,7 +1888,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>944</yloc>
+      <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1905,7 +1903,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/outc/outc_new_qtr.txt</filename>
+    <filename>/home/pentaho-secondary/projects-brb265-2024/faersdbstats/data_from_s3/faers/outc/outc_new_qtr.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1986,7 +1984,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>704</yloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2082,7 +2080,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>784</yloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2178,7 +2176,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>864</yloc>
+      <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2318,7 +2316,7 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>944</yloc>
+      <yloc>1184</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
