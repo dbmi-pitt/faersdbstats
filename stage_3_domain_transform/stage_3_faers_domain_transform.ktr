@@ -618,42 +618,42 @@ PREVIEW read an input file, a bad path will TRUNCATE table</note>
     <hop>
       <from>log faers_indi_import_failed_lines</from>
       <to>Abort if 100 indilines have failed</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>indi - CSV file input</from>
       <to>if indi qtr is 1, 2, 3 or 4</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>if indi qtr is 1, 2, 3 or 4</from>
       <to>load_in_indi_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>if indi qtr is 1, 2, 3 or 4</from>
       <to>log faers_indi_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log faers_outc_import_failed_lines</from>
       <to>Abort if 100 outc lines have failed</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>outc - CSV file input</from>
       <to>if outc qtr is 1, 2, 3 or 4</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>if outc qtr is 1, 2, 3 or 4</from>
       <to>load_in_outc_table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>if outc qtr is 1, 2, 3 or 4</from>
       <to>log faers_outc_import_failed_lines</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>log faers_reac_import_failed_lines</from>
