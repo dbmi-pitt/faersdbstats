@@ -42,37 +42,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject>rpsr - CSV file input</subject>
         </field>
         <field>
           <id>ERRORS</id>
@@ -436,29 +436,30 @@
   </info>
   <notepads>
     <notepad>
-      <note>Stage 3 faers Transform
+      <note>FAERS data load (ONLY LATEST QUARTER)
+
+*will NOT truncate tables
+
+loads data from
+${BASE_FILE_DIR}/data_from_s3/faers/${domain}_new_qtr.txt
 
 preq's
-- having run...
-__stage_1_setup...
-__stage_2_initial_data...
-__specifying either a single specific quarter from Q4 2012 or newer or LOAD_ALL_TIME=0 in faers.conf
-
-in trial run all domain data files were reduced in size with...
-  sed -i '15001,$ d' ther_new_qtr.txt
-^example for ther domain
+having run
+stage_1...
+stage_2...
 
 for logging...
 
 ${BASE_FILE_DIR}/../logs/download_results.txt 
+${BASE_FILE_DIR}/../logs/stage_2_domain_import_file_creation
 
-note:
-SIZE and STAT domain are not loaded by this transform
+(properties logging set to log rpsr)
+
 </note>
-      <xloc>0</xloc>
-      <yloc>0</yloc>
-      <width>687</width>
-      <heigth>333</heigth>
+      <xloc>464</xloc>
+      <yloc>80</yloc>
+      <width>437</width>
+      <heigth>346</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -528,21 +529,6 @@ SIZE and STAT domain are not loaded by this transform
   </connection>
   <order>
     <hop>
-      <from>indi - CSV file input</from>
-      <to>load_in_indi_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>outc - CSV file input</from>
-      <to>load_in_outc_table</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Data grid - Stage_3_faers_domain has started</from>
-      <to>Text file output - Log output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>demo - CSV file input</from>
       <to>load_in_demo_table</to>
       <enabled>Y</enabled>
@@ -550,6 +536,16 @@ SIZE and STAT domain are not loaded by this transform
     <hop>
       <from>drug - CSV file input</from>
       <to>load_in_drug_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>indi - CSV file input</from>
+      <to>load_in_indi_table</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>outc - CSV file input</from>
+      <to>load_in_outc_table</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -567,9 +563,14 @@ SIZE and STAT domain are not loaded by this transform
       <to>load_in_ther_table</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Data grid - Stage_3_faers_domain_new_qtr has started</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>Data grid - Stage_3_faers_domain has started</name>
+    <name>Data grid - Stage_3_faers_domain_new_qtr has started</name>
     <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
@@ -595,13 +596,10 @@ SIZE and STAT domain are not loaded by this transform
     </fields>
     <data>
       <line>
-        <item>#######################################################</item>
+        <item>Stage_3_faers_domain_new_qtr has started</item>
       </line>
       <line>
-        <item>####### Stage_3_faers_domain transform has started #################</item>
-      </line>
-      <line>
-        <item>#######################################################</item>
+        <item/>
       </line>
     </data>
     <attributes/>
@@ -614,12 +612,39 @@ SIZE and STAT domain are not loaded by this transform
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>1280</yloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output - Log output</name>
+    <name>Get system info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>0</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -637,7 +662,7 @@ SIZE and STAT domain are not loaded by this transform
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -670,8 +695,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>1280</yloc>
+      <xloc>384</xloc>
+      <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -702,7 +727,7 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -713,7 +738,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>CASE</name>
+        <name>caseid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -724,7 +749,18 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>I_F_COD</name>
+        <name>caseversion</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>i_f_code</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -735,7 +771,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>FOLL_SEQ</name>
+        <name>event_dt</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -746,18 +782,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>IMAGE</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>9</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EVENT_DT</name>
+        <name>mfr_dt</name>
         <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
@@ -768,7 +793,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>MFR_DT</name>
+        <name>init_fda_dt</name>
         <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
@@ -779,7 +804,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>FDA_DT</name>
+        <name>fda_dt</name>
         <type>String</type>
         <format>yyyyMMdd</format>
         <currency>$</currency>
@@ -790,7 +815,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>REPT_COD</name>
+        <name>rept_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -801,29 +826,51 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>MFR_NUM</name>
+        <name>auth_num</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>28</length>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>MFR_SNDR</name>
+        <name>mfr_num</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>30</length>
+        <length>40</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>AGE</name>
+        <name>mfr_sndr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>20</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>lit_ref</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>age</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -834,18 +881,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>AGE_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>GNDR_COD</name>
+        <name>age_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -856,7 +892,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>E_SUB</name>
+        <name>age_grp</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -867,40 +903,40 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>WT</name>
+        <name>gndr_cod</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>e_sub</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>wt</name>
         <type>String</type>
         <format>#.#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
-        <precision>1</precision>
+        <length>6</length>
+        <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>WT_COD</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>REPT_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>OCCP_COD</name>
+        <name>wt_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -911,7 +947,18 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DEATH_DT</name>
+        <name>rept_dt</name>
+        <type>String</type>
+        <format>yyyyMMdd</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>to_mfr</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -922,24 +969,35 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>TO_MFR</name>
+        <name>occp_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>CONFID</name>
+        <name>reporter_country</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>21</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>occr_country</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -950,13 +1008,13 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>yr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -967,13 +1025,13 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -986,8 +1044,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>528</yloc>
+      <xloc>112</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1018,7 +1076,18 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>caseid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1029,7 +1098,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DRUG_SEQ</name>
+        <name>drug_seq</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1040,7 +1109,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>ROLE_COD</name>
+        <name>role_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1051,18 +1120,18 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DRUGNAME</name>
+        <name>drugname</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>70</length>
+        <length>21</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>VAL_VBM</name>
+        <name>val_vbm</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1073,186 +1142,145 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>ROUTE</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>24</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DOSE_VBM</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>95</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DECHAL</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>RECHAL</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>LOT_NUM</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>16</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EXP_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>NDA_NUM</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>filename</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>yr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>qtr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>640</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>indi - CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>/home/pentaho-secondary/projects-brb265-2024/faersdbstats/data_from_s3/faers/indi/indi_new_qtr.txt</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>$</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>ISR</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DRUG_SEQ</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>INDI_PT</name>
+        <name>route</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>37</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dose_vbm</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>39</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>cum_dose_chr</name>
+        <type>String</type>
+        <format>#.#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>5</length>
+        <precision>1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>cum_dose_unit</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dechal</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>rechal</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>lot_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>exp_dt</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>nda_num</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dose_amt</name>
+        <type>String</type>
+        <format>#.#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>5</length>
+        <precision>2</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dose_unit</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dose_form</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>18</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dose_freq</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1269,7 +1297,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>yr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1280,7 +1308,7 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1299,8 +1327,126 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>784</yloc>
+      <xloc>112</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>indi - CSV file input</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/indi/indi_new_qtr.txt</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>$</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>primaryid</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>caseid</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>indi_drug_seq</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>indi_pt</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>35</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>filename</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1319,7 +1465,7 @@ SIZE and STAT domain are not loaded by this transform
     <schema>${DATABASE_SCHEMA}</schema>
     <table>demo</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -1334,104 +1480,116 @@ SIZE and STAT domain are not loaded by this transform
     <return_field/>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
       </field>
       <field>
-        <column_name>CASE</column_name>
-        <stream_name>CASE</stream_name>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
       </field>
       <field>
-        <column_name>I_F_COD</column_name>
-        <stream_name>I_F_COD</stream_name>
+        <column_name>caseversion</column_name>
+        <stream_name>caseversion</stream_name>
       </field>
       <field>
-        <column_name>FOLL_SEQ</column_name>
-        <stream_name>FOLL_SEQ</stream_name>
+        <column_name>i_f_code</column_name>
+        <stream_name>i_f_code</stream_name>
       </field>
       <field>
-        <column_name>IMAGE</column_name>
-        <stream_name>IMAGE</stream_name>
+        <column_name>event_dt</column_name>
+        <stream_name>event_dt</stream_name>
       </field>
       <field>
-        <column_name>EVENT_DT</column_name>
-        <stream_name>EVENT_DT</stream_name>
+        <column_name>mfr_dt</column_name>
+        <stream_name>mfr_dt</stream_name>
       </field>
       <field>
-        <column_name>MFR_DT</column_name>
-        <stream_name>MFR_DT</stream_name>
+        <column_name>init_fda_dt</column_name>
+        <stream_name>init_fda_dt</stream_name>
       </field>
       <field>
-        <column_name>FDA_DT</column_name>
-        <stream_name>FDA_DT</stream_name>
+        <column_name>fda_dt</column_name>
+        <stream_name>fda_dt</stream_name>
       </field>
       <field>
-        <column_name>REPT_COD</column_name>
-        <stream_name>REPT_COD</stream_name>
+        <column_name>rept_cod</column_name>
+        <stream_name>rept_cod</stream_name>
       </field>
       <field>
-        <column_name>MFR_NUM</column_name>
-        <stream_name>MFR_NUM</stream_name>
+        <column_name>mfr_num</column_name>
+        <stream_name>mfr_num</stream_name>
       </field>
       <field>
-        <column_name>MFR_SNDR</column_name>
-        <stream_name>MFR_SNDR</stream_name>
+        <column_name>mfr_sndr</column_name>
+        <stream_name>mfr_sndr</stream_name>
       </field>
       <field>
-        <column_name>AGE</column_name>
-        <stream_name>AGE</stream_name>
+        <column_name>age</column_name>
+        <stream_name>age</stream_name>
       </field>
       <field>
-        <column_name>AGE_COD</column_name>
-        <stream_name>AGE_COD</stream_name>
+        <column_name>age_cod</column_name>
+        <stream_name>age_cod</stream_name>
       </field>
       <field>
-        <column_name>GNDR_COD</column_name>
-        <stream_name>GNDR_COD</stream_name>
+        <column_name>e_sub</column_name>
+        <stream_name>e_sub</stream_name>
       </field>
       <field>
-        <column_name>E_SUB</column_name>
-        <stream_name>E_SUB</stream_name>
+        <column_name>wt</column_name>
+        <stream_name>wt</stream_name>
       </field>
       <field>
-        <column_name>WT</column_name>
-        <stream_name>WT</stream_name>
+        <column_name>wt_cod</column_name>
+        <stream_name>wt_cod</stream_name>
       </field>
       <field>
-        <column_name>WT_COD</column_name>
-        <stream_name>WT_COD</stream_name>
+        <column_name>rept_dt</column_name>
+        <stream_name>rept_dt</stream_name>
       </field>
       <field>
-        <column_name>REPT_DT</column_name>
-        <stream_name>REPT_DT</stream_name>
+        <column_name>to_mfr</column_name>
+        <stream_name>to_mfr</stream_name>
       </field>
       <field>
-        <column_name>OCCP_COD</column_name>
-        <stream_name>OCCP_COD</stream_name>
+        <column_name>occp_cod</column_name>
+        <stream_name>occp_cod</stream_name>
       </field>
       <field>
-        <column_name>DEATH_DT</column_name>
-        <stream_name>DEATH_DT</stream_name>
+        <column_name>reporter_country</column_name>
+        <stream_name>reporter_country</stream_name>
       </field>
       <field>
-        <column_name>TO_MFR</column_name>
-        <stream_name>TO_MFR</stream_name>
-      </field>
-      <field>
-        <column_name>CONFID</column_name>
-        <stream_name>CONFID</stream_name>
+        <column_name>occr_country</column_name>
+        <stream_name>occr_country</stream_name>
       </field>
       <field>
         <column_name>filename</column_name>
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr_var</column_name>
+        <column_name>yr</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr_var</column_name>
+        <column_name>qtr</column_name>
         <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>auth_num</column_name>
+        <stream_name>auth_num</stream_name>
+      </field>
+      <field>
+        <column_name>lit_ref</column_name>
+        <stream_name>lit_ref</stream_name>
+      </field>
+      <field>
+        <column_name>age_grp</column_name>
+        <stream_name>age_grp</stream_name>
+      </field>
+      <field>
+        <column_name>sex</column_name>
+        <stream_name>gndr_cod</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1443,8 +1601,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>528</yloc>
+      <xloc>352</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1463,7 +1621,7 @@ SIZE and STAT domain are not loaded by this transform
     <schema>${DATABASE_SCHEMA}</schema>
     <table>drug</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -1478,63 +1636,83 @@ SIZE and STAT domain are not loaded by this transform
     <return_field/>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
       </field>
       <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
+        <column_name>drug_seq</column_name>
+        <stream_name>drug_seq</stream_name>
       </field>
       <field>
-        <column_name>ROLE_COD</column_name>
-        <stream_name>ROLE_COD</stream_name>
+        <column_name>role_cod</column_name>
+        <stream_name>role_cod</stream_name>
       </field>
       <field>
-        <column_name>DRUGNAME</column_name>
-        <stream_name>DRUGNAME</stream_name>
+        <column_name>drugname</column_name>
+        <stream_name>drugname</stream_name>
       </field>
       <field>
-        <column_name>VAL_VBM</column_name>
-        <stream_name>VAL_VBM</stream_name>
+        <column_name>val_vbm</column_name>
+        <stream_name>val_vbm</stream_name>
       </field>
       <field>
-        <column_name>ROUTE</column_name>
-        <stream_name>ROUTE</stream_name>
+        <column_name>route</column_name>
+        <stream_name>route</stream_name>
       </field>
       <field>
-        <column_name>DOSE_VBM</column_name>
-        <stream_name>DOSE_VBM</stream_name>
+        <column_name>dose_vbm</column_name>
+        <stream_name>dose_vbm</stream_name>
       </field>
       <field>
-        <column_name>DECHAL</column_name>
-        <stream_name>DECHAL</stream_name>
+        <column_name>cum_dose_chr</column_name>
+        <stream_name>cum_dose_chr</stream_name>
       </field>
       <field>
-        <column_name>RECHAL</column_name>
-        <stream_name>RECHAL</stream_name>
+        <column_name>cum_dose_unit</column_name>
+        <stream_name>cum_dose_unit</stream_name>
       </field>
       <field>
-        <column_name>LOT_NUM</column_name>
-        <stream_name>LOT_NUM</stream_name>
+        <column_name>dechal</column_name>
+        <stream_name>dechal</stream_name>
       </field>
       <field>
-        <column_name>EXP_DT</column_name>
-        <stream_name>EXP_DT</stream_name>
+        <column_name>rechal</column_name>
+        <stream_name>rechal</stream_name>
       </field>
       <field>
-        <column_name>NDA_NUM</column_name>
-        <stream_name>NDA_NUM</stream_name>
+        <column_name>exp_dt</column_name>
+        <stream_name>exp_dt</stream_name>
+      </field>
+      <field>
+        <column_name>nda_num</column_name>
+        <stream_name>nda_num</stream_name>
+      </field>
+      <field>
+        <column_name>dose_amt</column_name>
+        <stream_name>dose_amt</stream_name>
+      </field>
+      <field>
+        <column_name>dose_unit</column_name>
+        <stream_name>dose_unit</stream_name>
+      </field>
+      <field>
+        <column_name>dose_form</column_name>
+        <stream_name>dose_form</stream_name>
+      </field>
+      <field>
+        <column_name>dose_freq</column_name>
+        <stream_name>dose_freq</stream_name>
       </field>
       <field>
         <column_name>filename</column_name>
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr_var</column_name>
+        <column_name>yr</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr_var</column_name>
+        <column_name>qtr</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1547,8 +1725,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>640</yloc>
+      <xloc>352</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1582,16 +1760,20 @@ SIZE and STAT domain are not loaded by this transform
     <return_field/>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
       </field>
       <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
       </field>
       <field>
-        <column_name>INDI_PT</column_name>
-        <stream_name>INDI_PT</stream_name>
+        <column_name>indi_drug_seq</column_name>
+        <stream_name>indi_drug_seq</stream_name>
+      </field>
+      <field>
+        <column_name>indi_pt</column_name>
+        <stream_name>indi_pt</stream_name>
       </field>
       <field>
         <column_name>filename</column_name>
@@ -1615,8 +1797,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>784</yloc>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1635,7 +1817,7 @@ SIZE and STAT domain are not loaded by this transform
     <schema>${DATABASE_SCHEMA}</schema>
     <table>outc</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -1650,12 +1832,156 @@ SIZE and STAT domain are not loaded by this transform
     <return_field/>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
       </field>
       <field>
-        <column_name>OUTC_COD</column_name>
-        <stream_name>OUTC_COD</stream_name>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
+      </field>
+      <field>
+        <column_name>outc_code</column_name>
+        <stream_name>outc_code</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_reac_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>reac</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
+      </field>
+      <field>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
+      </field>
+      <field>
+        <column_name>pt</column_name>
+        <stream_name>pt</stream_name>
+      </field>
+      <field>
+        <column_name>drug_rec_act</column_name>
+        <stream_name>drug_rec_act</stream_name>
+      </field>
+      <field>
+        <column_name>filename</column_name>
+        <stream_name>filename</stream_name>
+      </field>
+      <field>
+        <column_name>qtr</column_name>
+        <stream_name>qtr</stream_name>
+      </field>
+      <field>
+        <column_name>yr</column_name>
+        <stream_name>yr</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>load_in_rpsr_table</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <schema>${DATABASE_SCHEMA}</schema>
+    <table>rpsr</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field>Field_000</tablename_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
+      </field>
+      <field>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
+      </field>
+      <field>
+        <column_name>rpsr_cod</column_name>
+        <stream_name>rpsr_cod</stream_name>
       </field>
       <field>
         <column_name>filename</column_name>
@@ -1679,136 +2005,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>864</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_reac_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>reac</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>PT</column_name>
-        <stream_name>PT</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr_var</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr_var</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>load_in_rpsr_table</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <schema>${DATABASE_SCHEMA}</schema>
-    <table>rpsr</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field>Field_000</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
-      </field>
-      <field>
-        <column_name>RPSR_COD</column_name>
-        <stream_name>RPSR_COD</stream_name>
-      </field>
-      <field>
-        <column_name>filename</column_name>
-        <stream_name>filename</stream_name>
-      </field>
-      <field>
-        <column_name>yr_var</column_name>
-        <stream_name>yr</stream_name>
-      </field>
-      <field>
-        <column_name>qtr_var</column_name>
-        <stream_name>qtr</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>1072</yloc>
+      <xloc>352</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1827,7 +2025,7 @@ SIZE and STAT domain are not loaded by this transform
     <schema>${DATABASE_SCHEMA}</schema>
     <table>ther</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -1842,39 +2040,43 @@ SIZE and STAT domain are not loaded by this transform
     <return_field/>
     <fields>
       <field>
-        <column_name>ISR</column_name>
-        <stream_name>ISR</stream_name>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
       </field>
       <field>
-        <column_name>DRUG_SEQ</column_name>
-        <stream_name>DRUG_SEQ</stream_name>
+        <column_name>caseid</column_name>
+        <stream_name>caseid</stream_name>
       </field>
       <field>
-        <column_name>START_DT</column_name>
-        <stream_name>START_DT</stream_name>
+        <column_name>dsg_drug_seq</column_name>
+        <stream_name>dsg_drug_seq</stream_name>
       </field>
       <field>
-        <column_name>END_DT</column_name>
-        <stream_name>END_DT</stream_name>
+        <column_name>start_dt</column_name>
+        <stream_name>start_dt</stream_name>
       </field>
       <field>
-        <column_name>DUR</column_name>
-        <stream_name>DUR</stream_name>
+        <column_name>end_dt</column_name>
+        <stream_name>end_dt</stream_name>
       </field>
       <field>
-        <column_name>DUR_COD</column_name>
-        <stream_name>DUR_COD</stream_name>
+        <column_name>dur</column_name>
+        <stream_name>dur</stream_name>
+      </field>
+      <field>
+        <column_name>dur_cod</column_name>
+        <stream_name>dur_cod</stream_name>
       </field>
       <field>
         <column_name>filename</column_name>
         <stream_name>filename</stream_name>
       </field>
       <field>
-        <column_name>yr_var</column_name>
+        <column_name>yr</column_name>
         <stream_name>yr</stream_name>
       </field>
       <field>
-        <column_name>qtr_var</column_name>
+        <column_name>qtr</column_name>
         <stream_name>qtr</stream_name>
       </field>
     </fields>
@@ -1887,8 +2089,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>1184</yloc>
+      <xloc>352</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1903,7 +2105,7 @@ SIZE and STAT domain are not loaded by this transform
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/pentaho-secondary/projects-brb265-2024/faersdbstats/data_from_s3/faers/outc/outc_new_qtr.txt</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/faers/outc/outc_new_qtr.txt</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1919,7 +2121,7 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -1930,7 +2132,18 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>OUTC_COD</name>
+        <name>caseid</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>outc_code</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1947,30 +2160,30 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>yr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -1983,8 +2196,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>864</yloc>
+      <xloc>112</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2015,7 +2228,7 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2026,46 +2239,68 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>PT</name>
+        <name>caseid</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>pt</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>49</length>
+        <length>40</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>drug_rec_act</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>filename</name>
         <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>qtr</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>yr</name>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>yr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>qtr</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2079,8 +2314,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>944</yloc>
+      <xloc>112</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2111,7 +2346,7 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2122,7 +2357,18 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>RPSR_COD</name>
+        <name>caseid</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>rpsr_cod</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -2139,13 +2385,13 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>yr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2156,13 +2402,13 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -2175,8 +2421,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>1072</yloc>
+      <xloc>112</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2207,7 +2453,7 @@ SIZE and STAT domain are not loaded by this transform
     <encoding/>
     <fields>
       <field>
-        <name>ISR</name>
+        <name>primaryid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2218,7 +2464,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DRUG_SEQ</name>
+        <name>caseid</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2229,29 +2475,7 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>START_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>END_DT</name>
-        <type>String</type>
-        <format>yyyyMMdd</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DUR</name>
+        <name>dsg_drug_seq</name>
         <type>String</type>
         <format>#</format>
         <currency>$</currency>
@@ -2262,13 +2486,46 @@ SIZE and STAT domain are not loaded by this transform
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DUR_COD</name>
+        <name>start_dt</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>end_dt</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dur</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>dur_cod</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2279,13 +2536,13 @@ SIZE and STAT domain are not loaded by this transform
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>yr</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -2296,13 +2553,13 @@ SIZE and STAT domain are not loaded by this transform
       </field>
       <field>
         <name>qtr</name>
-        <type>String</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>2</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
     </fields>
@@ -2315,8 +2572,8 @@ SIZE and STAT domain are not loaded by this transform
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>1184</yloc>
+      <xloc>112</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
