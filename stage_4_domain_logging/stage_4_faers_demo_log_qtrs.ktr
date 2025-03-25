@@ -660,7 +660,9 @@ databases</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
-    <sql>select count(*) as total_comp, cast(substring(filename,5,2)as int) as yr_b, cast(substring(filename,8,1)as int) as qtr_b, upper(substring(filename,0,5)) as domain_b
+    <sql>select 
+	count(*) as total_comp, 
+	cast(substring(filename,5,2)as int) as yr_b, cast(substring(filename,8,1)as int) as qtr_b, upper(substring(filename,0,5)) as domain_b
 	from ${DATABASE_SCHEMA}.demo
 	group by filename, yr_b, qtr_b
 	order by yr_b, qtr_b</sql>
@@ -677,7 +679,7 @@ databases</note>
         <name>total_comp</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - demo_table_counts.sql</origin>
         <comments>total_comp</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -700,7 +702,7 @@ databases</note>
         <name>yr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - demo_table_counts.sql</origin>
         <comments>yr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -723,7 +725,7 @@ databases</note>
         <name>qtr_b</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - demo_table_counts.sql</origin>
         <comments>qtr_b</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -746,7 +748,7 @@ databases</note>
         <name>domain_b</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.demo_table_counts.sql</origin>
+        <origin>Comparison Table input - demo_table_counts.sql</origin>
         <comments>domain_b</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -811,7 +813,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>demo stage_4_${DATABASE_SCHEMA}_demo... results</item>
+        <item>demo stage_4_faers_demo... results</item>
       </line>
     </data>
     <attributes/>
@@ -958,11 +960,13 @@ databases</note>
     <step1>Table input - demo_table_counts.sql</step1>
     <step2>Comparison Table input - demo_table_counts.sql</step2>
     <keys_1>
+      <key>total_main</key>
       <key>yr_a</key>
       <key>qtr_a</key>
       <key>domain_a</key>
     </keys_1>
     <keys_2>
+      <key>total_comp</key>
       <key>yr_b</key>
       <key>qtr_b</key>
       <key>domain_b</key>
@@ -993,10 +997,31 @@ databases</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>select count(*) as total_main, yr as yr_a, qtr as qtr_a, upper(substring(filename,0,5)) as domain_a
-	from ${DATABASE_SCHEMA}.demo
-	group by filename, yr_a, qtr_a
-	order by yr_a, qtr_a</sql>
+    <sql>SELECT 
+    COUNT(*) AS total_main, 
+    COALESCE(
+        yr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 5, 2) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 5, 2)::INT 
+            ELSE NULL 
+        END
+    ) AS yr_a,
+    COALESCE(
+        qtr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 8, 1) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 8, 1)::INT 
+            ELSE NULL 
+        END
+    ) AS qtr_a,
+    UPPER(SUBSTRING(filename, 1, 4)) AS domain_a
+FROM ${DATABASE_SCHEMA}.demo
+GROUP BY filename, yr, qtr, qtr_var, domain_a
+ORDER BY yr_a, qtr_a
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

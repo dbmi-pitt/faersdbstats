@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_${DATABASE_SCHEMA}_indi_log_qtrs</name>
+    <name>stage_4_faers_indi_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -811,7 +811,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>indi stage_4_${DATABASE_SCHEMA}_indi... results</item>
+        <item>indi stage_4_faers_indi... results</item>
       </line>
     </data>
     <attributes/>
@@ -958,11 +958,13 @@ databases</note>
     <step1>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.indi_table_counts.sql</step1>
     <step2>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.indi_table_counts.sql</step2>
     <keys_1>
+      <key>total_main</key>
       <key>yr_a</key>
       <key>qtr_a</key>
       <key>domain_a</key>
     </keys_1>
     <keys_2>
+      <key>total_b</key>
       <key>yr_b</key>
       <key>qtr_b</key>
       <key>domain_b</key>
@@ -993,10 +995,31 @@ databases</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>select count(*) as total_main, yr as yr_a, qtr as qtr_a, upper(substring(filename,0,5)) as domain_a
-	from ${DATABASE_SCHEMA}.indi
-	group by filename, yr_a, qtr_a
-	order by yr_a, qtr_a</sql>
+    <sql>SELECT 
+    COUNT(*) AS total_main, 
+    COALESCE(
+        yr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 5, 2) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 5, 2)::INT 
+            ELSE NULL 
+        END
+    ) AS yr_a,
+    COALESCE(
+        qtr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 8, 1) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 8, 1)::INT 
+            ELSE NULL 
+        END
+    ) AS qtr_a,
+    UPPER(SUBSTRING(filename, 1, 4)) AS domain_a
+FROM ${DATABASE_SCHEMA}.indi
+GROUP BY filename, yr, qtr, qtr_var, domain_a
+ORDER BY yr_a, qtr_a
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1007,11 +1030,11 @@ databases</note>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>total_a</name>
+        <name>total_main</name>
         <length>15</length>
         <precision>0</precision>
         <origin>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.indi_table_counts.sql</origin>
-        <comments>total_a</comments>
+        <comments>total_main</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>

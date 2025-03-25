@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>stage_4_${DATABASE_SCHEMA}_outc_log_qtrs</name>
+    <name>stage_4_faers_outc_log_qtrs</name>
     <description/>
     <extended_description/>
     <trans_version>1</trans_version>
@@ -811,7 +811,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>outc stage_4_${DATABASE_SCHEMA}_outc... results</item>
+        <item>outc stage_4_faers_outc... results</item>
       </line>
     </data>
     <attributes/>
@@ -993,10 +993,31 @@ databases</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
-    <sql>select count(*) as total_main, yr as yr_a, qtr as qtr_a, upper(substring(filename,0,5)) as domain_a
-	from ${DATABASE_SCHEMA}.outc
-	group by filename, yr_a, qtr_a
-	order by yr_a, qtr_a</sql>
+    <sql>SELECT 
+    COUNT(*) AS total_main, 
+    COALESCE(
+        yr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 5, 2) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 5, 2)::INT 
+            ELSE NULL 
+        END
+    ) AS yr_a,
+    COALESCE(
+        qtr,  -- Already an INT
+        NULLIF(qtr_var, '')::INT, 
+        CASE 
+            WHEN SUBSTRING(filename, 8, 1) ~ '^[0-9]+$' 
+            THEN SUBSTRING(filename, 8, 1)::INT 
+            ELSE NULL 
+        END
+    ) AS qtr_a,
+    UPPER(SUBSTRING(filename, 1, 4)) AS domain_a
+FROM ${DATABASE_SCHEMA}.outc
+GROUP BY filename, yr, qtr, qtr_var, domain_a
+ORDER BY yr_a, qtr_a
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
