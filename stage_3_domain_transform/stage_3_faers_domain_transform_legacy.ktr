@@ -436,7 +436,9 @@
   </info>
   <notepads>
     <notepad>
-      <note>Stage 3 faers Transform
+      <note>NOTE UNTESTED and from stage_3_faers_domain_transform_new_qtr.ktr
+
+Stage 3 LAERS (Legacy data) into faers schema, *_legacy tables 
 
 preq's
 - having run...
@@ -448,7 +450,7 @@ in trial run all domain data files were reduced in size with...
   sed -i '15001,$ d' ther_new_qtr.txt
 ^example for ther domain
 
-THIS IS faers FOR LEGACY DATA
+THIS IS FOR LEGACY DATA
 
 for logging...
 
@@ -460,7 +462,7 @@ SIZE and STAT domain are not loaded by this transform
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>682</width>
-      <heigth>367</heigth>
+      <heigth>401</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
