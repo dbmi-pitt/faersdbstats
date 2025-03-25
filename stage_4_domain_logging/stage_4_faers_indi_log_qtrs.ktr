@@ -572,7 +572,7 @@ databases</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.indi_table_counts.sql</from>
+      <from>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA} ${DATABASE_SCHEMA}.indi_table_counts.sql</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
@@ -649,7 +649,7 @@ databases</note>
     </GUI>
   </step>
   <step>
-    <name>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.indi_table_counts.sql</name>
+    <name>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA} ${DATABASE_SCHEMA}.indi_table_counts.sql</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -660,8 +660,11 @@ databases</note>
       <schema_name/>
     </partitioning>
     <connection>${DATABASE_COMPARISON_NAME}</connection>
-    <sql>select count(*) as total_comp, cast(substring(filename,5,2)as int) as yr_b, cast(substring(filename,8,1)as int) as qtr_b, upper(substring(filename,0,5)) as domain_b
-	from ${DATABASE_SCHEMA}.indi
+    <sql>select count(*) as total_comp, 
+	cast(substring(filename,5,2)as int) as yr_b, 
+	cast(substring(filename,8,1)as int) as qtr_b, 
+	upper(substring(filename,0,5)) as domain_b
+  from ${DATABASE_SCHEMA}.indi
 	group by filename, yr_b, qtr_b
 	order by yr_b, qtr_b</sql>
     <limit>0</limit>
@@ -674,11 +677,11 @@ databases</note>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>total_b</name>
+        <name>total_comp</name>
         <length>15</length>
         <precision>0</precision>
         <origin>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.indi_table_counts.sql</origin>
-        <comments>total_b</comments>
+        <comments>total_comp</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -811,7 +814,7 @@ databases</note>
         <item/>
       </line>
       <line>
-        <item>indi stage_4_faers_indi... results</item>
+        <item>indi stage_4_${DATABASE_SCHEMA}_indi... results</item>
       </line>
     </data>
     <attributes/>
@@ -956,7 +959,7 @@ databases</note>
     </partitioning>
     <join_type>FULL OUTER</join_type>
     <step1>Table input - ${DATABASE_SCHEMA}.${DATABASE_SCHEMA}.indi_table_counts.sql</step1>
-    <step2>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA}${DATABASE_SCHEMA}.indi_table_counts.sql</step2>
+    <step2>Comparison Table input - ${DATABASE_COMPARISON_SCHEMA} ${DATABASE_SCHEMA}.indi_table_counts.sql</step2>
     <keys_1>
       <key>total_main</key>
       <key>yr_a</key>
@@ -964,7 +967,7 @@ databases</note>
       <key>domain_a</key>
     </keys_1>
     <keys_2>
-      <key>total_b</key>
+      <key>total_comp</key>
       <key>yr_b</key>
       <key>qtr_b</key>
       <key>domain_b</key>
