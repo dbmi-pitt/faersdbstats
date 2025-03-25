@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>put_yr_var_and_qtr_var_into_yr_and_qtr_from_filename</name>
+    <name>stage_3_put_yr_var_and_qtr_var_in_from_filename</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -441,8 +441,8 @@
 other domains (demo, drug, etc.) are hidden steps
 
 test w/ rpsr and then do others</note>
-      <xloc>218</xloc>
-      <yloc>280</yloc>
+      <xloc>752</xloc>
+      <yloc>32</yloc>
       <width>344</width>
       <heigth>95</heigth>
       <fontname>Ubuntu</fontname>
@@ -536,8 +536,8 @@ test w/ rpsr and then do others</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>112</yloc>
+      <xloc>48</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -559,10 +559,10 @@ test w/ rpsr and then do others</note>
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.demo
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -580,9 +580,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>64</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -603,10 +603,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.drug
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -624,9 +624,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -647,10 +647,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.indi
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -668,9 +668,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>224</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -691,10 +691,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.outc
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -712,9 +712,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>304</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -735,10 +735,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.reac
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -756,9 +756,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>384</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -779,10 +779,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.rpsr
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -800,8 +800,8 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>464</yloc>
+      <xloc>64</xloc>
+      <yloc>592</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -823,10 +823,10 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.ther
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::int,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::int
+    yr_var = SUBSTRING(filename FROM 5 FOR 2)::text,
+    qtr_var = SUBSTRING(filename FROM 8 FOR 1)::text
 WHERE
-    (qtr IS NULL OR yr IS NULL)
+    (qtr_var IS NULL OR yr_var IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
     <set_params>N</set_params>
     <insert_field/>
@@ -844,9 +844,9 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>544</yloc>
-      <draw>N</draw>
+      <xloc>64</xloc>
+      <yloc>672</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
