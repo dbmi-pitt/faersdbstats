@@ -431,7 +431,7 @@
     <created_date>2024/12/02 14:28:27.901</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/12/02 14:28:27.901</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -505,45 +505,44 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_demo_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'demo'
-        IF LOWER(LEFT(rec.filename, 4)) = 'demo' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: demo, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM demo WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('demo') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM demo WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'demo'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -581,45 +580,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_drug_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'drug'
-        IF LOWER(LEFT(rec.filename, 4)) = 'drug' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: drug, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM drug WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's drug
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('drug') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM drug WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'drug'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -657,45 +655,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_indi_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'indi'
-        IF LOWER(LEFT(rec.filename, 4)) = 'indi' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: indi, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM indi WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('indi') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM indi WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'indi'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -718,7 +715,7 @@ END $$;
     </GUI>
   </step>
   <step>
-    <name>outc counts for each yr and each qtr</name>
+    <name>outc counts for each yr and each</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -733,45 +730,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_outc_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'outc'
-        IF LOWER(LEFT(rec.filename, 4)) = 'outc' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: outc, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM outc WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('outc') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM outc WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'outc'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -809,45 +805,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_reac_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'reac'
-        IF LOWER(LEFT(rec.filename, 4)) = 'reac' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: reac, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM reac WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('reac') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM reac WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'reac'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -885,45 +880,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_reac_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'reac'
-        IF LOWER(LEFT(rec.filename, 4)) = 'reac' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: reac, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM reac WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('rpsr') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM reac WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'reac'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -961,45 +955,44 @@ END $$;
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>-- File: process_ther_table.sql
--- Path: /path/to/sql/scripts/
-
-SET search_path = faers;
-
-DO $$
+    <sql>DO $$
 DECLARE
     rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
 BEGIN
     FOR rec IN 
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
-        -- Process only if the dynamic table is 'ther'
-        IF LOWER(LEFT(rec.filename, 4)) = 'ther' THEN
-            -- Debugging: Print the generated query
-            RAISE NOTICE 'Dynamic table: ther, yr: %, qtr: %, filename: %', rec.yr, rec.qtr, rec.filename;
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
 
-            RAISE NOTICE 'Generated Query: UPDATE z_qa_faers_wc_import_log 
-                  SET select_count_on_domain = (
-                      SELECT COUNT(*) FROM ther WHERE yr = $1 AND qtr = $2
-                  )
-                  WHERE filename = $3 AND yr = $1 AND qtr = $2';
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('ther') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
 
-            -- Execute the dynamic query
+            -- Build and execute the dynamic query
             EXECUTE format(
                 'UPDATE z_qa_faers_wc_import_log 
                  SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM ther WHERE yr = $1 AND qtr = $2
+                     SELECT COUNT(*) FROM %I WHERE yr = $1 AND qtr = $2
                  )
-                 WHERE filename = $3 AND yr = $1 AND qtr = $2'
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
             )
             USING rec.yr, rec.qtr, rec.filename;
+
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
         ELSE
-            -- Skip if the table is not 'ther'
-            RAISE NOTICE 'Skipping table: %', LOWER(LEFT(rec.filename, 4));
+            RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
-END $$;
-</sql>
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

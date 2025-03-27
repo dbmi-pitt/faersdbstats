@@ -1405,7 +1405,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>UPDATE ${DATABASE_SCHEMA}.z_qa_faers_wc_import_log
+      <sql>UPDATE faers.z_qa_faers_wc_import_log
 SET select_count_diff = wc_l_count - select_count_on_domain;
 </sql>
       <useVariableSubstitution>T</useVariableSubstitution>
@@ -1710,15 +1710,6 @@ SET select_count_diff_pct =
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log "STAGE 4 STARTED"</from>
-      <to>create if not exists faers_wc_import_log</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>create if not exists faers_wc_import_log</from>
       <to>SUCCESS IF REBUILD_ALL_TIME_DATA_LOCALLY=1</to>
       <from_nr>0</from_nr>
@@ -1741,7 +1732,7 @@ SET select_count_diff_pct =
       <to>stage_4_wc_l_import_files_just_rpsr.kjb rspr domain wc -l</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1820,6 +1811,15 @@ SET select_count_diff_pct =
     <hop>
       <from>select_count_diff_pct</from>
       <to>stage_4_faers_demo_log_qtrs.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Log "STAGE 4 STARTED"</from>
+      <to>create if not exists faers_wc_import_log</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
