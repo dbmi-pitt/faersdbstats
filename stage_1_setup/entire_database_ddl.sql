@@ -1299,3 +1299,12 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
+CREATE TABLE IF NOT EXISTS ${DATABASE_SCHEMA}.z_qa_faers_wc_import_log (
+    log_filename VARCHAR(255) NOT NULL,      -- Name of the log file
+    filename VARCHAR(255) NOT NULL,          -- Base name of the file without extension
+    laers_or_faers VARCHAR(10) NOT NULL,     -- Type of data, e.g., 'faers'
+    yr INT NOT NULL,                         -- Year of the data
+    qtr INT NOT NULL,                 -- Quarter of the data (e.g., 'Q1', 'Q2')
+    wc_l_count INT NOT NULL,                 -- Line count from wc -l
+    loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp when data is inserted
+);
