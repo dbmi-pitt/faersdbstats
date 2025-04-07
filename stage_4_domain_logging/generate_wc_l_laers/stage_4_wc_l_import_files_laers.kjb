@@ -310,11 +310,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_rpsr.sh</name>
+      <name>generate_wc_l_import_file_rpsr_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_rpsr_laers.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_rpsr_laers_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -335,11 +335,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_outc.sh</name>
+      <name>generate_wc_l_import_file_outc_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_outc.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_outc_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -360,11 +360,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_ther.sh</name>
+      <name>generate_wc_l_import_file_ther_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_ther.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_ther_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -385,11 +385,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_demo.sh</name>
+      <name>generate_wc_l_import_file_demo_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_demo.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_demo_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -410,11 +410,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_indi.sh</name>
+      <name>generate_wc_l_import_file_indi_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_indi.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_indi_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -435,11 +435,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_drug.sh</name>
+      <name>generate_wc_l_import_file_drug_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_drug.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_drug_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -460,11 +460,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>generate_wc_l_import_file_reac.sh</name>
+      <name>generate_wc_l_import_file_reac_laers.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_reac.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_laers/generate_wc_l_import_file_reac_laers.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -488,7 +488,7 @@
   <hops>
     <hop>
       <from>Start</from>
-      <to>generate_wc_l_import_file_rpsr.sh</to>
+      <to>generate_wc_l_import_file_rpsr_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -496,8 +496,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_rpsr.sh</from>
-      <to>generate_wc_l_import_file_outc.sh</to>
+      <from>generate_wc_l_import_file_rpsr_laers.sh</from>
+      <to>generate_wc_l_import_file_outc_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -505,8 +505,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_outc.sh</from>
-      <to>generate_wc_l_import_file_ther.sh</to>
+      <from>generate_wc_l_import_file_ther_laers.sh</from>
+      <to>generate_wc_l_import_file_demo_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -514,8 +514,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_ther.sh</from>
-      <to>generate_wc_l_import_file_demo.sh</to>
+      <from>generate_wc_l_import_file_demo_laers.sh</from>
+      <to>generate_wc_l_import_file_indi_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -523,8 +523,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_demo.sh</from>
-      <to>generate_wc_l_import_file_indi.sh</to>
+      <from>generate_wc_l_import_file_indi_laers.sh</from>
+      <to>generate_wc_l_import_file_drug_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -532,8 +532,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_indi.sh</from>
-      <to>generate_wc_l_import_file_drug.sh</to>
+      <from>generate_wc_l_import_file_drug_laers.sh</from>
+      <to>generate_wc_l_import_file_reac_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -541,8 +541,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_wc_l_import_file_drug.sh</from>
-      <to>generate_wc_l_import_file_reac.sh</to>
+      <from>generate_wc_l_import_file_outc_laers.sh</from>
+      <to>generate_wc_l_import_file_ther_laers.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
