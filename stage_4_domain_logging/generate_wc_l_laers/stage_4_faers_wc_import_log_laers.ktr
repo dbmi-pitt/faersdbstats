@@ -458,13 +458,13 @@
     </notepad>
     <notepad>
       <note>tables size asc (recommended to approach work w/ individual tables in order of size asc)
-- [ ] faers.rpsr
-- [ ] faers.outc
-- [ ] faers.ther
-- [ ] faers.demo
-- [ ] faers.indi
-- [ ] faers.drug
-- [ ] faers.reac</note>
+- [ ] laers.rpsr
+- [ ] laers.outc
+- [ ] laers.ther
+- [ ] laers.demo
+- [ ] laers.indi
+- [ ] laers.drug
+- [ ] laers.reac</note>
       <xloc>861</xloc>
       <yloc>49</yloc>
       <width>600</width>
@@ -4130,7 +4130,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/demo/qa/demo_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/demo/qa/demo_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -4237,7 +4237,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/drug/qa/drug_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/drug/qa/drug_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -4344,7 +4344,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/indi/qa/indi_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/indi/qa/indi_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -4451,7 +4451,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/outc/qa/outc_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/outc/qa/outc_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -4558,7 +4558,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/reac/qa/reac_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/reac/qa/reac_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -4665,8 +4665,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/rpsr/qa/rpsr_wc_import.psv</filename>
-    <filename_field>BASE_FILE_DIR/data_from_s3/faers/rpsr/qa/rpsr_wc_import.psv</filename_field>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/rpsr/qa/rpsr_wc_import.psv</filename>
+    <filename_field>BASE_FILE_DIR/data_from_s3/laers/rpsr/qa/rpsr_wc_import.psv</filename_field>
     <rownum_field/>
     <include_filename>N</include_filename>
     <separator>|</separator>
@@ -4772,7 +4772,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>${BASE_FILE_DIR}/data_from_s3/faers/ther/qa/ther_wc_import.psv</filename>
+    <filename>${BASE_FILE_DIR}/data_from_s3/laers/ther/qa/ther_wc_import.psv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
