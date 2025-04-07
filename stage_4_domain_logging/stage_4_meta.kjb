@@ -1840,7 +1840,7 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>stage_4_faers_wc_import_log_laers.ktr</from>
-      <to>stage_4_select_count_domains</to>
+      <to>set search_path = faers</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
