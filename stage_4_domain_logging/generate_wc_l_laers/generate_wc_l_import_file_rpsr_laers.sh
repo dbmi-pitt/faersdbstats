@@ -56,7 +56,9 @@ for year_dir in "$BASE_FILE_DIR"/*; do
 
       # Skip certain filenames
       filename=$(basename "$file")
-      if [[ "$filename" =~ _staged_with_lfs_only\.txt$ || "$filename" =~ ^old\.txt$ || "$filename" =~ ^ol\.txt$ ]]; then
+      shopt -s nocasematch  # Add this once at the top of your script
+
+if [[ "$filename" =~ _staged_with_lfs_only\.txt$ || "$filename" =~ ^old\.txt$ || "$filename" =~ ^ol\.txt$ || "$filename" =~ bak ]]; then
         echo "Skipping file: $filename"
         continue
       fi

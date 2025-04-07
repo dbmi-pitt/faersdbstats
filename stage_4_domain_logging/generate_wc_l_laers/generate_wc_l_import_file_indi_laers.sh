@@ -64,7 +64,7 @@ for year_dir in "$BASE_FILE_DIR"/*; do
       log_filename="$LOG_FILENAME"
 
     # Determine LAERS or FAERS (set to 'faers' for now)
-    laers_or_faers="faers"
+    laers_or_faers="laers"
 
     # Get line count using wc -l
     wc_l_count=$(wc -l < "$file")
