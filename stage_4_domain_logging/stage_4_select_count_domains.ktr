@@ -476,7 +476,7 @@ BEGIN
                         (select_count_on_domain IS NULL
                           OR
                         select_count_on_domain = 0) AND
-                        yr >= 12',
+                        yr &lt;= 12',
                     domain  -- injects table name safely as identifier
                 )
                 USING rec.yr, rec.qtr, rec.filename;
