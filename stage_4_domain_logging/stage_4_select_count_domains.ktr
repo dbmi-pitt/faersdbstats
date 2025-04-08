@@ -435,6 +435,66 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>run in dbeaver,
+
+test on rpsr first
+
+DO $$
+DECLARE
+    rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
+BEGIN
+    FOR rec IN 
+        SELECT * FROM z_qa_faers_wc_import_log
+    LOOP
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
+        -- Only process if it's demo
+--        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+--        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+IF domain IN ('rpsr') THEN
+            -- Debugging output
+            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
+            -- Build and execute the dynamic query
+            EXECUTE format(
+                'UPDATE z_qa_faers_wc_import_log 
+                 SET select_count_on_domain = (
+                     SELECT COUNT(*) FROM %I_legacy WHERE yr = $1 AND qtr = $2
+                 )
+                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
+                domain  -- injects table name safely as identifier
+            )
+            USING rec.yr, rec.qtr, rec.filename;
+            -- Get and show number of rows updated
+            GET DIAGNOSTICS rowcount = ROW_COUNT;
+            RAISE NOTICE 'Rows updated: %', rowcount;
+        ELSE
+            RAISE NOTICE 'Skipping table: %', domain;
+        END IF;
+    END LOOP;
+END $$;
+</note>
+      <xloc>336</xloc>
+      <yloc>48</yloc>
+      <width>703</width>
+      <heigth>690</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>${DATABASE_NAME}</name>
@@ -561,7 +621,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>48</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -636,7 +696,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -711,7 +771,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>272</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -786,7 +846,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>384</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -861,7 +921,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>496</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -1011,7 +1071,7 @@ END $$;</sql>
     <GUI>
       <xloc>176</xloc>
       <yloc>720</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step_error_handling>
