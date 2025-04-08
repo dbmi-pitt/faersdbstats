@@ -1850,7 +1850,9 @@ SET select_count_diff_pct =
   </hops>
   <notepads>
     <notepad>
-      <note>The first 2 transforms log domain total counts the rest
+      <note>stage_4_select_count_domains.ktr needs to be done manually
+
+The first 2 transforms log domain total counts the rest
 compare domain yr/qtr counts against comparison database
 
 appends them to the ${LOG_FILENAME} log defined the your faers_config.config
@@ -1865,7 +1867,7 @@ ther</note>
       <xloc>0</xloc>
       <yloc>0</yloc>
       <width>542</width>
-      <heigth>214</heigth>
+      <heigth>248</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1968,11 +1970,14 @@ ther</note>
     <notepad>
       <note>re-counts every domain's select count(*) for all quarters
 and 
-updates qa table w/ new value</note>
+updates qa table w/ new value
+
+&lt;- should result in counts in 
+z_qa_faers_wc_import_log.select_count_on_domain</note>
       <xloc>1216</xloc>
-      <yloc>768</yloc>
+      <yloc>736</yloc>
       <width>382</width>
-      <heigth>61</heigth>
+      <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2044,11 +2049,12 @@ then do the one immediately below this</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>load faers psv into log table</note>
+      <note>load faers psv into log table 
+z_qa_faers_wc_import_log</note>
       <xloc>1328</xloc>
-      <yloc>480</yloc>
-      <width>196</width>
-      <heigth>27</heigth>
+      <yloc>464</yloc>
+      <width>199</width>
+      <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2071,6 +2077,51 @@ load faers psv into log table                        </note>
       <xloc>720</xloc>
       <yloc>656</yloc>
       <width>268</width>
+      <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>&lt;-- loads/updates
+z_qa_faers_wc_import_log.select_count_diff </note>
+      <xloc>1184</xloc>
+      <yloc>896</yloc>
+      <width>313</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>&lt;-- loads/updates
+z_qa_faers_wc_import_log.select_count_diff 
+z_qa_faers_wc_import_log.select_count_diff_pct</note>
+      <xloc>1184</xloc>
+      <yloc>1040</yloc>
+      <width>339</width>
       <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
