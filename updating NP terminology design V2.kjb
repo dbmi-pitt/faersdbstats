@@ -1723,11 +1723,13 @@ in the Global Substance Registration System (GSRS).</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>where's this list loaded?</note>
+      <note>where's this list loaded?
+
+within download col 2 "StructurallyDiverse" (might have misspelled) grep struc_diverse in our  workflow</note>
       <xloc>620</xloc>
       <yloc>281</yloc>
-      <width>170</width>
-      <heigth>27</heigth>
+      <width>695</width>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
