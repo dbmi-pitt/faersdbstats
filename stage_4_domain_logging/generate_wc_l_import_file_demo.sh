@@ -45,32 +45,36 @@ for year_dir in "$BASE_FILE_DIR"/*; do
 
   # Extract quarter (e.g., 'Q1') and convert to integer (1, 2, 3, 4)
   qtr=$(basename "$quarter_dir" | sed 's/Q//')
+  
+
+  echo "Processing quarter directory: $quarter_dir"
 
   # Loop through files in the current quarter directory
   for file in "$quarter_dir"/*.txt; do
     # Skip if no files are present
     [ -e "$file" ] || continue
 
-      # Skip files that match *_staged_with_lfs_only.txt, old.txt, or ol.txt
-      if [[ "$file" =~ _staged_with_lfs_only\.txt$ || "$file" =~ /old\.txt$ || "$file" =~ /ol\.txt$ ]]; then
-        echo "Skipping file: $(basename "$file")"
+      # Skip certain filenames
+      filename=$(basename "$file")
+      shopt -s nocasematch  # Add this once at the top of your script
+
+if [[ "$filename" =~ _staged_with_lfs_only\.txt$ || "$filename" =~ ^old\.txt$ || "$filename" =~ ^ol\.txt$ || "$filename" =~ bak ]]; then
+        echo "Skipping file: $filename"
         continue
       fi
 
-        # Use the actual filename dynamically for the second column
-        filename=$(basename "$file")
-
-      # Set log_filename from config
+      # double check log_filename is still set
       log_filename="$LOG_FILENAME"
+      if [ -z "$log_filename" ]; then
+        echo "Error: log_filename is unset while processing $filename. Skipping."
+        continue
+      fi
+
+      # Line count, minus 1 for header
+      wc_l_count=$(($(wc -l < "$file") - 1))
 
     # Determine LAERS or FAERS (set to 'faers' for now)
-    laers_or_faers="faers"
-
-    # Get line count using wc -l
-    wc_l_count=$(wc -l < "$file")
-
-    # decrease wc_l_count by 1 to account for headers
-    wc_l_count=$((wc_l_count - 1))
+    laers_or_faers="laers"
 
     # Append data to the output PSV file
     echo "$log_filename|$filename|$laers_or_faers|$yr|$qtr|$wc_l_count" >> "$OUTPUT_FILE"
