@@ -440,46 +440,136 @@
 
 test on rpsr first
 
+
+
 DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
     rowcount INTEGER;
 BEGIN
-    FOR rec IN 
+    FOR rec IN
         SELECT * FROM z_qa_faers_wc_import_log
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
-        -- Only process if it's demo
---        IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
---        IF domain IN ('drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
-IF domain IN ('rpsr') THEN
-            -- Debugging output
-            RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
-            -- Build and execute the dynamic query
-            EXECUTE format(
-                'UPDATE z_qa_faers_wc_import_log 
-                 SET select_count_on_domain = (
-                     SELECT COUNT(*) FROM %I_legacy WHERE yr = $1 AND qtr = $2
-                 )
-                 WHERE LOWER(filename) = LOWER($3) AND yr = $1 AND qtr = $2',
-                domain  -- injects table name safely as identifier
-            )
-            USING rec.yr, rec.qtr, rec.filename;
-            -- Get and show number of rows updated
-            GET DIAGNOSTICS rowcount = ROW_COUNT;
-            RAISE NOTICE 'Rows updated: %', rowcount;
+        -- first consider rpsr only
+        -- IF domain IN ('rpsr') THEN
+        -- ...then do the rest of the domains
+	  	  -- IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'ther') THEN
+        -- or you can do call domains
+      IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+            -- Only proceed if select_count_on_domain is 0 or NULL and yr >= 12
+            IF (rec.select_count_on_domain IS NULL OR rec.select_count_on_domain = 0) AND rec.yr >= 12 THEN
+                -- Debugging output
+                RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
+                -- Build and execute the dynamic query
+                EXECUTE format(
+                    'UPDATE z_qa_faers_wc_import_log
+                        SET select_count_on_domain = (
+                            SELECT COUNT(*) FROM %I_legacy
+                              WHERE yr = $1 AND qtr = $2
+                        )
+                      WHERE LOWER(filename) = LOWER($3) AND
+                        yr = $1 AND
+                        qtr = $2 AND
+                        (select_count_on_domain IS NULL
+                          OR
+                        select_count_on_domain = 0) AND
+                        yr >= 12',
+                    domain  -- injects table name safely as identifier
+                )
+                USING rec.yr, rec.qtr, rec.filename;
+                -- Get and show number of rows updated
+                GET DIAGNOSTICS rowcount = ROW_COUNT;
+                RAISE NOTICE 'Rows updated: %', rowcount;
+            ELSE
+                -- Skip rows where select_count_on_domain is already populated or yr &lt; 12
+                RAISE NOTICE 'Skipping already populated or wrong year: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
+            END IF;
         ELSE
             RAISE NOTICE 'Skipping table: %', domain;
         END IF;
     END LOOP;
 END $$;
 </note>
-      <xloc>336</xloc>
+      <xloc>784</xloc>
       <yloc>48</yloc>
-      <width>703</width>
-      <heigth>690</heigth>
+      <width>883</width>
+      <heigth>979</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>-- run this one for faers and the other for laers
+
+DO $$
+DECLARE
+    rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
+BEGIN
+    FOR rec IN
+        SELECT * FROM z_qa_faers_wc_import_log
+    LOOP
+        -- Extract domain from the filename (first 4 letters, lowercase)
+        domain := LOWER(LEFT(rec.filename, 4));
+        -- first consider rpsr only
+        -- IF domain IN ('rpsr') THEN
+        -- ...then do the rest of the domains
+	  	  -- IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'ther') THEN
+        -- or you can do call domains
+      IF domain IN ('demo', 'drug', 'indi', 'outc', 'reac', 'rpsr', 'ther') THEN
+            -- Only proceed if select_count_on_domain is 0 or NULL and yr >= 12
+            IF (rec.select_count_on_domain IS NULL OR rec.select_count_on_domain = 0) AND rec.yr >= 12 THEN
+                -- Debugging output
+                RAISE NOTICE 'Processing table: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
+                -- Build and execute the dynamic query
+                EXECUTE format(
+                    'UPDATE z_qa_faers_wc_import_log
+                        SET select_count_on_domain = (
+                            SELECT COUNT(*) FROM %I_legacy
+                              WHERE yr = $1 AND qtr = $2
+                        )
+                      WHERE LOWER(filename) = LOWER($3) AND
+                        yr = $1 AND
+                        qtr = $2 AND
+                        (select_count_on_domain IS NULL
+                          OR
+                        select_count_on_domain = 0) AND
+                        yr >= 12',
+                    domain  -- injects table name safely as identifier
+                )
+                USING rec.yr, rec.qtr, rec.filename;
+                -- Get and show number of rows updated
+                GET DIAGNOSTICS rowcount = ROW_COUNT;
+                RAISE NOTICE 'Rows updated: %', rowcount;
+            ELSE
+                -- Skip rows where select_count_on_domain is already populated or yr &lt; 12
+                RAISE NOTICE 'Skipping already populated or wrong year: %, yr: %, qtr: %, filename: %', domain, rec.yr, rec.qtr, rec.filename;
+            END IF;
+        ELSE
+            RAISE NOTICE 'Skipping table: %', domain;
+        END IF;
+    END LOOP;
+END $$;
+</note>
+      <xloc>107</xloc>
+      <yloc>78</yloc>
+      <width>883</width>
+      <heigth>911</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
