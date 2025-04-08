@@ -501,7 +501,7 @@
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
+      <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>464</xloc>
@@ -552,7 +552,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_transilename></filename>
+      <filename>${Internal.Entry.Current.Directory}/stage_6_sql_counts_trans/stage_6_sql_counts_trans.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -804,7 +804,7 @@
       <to>stage_5_sqls</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -867,6 +867,27 @@ When logging goes blank click job metrics
       <yloc>0</yloc>
       <width>805</width>
       <heigth>588</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>note if z_qa_faers_wc_import_log is blank run stage_4_select_count_domains sqls manually</note>
+      <xloc>549</xloc>
+      <yloc>960</yloc>
+      <width>621</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
