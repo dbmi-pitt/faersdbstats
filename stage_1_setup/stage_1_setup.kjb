@@ -368,8 +368,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>528</yloc>
+      <xloc>96</xloc>
+      <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -960,7 +960,7 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>880</xloc>
       <yloc>1968</yloc>
       <attributes_kjc/>
     </entry>
@@ -1264,7 +1264,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>752</xloc>
       <yloc>1840</yloc>
       <attributes_kjc/>
     </entry>
@@ -1289,8 +1289,8 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>768</yloc>
+      <xloc>784</xloc>
+      <yloc>528</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1340,6 +1340,31 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <nr>0</nr>
       <xloc>672</xloc>
       <yloc>1056</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>omop_vocab_umls_auth.sh</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/omop_vocab_umls_auth.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>1840</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1588,20 +1613,11 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_drug_usagi_mapping_table.sql</from>
-      <to>omop_vocab_load</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>omop_vocab_load</from>
       <to>Log STAGE 1 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1662,6 +1678,24 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     <hop>
       <from>download_faers_fda_data new qtr</from>
       <to>upload_new_quarter_from_fda.sh  to s3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_drug_usagi_mapping_table.sql</from>
+      <to>omop_vocab_umls_auth.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>omop_vocab_umls_auth.sh</from>
+      <to>omop_vocab_load</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1829,28 +1863,6 @@ run from country_codes_job step</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>skipped for nov 2024 load
-</note>
-      <xloc>192</xloc>
-      <yloc>1840</yloc>
-      <width>182</width>
-      <heigth>44</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
       <note>this disabled hop (from "Log FDA..." to "country_code_jobs") should be 
 re-enabled on running 
 of last quarter's update
@@ -1907,10 +1919,78 @@ before orange book job</note>
 
 
 </note>
-      <xloc>32</xloc>
-      <yloc>752</yloc>
+      <xloc>720</xloc>
+      <yloc>512</yloc>
       <width>160</width>
       <heigth>78</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>this omop_vocab_umls_auth.sh is an attempt to automate work in this note below (untested)
+
+
+
+
+
+https://athena.ohdsi.org/vocabulary/download-history
+
+note for prior ~April 2025 load I did this, swapping api key, tgt and st values (these are fake).
+
+1. Request a TGT (Ticket Granting Ticket)
+You used your API key to obtain a TGT:
+
+```sh
+curl -s -X POST "https://utslogin.nlm.nih.gov/cas/v1/api-key" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "apikey=YOUR_UMLS_API_KEY"
+```
+Response: HTML containing a form action="..."
+You extracted the TGT URL from the action attribute, e.g.:
+
+```sh
+https://utslogin.nlm.nih.gov/cas/v1/tickets/TGT-abc123xyz456
+```
+
+2. Use TGT to Request a Service Ticket (ST)
+
+```sh
+curl -s -X POST "https://utslogin.nlm.nih.gov/cas/v1/tickets/TGT-abc123xyz456" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "service=http://umlsks.nlm.nih.gov"
+```
+Response: A single-use Service Ticket (ST), e.g.:
+ST-567890-ghijk-cas
+
+3. Use ST to Make Authenticated API Call
+Example: Get UMLS concept info
+
+```sh
+curl -s "https://uts-ws.nlm.nih.gov/rest/content/current/CUI/C0009044?ticket=ST-567890-ghijk-cas"
+```
+
+Notes:
+Each ST is valid for 1 use only
+
+TGT is valid for 8 hours, and can be reused to generate new STs
+
+You used this flow manually to test your access before using cpt.sh</note>
+      <xloc>32</xloc>
+      <yloc>1808</yloc>
+      <width>664</width>
+      <heigth>826</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
