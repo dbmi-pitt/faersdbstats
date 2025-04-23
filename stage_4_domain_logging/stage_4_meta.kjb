@@ -1494,6 +1494,43 @@ SET select_count_diff_pct =
       <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>stage_4_wc_l_import_files_omop_domain.kjb</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_4_domain_logging/stage_4_wc_l_import_files_omop_domain.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1104</xloc>
+      <yloc>576</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1740,15 +1777,6 @@ SET select_count_diff_pct =
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_faers_wc_import_log.ktr</from>
-      <to>set search_path = faers</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>select_count_diff</from>
       <to>select_count_diff_pct</to>
       <from_nr>0</from_nr>
@@ -1840,6 +1868,24 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>stage_4_faers_wc_import_log_laers.ktr</from>
+      <to>stage_4_wc_l_import_files_omop_domain.kjb</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_wc_import_log.ktr</from>
+      <to>stage_4_wc_l_import_files_omop_domain.kjb</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_wc_l_import_files_omop_domain.kjb</from>
       <to>set search_path = faers</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -2123,6 +2169,27 @@ z_qa_faers_wc_import_log.select_count_diff_pct</note>
       <yloc>1040</yloc>
       <width>339</width>
       <heigth>61</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>untested</note>
+      <xloc>1136</xloc>
+      <yloc>576</yloc>
+      <width>70</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
