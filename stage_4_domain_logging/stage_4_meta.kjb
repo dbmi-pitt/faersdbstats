@@ -1495,13 +1495,13 @@ SET select_count_diff_pct =
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_wc_l_import_files_omop_domain.kjb</name>
+      <name>stage_4_wc_l_import_files_omop_vocab.kjb</name>
       <description/>
       <type>JOB</type>
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_4_domain_logging/stage_4_wc_l_import_files_omop_domain.kjb</filename>
+      <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_4_domain_logging/stage_4_wc_l_import_files_omop_vocab.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
@@ -1529,6 +1529,70 @@ SET select_count_diff_pct =
       <nr>0</nr>
       <xloc>1104</xloc>
       <yloc>576</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>SQL populate_wc_count_omop</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>DO $$
+DECLARE
+    rec RECORD;
+    domain TEXT;
+    rowcount INTEGER;
+BEGIN
+    FOR rec IN
+        SELECT * FROM faers.z_qa_faers_wc_import_log
+        WHERE laers_or_faers = 'staging_vo'
+    LOOP
+        -- Derive table name from filename (e.g., CONCEPT.csv => concept)
+        domain := LOWER(REPLACE(rec.filename, '.csv', ''));
+
+        -- Validate domain is expected
+        IF domain IN (
+            'concept', 'concept_ancestor', 'concept_class', 'concept_relationship',
+            'concept_synonym', 'domain', 'drug_strength', 'relationship', 'vocabulary'
+        ) THEN
+
+            -- Only proceed if select_count_on_domain is NULL or 0
+            IF (rec.select_count_on_domain IS NULL OR rec.select_count_on_domain = 0) THEN
+
+                RAISE NOTICE 'Updating count for table: % (file: %)', domain, rec.filename;
+
+                EXECUTE format(
+                    'UPDATE z_qa_faers_wc_import_log
+                     SET select_count_on_domain = (
+                         SELECT COUNT(*) FROM staging_vocabulary.%I
+                     )
+                     WHERE LOWER(filename) = LOWER($1)
+                       AND laers_or_faers = ''staging_vo''
+                       AND (select_count_on_domain IS NULL OR select_count_on_domain = 0)',
+                    domain
+                )
+                USING rec.filename;
+
+                GET DIAGNOSTICS rowcount = ROW_COUNT;
+                RAISE NOTICE 'Rows updated: %', rowcount;
+
+            ELSE
+                RAISE NOTICE 'Skipping row with populated count: %', rec.filename;
+            END IF;
+        ELSE
+            RAISE NOTICE 'Skipping unrecognized vocab file: %', rec.filename;
+        END IF;
+    END LOOP;
+END $$</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1312</xloc>
+      <yloc>592</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1795,15 +1859,6 @@ SET select_count_diff_pct =
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>set search_path = faers</from>
-      <to>stage_4_select_count_domains</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>stage_4_select_count_domains</from>
       <to>select_count_diff</to>
       <from_nr>0</from_nr>
@@ -1868,7 +1923,7 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>stage_4_faers_wc_import_log_laers.ktr</from>
-      <to>stage_4_wc_l_import_files_omop_domain.kjb</to>
+      <to>stage_4_wc_l_import_files_omop_vocab.kjb</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1877,7 +1932,7 @@ SET select_count_diff_pct =
     </hop>
     <hop>
       <from>stage_4_faers_wc_import_log.ktr</from>
-      <to>stage_4_wc_l_import_files_omop_domain.kjb</to>
+      <to>stage_4_wc_l_import_files_omop_vocab.kjb</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1885,8 +1940,26 @@ SET select_count_diff_pct =
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_wc_l_import_files_omop_domain.kjb</from>
+      <from>set search_path = faers</from>
+      <to>SQL populate_wc_count_omop</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_wc_l_import_files_omop_vocab.kjb</from>
       <to>set search_path = faers</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL populate_wc_count_omop</from>
+      <to>stage_4_select_count_domains</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
