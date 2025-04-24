@@ -310,11 +310,11 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>omop_vocab_umls_auth.sh</name>
+      <name>generate_wc_l_import_file_omop_vocab.sh</name>
       <description/>
       <type>SHELL</type>
       <attributes/>
-      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/omop_vocab_umls_auth.sh</filename>
+      <filename>${BASE_FILE_DIR}/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_omop_vocab.sh</filename>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -338,7 +338,7 @@
   <hops>
     <hop>
       <from>Start</from>
-      <to>omop_vocab_umls_auth.sh</to>
+      <to>generate_wc_l_import_file_omop_vocab.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
