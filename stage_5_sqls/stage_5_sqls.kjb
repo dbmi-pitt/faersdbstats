@@ -13,57 +13,6 @@
   <parameters>
     </parameters>
   <connection>
-    <name>${DATABASE_LOG_NAME}</name>
-    <server>${DATABASE_HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${DATABASE_LOG_NAME}</database>
-    <port>${DATABASE_PORT}</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>${DATABASE_PASSWORD}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${DATABASE_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
     <name>${DATABASE_NAME}</name>
     <server>${DATABASE_HOST}</server>
     <type>POSTGRESQL</type>
@@ -800,24 +749,6 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>map_all_drugname_to_rxnorm.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql/>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/map_all_drugname_to_rxnorm.sql</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1040</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>derive_unique_all_case.sql</name>
       <description/>
       <type>SQL</type>
@@ -1226,7 +1157,7 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>400</xloc>
       <yloc>1760</yloc>
       <attributes_kjc/>
     </entry>
@@ -1451,17 +1382,48 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <yloc>1488</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>map_all_drugname_to_rxnorm.sql</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename>$(Internal.Entry.Current.Directory)/map_all_drugname_to_rxnorm.sql</filename>
+      <work_directory>${Internal.Entry.Current.Directory}</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>#!/bin/bash
+
+set -e
+
+# Load environment variables from the config file
+source ../../faers_config.config
+
+# Run SQL with envsubst to substitute ${…} in the SQL
+envsubst &lt; ./map_all_drugname_to_rxnorm.sql | \
+  PGPASSWORD="${DATABASE_PASSWORD}" \
+  psql -v ON_ERROR_STOP=1 \
+       -h "$DATABASE_HOST" \
+       -p "$DATABASE_PORT" \
+       -U "$DATABASE_USERNAME" \
+       -d "$DATABASE_NAME"
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>1008</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
-    <hop>
-      <from>create_usagi_import_table.sql</from>
-      <to>map_all_drugname_to_rxnorm.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>derive_standard_case_indication (inserted) sql</from>
       <to>derive_standard_case_adr (inserted) sql</to>
@@ -1665,7 +1627,7 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <to>Log "STAGE 5 STARTED"</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1681,15 +1643,6 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
     <hop>
       <from>Wait for 3s</from>
       <to>derive_unique_all_case.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>map_all_drugname_to_rxnorm.sql</from>
-      <to>natural product vocabulary workflow step 3</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1717,6 +1670,15 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
     <hop>
       <from>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</from>
       <to>derive_standard_drug_outcome_count.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_usagi_import_table.sql</from>
+      <to>map_all_drugname_to_rxnorm.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1758,8 +1720,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>773</width>
-      <heigth>520</heigth>
+      <width>848</width>
+      <heigth>550</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1781,8 +1743,8 @@ implement de-duplication procress after this?
 </note>
       <xloc>16</xloc>
       <yloc>1664</yloc>
-      <width>320</width>
-      <heigth>61</heigth>
+      <width>336</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1802,8 +1764,8 @@ implement de-duplication procress after this?
       <note>^combined_drug_mapping</note>
       <xloc>16</xloc>
       <yloc>1104</yloc>
-      <width>189</width>
-      <heigth>27</heigth>
+      <width>198</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1829,10 +1791,10 @@ implement de-duplication procress after this?
 are we going to pentaho 
 workflow this "workflow" 
 https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports#workflow? </note>
-      <xloc>320</xloc>
+      <xloc>304</xloc>
       <yloc>1040</yloc>
-      <width>600</width>
-      <heigth>163</heigth>
+      <width>623</width>
+      <heigth>172</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1860,8 +1822,8 @@ into stage 6
 </note>
       <xloc>1056</xloc>
       <yloc>1456</yloc>
-      <width>859</width>
-      <heigth>163</heigth>
+      <width>899</width>
+      <heigth>172</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1910,8 +1872,8 @@ into stage 6
 </note>
       <xloc>16</xloc>
       <yloc>1760</yloc>
-      <width>451</width>
-      <heigth>520</heigth>
+      <width>496</width>
+      <heigth>550</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1937,8 +1899,8 @@ https://github.com/rkboyce/NaPDI-pv/tree/master/DDI_signals
 https://github.com/rkboyce/NaPDI-pv/issues/22</note>
       <xloc>736</xloc>
       <yloc>1616</yloc>
-      <width>434</width>
-      <heigth>129</heigth>
+      <width>452</width>
+      <heigth>136</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
