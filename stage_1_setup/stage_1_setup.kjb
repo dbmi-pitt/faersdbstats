@@ -380,7 +380,7 @@ aws configure list</script>
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
+      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1698,7 +1698,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>omop_vocab_load</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
