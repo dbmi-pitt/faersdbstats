@@ -1422,6 +1422,37 @@ envsubst &lt; ./map_all_drugname_to_rxnorm.sql | \
       <yloc>1008</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>generate_drug_export_for_usagi.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- This SQL generates the set of unmatched drug names with a dummy source_id and a source frequency based on frequency of cases
+-- In postgres SQL client save the results to a csv file and then import that csv file to usagi for manual code curation
+--
+-- LTS Computing LLC
+--------------------------------------------
+set search_path = ${DATABASE_SCHEMA};
+
+select row_number() over () as source_code, 
+	upper(drug_name_original) as source_code_description, 
+	count(*) as frequency -- (case frequency)
+from combined_drug_mapping where concept_id is null
+	group by upper(drug_name_original)
+	order by count(*) desc
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>976</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1685,6 +1716,15 @@ envsubst &lt; ./map_all_drugname_to_rxnorm.sql | \
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>map_all_drugname_to_rxnorm.sql</from>
+      <to>generate_drug_export_for_usagi.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1761,11 +1801,12 @@ implement de-duplication procress after this?
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^combined_drug_mapping</note>
+      <note>^combined_drug_mapping
+drug_nda_mapping</note>
       <xloc>16</xloc>
-      <yloc>1104</yloc>
+      <yloc>1072</yloc>
       <width>198</width>
-      <heigth>28</heigth>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1897,8 +1938,8 @@ the 2 not validation sql's from:
 https://github.com/rkboyce/NaPDI-pv/tree/master/DDI_signals
 
 https://github.com/rkboyce/NaPDI-pv/issues/22</note>
-      <xloc>736</xloc>
-      <yloc>1616</yloc>
+      <xloc>880</xloc>
+      <yloc>1648</yloc>
       <width>452</width>
       <heigth>136</heigth>
       <fontname>Ubuntu</fontname>
