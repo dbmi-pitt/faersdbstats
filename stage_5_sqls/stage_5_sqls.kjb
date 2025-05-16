@@ -1471,6 +1471,24 @@ from combined_drug_mapping where concept_id is null
       <yloc>1056</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>load_drug_usagi_mapping.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Entry.Current.Directory}/load_drug_usagi_mapping.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>960</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1717,21 +1735,30 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_usagi_import_table.sql</from>
-      <to>map_all_drugname_to_rxnorm.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>map_all_drugname_to_rxnorm.sql</from>
       <to>standardize_combined_drug_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_drug_usagi_mapping.sql</from>
+      <to>map_all_drugname_to_rxnorm.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_usagi_import_table.sql</from>
+      <to>load_drug_usagi_mapping.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
