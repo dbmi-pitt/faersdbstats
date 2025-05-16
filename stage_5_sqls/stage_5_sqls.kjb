@@ -695,21 +695,21 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>standardize_combined_drug_mapping.sql</name>
+      <name>load_nda_table.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql>--NOTE THIS STEP THROWS ERRORS IF NOT "SQL from file"</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/standardize_combined_drug_mapping.sql</sqlfilename>
+      <sqlfilename>${Internal.Entry.Current.Directory}/load_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>1360</yloc>
+      <xloc>368</xloc>
+      <yloc>880</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1284,8 +1284,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>1056</yloc>
+      <xloc>896</xloc>
+      <yloc>1216</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1304,8 +1304,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>1072</yloc>
+      <xloc>176</xloc>
+      <yloc>1216</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1322,8 +1322,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>584</xloc>
-      <yloc>1093</yloc>
+      <xloc>528</xloc>
+      <yloc>1216</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1342,8 +1342,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>1200</yloc>
+      <xloc>176</xloc>
+      <yloc>1376</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1360,8 +1360,8 @@ alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>1264</yloc>
+      <xloc>544</xloc>
+      <yloc>1360</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1418,8 +1418,8 @@ envsubst &lt; ./map_all_drugname_to_rxnorm.sql | \
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1008</yloc>
+      <xloc>560</xloc>
+      <yloc>1056</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1449,8 +1449,26 @@ from combined_drug_mapping where concept_id is null
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>976</yloc>
+      <xloc>112</xloc>
+      <yloc>1040</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>standardize_combined_drug_mapping.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>--NOTE THIS STEP THROWS ERRORS IF NOT "SQL from file"</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Entry.Current.Directory}/standardize_combined_drug_mapping.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>848</xloc>
+      <yloc>1056</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1474,26 +1492,8 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>standardize_combined_drug_mapping.sql</from>
-      <to>derive_standard_case_outcome_category.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>map_meddra_to_snomed (inserted) sql</from>
       <to>derive_standard_drug_outcome_drilldown (inserted) sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_unique_all_case.sql</from>
-      <to>create_usagi_import_table.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1681,15 +1681,6 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>natural product vocabulary workflow step 3</from>
-      <to>standardize_combined_drug_mapping.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Wait for 3s (2)</from>
       <to>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</to>
       <from_nr>0</from_nr>
@@ -1708,8 +1699,8 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_usagi_import_table.sql</from>
-      <to>map_all_drugname_to_rxnorm.sql</to>
+      <from>derive_unique_all_case.sql</from>
+      <to>load_nda_table.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1717,8 +1708,26 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>load_nda_table.sql</from>
+      <to>create_usagi_import_table.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_usagi_import_table.sql</from>
+      <to>map_all_drugname_to_rxnorm.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>map_all_drugname_to_rxnorm.sql</from>
-      <to>generate_drug_export_for_usagi.sql</to>
+      <to>standardize_combined_drug_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1801,12 +1810,14 @@ implement de-duplication procress after this?
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^combined_drug_mapping
+      <note>^drug_regex_mapping
+combined_drug_mapping
+drug_ai_mapping
 drug_nda_mapping</note>
-      <xloc>16</xloc>
-      <yloc>1072</yloc>
-      <width>198</width>
-      <heigth>46</heigth>
+      <xloc>496</xloc>
+      <yloc>1120</yloc>
+      <width>189</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1832,8 +1843,8 @@ drug_nda_mapping</note>
 are we going to pentaho 
 workflow this "workflow" 
 https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports#workflow? </note>
-      <xloc>304</xloc>
-      <yloc>1040</yloc>
+      <xloc>48</xloc>
+      <yloc>1200</yloc>
       <width>623</width>
       <heigth>172</heigth>
       <fontname>Ubuntu</fontname>
@@ -1942,6 +1953,59 @@ https://github.com/rkboyce/NaPDI-pv/issues/22</note>
       <yloc>1648</yloc>
       <width>452</width>
       <heigth>136</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>
+
+
+
+manually load tsv from ${REPO_LOCATION}/data/usagi/&lt;tsv_file></note>
+      <xloc>528</xloc>
+      <yloc>864</yloc>
+      <width>471</width>
+      <heigth>100</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>
+
+
+
+...skipping May '25 but is part of the 
+documentation/FAERS_Processing_Instructions.docx
+section... "d) Map current data drug name to RxNorm - USAGI"
+</note>
+      <xloc>0</xloc>
+      <yloc>1024</yloc>
+      <width>444</width>
+      <heigth>154</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
