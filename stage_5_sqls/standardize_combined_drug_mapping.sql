@@ -17,6 +17,8 @@ set search_path = ${DATABASE_SCHEMA};
 drop table if exists standard_combined_drug_mapping;
 
 create table standard_combined_drug_mapping as
+select a.*, cast (concept_id as integer) as standard_concept_id 
+from combined_drug_mapping a;
 
 -- Create indexes for performance
 create index scdm_primaryid_idx on standard_combined_drug_mapping(primaryid);
@@ -25,6 +27,29 @@ create index scdm_drug_name_original_idx on standard_combined_drug_mapping(upper
 create index scdm_standard_concept_id_idx on standard_combined_drug_mapping(standard_concept_id);
 create index scdm_concept_id_null_idx on standard_combined_drug_mapping(concept_id) where concept_id is null;
 create index scdm_primaryid_isr_idx on standard_combined_drug_mapping(primaryid, isr);
+
+-- ====================== NaPDI Mapping for unmapped drugs ==============================
+
+-- Create temporary table for NaPDI mapping
+create temp table temp_np_mapped_drug_name_original as 
+select cdm.primaryid, cdm.isr, cdm.drug_name_original, cdm.lookup_value,
+       c.concept_name, c.concept_class_id, c.concept_id
+from standard_combined_drug_mapping cdm
+left join staging_vocabulary.concept c on upper(cdm.drug_name_original) = upper(c.concept_name)
+where cdm.concept_id is null
+  and c.concept_id < 0;
+
+-- Update standard_combined_drug_mapping with NaPDI mappings
+update standard_combined_drug_mapping scdm
+set concept_id = npmap.concept_id, -- fill in the null concept_id with the NP concept_id
+    standard_concept_id = npmap.concept_id, -- although not standard according to the OMOP vocab, use the concept id as a standard concept
+    update_method = 'napdi mapping'
+from temp_np_mapped_drug_name_original npmap
+where upper(scdm.drug_name_original) = upper(npmap.drug_name_original) 
+  and scdm.concept_id is null  -- only update rows that need updating
+  and ((scdm.isr is null and scdm.primaryid = npmap.primaryid)
+       or (scdm.isr is not null and scdm.isr = npmap.isr));
+
 
 ------------------------------------------------------
 -- directly lookup the standard concept associated with the drug concepts we derived from drug name
