@@ -362,6 +362,40 @@ update standard_combined_drug_mapping set standard_concept_id = 19028106 where s
 update standard_combined_drug_mapping set standard_concept_id = 1516800 where standard_concept_id = 40079926;
 -- map concept "Allegra D" to standard concept "fexofenadine / Pseudoephedrine Extended Release Oral Tablet"
 update standard_combined_drug_mapping set standard_concept_id = 40129571 where standard_concept_id = 40223264;
+
+------------------------------------------------------
+-- Map RxNorm concepts to NaPDI preferred terms where relationships exist
+-- This provides additional standardization by mapping to NaPDI concepts when available
+
+with cte1 as ( -- Find RxNorm concepts that have NaPDI mappings
+    select distinct scdm.standard_concept_id
+    from standard_combined_drug_mapping scdm
+    inner join staging_vocabulary.concept c1 
+        on scdm.standard_concept_id = c1.concept_id
+    inner join staging_vocabulary.concept_relationship cr 
+        on cr.concept_id_2 = scdm.standard_concept_id
+    inner join staging_vocabulary.concept c2 
+        on cr.concept_id_1 = c2.concept_id
+    where c1.vocabulary_id in ('RxNorm','RxNorm Extension')
+      and cr.relationship_id = 'napdi_np_maps_to'
+      -- and c2.concept_class_id = 'NaPDI Preferred Term'  -- Focus on preferred terms
+      and scdm.concept_id is not null
+),
+cte2 as ( -- Get the NaPDI preferred term mappings
+    select cr.concept_id_2 as rxnorm_concept_id, 
+           cr.concept_id_1 as napdi_concept_id
+    from staging_vocabulary.concept_relationship cr
+    inner join staging_vocabulary.concept c2 
+        on cr.concept_id_1 = c2.concept_id
+    where cr.relationship_id = 'napdi_np_maps_to'
+      and c2.concept_class_id = 'NaPDI Preferred Term'
+      and cr.concept_id_2 in (select standard_concept_id from cte1)
+)
+update standard_combined_drug_mapping scdm 
+set standard_concept_id = cte2.napdi_concept_id
+from cte2
+where scdm.standard_concept_id = cte2.rxnorm_concept_id;
+
 -------------------------------------------------------
 -- create final table with just the standard ingredient and clinical drug form of the drugs
 
