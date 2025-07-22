@@ -406,6 +406,15 @@ select distinct a.primaryid, a.isr, a.drug_seq, a.role_cod, a.standard_concept_i
 from standard_combined_drug_mapping a
 inner join staging_vocabulary.concept c
 on a.standard_concept_id = c.concept_id
-and c.concept_class_id in ('Ingredient','Clinical Drug Form')
-and c.standard_concept = 'S';
+and (
+    (c.concept_class_id in ('Ingredient','Clinical Drug Form')
+     and c.standard_concept = 'S')
+    or
+    c.concept_class_id in ('NaPDI NP Combination Product','NaPDI NP Spelling Variation','NaPDI Preferred Term','NaPDI NP Constituent')
+);
 
+-- Create indexes for the final table
+create index scd_primaryid_idx on standard_case_drug(primaryid);
+create index scd_isr_idx on standard_case_drug(isr);
+create index scd_standard_concept_id_idx on standard_case_drug(standard_concept_id);
+create index scd_role_cod_idx on standard_case_drug(role_cod);
