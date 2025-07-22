@@ -17,7 +17,14 @@ set search_path = ${DATABASE_SCHEMA};
 drop table if exists standard_combined_drug_mapping;
 
 create table standard_combined_drug_mapping as
-select a.*, cast (concept_id as integer) as standard_concept_id from combined_drug_mapping a;
+
+-- Create indexes for performance
+create index scdm_primaryid_idx on standard_combined_drug_mapping(primaryid);
+create index scdm_isr_idx on standard_combined_drug_mapping(isr);
+create index scdm_drug_name_original_idx on standard_combined_drug_mapping(upper(drug_name_original));
+create index scdm_standard_concept_id_idx on standard_combined_drug_mapping(standard_concept_id);
+create index scdm_concept_id_null_idx on standard_combined_drug_mapping(concept_id) where concept_id is null;
+create index scdm_primaryid_isr_idx on standard_combined_drug_mapping(primaryid, isr);
 
 ------------------------------------------------------
 -- directly lookup the standard concept associated with the drug concepts we derived from drug name
