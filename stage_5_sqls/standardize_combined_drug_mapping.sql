@@ -58,26 +58,26 @@ where upper(scdm.drug_name_original) = upper(npmap.drug_name_original)
 -- Create a temporary table with RxNorm mappings
 create temp table temp_rxnorm_mappings as
 with input_concepts as (
-select distinct scdm.standard_concept_id
-from standard_combined_drug_mapping scdm
-inner join staging_vocabulary.concept c 
-on scdm.standard_concept_id = c.concept_id
+    select distinct scdm.standard_concept_id
+    from standard_combined_drug_mapping scdm
+    inner join staging_vocabulary.concept c
+        on scdm.standard_concept_id = c.concept_id
     where scdm.concept_id is not null
-and c.standard_concept is null 
+      and c.standard_concept is null
       and c.vocabulary_id = 'RxNorm'
 ),
 mappings as (
     select cr.concept_id_1, cr.concept_id_2
     from staging_vocabulary.concept_relationship cr
-inner join staging_vocabulary.concept a
-on cr.concept_id_1 = a.concept_id
-inner join staging_vocabulary.concept b
-on cr.concept_id_2 = b.concept_id
+    inner join staging_vocabulary.concept a
+        on cr.concept_id_1 = a.concept_id
+    inner join staging_vocabulary.concept b
+        on cr.concept_id_2 = b.concept_id
     where cr.invalid_reason is null
       and a.vocabulary_id = 'RxNorm'
-and b.vocabulary_id = 'RxNorm'
-and b.standard_concept = 'S'
-and b.concept_class_id in ('Ingredient','Clinical Drug Form')
+      and b.vocabulary_id = 'RxNorm'
+      and b.standard_concept = 'S'
+      and b.concept_class_id in ('Ingredient','Clinical Drug Form')
       and cr.concept_id_1 in (select standard_concept_id from input_concepts)
 )
 select * from mappings;
@@ -85,7 +85,7 @@ select * from mappings;
 create index temp_rxnorm_mappings_idx on temp_rxnorm_mappings(concept_id_1);
 
 -- Now update the standard_combined_drug_mapping with the standard concept id from the temp RxNorm mappings
-update standard_combined_drug_mapping scdm 
+update standard_combined_drug_mapping scdm
 set standard_concept_id = trm.concept_id_2
 from temp_rxnorm_mappings trm
 where scdm.standard_concept_id = trm.concept_id_1;
