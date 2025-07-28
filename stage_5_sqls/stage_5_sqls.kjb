@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection>${DATABASE_LOG_NAME}</connection>
+    <connection>${DATABASE_NAME}</connection>
     <schema>${DATABASE_LOG_SCHEMA}</schema>
     <table>${DATABASE_LOG_NAME}</table>
     <size_limit_lines>5000</size_limit_lines>
@@ -451,7 +451,7 @@ update standard_drug_outcome_drilldown a
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
+      <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>656</xloc>
@@ -514,7 +514,7 @@ from meddra_snomed_mapping b
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_1.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_1.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1255,7 +1255,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <sql/>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_5.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_5.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1273,7 +1273,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_2.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_2.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1291,7 +1291,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_3.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_3.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1309,7 +1309,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_4.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table_part_4.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1403,7 +1403,7 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>/home/pentaho-secondary/projects-brb265/faers/faersdbstats/stage_5_sqls/derive_standard_drug_outcome_contingency_table.sql</sqlfilename>
+      <sqlfilename>${BASE_FILE_DIR}/stage_5_sqls/derive_standard_drug_outcome_contingency_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -1502,15 +1502,6 @@ printf '\n' >> $log_location</script>
     </entry>
   </entries>
   <hops>
-    <hop>
-      <from>create_usagi_import_table.sql</from>
-      <to>map_all_drugname_to_rxnorm</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>derive_standard_case_indication.sql</from>
       <to>derive_standard_case_adr.sql</to>
@@ -1651,7 +1642,7 @@ printf '\n' >> $log_location</script>
       <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1710,15 +1701,6 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log "STAGE 5 TOOK DERIVE_* step SHORT ROUTE"</from>
-      <to>derive_standard_drug_outcome_statistics.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>derive_standard_drug_outcome_contingency_table.sql (all)</from>
       <to>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</to>
       <from_nr>0</from_nr>
@@ -1728,8 +1710,17 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</from>
-      <to>derive_standard_drug_outcome_contingency_table_part_1.sql</to>
+      <from>Log "STAGE 5 TOOK DERIVE_* step SHORT ROUTE"</from>
+      <to>derive_standard_drug_outcome_statistics.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s</from>
+      <to>derive_unique_all_case.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1746,6 +1737,15 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>Log "STAGE 5 TOOK DERIVE FAILED SO DERIVE_* step LONG ROUTE"</from>
+      <to>derive_standard_drug_outcome_contingency_table_part_1.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>Log "STAGE 5 STARTED"</from>
       <to>Set AWS Credentials</to>
       <from_nr>0</from_nr>
@@ -1755,8 +1755,8 @@ printf '\n' >> $log_location</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Wait for 3s</from>
-      <to>derive_unique_all_case.sql</to>
+      <from>create_usagi_import_table.sql</from>
+      <to>map_all_drugname_to_rxnorm</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
