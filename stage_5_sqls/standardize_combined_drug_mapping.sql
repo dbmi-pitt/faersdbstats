@@ -50,6 +50,46 @@ where upper(scdm.drug_name_original) = upper(npmap.drug_name_original)
   and ((scdm.isr is null and scdm.primaryid = npmap.primaryid)
        or (scdm.isr is not null and scdm.isr = npmap.isr));
 
+-- ====================== RxNorm to NaPDI Mapping ==============================
+-- Map RxNorm concepts to NaPDI preferred terms where relationships exist
+
+with cte1 as ( -- Find RxNorm concepts that have NaPDI mappings
+    select distinct scdm.standard_concept_id
+    from standard_combined_drug_mapping scdm
+    inner join staging_vocabulary.concept c1 
+        on scdm.standard_concept_id = c1.concept_id
+    inner join staging_vocabulary.concept_relationship cr 
+        on cr.concept_id_2 = scdm.standard_concept_id
+    inner join staging_vocabulary.concept c2 
+        on cr.concept_id_1 = c2.concept_id
+    where c1.vocabulary_id in ('RxNorm','RxNorm Extension')
+      and cr.relationship_id = 'napdi_np_maps_to'
+      and c2.concept_class_id = 'NaPDI Preferred Term'  -- Focus on preferred terms
+      and scdm.concept_id is not null
+),
+cte2 as ( -- Get the NaPDI preferred term mappings
+    select cr.concept_id_2 as rxnorm_concept_id, 
+           cr.concept_id_1 as napdi_concept_id
+    from staging_vocabulary.concept_relationship cr
+    inner join staging_vocabulary.concept c2 
+        on cr.concept_id_1 = c2.concept_id
+    where cr.relationship_id = 'napdi_np_maps_to'
+      and c2.concept_class_id = 'NaPDI Preferred Term'
+      and cr.concept_id_2 in (select standard_concept_id from cte1)
+)
+update standard_combined_drug_mapping scdm 
+set standard_concept_id = cte2.napdi_concept_id,
+    update_method = 'rxnorm_to_napdi_mapping'
+from cte2
+where scdm.standard_concept_id = cte2.rxnorm_concept_id;
+
+-- Log the mapping results for debugging
+select count(*) as rxnorm_to_napdi_mappings_applied
+from standard_combined_drug_mapping scdm
+inner join staging_vocabulary.concept c on scdm.standard_concept_id = c.concept_id
+where c.concept_class_id = 'NaPDI Preferred Term'
+  and scdm.update_method = 'rxnorm_to_napdi_mapping';
+
 -- ====================== Standard RxNorm Code Mapping ==============================
 
 ------------------------------------------------------
@@ -65,6 +105,8 @@ with input_concepts as (
     where scdm.concept_id is not null
       and c.standard_concept is null
       and c.vocabulary_id = 'RxNorm'
+      -- Skip concepts that were already mapped to NaPDI
+      and scdm.update_method != 'rxnorm_to_napdi_mapping'
 ),
 mappings as (
     select cr.concept_id_1, cr.concept_id_2
@@ -88,7 +130,8 @@ create index temp_rxnorm_mappings_idx on temp_rxnorm_mappings(concept_id_1);
 update standard_combined_drug_mapping scdm
 set standard_concept_id = trm.concept_id_2
 from temp_rxnorm_mappings trm
-where scdm.standard_concept_id = trm.concept_id_1;
+where scdm.standard_concept_id = trm.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 -- Check how many rows were updated
 select count(*) as rows_updated
@@ -107,6 +150,7 @@ INNER JOIN staging_vocabulary.concept c
 on scdm.standard_concept_id = c.concept_id 
 and scdm.concept_id is not null 
 and c.concept_class_id  = 'Branded Drug Form' 
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as ( -- this is the 'output' set of standard concepts that we have found for the 'input' set of concepts
 select concept_id_1, concept_id_2
@@ -125,7 +169,8 @@ and concept_id_1 in (select standard_concept_id from cte1)
 update standard_combined_drug_mapping scdm 
 set standard_concept_id = concept_id_2 -- update the standard concept id to the standard concept id we found
 from cte2
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 ------------------------------------------------------
 -- convert precise ingredient to standard ingredient or clinical drug form
@@ -137,6 +182,7 @@ INNER JOIN staging_vocabulary.concept c
 on scdm.standard_concept_id = c.concept_id
 and scdm.concept_id is not null
 and c.concept_class_id  = 'Precise Ingredient'
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as ( -- this is the 'output' set of standard concepts that we have found for the 'input' set of concepts
 select c1.concept_id as concept_id_1, c2.concept_id as concept_id_2
@@ -153,7 +199,8 @@ and c1.concept_id in (select standard_concept_id from cte1)
 update standard_combined_drug_mapping scdm
 set standard_concept_id = concept_id_2 -- update the standard concept id to the standard concept id we found
 from cte2
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 ------------------------------------------------------
 -- convert brand name to standard ingredient or standard clinical drug form
@@ -166,6 +213,7 @@ on scdm.standard_concept_id = c.concept_id
 and scdm.concept_id is not null 
 and c.concept_class_id  = 'Brand Name' 
 and c.invalid_reason is null
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as ( -- this is the 'output' set of standard concepts that we have found for the 'input' set of concepts
 select concept_id_1, concept_id_2
@@ -184,7 +232,8 @@ and relationship_id = 'Tradename of'
 update standard_combined_drug_mapping scdm 
 set standard_concept_id = concept_id_2 -- update the standard concept id to the standard concept id we found
 from cte2
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 ------------------------------------------------------
 -- map to the standard ingredient for a single ingredient brand name that has been updated
@@ -197,6 +246,7 @@ on scdm.standard_concept_id = c.concept_id
 and scdm.concept_id is not null 
 and c.concept_class_id  = 'Brand Name' 
 and c.invalid_reason = 'U'
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as
 (select concept_id_1, concept_id_2 from staging_vocabulary.concept_relationship a
@@ -234,7 +284,8 @@ on cr.concept_id_2 = b.concept_id
 and cr.relationship_id = 'Tradename of' 
 and b.vocabulary_id = 'RxNorm'
 and b.standard_concept = 'S' and b.invalid_reason is null
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 ------------------------------------------------------
 -- map to the standard ingredient for a brand name that has been deleted
@@ -247,6 +298,7 @@ on scdm.standard_concept_id = c.concept_id
 and scdm.concept_id is not null 
 and c.concept_class_id  = 'Brand Name' 
 and c.invalid_reason = 'D'
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as
 (select concept_id_1, concept_id_2 
@@ -270,7 +322,8 @@ on cr.concept_id_2 = b.concept_id
 and cr.relationship_id = 'Form of' 
 and b.vocabulary_id = 'RxNorm'
 and b.standard_concept = 'S' and b.invalid_reason is null
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 ------------------------------------------------------
 -- convert U or D status concepts to standard ingredient or clinical drug form
 
@@ -281,6 +334,7 @@ INNER JOIN staging_vocabulary.concept c
 on scdm.standard_concept_id = c.concept_id 
 and scdm.concept_id is not null 
 and c.invalid_reason in ('U','D')
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as ( -- this is the 'output' set of standard concepts that we have found for the 'input' set of concepts
 select concept_id_1, concept_id_2
@@ -298,7 +352,8 @@ and concept_id_1 in (select standard_concept_id from cte1)
 update standard_combined_drug_mapping scdm 
 set standard_concept_id = concept_id_2 -- update the standard concept id to the standard concept id we found
 from cte2
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 ------------------------------------------------------
 -- convert the standard clinical drug form concepts (that we derived in all the previous logic) with only a single ingredient, to standard ingredient
@@ -312,6 +367,7 @@ on scdm.standard_concept_id = c.concept_id
 and scdm.concept_id is not null 
 and c.concept_class_id  = 'Clinical Drug Form' 
 and c.concept_name not like '%/%'
+and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping')
 ),
 cte2 as ( -- this is the 'output' set of standard concepts that we have found for the 'input' set of concepts
 select concept_id_1, concept_id_2
@@ -329,7 +385,8 @@ and concept_id_1 in (select standard_concept_id from cte1)
 update standard_combined_drug_mapping scdm 
 set standard_concept_id = concept_id_2 -- update the standard concept id to the standard concept id we found
 from cte2
-where scdm.standard_concept_id = cte2.concept_id_1;
+where scdm.standard_concept_id = cte2.concept_id_1
+  and (scdm.update_method is null or scdm.update_method != 'rxnorm_to_napdi_mapping');
 
 -------------------------------------------------------
 -- these updates correct some edge cases around updated and deleted status concepts 
@@ -362,39 +419,6 @@ update standard_combined_drug_mapping set standard_concept_id = 19028106 where s
 update standard_combined_drug_mapping set standard_concept_id = 1516800 where standard_concept_id = 40079926;
 -- map concept "Allegra D" to standard concept "fexofenadine / Pseudoephedrine Extended Release Oral Tablet"
 update standard_combined_drug_mapping set standard_concept_id = 40129571 where standard_concept_id = 40223264;
-
-------------------------------------------------------
--- Map RxNorm concepts to NaPDI preferred terms where relationships exist
--- This provides additional standardization by mapping to NaPDI concepts when available
-
-with cte1 as ( -- Find RxNorm concepts that have NaPDI mappings
-    select distinct scdm.standard_concept_id
-    from standard_combined_drug_mapping scdm
-    inner join staging_vocabulary.concept c1 
-        on scdm.standard_concept_id = c1.concept_id
-    inner join staging_vocabulary.concept_relationship cr 
-        on cr.concept_id_2 = scdm.standard_concept_id
-    inner join staging_vocabulary.concept c2 
-        on cr.concept_id_1 = c2.concept_id
-    where c1.vocabulary_id in ('RxNorm','RxNorm Extension')
-      and cr.relationship_id = 'napdi_np_maps_to'
-      -- and c2.concept_class_id = 'NaPDI Preferred Term'  -- Focus on preferred terms
-      and scdm.concept_id is not null
-),
-cte2 as ( -- Get the NaPDI preferred term mappings
-    select cr.concept_id_2 as rxnorm_concept_id, 
-           cr.concept_id_1 as napdi_concept_id
-    from staging_vocabulary.concept_relationship cr
-    inner join staging_vocabulary.concept c2 
-        on cr.concept_id_1 = c2.concept_id
-    where cr.relationship_id = 'napdi_np_maps_to'
-      and c2.concept_class_id = 'NaPDI Preferred Term'
-      and cr.concept_id_2 in (select standard_concept_id from cte1)
-)
-update standard_combined_drug_mapping scdm 
-set standard_concept_id = cte2.napdi_concept_id
-from cte2
-where scdm.standard_concept_id = cte2.rxnorm_concept_id;
 
 -------------------------------------------------------
 -- create final table with just the standard ingredient and clinical drug form of the drugs
