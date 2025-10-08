@@ -373,7 +373,7 @@ aws configure list</script>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_drug_outcome_drilldown (inserted) sql</name>
+      <name>derive_standard_drug_outcome_drilldown.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -455,11 +455,11 @@ update standard_drug_outcome_drilldown a
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>656</xloc>
-      <yloc>2240</yloc>
+      <yloc>1904</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>map_meddra_to_snomed (inserted) sql</name>
+      <name>map_meddra_to_snomed.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -503,7 +503,7 @@ from meddra_snomed_mapping b
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>2224</yloc>
+      <yloc>1904</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -521,7 +521,7 @@ from meddra_snomed_mapping b
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1904</yloc>
+      <yloc>1600</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -544,14 +544,14 @@ create table standard_drug_outcome_count as
 select drug_concept_id, outcome_concept_id, count(*) as drug_outcome_pair_count, cast(null as integer) as snomed_outcome_concept_id
 from (
 	select 'PRIMARYID' || a.primaryid as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
-			from standard_case_drug a
-		inner join standard_case_adr b
-			on a.primaryid = b.primaryid and a.isr is null and b.isr is null
-		union 
+	from standard_case_drug a
+	inner join standard_case_adr b
+	on a.primaryid = b.primaryid and a.isr is null and b.isr is null
+	union 
 	select 'ISR' || a.isr as case_key, a.standard_concept_id as drug_concept_id, b.outcome_concept_id, cast(null as integer) as snomed_outcome_concept_id
-			from standard_case_drug a
-		inner join standard_case_adr b
-			on a.isr = b.isr and a.isr is not null and b.isr is not null
+	from standard_case_drug a
+	inner join standard_case_adr b
+	on a.isr = b.isr and a.isr is not null and b.isr is not null
 ) aa
 group by drug_concept_id, outcome_concept_id;
 </sql>
@@ -563,12 +563,12 @@ group by drug_concept_id, outcome_concept_id;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>1600</yloc>
+      <xloc>144</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_case_adr (inserted) sql</name>
+      <name>derive_standard_case_adr.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -624,12 +624,12 @@ inner join reac_legacy b
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>1472</yloc>
+      <xloc>384</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_standard_case_indication (inserted) sql</name>
+      <name>derive_standard_case_indication.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -672,8 +672,8 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>1472</yloc>
+      <xloc>112</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -681,35 +681,90 @@ select distinct a.primaryid, a.isr, drug_seq, b.indi_pt, c.concept_id as indicat
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql/>
+      <sql>------------------------------
+--
+-- This SQL script derives the SNOMED-CT concept codes for the legacy LARES and current FAERS outcome (categories) in a new table called standard_case_outcome_category
+-- limited to just the unique cases.
+--
+-- Map the outcome categories to the following SNOMED codes:
+--
+-- CA "Congenital Anomaly" = SNOMED concept code: 107656002, SNOMED concept: "Congenital anomaly", OHDSI concept_id = 4029540
+-- DE "Death" = SNOMED concept code: 419620001, SNOMED concept: "Death" , OHDSI concept_id = 4306655
+-- DS "Disability" = SNOMED concept code: 21134002, SNOMED concept: "Disability", OHDSI concept_id = 4052648
+-- HO "Hospitalization - Initial or Prolonged" = SNOMED concept code: 32485007, SNOMED concept: "Hospital admission", OHDSI concept_id = 8715
+-- LT "Life-Threatening" = SNOMED concept code: 442452003, SNOMED concept: "Life threatening severity" OHDSI, concept_id = 40483553
+-- OT "Other" = SNOMED concept code: 10003008, SNOMED concept: "Non-specific", OHDSI concept_id = 4001594
+-- RI "Required Intervention to Prevent Permanent Impairment/Damage" = SNOMED concept code: 3890004, SNOMED concept: "Treatment required for", OHDSI concept_id = 4191370
+--
+-- NOTE. Around 25% of the cases in the FAERS demo table and 6% of LAERS do not have an outcome in the outc table
+-- so in this sql we use a left outer join and some of the outc_codes will be null.
+--
+-- LTS COMPUTING LLC
+------------------------------
+
+set search_path = ${DATABASE_SCHEMA};
+
+--drop table if exists standard_case_outcome_category;
+create table if not exists standard_case_outcome_category as
+(
+	with cte1 as (
+	select distinct a.primaryid, a.isr, b.outc_code
+	from unique_all_case a
+	left outer join outc b
+	on a.primaryid = b.primaryid
+	where a.isr is null
+	union
+	select distinct a.primaryid, a.isr, b.outc_cod
+	from unique_all_case a
+	left outer join outc_legacy b
+	on a.isr = b.isr
+	where a.isr is not null
+	
+	),
+	cte2 as (
+	select distinct primaryid, isr, outc_code, 
+	case 
+		when (outc_code = 'CA') then 4029540 	-- SNOMED concept: "Congenital anomaly", OHDSI concept_id = 4029540
+		when (outc_code = 'DE') then 4306655 	-- SNOMED concept: "Death" , OHDSI concept_id = 4306655
+		when (outc_code = 'DS') then 4052648  	-- SNOMED concept: "Disability", OHDSI concept_id = 4052648
+		when (outc_code = 'HO') then 8715		-- SNOMED concept: "Hospital admission", OHDSI concept_id = 8715
+		when (outc_code = 'LT') then 40483553	-- SNOMED concept: "Life threatening severity" OHDSI, concept_id = 40483553
+		when (outc_code = 'OT') then 4001594	-- SNOMED concept: "Non-specific", OHDSI concept_id = 4001594
+		when (outc_code = 'RI') then 4191370	-- SNOMED concept: "Treatment required for", OHDSI concept_id = 4191370
+	end as snomed_concept_id
+	from cte1
+	)
+select * from cte2
+);
+</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/derive_standard_case_outcome_category.sql</sqlfilename>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>976</xloc>
-      <yloc>1360</yloc>
+      <xloc>864</xloc>
+      <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>load_nda_table.sql</name>
+      <name>standardize_combined_drug_mapping.sql</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql>--NOTE THIS STEP THROWS ERRORS IF NOT "SQL from file"</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/load_nda_table.sql</sqlfilename>
+      <sqlfilename>${Internal.Entry.Current.Directory}/standardize_combined_drug_mapping.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>880</yloc>
+      <xloc>544</xloc>
+      <yloc>1040</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -749,14 +804,211 @@ CREATE TABLE IF NOT EXISTS usagi_import
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>derive_unique_all_case.sql</name>
+      <name>map_all_drugname_to_rxnorm</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_5_sqls/derive_unique_all_case.sql</sqlfilename>
+      <sqlfilename>${Internal.Entry.Current.Directory}/map_all_drugname_to_rxnorm.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>1040</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>derive_unique_all_case.sql</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Transform the LAERS legacy demo data into the same format as the FAERS current data so we can combine demographic data across both databases and run logic to remove duplicate cases across them both
+-- There is no real LAERS case version so we default to '0' to ensure that LAERS data will sort before FAERS data case version (FAERS case version is always populated and never less than '1')
+-- There is no real LAERS primaryid but we generate it from CASE and case version
+-- We translate LAERS country names to FAERS 2 char country codes with a join to the country_code table
+--
+-- We perform single imputation of missing 'key' demographic fields for multiple reports within the same case producing a new table demo_with_imputed_keys.
+--
+-- We followed the single imputation process in the book "Data Mining Applications in Engineering and Medicine" 
+--		by Elisabetta Poluzzi1, Emanuel Raschi1, Carlo Piccinni1 and Fabrizio De Ponti1
+--		ISBN 978-953-51-0720-0: 
+--		See Chapter 12: Data Mining Techniques in Pharmacovigilance: Analysis of the Publicly Accessible FDA Adverse Event Reporting System (AERS)  
+-- 		we use the same demographic key fields:  age, event_dt, sex, reporter_country.
+-- 
+-- The 'key' demographic fields are required in later processing to remove duplicate cases.
+-- 
+-- We will only impute single missing case demo key values for a case where there is at least one case record with a fully populated set of demo keys 
+-- and we populate (impute) the value of a missing demo key field using the max value of the demo key field for the same case.
+--
+-- LTS Computing LLC
+-------------------------------
+
+set search_path = ${DATABASE_SCHEMA};
+
+-- generate a table to lookup concatenated string of current drugnames by primaryid
+drop table if exists drugname_list;
+create table drugname_list as
+select primaryid, upper(string_agg(drugname, '|' order by drugname)) as drugname_list
+from drug
+group by primaryid;
+
+-- generate a table to lookup concatenated string of reaction preferred terms by primaryid
+drop table if exists reac_pt_list;
+create table reac_pt_list as
+select primaryid, upper(string_agg(pt, '|' order by pt)) as reac_pt_list
+from reac
+group by primaryid;
+
+-- generate a table of current data demographics by caseid
+drop table if exists casedemo;
+create table casedemo as
+select caseid, caseversion, i_f_code, event_dt, age, sex, reporter_country, d.primaryid, drugname_list, reac_pt_list, fda_dt
+from demo d
+left outer join drugname_list dl
+on d.primaryid = dl.primaryid 
+left outer join reac_pt_list rpl
+on d.primaryid = rpl.primaryid;
+
+----------------------
+
+-- generate a table to lookup concatenated string of legacy drugnames by isr
+drop table if exists drugname_legacy_list;
+create table drugname_legacy_list as
+select isr, upper(string_agg(drugname, '|' order by drugname)) as drugname_list 
+from drug_legacy
+group by isr;
+
+-- generate a table to lookup concatenated string of legacy reaction preferred terms by isr
+drop table if exists reac_pt_legacy_list;
+create table reac_pt_legacy_list as
+select isr, upper(string_agg(pt, '|' order by pt)) as reac_pt_list
+from reac_legacy
+group by isr;
+
+-- generate a table of legacy case demographics by case id
+drop table if exists casedemo_legacy;
+create table casedemo_legacy as
+select "CASE", i_f_cod, event_dt, age, gndr_cod, reporter_country, d.isr, drugname_list, reac_pt_list, fda_dt
+from demo_legacy d
+left outer join drugname_legacy_list dl
+on d.isr = dl.isr 
+left outer join reac_pt_legacy_list rpl
+on d.isr = rpl.isr;
+
+------------------------------
+
+-- create a combined set of all case demographics with drug list and reaction (outcome) lists across all the LAERS legacy data and FAERS current data
+drop table if exists all_casedemo;
+create table all_casedemo as 
+select 'FAERS' as database, caseid, cast(null as varchar) as isr, caseversion, i_f_code, event_dt, age, sex, reporter_country, primaryid, 
+drugname_list, reac_pt_list, fda_dt, null as imputed_field_name 
+from casedemo 
+union
+select 'LAERS' as database, "CASE" as caseid, isr, cast ('0' as varchar) as caseversion, i_f_cod as i_f_code, event_dt, age, gndr_cod as sex, e.country_code as reporter_country, cast("CASE" || '0' as varchar) as primaryid, 
+drugname_list, reac_pt_list, fda_dt, null as imputed_field_name 
+from casedemo_legacy a 
+left outer join country_code e
+on upper(a.reporter_country) = upper(e.country_name);
+
+------------------------------
+
+-- perform single imputation of missing 'key' demographic fields for multiple reports within the same case across all the legacy and current data
+
+-- create table of default demo event_dt key value for each case where all the key fields are populated on at least one report for that case
+drop table if exists default_all_casedemo_event_dt_keys; 
+create table default_all_casedemo_event_dt_keys as 
+select caseid, age, sex, reporter_country, max(event_dt) as default_event_dt
+from all_casedemo 
+where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
+group by caseid, age, sex, reporter_country;
+
+-- single imputation of missing event_dt 
+update all_casedemo a
+set event_dt = default_event_dt, imputed_field_name = 'event_dt' 
+from default_all_casedemo_event_dt_keys d
+where a.caseid = d.caseid and a.age = d.age and a.sex = d.sex and a.reporter_country = d.reporter_country
+and a.caseid is not null and a.event_dt is null and a.age is not null and a.sex is not null and a.reporter_country is not null;
+
+-- create table of default demo age key value for each case where all the key fields are populated on at least one report for that case
+drop table if exists default_all_casedemo_age_keys; 
+create table default_all_casedemo_age_keys as 
+select caseid, event_dt, sex, reporter_country, max(age) as default_age
+from all_casedemo 
+where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
+group by caseid, event_dt, sex, reporter_country;
+
+-- single imputation of missing age 
+update all_casedemo a 
+set age = default_age, imputed_field_name = 'age'  
+from default_all_casedemo_age_keys d
+where a.caseid = d.caseid and a.event_dt = d.event_dt and a.sex = d.sex and a.reporter_country = d.reporter_country
+and a.caseid is not null and a.event_dt is not null and a.age is null and a.sex is not null and a.reporter_country is not null;
+
+-- create table of default demo gender key value for each case where all the key fields are populated on at least one report for that case
+drop table if exists default_all_casedemo_sex_keys; 
+create table default_all_casedemo_sex_keys as 
+select caseid, event_dt, age, reporter_country, max(sex) as default_sex
+from all_casedemo 
+where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
+group by caseid, event_dt, age, reporter_country;
+
+-- single imputation of missing gender
+update all_casedemo a 
+set sex = default_sex, imputed_field_name = 'sex' 
+from default_all_casedemo_sex_keys d
+where a.caseid = d.caseid and a.event_dt = d.event_dt and a.age = d.age and a.reporter_country = d.reporter_country
+and a.caseid is not null and a.event_dt is not null and a.age is not null and a.sex is null and a.reporter_country is not null;
+
+-- create table of default demo reporter_country key value for each case where all the key fields are populated on at least one report for that case
+drop table if exists default_all_casedemo_reporter_country_keys; 
+create table default_all_casedemo_reporter_country_keys as 
+select caseid, event_dt, age, sex, max(reporter_country) as default_reporter_country
+from all_casedemo 
+where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null
+group by caseid, event_dt, age, sex;
+
+-- single imputation of missing reporter_country
+update all_casedemo a
+set reporter_country = default_reporter_country, imputed_field_name = 'reporter_country'  
+from default_all_casedemo_reporter_country_keys d
+where a.caseid = d.caseid and a.event_dt = d.event_dt and a.age = d.age and a.sex = d.sex
+and a.caseid is not null and a.event_dt is not null and a.age is not null and a.sex is not null and a.reporter_country is null;
+
+------------------------------
+
+-- get the latest case row for each case across both the legacy LAERS and current FAERS data based on CASE ID
+drop table if exists unique_all_casedemo;
+create table unique_all_casedemo as
+  select database, caseid, isr, caseversion, i_f_code, event_dt, age, sex, reporter_country, primaryid, drugname_list, reac_pt_list, fda_dt
+   from (
+     select *, 
+       row_number() over(partition by caseid order by primaryid desc, database desc, fda_dt desc, i_f_code, isr desc) as row_num 
+     from all_casedemo 
+   ) a where a.row_num = 1;
+
+-- remove any duplicates based on fully populated matching demographic key fields and exact match on list of drugs and list of outcomes (FAERS reactions)
+-- NOTE. when using this table for subsequent joins in the ETL process, join to FAERS data using primaryid and join to LAERS data using isr
+drop table if exists unique_all_case;   
+create table unique_all_case as
+select caseid, case when isr is not null then null else primaryid end as primaryid, isr 
+from (
+	select caseid, primaryid, isr, 
+	row_number() over(partition by event_dt, age, sex, reporter_country, drugname_list, reac_pt_list order by primaryid desc, database desc, fda_dt desc, i_f_code, isr desc) as row_num 
+	from unique_all_casedemo 
+	where caseid is not null and event_dt is not null and age is not null and sex is not null and reporter_country is not null and drugname_list is not null and reac_pt_list is not null
+) a where a.row_num = 1
+union 
+  select caseid, case when isr is not null then null else primaryid end as primaryid, isr 
+    from unique_all_casedemo 
+      where caseid is null or event_dt is null or age is null or sex is null or reporter_country is null or drugname_list is null or reac_pt_list is null;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -960,7 +1212,7 @@ from standard_drug_outcome_contingency_table;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>160</xloc>
-      <yloc>2208</yloc>
+      <yloc>1888</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -992,7 +1244,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>2320</yloc>
+      <yloc>2000</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1010,7 +1262,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>2160</yloc>
+      <yloc>1792</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1028,7 +1280,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1968</yloc>
+      <yloc>1648</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1046,7 +1298,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>2032</yloc>
+      <yloc>1696</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1064,7 +1316,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>2096</yloc>
+      <yloc>1744</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1077,8 +1329,8 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>976</xloc>
-      <yloc>1472</yloc>
+      <xloc>880</xloc>
+      <yloc>1184</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1091,8 +1343,8 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>528</xloc>
-      <yloc>1600</yloc>
+      <xloc>400</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1106,7 +1358,7 @@ echo ' You might have a database administrator vacuum db and reindex ' >> $log_l
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>672</xloc>
-      <yloc>1936</yloc>
+      <yloc>1552</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1139,8 +1391,8 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>1664</yloc>
+      <xloc>880</xloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1157,8 +1409,8 @@ CREATE TABLE if not exists faers.standard_drug_outcome_contingency_table (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>1760</yloc>
+      <xloc>208</xloc>
+      <yloc>1440</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1187,7 +1439,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>160</xloc>
-      <yloc>1856</yloc>
+      <yloc>1536</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1216,7 +1468,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>400</xloc>
-      <yloc>1840</yloc>
+      <yloc>1520</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1248,252 +1500,20 @@ printf '\n' >> $log_location</script>
       <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
-    <entry>
-      <name>natural product vocabulary workflow step 3</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- from https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports
-
---- APPROACH FOR NON-AWS --- RUN AS SUPER USER ON THE DATABASE OF INTEREST
-alter table staging_vocabulary.concept disable trigger all;
-alter table staging_vocabulary.vocabulary disable trigger all;
-alter table staging_vocabulary.domain  disable trigger all;
-alter table staging_vocabulary.concept_class disable trigger all;
-alter table staging_vocabulary.relationship disable trigger all;
-alter table staging_vocabulary.concept_relationship disable trigger all;
-
-DELETE FROM staging_vocabulary.concept cascade WHERE concept_id BETWEEN -9999999 AND -7000000 ;
-DELETE FROM staging_vocabulary.vocabulary cascade WHERE vocabulary_concept_id BETWEEN -9999999 AND -7000000 ;
-DELETE FROM staging_vocabulary.domain cascade WHERE domain_concept_id BETWEEN -9999999 AND -7000000 ;
-DELETE FROM staging_vocabulary.concept_class cascade WHERE concept_class_concept_id BETWEEN -9999999 AND -7000000 ;
-DELETE FROM staging_vocabulary.relationship cascade WHERE relationship_concept_id BETWEEN -9999999 AND -7000000 ;
-DELETE FROM staging_vocabulary.concept_relationship cascade WHERE relationship_id like 'napdi_%';
-
-alter table staging_vocabulary.concept enable trigger all;
-alter table staging_vocabulary.vocabulary enable trigger all;
-alter table staging_vocabulary.domain  enable trigger all;
-alter table staging_vocabulary.concept_class enable trigger all;
-alter table staging_vocabulary.relationship enable trigger all;
-alter table staging_vocabulary.concept_relationship enable trigger all;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>896</xloc>
-      <yloc>1216</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>natural product vocabulary workflow step 1</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- update GSRS NPs, common names, and constituents in lb_to_common_names_tsv, test_srs_np, and test_srs_np_constituent (currently in the scratch_sanya schema of the GSRS database). See GSRS database query notes
-
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>1216</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>natural product vocabulary workflow step 2</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- update the manually curated NP spelling variations in np_faers_reference_set (currently in the scratch_sanya schema of the CEM database)</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>528</xloc>
-      <yloc>1216</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>natural product vocabulary workflow step 4</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- run the SQL NP terminology additions script
--- https://github.com/rkboyce/NaPDI-pv/blob/master/np-terminology-imports/napdi_np_vocab_workflow_DEC_2022_Israel_mappings.sql
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>1376</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>natural product vocabulary workflow step 5</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- test that the vocabulary is working and makes sense using queries like the following:</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>1360</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql/>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${BASE_FILE_DIR}/faersdbstats/stage_5_sqls/faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1264</xloc>
-      <yloc>1488</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>map_all_drugname_to_rxnorm.sql</name>
-      <description/>
-      <type>SHELL</type>
-      <attributes/>
-      <filename>$(Internal.Entry.Current.Directory)/map_all_drugname_to_rxnorm.sql</filename>
-      <work_directory>${Internal.Entry.Current.Directory}</work_directory>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>#!/bin/bash
-
-set -e
-
-# Load environment variables from the config file
-source ../../faers_config.config
-
-# Run SQL with envsubst to substitute ${…} in the SQL
-envsubst &lt; ./map_all_drugname_to_rxnorm.sql | \
-  PGPASSWORD="${DATABASE_PASSWORD}" \
-  psql -v ON_ERROR_STOP=1 \
-       -h "$DATABASE_HOST" \
-       -p "$DATABASE_PORT" \
-       -U "$DATABASE_USERNAME" \
-       -d "$DATABASE_NAME"
-</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>1056</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>generate_drug_export_for_usagi.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>-- This SQL generates the set of unmatched drug names with a dummy source_id and a source frequency based on frequency of cases
--- In postgres SQL client save the results to a csv file and then import that csv file to usagi for manual code curation
---
--- LTS Computing LLC
---------------------------------------------
-set search_path = ${DATABASE_SCHEMA};
-
-select row_number() over () as source_code, 
-	upper(drug_name_original) as source_code_description, 
-	count(*) as frequency -- (case frequency)
-from combined_drug_mapping where concept_id is null
-	group by upper(drug_name_original)
-	order by count(*) desc
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>1040</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>standardize_combined_drug_mapping.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>--NOTE THIS STEP THROWS ERRORS IF NOT "SQL from file"</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/standardize_combined_drug_mapping.sql</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>848</xloc>
-      <yloc>1056</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>load_drug_usagi_mapping.sql</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql/>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${Internal.Entry.Current.Directory}/load_drug_usagi_mapping.sql</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>960</yloc>
-      <attributes_kjc/>
-    </entry>
   </entries>
   <hops>
     <hop>
-      <from>derive_standard_case_indication (inserted) sql</from>
-      <to>derive_standard_case_adr (inserted) sql</to>
+      <from>create_usagi_import_table.sql</from>
+      <to>map_all_drugname_to_rxnorm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_standard_case_indication.sql</from>
+      <to>derive_standard_case_adr.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1502,7 +1522,7 @@ from combined_drug_mapping where concept_id is null
     </hop>
     <hop>
       <from>derive_standard_case_outcome_category.sql</from>
-      <to>derive_standard_case_indication (inserted) sql</to>
+      <to>derive_standard_case_indication.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1510,8 +1530,35 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>map_meddra_to_snomed (inserted) sql</from>
-      <to>derive_standard_drug_outcome_drilldown (inserted) sql</to>
+      <from>standardize_combined_drug_mapping.sql</from>
+      <to>derive_standard_case_outcome_category.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>map_meddra_to_snomed.sql</from>
+      <to>derive_standard_drug_outcome_drilldown.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>derive_unique_all_case.sql</from>
+      <to>create_usagi_import_table.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>map_all_drugname_to_rxnorm</from>
+      <to>standardize_combined_drug_mapping.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1537,7 +1584,7 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_drug_outcome_drilldown (inserted) sql</from>
+      <from>derive_standard_drug_outcome_drilldown.sql</from>
       <to>Log STAGE 5 COMPLETE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1547,7 +1594,7 @@ from combined_drug_mapping where concept_id is null
     </hop>
     <hop>
       <from>derive_standard_drug_outcome_statistics.sql</from>
-      <to>map_meddra_to_snomed (inserted) sql</to>
+      <to>map_meddra_to_snomed.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1591,8 +1638,17 @@ from combined_drug_mapping where concept_id is null
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>derive_standard_case_adr (inserted) sql</from>
+      <from>derive_standard_case_adr.sql</from>
       <to>Wait for 3s (2)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (2)</from>
+      <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -1613,13 +1669,22 @@ from combined_drug_mapping where concept_id is null
       <to>Wait for 3s (4)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Wait for 3s (4)</from>
       <to>derive_standard_drug_outcome_contingency_table_part_2.sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for 3s (3)</from>
+      <to>create standard_drug_outcome_contingency_table from cem_ddl.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1698,69 +1763,6 @@ from combined_drug_mapping where concept_id is null
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
-    <hop>
-      <from>Wait for 3s (2)</from>
-      <to>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>faers-deduplication-strategy-DECEMBER-2022-USES-VIGIBASE.sql</from>
-      <to>derive_standard_drug_outcome_count.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>derive_unique_all_case.sql</from>
-      <to>load_nda_table.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_nda_table.sql</from>
-      <to>create_usagi_import_table.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>map_all_drugname_to_rxnorm.sql</from>
-      <to>standardize_combined_drug_mapping.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_drug_usagi_mapping.sql</from>
-      <to>map_all_drugname_to_rxnorm.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create_usagi_import_table.sql</from>
-      <to>load_drug_usagi_mapping.sql</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1796,8 +1798,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>848</width>
-      <heigth>550</heigth>
+      <width>773</width>
+      <heigth>520</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1814,13 +1816,11 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^creates standard_drug_outcome_count table
-implement de-duplication procress after this?
-</note>
-      <xloc>16</xloc>
-      <yloc>1664</yloc>
-      <width>336</width>
-      <heigth>64</heigth>
+      <note>^creates standard_drug_outcome_count table</note>
+      <xloc>32</xloc>
+      <yloc>1360</yloc>
+      <width>320</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1837,14 +1837,32 @@ implement de-duplication procress after this?
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>^drug_regex_mapping
-combined_drug_mapping
-drug_ai_mapping
-drug_nda_mapping</note>
-      <xloc>496</xloc>
-      <yloc>1120</yloc>
+      <note>^combined_drug_mapping</note>
+      <xloc>117</xloc>
+      <yloc>1107</yloc>
       <width>189</width>
-      <heigth>82</heigth>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>wants to review</note>
+      <xloc>304</xloc>
+      <yloc>960</yloc>
+      <width>115</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1862,177 +1880,53 @@ drug_nda_mapping</note>
     </notepad>
     <notepad>
       <note>our natural product vocabulary goes here
-
-
-
-
-
-are we going to pentaho 
-workflow this "workflow" 
-https://github.com/rkboyce/NaPDI-pv/tree/master/np-terminology-imports#workflow? </note>
-      <xloc>48</xloc>
-      <yloc>1200</yloc>
-      <width>623</width>
-      <heigth>172</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>bring in our new de-duplication method (references vigibase but we didn't update that...)
-
-...for new quarter
-
-
-TODO put
-https://github.com/rkboyce/NaPDI-pv/blob/master/deduplication-strategy/review-of-deduplication-analysis-from-dec-2022.sql
-into stage 6
 </note>
-      <xloc>1056</xloc>
-      <yloc>1456</yloc>
-      <width>899</width>
-      <heigth>172</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>these are drug-adverse-disproportionate calculations                            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</note>
-      <xloc>16</xloc>
-      <yloc>1760</yloc>
-      <width>496</width>
-      <heigth>550</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>need to calculcate drug drug adverse event calculation
-
-where's this code?
-the 2 not validation sql's from:
-https://github.com/rkboyce/NaPDI-pv/tree/master/DDI_signals
-
-https://github.com/rkboyce/NaPDI-pv/issues/22</note>
-      <xloc>880</xloc>
-      <yloc>1648</yloc>
-      <width>452</width>
-      <heigth>136</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>
-
-
-
-manually load tsv from ${REPO_LOCATION}/data/usagi/&lt;tsv_file></note>
-      <xloc>528</xloc>
-      <yloc>864</yloc>
-      <width>471</width>
-      <heigth>100</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>
-
-
-
-...skipping May '25 but is part of the 
-documentation/FAERS_Processing_Instructions.docx
-section... "d) Map current data drug name to RxNorm - USAGI"
-</note>
-      <xloc>0</xloc>
+      <xloc>160</xloc>
       <yloc>1024</yloc>
-      <width>444</width>
-      <heigth>154</heigth>
+      <width>285</width>
+      <heigth>44</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>bring in our new de-duplication method</note>
+      <xloc>528</xloc>
+      <yloc>1168</yloc>
+      <width>272</width>
+      <heigth>27</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>bring in xiaotong's ddi stats</note>
+      <xloc>192</xloc>
+      <yloc>1984</yloc>
+      <width>195</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
