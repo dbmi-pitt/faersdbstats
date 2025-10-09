@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# note you have to chmod +x cpt.sh and cpt4.jar to run this script to run it
+
 CONFIG_FILE="${BASE_FILE_DIR}/faers_config.config"
 
 if [[ ! -f "$CONFIG_FILE" ]]; then
