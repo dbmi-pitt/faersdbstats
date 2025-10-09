@@ -504,14 +504,14 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create faers.nda (load_nda_table.sql)</name>
+      <name>create faers.nda (create_nda_table.sql)</name>
       <description/>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/load_nda_table.sql</sqlfilename>
+      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_nda_table.sql</sqlfilename>
       <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
@@ -873,7 +873,7 @@ COUNTRY_CODE_ROW_NUM_CEM_CHEX is ${COUNTRY_CODE_ROW_NUM_CEM_CHEX}</logmessage>
     </hop>
     <hop>
       <from>log COUNTRY_CODE_ROW_NUM</from>
-      <to>create faers.nda (load_nda_table.sql)</to>
+      <to>create faers.nda (create_nda_table.sql)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
