@@ -527,7 +527,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.re
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>464</xloc>
       <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
@@ -555,7 +555,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.dr
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
+      <xloc>672</xloc>
       <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
@@ -583,8 +583,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>432</yloc>
+      <xloc>112</xloc>
+      <yloc>576</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -611,7 +611,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
+      <xloc>416</xloc>
       <yloc>576</yloc>
       <attributes_kjc/>
     </entry>
@@ -639,7 +639,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>672</xloc>
       <yloc>576</yloc>
       <attributes_kjc/>
     </entry>
@@ -912,6 +912,33 @@ drop table if exists staging_vocabulary.domain CASCADE;
       <yloc>175</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Load staging CONCEPT_CPT4</name>
+      <description/>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>export PGPASSWORD=${DATABASE_PASSWORD}
+psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT_CPT4.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>144</xloc>
+      <yloc>432</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -935,15 +962,6 @@ drop table if exists staging_vocabulary.domain CASCADE;
     <hop>
       <from>Load staging DOMAIN</from>
       <to>Load staging CONCEPT_CLASS</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load staging CONCEPT_CLASS</from>
-      <to>Load staging RELATIONSHIP</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1040,6 +1058,15 @@ drop table if exists staging_vocabulary.domain CASCADE;
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>Load staging CONCEPT_CLASS</from>
+      <to>Load staging RELATIONSHIP</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1081,8 +1108,8 @@ wc -l of import files...
 657 RELATIONSHIP.csv
 89 VOCABULARY.csv
 </note>
-      <xloc>741</xloc>
-      <yloc>287</yloc>
+      <xloc>1184</xloc>
+      <yloc>288</yloc>
       <width>280</width>
       <heigth>248</heigth>
       <fontname>Ubuntu</fontname>
@@ -1101,12 +1128,14 @@ wc -l of import files...
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>where nov 2024 load failed
-</note>
-      <xloc>512</xloc>
-      <yloc>256</yloc>
-      <width>187</width>
-      <heigth>44</heigth>
+      <note>note concept_cpt4.csv is used 
+by the included cpt4.sh (which runs the .jar) 
+to update the 
+concept.csv and concept_relationship.csv</note>
+      <xloc>48</xloc>
+      <yloc>400</yloc>
+      <width>298</width>
+      <heigth>78</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
