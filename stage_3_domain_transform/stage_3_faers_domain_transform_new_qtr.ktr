@@ -459,7 +459,7 @@ ${BASE_FILE_DIR}/../logs/stage_2_domain_import_file_creation
       <xloc>464</xloc>
       <yloc>80</yloc>
       <width>437</width>
-      <heigth>346</heigth>
+      <heigth>350</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1208,7 +1208,7 @@ ${BASE_FILE_DIR}/../logs/stage_2_domain_import_file_creation
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>lot_nbr</name>
+        <name>lot_num</name>
         <type>String</type>
         <format/>
         <currency>$</currency>
@@ -1636,6 +1636,10 @@ ${BASE_FILE_DIR}/../logs/stage_2_domain_import_file_creation
     <return_field/>
     <fields>
       <field>
+        <column_name>primaryid</column_name>
+        <stream_name>primaryid</stream_name>
+      </field>
+      <field>
         <column_name>caseid</column_name>
         <stream_name>caseid</stream_name>
       </field>
@@ -1678,6 +1682,10 @@ ${BASE_FILE_DIR}/../logs/stage_2_domain_import_file_creation
       <field>
         <column_name>rechal</column_name>
         <stream_name>rechal</stream_name>
+      </field>
+      <field>
+        <column_name>lot_num</column_name>
+        <stream_name>lot_num</stream_name>
       </field>
       <field>
         <column_name>exp_dt</column_name>
