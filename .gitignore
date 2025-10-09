@@ -6,3 +6,8 @@ faers_config.config
 leftover_repo_extras/*
 **.*.bak
 stage_4_domain_logging/generate_wc_l_import_file_rpsr.bak
+stage_1_setup/omop_vocab_umls_auth.sh
+stage_1_setup/omop_vocab_umls_auth copy.sh
+stage_3_domain_transform/stage_3_faers_domain_transform_new_qtr copy.ktr
+stage_3_domain_transform/stage_3_laers_domain_transform_new_qtr copy.ktr
+stage_5_sqls/map_all_drugname_to_rxnorm copy.sql
