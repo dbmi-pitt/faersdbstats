@@ -1,8 +1,32 @@
 #!/bin/bash
 # /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_omop_vocab.sh
 
-# Load shared config
-source ../../faers_config.config
+# Load shared config (resolve path relative to this script so the script works from any CWD)
+# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo 'wow super bad'
+SCRIPT_DIR="$BASE_FILE_DIR"
+echo '$BASE_FILE_DIR is '"$SCRIPT_DIR"
+CONFIG_FILE="$SCRIPT_DIR"'/faers_config.config'
+
+if [ ! -f "$CONFIG_FILE" ]; then
+  # fallback 1: try repo root from current working directory
+  if [ -f "$(pwd)/faers_config.config" ]; then
+    CONFIG_FILE="$(pwd)/faers_config.config"
+    echo "CONFIG_FILE is set to $CONFIG_FILE (repo root)"
+  # fallback 2: try script directory
+  elif [ -f "$(cd "$(dirname "$0")" && pwd)/faers_config.config" ]; then
+    CONFIG_FILE="$(cd "$(dirname "$0")" && pwd)/faers_config.config"
+    echo "CONFIG_FILE is set to $CONFIG_FILE (script dir)"
+  fi
+fi
+
+if [ ! -f "$CONFIG_FILE" ]; then
+  echo "❌ faers_config.config not found. Tried: $SCRIPT_DIR/../../faers_config.config and $(pwd)/faers_config.config"
+  exit 1
+fi
+
+# shellcheck source=/dev/null
+source "$CONFIG_FILE"
 
 # Use a specific directory where OMOP vocab files live
 BASE_FILE_DIR="$OMOP_FILE_DIR"
