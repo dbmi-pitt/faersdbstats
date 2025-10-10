@@ -3,7 +3,6 @@
 
 # Load shared config (resolve path relative to this script so the script works from any CWD)
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo 'wow super bad'
 SCRIPT_DIR="$BASE_FILE_DIR"
 echo '$BASE_FILE_DIR is '"$SCRIPT_DIR"
 CONFIG_FILE="$SCRIPT_DIR"'/faers_config.config'
