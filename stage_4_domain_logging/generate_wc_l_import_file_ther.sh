@@ -1,6 +1,7 @@
 #!/bin/bash
 # /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_ther.sh
 source ../../faers_config.config
+# compute laers_or_faers from config only: LAERS up through 2012 Q3, FAERS for 2012 Q4 and later
 
 # Base directory for all years of data
 BASE_FILE_DIR="$BASE_FILE_DIR/data_from_s3/faers/ther"
@@ -73,8 +74,13 @@ if [[ "$filename" =~ _staged_with_lfs_only\.txt$ || "$filename" =~ ^old\.txt$ ||
       # Line count, minus 1 for header
       wc_l_count=$(($(wc -l < "$file") - 1))
 
-    # Determine LAERS or FAERS (set to 'faers' for now)
-    laers_or_faers="laers"
+    # Determine LAERS or FAERS from config cutoff
+    y4=$((2000 + yr))
+    if (( y4 > 2012 )) || { (( y4 == 2012 )) && (( qtr >= 4 )); }; then
+      laers_or_faers="faers"
+    else
+      laers_or_faers="laers"
+    fi
 
     # Append data to the output PSV file
     echo "$log_filename|$filename|$laers_or_faers|$yr|$qtr|$wc_l_count" >> "$OUTPUT_FILE"
