@@ -1305,6 +1305,11 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_SCHEMA}.z_qa_faers_wc_import_log (
     laers_or_faers VARCHAR(10) NOT NULL,     -- Type of data, e.g., 'faers'
     yr INT NOT NULL,                         -- Year of the data
     qtr INT NOT NULL,                 -- Quarter of the data (e.g., 'Q1', 'Q2')
-    wc_l_count INT NOT NULL,                 -- Line count from wc -l
+    -- per-quarter wc-l import count of files
+    wc_l_count integer,
+    -- derived audit columns populated by stage_4 jobs
+    select_count_on_domain integer,
+    select_count_diff integer,
+    select_count_diff_pct double precision,
     loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp when data is inserted
 );
