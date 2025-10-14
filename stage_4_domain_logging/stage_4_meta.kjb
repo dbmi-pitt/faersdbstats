@@ -836,7 +836,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1776</yloc>
+      <yloc>1824</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1134,7 +1134,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1664</yloc>
+      <yloc>1712</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1275,7 +1275,7 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1360</xloc>
+      <xloc>1280</xloc>
       <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
@@ -1369,8 +1369,8 @@ echo 'DEMO COUNT RESULTS' >> $log_location
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1184</xloc>
-      <yloc>640</yloc>
+      <xloc>1280</xloc>
+      <yloc>720</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1390,7 +1390,7 @@ SET select_count_diff = wc_l_count - select_count_on_domain;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1088</xloc>
-      <yloc>896</yloc>
+      <yloc>1152</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1413,7 +1413,7 @@ SET select_count_diff_pct =
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1088</xloc>
-      <yloc>1040</yloc>
+      <yloc>1296</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1452,7 +1452,7 @@ SET select_count_diff_pct =
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1088</xloc>
-      <yloc>768</yloc>
+      <yloc>1024</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1527,8 +1527,8 @@ SET select_count_diff_pct =
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
-      <yloc>576</yloc>
+      <xloc>1280</xloc>
+      <yloc>592</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1591,8 +1591,8 @@ END $$</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1312</xloc>
-      <yloc>592</yloc>
+      <xloc>1280</xloc>
+      <yloc>864</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1656,7 +1656,7 @@ END $$</sql>
       <to>stage_4_faers_drug_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1887,15 +1887,6 @@ END $$</sql>
     </hop>
     <hop>
       <from>select_count_diff_pct</from>
-      <to>stage_4_faers_demo_log_qtrs.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>select_count_diff_pct</from>
       <to>stage_4_laers_demo_log_qtrs.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1960,6 +1951,15 @@ END $$</sql>
     <hop>
       <from>SQL populate_wc_count_omop</from>
       <to>stage_4_select_count_domains</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>select_count_diff_pct</from>
+      <to>SUCCESS IF LOAD_ALL_TIME=1 (2nd time)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2094,7 +2094,7 @@ updates qa table w/ new value
 &lt;- should result in counts in 
 z_qa_faers_wc_import_log.select_count_on_domain</note>
       <xloc>1216</xloc>
-      <yloc>736</yloc>
+      <yloc>992</yloc>
       <width>382</width>
       <heigth>112</heigth>
       <fontname>Ubuntu</fontname>
@@ -2170,7 +2170,7 @@ then do the one immediately below this</note>
     <notepad>
       <note>load faers psv into log table 
 z_qa_faers_wc_import_log</note>
-      <xloc>1328</xloc>
+      <xloc>1344</xloc>
       <yloc>464</yloc>
       <width>199</width>
       <heigth>44</heigth>
@@ -2215,8 +2215,8 @@ load faers psv into log table                        </note>
     <notepad>
       <note>&lt;-- loads/updates
 z_qa_faers_wc_import_log.select_count_diff </note>
-      <xloc>1184</xloc>
-      <yloc>896</yloc>
+      <xloc>1168</xloc>
+      <yloc>1184</yloc>
       <width>313</width>
       <heigth>44</heigth>
       <fontname>Ubuntu</fontname>
@@ -2239,7 +2239,7 @@ z_qa_faers_wc_import_log.select_count_diff </note>
 z_qa_faers_wc_import_log.select_count_diff 
 z_qa_faers_wc_import_log.select_count_diff_pct</note>
       <xloc>1184</xloc>
-      <yloc>1040</yloc>
+      <yloc>1328</yloc>
       <width>339</width>
       <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
