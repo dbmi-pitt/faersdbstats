@@ -610,7 +610,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</name>
+      <name>stage_4_meta.kjb</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -749,7 +749,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</from>
+      <from>stage_4_meta.kjb</from>
       <to>stage_5_sqls</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -768,7 +768,7 @@
     </hop>
     <hop>
       <from>stage_3_meta</from>
-      <to>stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb</to>
+      <to>stage_4_meta.kjb</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -816,6 +816,27 @@ When logging goes blank click job metrics
       <yloc>0</yloc>
       <width>805</width>
       <heigth>588</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>should this be stage_4_domain_logging/stage_4_meta_domain_year_qtr_comparison.kjb ?</note>
+      <xloc>544</xloc>
+      <yloc>960</yloc>
+      <width>615</width>
+      <heigth>27</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
