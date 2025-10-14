@@ -879,7 +879,7 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <to>stage_3_faers_domain_transform_delete_new_qtr_data.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -906,7 +906,7 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <to>stage_3_faers_domain_transform_new_qtr.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
