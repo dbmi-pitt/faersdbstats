@@ -685,10 +685,11 @@ S</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -742,8 +743,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>48</yloc>
+      <xloc>592</xloc>
+      <yloc>560</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -760,10 +761,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -817,8 +819,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>160</yloc>
+      <xloc>848</xloc>
+      <yloc>352</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -835,10 +837,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -892,8 +895,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>272</yloc>
+      <xloc>624</xloc>
+      <yloc>624</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -910,10 +913,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -967,8 +971,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>384</yloc>
+      <xloc>720</xloc>
+      <yloc>528</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -985,10 +989,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -1042,8 +1047,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>496</yloc>
+      <xloc>736</xloc>
+      <yloc>672</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -1060,10 +1065,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -1117,9 +1123,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>608</yloc>
-      <draw>Y</draw>
+      <xloc>832</xloc>
+      <yloc>768</yloc>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -1135,10 +1141,11 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DO $$
+    <sql>set search_path=${DATABASE_SCHEMA};
+DO $$
 DECLARE
     rec RECORD;
     domain TEXT;
@@ -1192,9 +1199,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>720</yloc>
-      <draw>N</draw>
+      <xloc>624</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>

@@ -512,253 +512,7 @@
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
-      <yloc>0</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete ther where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.ther
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>616</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete rpsr where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.rpsr
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>528</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete reac where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.reac
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>440</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete outc where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.outc
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete indi where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.indi
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>264</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>delete drug where year and qtr</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>${DATABASE_NAME}</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.drug
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>176</yloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -775,13 +529,21 @@ AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEG
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>DELETE FROM faers.demo
-WHERE yr = CAST(SUBSTRING(CAST(${LOAD_NEW_YEAR} AS TEXT), 3, 2) AS INTEGER)
-AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEGER);
-</sql>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.demo
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for demo yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -800,7 +562,301 @@ AND qtr = CAST(REGEXP_REPLACE('${LOAD_NEW_QUARTER}', '[^0-9]', '', 'g') AS INTEG
     <GUI>
       <xloc>128</xloc>
       <yloc>88</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete drug where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.drug
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for drug yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete indi where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.indi
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for indi yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete outc where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.outc
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for outc yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>352</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete reac where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.reac
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for reac yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>256</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete rpsr where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.rpsr
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for rpsr yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>528</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>delete ther where year and qtr</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>${DATABASE_NAME}</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DO $$
+DECLARE v_deleted int;
+BEGIN
+  DELETE FROM faers.ther
+  WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
+  RETURNING 1 INTO v_deleted;
+  RAISE NOTICE 'Deleted % rows for ther yr % qtr %',
+               v_deleted,
+               (${LOAD_NEW_YEAR}::int % 100),
+               regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g');
+END $$;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>272</yloc>
+      <draw>N</draw>
     </GUI>
   </step>
   <step_error_handling>
