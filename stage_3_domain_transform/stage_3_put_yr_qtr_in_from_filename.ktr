@@ -559,8 +559,8 @@ test w/ rpsr and then do others</note>
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.demo
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -603,8 +603,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.drug
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -647,8 +647,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.indi
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -691,8 +691,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.outc
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -735,8 +735,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.reac
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -779,8 +779,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE ${DATABASE_SCHEMA}.rpsr
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
@@ -823,8 +823,8 @@ WHERE
     <quoteString>N</quoteString>
     <sql>UPDATE faers.ther
 SET
-    yr = SUBSTRING(filename FROM 5 FOR 2)::text,
-    qtr = SUBSTRING(filename FROM 8 FOR 1)::text
+    yr = SUBSTRING(filename FROM 5 FOR 2)::integer,
+    qtr = SUBSTRING(filename FROM 8 FOR 1)::integer
 WHERE
     (qtr IS NULL OR yr IS NULL)
   AND filename ~ '^\w{4}\d{2}Q\d\.txt$'; -- Matches expected filename structure</sql>
