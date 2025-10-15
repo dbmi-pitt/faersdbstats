@@ -343,24 +343,36 @@
       <description/>
       <type>JOB</type>
       <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
       <filename>${Internal.Entry.Current.Directory}/../stage_0_set_pentaho_vars/stage_0_set_pentaho_vars.kjb</filename>
-      <work_directory/>
+      <jobname/>
+      <directory/>
       <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
       <logfile/>
-      <set_append_logfile>N</set_append_logfile>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
       <loglevel>Basic</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration/>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>16</yloc>
+      <xloc>352</xloc>
+      <yloc>528</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -393,8 +405,8 @@ aws configure list</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>528</yloc>
+      <xloc>96</xloc>
+      <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -471,8 +483,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>608</yloc>
+      <xloc>96</xloc>
+      <yloc>736</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -526,8 +538,8 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>688</yloc>
+      <xloc>352</xloc>
+      <yloc>736</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -685,7 +697,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
+      <xloc>624</xloc>
       <yloc>528</yloc>
       <attributes_kjc/>
     </entry>
@@ -819,7 +831,7 @@ GRANT ALL ON SCHEMA ${DATABASE_SCHEMA} TO ${DATABASE_USERNAME};
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>352</xloc>
       <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
@@ -873,8 +885,8 @@ chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>688</yloc>
+      <xloc>624</xloc>
+      <yloc>736</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -898,8 +910,8 @@ chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>768</yloc>
+      <xloc>96</xloc>
+      <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1066,7 +1078,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
+      <xloc>624</xloc>
       <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
@@ -1338,7 +1350,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
+      <xloc>352</xloc>
       <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
