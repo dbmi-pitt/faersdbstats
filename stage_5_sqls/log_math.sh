@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ../faers_config.config
+CONFIG_FILE="/home/pentaho-secondary/projects-brb265-2024/faersdbstats/faers_config.config"
+source "$CONFIG_FILE"
 log_location=test_log.txt
 
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}

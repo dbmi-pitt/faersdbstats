@@ -1,6 +1,7 @@
 #!/bin/bash
 # /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faersdbstats/stage_4_domain_logging/generate_wc_l_import_file_ther.sh
-source ../../faers_config.config
+CONFIG_FILE="/home/pentaho-secondary/projects-brb265-2024/faersdbstats/faers_config.config"
+source "$CONFIG_FILE"
 # compute laers_or_faers from config only: LAERS up through 2012 Q3, FAERS for 2012 Q4 and later
 
 # Base directory for all years of data

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Source the configuration file for LOG_FILENAME and other variables
-source ../../faers_config.config
+CONFIG_FILE="/home/pentaho-secondary/projects-brb265-2024/faersdbstats/faers_config.config"
+source "$CONFIG_FILE"
 
 # Check if LOG_FILENAME is set
 if [ -z "$LOG_FILENAME" ]; then
