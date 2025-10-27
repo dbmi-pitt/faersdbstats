@@ -537,8 +537,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.demo
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for demo yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -561,8 +561,8 @@ END $$;</sql>
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
-      <yloc>88</yloc>
-      <draw>N</draw>
+      <yloc>109</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -586,8 +586,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.drug
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for drug yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -609,8 +609,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>176</yloc>
+      <xloc>128</xloc>
+      <yloc>202</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -629,14 +629,14 @@ END $$;</sql>
     <execute_each_row>N</execute_each_row>
     <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
+    <quoteString>Y</quoteString>
     <sql>DO $$
 DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.indi
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for indi yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -658,8 +658,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>320</yloc>
+      <xloc>128</xloc>
+      <yloc>295</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -684,8 +684,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.outc
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for outc yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -708,8 +708,8 @@ END $$;</sql>
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
-      <yloc>352</yloc>
-      <draw>N</draw>
+      <yloc>388</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -733,8 +733,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.reac
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for reac yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -756,9 +756,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>256</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>481</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -782,8 +782,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.rpsr
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for rpsr yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -806,8 +806,8 @@ END $$;</sql>
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
-      <yloc>528</yloc>
-      <draw>N</draw>
+      <yloc>574</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -831,8 +831,8 @@ DECLARE v_deleted int;
 BEGIN
   DELETE FROM faers.ther
   WHERE yr = (${LOAD_NEW_YEAR}::int % 100)
-    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int)
-  RETURNING 1 INTO v_deleted;
+    AND qtr = CAST(regexp_replace('${LOAD_NEW_QUARTER}','[^0-9]','','g') AS int);
+  GET DIAGNOSTICS v_deleted = ROW_COUNT;
   RAISE NOTICE 'Deleted % rows for ther yr % qtr %',
                v_deleted,
                (${LOAD_NEW_YEAR}::int % 100),
@@ -854,9 +854,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>272</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>667</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
