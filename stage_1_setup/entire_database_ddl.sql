@@ -315,6 +315,10 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_SCHEMA}.drug (
 
 ALTER TABLE ${DATABASE_SCHEMA}.drug OWNER TO ${DATABASE_USERNAME};
 
+-- Enforce non-null primaryid in drug table
+ALTER TABLE IF EXISTS ${DATABASE_SCHEMA}.drug
+    ADD CONSTRAINT drug_primaryid_not_null CHECK (primaryid IS NOT NULL);
+
 --
 -- Name: drug_ai_mapping; Type: TABLE; Schema: ${DATABASE_SCHEMA}; Owner: ${DATABASE_USERNAME}
 --
