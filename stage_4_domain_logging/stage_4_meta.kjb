@@ -1427,7 +1427,7 @@ SET select_count_diff_pct =
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
+      <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
@@ -1773,7 +1773,7 @@ END $$</sql>
       <to>log_math_4_pentaho.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1872,7 +1872,7 @@ END $$</sql>
       <to>just_rpsr_log_math_4_pentaho.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1882,15 +1882,6 @@ END $$</sql>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>select_count_diff_pct</from>
-      <to>stage_4_laers_demo_log_qtrs.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1985,8 +1976,8 @@ rpsr
 ther</note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>542</width>
-      <heigth>248</heigth>
+      <width>578</width>
+      <heigth>262</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2006,8 +1997,8 @@ ther</note>
       <note>&lt;- laers domain total counts</note>
       <xloc>272</xloc>
       <yloc>432</yloc>
-      <width>196</width>
-      <heigth>27</heigth>
+      <width>206</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2027,8 +2018,8 @@ ther</note>
       <note>&lt;- faers domain total counts</note>
       <xloc>704</xloc>
       <yloc>528</yloc>
-      <width>198</width>
-      <heigth>27</heigth>
+      <width>208</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2048,8 +2039,8 @@ ther</note>
       <note>&lt;- faers domain quarter counts</note>
       <xloc>288</xloc>
       <yloc>928</yloc>
-      <width>216</width>
-      <heigth>27</heigth>
+      <width>228</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2069,8 +2060,8 @@ ther</note>
       <note>&lt;- from here on they write to BASE_FILE_DIR/logs/LOG_FILENAME</note>
       <xloc>288</xloc>
       <yloc>880</yloc>
-      <width>448</width>
-      <heigth>27</heigth>
+      <width>478</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2095,8 +2086,8 @@ updates qa table w/ new value
 z_qa_faers_wc_import_log.select_count_on_domain</note>
       <xloc>1216</xloc>
       <yloc>992</yloc>
-      <width>382</width>
-      <heigth>112</heigth>
+      <width>402</width>
+      <heigth>118</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2123,8 +2114,8 @@ recommended practice for single quarter update use case
 to start here, then do "all new domains" immediately below this</note>
       <xloc>1168</xloc>
       <yloc>144</yloc>
-      <width>432</width>
-      <heigth>146</heigth>
+      <width>459</width>
+      <heigth>154</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2150,8 +2141,8 @@ test from here forward w/ rpsr first
 then do the one immediately below this</note>
       <xloc>0</xloc>
       <yloc>608</yloc>
-      <width>272</width>
-      <heigth>129</heigth>
+      <width>292</width>
+      <heigth>136</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2172,8 +2163,8 @@ then do the one immediately below this</note>
 z_qa_faers_wc_import_log</note>
       <xloc>1344</xloc>
       <yloc>464</yloc>
-      <width>199</width>
-      <heigth>44</heigth>
+      <width>210</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2195,8 +2186,8 @@ z_qa_faers_wc_import_log</note>
 load faers psv into log table                        </note>
       <xloc>720</xloc>
       <yloc>656</yloc>
-      <width>268</width>
-      <heigth>61</heigth>
+      <width>302</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2217,8 +2208,8 @@ load faers psv into log table                        </note>
 z_qa_faers_wc_import_log.select_count_diff </note>
       <xloc>1168</xloc>
       <yloc>1184</yloc>
-      <width>313</width>
-      <heigth>44</heigth>
+      <width>329</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2240,8 +2231,8 @@ z_qa_faers_wc_import_log.select_count_diff
 z_qa_faers_wc_import_log.select_count_diff_pct</note>
       <xloc>1184</xloc>
       <yloc>1328</yloc>
-      <width>339</width>
-      <heigth>61</heigth>
+      <width>355</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
