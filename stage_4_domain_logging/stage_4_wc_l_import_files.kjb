@@ -430,7 +430,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>186</xloc>
-      <yloc>256</yloc>
+      <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -455,7 +455,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>529</xloc>
-      <yloc>249</yloc>
+      <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -561,8 +561,8 @@
 - [ ] faers.reac</note>
       <xloc>1061</xloc>
       <yloc>202</yloc>
-      <width>600</width>
-      <heigth>146</heigth>
+      <width>629</width>
+      <heigth>154</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
