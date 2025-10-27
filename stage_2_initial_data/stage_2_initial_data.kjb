@@ -1225,6 +1225,26 @@ echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script
       <yloc>832</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>add drug table primaryid constraint if not exists</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Enforce non-null primaryid in drug table
+ALTER TABLE IF EXISTS ${DATABASE_SCHEMA}.drug
+    ADD CONSTRAINT drug_primaryid_not_null CHECK (primaryid IS NOT NULL);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>672</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1300,15 +1320,6 @@ echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>Log LOAD_ALL_TIME=0 path taken</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Wait for 3s</from>
       <to>SUCCESS IF LOAD_ALL_TIME=1</to>
       <from_nr>0</from_nr>
@@ -1329,6 +1340,24 @@ echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script
     <hop>
       <from>Log LOAD_ALL_TIME=0 path taken</from>
       <to>s3_data_download</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <to>add drug table primaryid constraint if not exists</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>add drug table primaryid constraint if not exists</from>
+      <to>Log LOAD_ALL_TIME=0 path taken</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1370,8 +1399,8 @@ Logging is blank
 -work around view job metrics and terminal window that launched ./spoon.sh</note>
       <xloc>16</xloc>
       <yloc>0</yloc>
-      <width>1349</width>
-      <heigth>520</heigth>
+      <width>1459</width>
+      <heigth>550</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1393,8 +1422,8 @@ data will be downloaded to &lt;domain>.txt or &lt;domain>_new_qtr.txt
 and loaded from there</note>
       <xloc>768</xloc>
       <yloc>992</yloc>
-      <width>456</width>
-      <heigth>61</heigth>
+      <width>482</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
