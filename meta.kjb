@@ -490,7 +490,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>384</xloc>
       <yloc>1472</yloc>
       <attributes_kjc/>
     </entry>
@@ -771,7 +771,7 @@
       <to>stage_1_setup job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -814,8 +814,8 @@ When logging goes blank click job metrics
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>805</width>
-      <heigth>588</heigth>
+      <width>859</width>
+      <heigth>622</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -835,8 +835,60 @@ When logging goes blank click job metrics
       <note>note if faers.z_qa_faers_wc_import_log is blank run stage_4_select_count_domains sqls manually</note>
       <xloc>549</xloc>
       <yloc>960</yloc>
-      <width>660</width>
-      <heigth>27</heigth>
+      <width>697</width>
+      <heigth>28</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>must load job vars and last 2 steps
+
+TODO fix constraint step</note>
+      <xloc>544</xloc>
+      <yloc>800</yloc>
+      <width>252</width>
+      <heigth>64</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>TODO
+
+make idempotent by checking 
+to see if qtr of data's downloaded first
+
+
+
+
+</note>
+      <xloc>16</xloc>
+      <yloc>720</yloc>
+      <width>282</width>
+      <heigth>172</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
