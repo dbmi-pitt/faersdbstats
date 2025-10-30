@@ -412,6 +412,31 @@
           <variable_value>${OMOP_FILE_NAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>DATABASE_HOST</variable_name>
+          <variable_value>${DATABASE_HOST}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_PORT</variable_name>
+          <variable_value>${DATABASE_PORT}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_NAME</variable_name>
+          <variable_value>${DATABASE_NAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_PASSWORD</variable_name>
+          <variable_value>${DATABASE_PASSWORD}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>DATABASE_SCHEMA</variable_name>
+          <variable_value>${DATABASE_SCHEMA}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -437,8 +462,8 @@
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.domain" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.domain FROM '${OMOP_FILE_DIR}/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.domain" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.domain FROM '${OMOP_FILE_DIR}/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -465,8 +490,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.do
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD="${DATABASE_PASSWORD}"
-psql -h "${DATABASE_HOST}" -U "${DATABASE_USERNAME}" -c "truncate table staging_vocabulary.vocabulary" "${DATABASE_NAME}"
-psql -h "${DATABASE_HOST}" -U "${DATABASE_USERNAME}" -c "\COPY staging_vocabulary.vocabulary FROM ${OMOP_FILE_DIR}/VOCABULARY.csv WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" "${DATABASE_NAME}"</script>
+psql -h "${DATABASE_HOST}" -p "${DATABASE_PORT}" -U "${DATABASE_USERNAME}" -c "truncate table staging_vocabulary.vocabulary" "${DATABASE_NAME}"
+psql -h "${DATABASE_HOST}"  -p "${DATABASE_PORT}" -U "${DATABASE_USERNAME}" -c "\COPY staging_vocabulary.vocabulary FROM ${OMOP_FILE_DIR}/VOCABULARY.csv WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" "${DATABASE_NAME}"</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -492,8 +517,8 @@ psql -h "${DATABASE_HOST}" -U "${DATABASE_USERNAME}" -c "\COPY staging_vocabular
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_class" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_class FROM '${OMOP_FILE_DIR}/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_class" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_class FROM '${OMOP_FILE_DIR}/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -520,8 +545,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.relationship" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.relationship FROM '${OMOP_FILE_DIR}/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.relationship" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.relationship FROM '${OMOP_FILE_DIR}/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -548,8 +573,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.re
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.drug_strength" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.drug_strength FROM '${OMOP_FILE_DIR}/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.drug_strength" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.drug_strength FROM '${OMOP_FILE_DIR}/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -576,8 +601,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.dr
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_synonym" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_synonym FROM '${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_synonym" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_synonym FROM '${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -604,8 +629,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -632,8 +657,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_ancestor" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_ancestor FROM '${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_ancestor" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_ancestor FROM '${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -660,8 +685,8 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT.csv' WITH DELIMITER E'\t' QUOTE E'\b' CSV HEADER" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT.csv' WITH DELIMITER E'\t' QUOTE E'\b' CSV HEADER" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -724,7 +749,7 @@ psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.co
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -f ./omop_vocab_scripts/show_record_counts.sql ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -f ./omop_vocab_scripts/show_record_counts.sql ${DATABASE_NAME}
 
 </script>
       <loglevel>Basic</loglevel>
@@ -929,7 +954,7 @@ drop table if exists staging_vocabulary.domain CASCADE;
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT_CPT4.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT_CPT4.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -1076,8 +1101,8 @@ in the "set job variables" step
 before starting this process</note>
       <xloc>16</xloc>
       <yloc>16</yloc>
-      <width>549</width>
-      <heigth>78</heigth>
+      <width>581</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1110,8 +1135,8 @@ wc -l of import files...
 </note>
       <xloc>1184</xloc>
       <yloc>288</yloc>
-      <width>280</width>
-      <heigth>248</heigth>
+      <width>299</width>
+      <heigth>262</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1134,8 +1159,8 @@ to update the
 concept.csv and concept_relationship.csv</note>
       <xloc>48</xloc>
       <yloc>400</yloc>
-      <width>298</width>
-      <heigth>78</heigth>
+      <width>322</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
