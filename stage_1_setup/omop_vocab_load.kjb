@@ -1176,6 +1176,43 @@ concept.csv and concept_relationship.csv</note>
       <bordercolorblue>100</bordercolorblue>
       <drawshadow>Y</drawshadow>
     </notepad>
+    <notepad>
+      <note>i ran concept with
+
+
+
+
+this
+
+source /home/pentaho-secondary/projects-brb265-2024/faersdbstats/faers_config.config &amp;&amp; 
+export PGPASSWORD="${DATABASE_PASSWORD}" 
+&amp;&amp; psql -h "${DATABASE_HOST}" 
+-p "${DATABASE_PORT}" 
+-U "${DATABASE_USERNAME}" 
+-c "truncate table staging_vocabulary.concept" "${DATABASE_NAME}" 
+&amp;&amp; psql -h "${DATABASE_HOST}" 
+-p "${DATABASE_PORT}" 
+-U "${DATABASE_USERNAME}" 
+-c "\COPY staging_vocabulary.concept FROM '${OMOP_FILE_DIR}/CONCEPT.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b' ESCAPE E'\b'" "${DATABASE_NAME}"</note>
+      <xloc>16</xloc>
+      <yloc>688</yloc>
+      <width>1165</width>
+      <heigth>316</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <attributes>
     <group>
