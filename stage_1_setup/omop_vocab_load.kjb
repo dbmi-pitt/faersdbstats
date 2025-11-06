@@ -356,7 +356,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
+      <xloc>96</xloc>
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
@@ -446,7 +446,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
+      <xloc>320</xloc>
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
@@ -634,8 +634,10 @@ psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY s
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
-psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
-psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
+psql -v ON_ERROR_STOP=1 -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
+psql -v ON_ERROR_STOP=1 -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH (FORMAT csv, HEADER true, DELIMITER E'\t', QUOTE E'\b')" ${DATABASE_NAME}
+# quick sanity: show count after load to surface issues immediately
+psql -v ON_ERROR_STOP=1 -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "SELECT 'staging_vocabulary.concept_relationship count=' || to_char(count(*), '999G999G999G999') FROM staging_vocabulary.concept_relationship;" ${DATABASE_NAME}
 </script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
@@ -715,7 +717,7 @@ psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY s
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
+      <xloc>320</xloc>
       <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
@@ -908,7 +910,7 @@ CREATE TABLE IF NOT EXISTS staging_vocabulary.attribute_definition (
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
+      <xloc>576</xloc>
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
