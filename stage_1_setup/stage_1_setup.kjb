@@ -1501,7 +1501,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>Set AWS Credentials</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
