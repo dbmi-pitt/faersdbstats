@@ -356,7 +356,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
+      <xloc>128</xloc>
       <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
@@ -382,8 +382,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>1</nr>
-      <xloc>320</xloc>
-      <yloc>160</yloc>
+      <xloc>704</xloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -392,7 +392,7 @@
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, (SELECT COUNT(*) FROM staging_vocabulary.domain), 49 - (SELECT COUNT(*) FROM staging_vocabulary.domain) - 1, ((49 - (SELECT COUNT(*) FROM staging_vocabulary.domain) - 1)::float / 49) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', ${DOMAIN_WC}, (SELECT COUNT(*) FROM staging_vocabulary.domain), (SELECT COUNT(*) FROM staging_vocabulary.domain) - ${DOMAIN_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.domain) - ${DOMAIN_WC} + 1)::float / ${DOMAIN_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -401,8 +401,8 @@ VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, (SELECT COUNT(*) FROM staging_vocab
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>2</nr>
-      <xloc>480</xloc>
-      <yloc>160</yloc>
+      <xloc>128</xloc>
+      <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -411,7 +411,7 @@ VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, (SELECT COUNT(*) FROM staging_vocab
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, (SELECT COUNT(*) FROM staging_vocabulary.vocabulary), 75 - (SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - 1, ((75 - (SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - 1)::float / 75) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', ${VOCABULARY_WC}, (SELECT COUNT(*) FROM staging_vocabulary.vocabulary), (SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - ${VOCABULARY_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - ${VOCABULARY_WC} + 1)::float / ${VOCABULARY_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -420,8 +420,8 @@ VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, (SELECT COUNT(*) FROM staging_v
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>3</nr>
-      <xloc>160</xloc>
-      <yloc>320</yloc>
+      <xloc>448</xloc>
+      <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -430,7 +430,7 @@ VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, (SELECT COUNT(*) FROM staging_v
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, (SELECT COUNT(*) FROM staging_vocabulary.concept_class), 434 - (SELECT COUNT(*) FROM staging_vocabulary.concept_class) - 1, ((434 - (SELECT COUNT(*) FROM staging_vocabulary.concept_class) - 1)::float / 434) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', ${CONCEPT_CLASS_WC}, (SELECT COUNT(*) FROM staging_vocabulary.concept_class), (SELECT COUNT(*) FROM staging_vocabulary.concept_class) - ${CONCEPT_CLASS_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.concept_class) - ${CONCEPT_CLASS_WC} + 1)::float / ${CONCEPT_CLASS_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -439,8 +439,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, (SELECT COUNT(*) FROM stagi
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>4</nr>
-      <xloc>352</xloc>
-      <yloc>320</yloc>
+      <xloc>704</xloc>
+      <yloc>560</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -449,7 +449,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, (SELECT COUNT(*) FROM stagi
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, (SELECT COUNT(*) FROM staging_vocabulary.relationship), 723 - (SELECT COUNT(*) FROM staging_vocabulary.relationship) - 1, ((723 - (SELECT COUNT(*) FROM staging_vocabulary.relationship) - 1)::float / 723) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', ${RELATIONSHIP_WC}, (SELECT COUNT(*) FROM staging_vocabulary.relationship), (SELECT COUNT(*) FROM staging_vocabulary.relationship) - ${RELATIONSHIP_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.relationship) - ${RELATIONSHIP_WC} + 1)::float / ${RELATIONSHIP_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -458,8 +458,8 @@ VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, (SELECT COUNT(*) FROM stagin
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>5</nr>
-      <xloc>560</xloc>
-      <yloc>320</yloc>
+      <xloc>128</xloc>
+      <yloc>688</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -468,7 +468,7 @@ VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, (SELECT COUNT(*) FROM stagin
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, (SELECT COUNT(*) FROM staging_vocabulary.drug_strength), 3020775 - (SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - 1, ((3020775 - (SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - 1)::float / 3020775) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', ${DRUG_STRENGTH_WC}, (SELECT COUNT(*) FROM staging_vocabulary.drug_strength), (SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - ${DRUG_STRENGTH_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - ${DRUG_STRENGTH_WC} + 1)::float / ${DRUG_STRENGTH_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -477,8 +477,8 @@ VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, (SELECT COUNT(*) FROM s
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>6</nr>
-      <xloc>160</xloc>
-      <yloc>464</yloc>
+      <xloc>448</xloc>
+      <yloc>688</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -487,7 +487,7 @@ VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, (SELECT COUNT(*) FROM s
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym), 3741399 - (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - 1, ((3741399 - (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - 1)::float / 3741399) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', ${CONCEPT_SYNONYM_WC}, (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym), (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - ${CONCEPT_SYNONYM_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - ${CONCEPT_SYNONYM_WC} + 1)::float / ${CONCEPT_SYNONYM_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -496,8 +496,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, (SELECT COUNT(*) FROM
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>7</nr>
-      <xloc>352</xloc>
-      <yloc>464</yloc>
+      <xloc>704</xloc>
+      <yloc>688</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -506,7 +506,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, (SELECT COUNT(*) FROM
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship), 42809727 - (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - 1, ((42809727 - (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - 1)::float / 42809727) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', ${CONCEPT_RELATIONSHIP_WC}, (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship), (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - ${CONCEPT_RELATIONSHIP_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - ${CONCEPT_RELATIONSHIP_WC} + 1)::float / ${CONCEPT_RELATIONSHIP_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -515,8 +515,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, (SELECT COUNT(*
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>8</nr>
-      <xloc>560</xloc>
-      <yloc>464</yloc>
+      <xloc>128</xloc>
+      <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -525,13 +525,13 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, (SELECT COUNT(*
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_ANCESTOR.csv', 85330260, 
+VALUES ('${LOG_FILENAME}', 'CONCEPT_ANCESTOR.csv', ${CONCEPT_ANCESTOR_WC}, 
 (SELECT COUNT(*) 
 FROM staging_vocabulary.concept_ancestor), 
-85330260 - (SELECT COUNT(*) 
-				FROM staging_vocabulary.concept_ancestor) - 1, 
-((85330260 - (SELECT COUNT(*) 
-				FROM staging_vocabulary.concept_ancestor) - 1)::float / 85330260) * 100);</sql>
+(SELECT COUNT(*) 
+FROM staging_vocabulary.concept_ancestor) - ${CONCEPT_ANCESTOR_WC} + 1, 
+(((SELECT COUNT(*) 
+FROM staging_vocabulary.concept_ancestor) - ${CONCEPT_ANCESTOR_WC} + 1)::float / ${CONCEPT_ANCESTOR_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -540,8 +540,8 @@ FROM staging_vocabulary.concept_ancestor),
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>9</nr>
-      <xloc>160</xloc>
-      <yloc>624</yloc>
+      <xloc>448</xloc>
+      <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -550,7 +550,7 @@ FROM staging_vocabulary.concept_ancestor),
       <type>SQL</type>
       <attributes/>
       <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
-VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, (SELECT COUNT(*) FROM staging_vocabulary.concept), 7198511 - (SELECT COUNT(*) FROM staging_vocabulary.concept) - 1, ((7198511 - (SELECT COUNT(*) FROM staging_vocabulary.concept) - 1)::float / 7198511) * 100);</sql>
+VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM staging_vocabulary.concept), (SELECT COUNT(*) FROM staging_vocabulary.concept) - ${CONCEPT_WC} + 1, (((SELECT COUNT(*) FROM staging_vocabulary.concept) - ${CONCEPT_WC} + 1)::float / ${CONCEPT_WC}) * 100);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -559,8 +559,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, (SELECT COUNT(*) FROM staging
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>10</nr>
-      <xloc>352</xloc>
-      <yloc>624</yloc>
+      <xloc>704</xloc>
+      <yloc>816</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -681,8 +681,233 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, (SELECT COUNT(*) FROM staging
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>496</xloc>
+      <xloc>448</xloc>
       <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set DOMAIN WC</name>
+      <description>Set DOMAIN_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/DOMAIN.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>11</nr>
+      <xloc>704</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set VOCABULARY WC</name>
+      <description>Set VOCABULARY_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/VOCABULARY.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>12</nr>
+      <xloc>128</xloc>
+      <yloc>192</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set CONCEPT_CLASS WC</name>
+      <description>Set CONCEPT_CLASS_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/CONCEPT_CLASS.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>13</nr>
+      <xloc>448</xloc>
+      <yloc>192</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set RELATIONSHIP WC</name>
+      <description>Set RELATIONSHIP_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/RELATIONSHIP.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>14</nr>
+      <xloc>704</xloc>
+      <yloc>192</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set DRUG_STRENGTH WC</name>
+      <description>Set DRUG_STRENGTH_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/DRUG_STRENGTH.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>15</nr>
+      <xloc>128</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set CONCEPT_SYNONYM WC</name>
+      <description>Set CONCEPT_SYNONYM_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>16</nr>
+      <xloc>448</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set CONCEPT_RELATIONSHIP WC</name>
+      <description>Set CONCEPT_RELATIONSHIP_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>17</nr>
+      <xloc>704</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set CONCEPT_ANCESTOR WC</name>
+      <description>Set CONCEPT_ANCESTOR_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>18</nr>
+      <xloc>128</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set CONCEPT WC</name>
+      <description>Set CONCEPT_WC variable from wc -l</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>wc -l ${OMOP_FILE_DIR}/CONCEPT.csv | awk '{print $1}'</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>19</nr>
+      <xloc>448</xloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -779,12 +1004,93 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, (SELECT COUNT(*) FROM staging
     </hop>
     <hop>
       <from>Set job variables</from>
-      <to>Create QA table</to>
+      <to>Set DOMAIN WC</to>
       <from_nr>0</from_nr>
+      <to_nr>11</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set DOMAIN WC</from>
+      <to>Set VOCABULARY WC</to>
+      <from_nr>11</from_nr>
+      <to_nr>12</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set VOCABULARY WC</from>
+      <to>Set CONCEPT_CLASS WC</to>
+      <from_nr>12</from_nr>
+      <to_nr>13</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set CONCEPT_CLASS WC</from>
+      <to>Set RELATIONSHIP WC</to>
+      <from_nr>13</from_nr>
+      <to_nr>14</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set RELATIONSHIP WC</from>
+      <to>Set DRUG_STRENGTH WC</to>
+      <from_nr>14</from_nr>
+      <to_nr>15</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set DRUG_STRENGTH WC</from>
+      <to>Set CONCEPT_SYNONYM WC</to>
+      <from_nr>15</from_nr>
+      <to_nr>16</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set CONCEPT_SYNONYM WC</from>
+      <to>Set CONCEPT_RELATIONSHIP WC</to>
+      <from_nr>16</from_nr>
+      <to_nr>17</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set CONCEPT_RELATIONSHIP WC</from>
+      <to>Set CONCEPT_ANCESTOR WC</to>
+      <from_nr>17</from_nr>
+      <to_nr>18</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set CONCEPT_ANCESTOR WC</from>
+      <to>Set CONCEPT WC</to>
+      <from_nr>18</from_nr>
+      <to_nr>19</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set CONCEPT WC</from>
+      <to>Create QA table</to>
+      <from_nr>19</from_nr>
       <to_nr>1</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
