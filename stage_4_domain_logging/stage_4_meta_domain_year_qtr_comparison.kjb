@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>stage_4_meta_domain_year_qtr_comparison</name>
+  <description>Minimal wrapper job to run domain/year/quarter comparison transformations.
+This job was added to avoid a NullPointerException when called from `meta.kjb` if the file
+was missing. It executes `stage_4_select_count_domains.ktr` in the same directory.
+  </description>
+  <directory>/</directory>
+  <parameters/>
+  <connections/>
+  <entries>
+    <entry>
+      <name>Start</name>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>48</xloc>
+      <yloc>72</yloc>
+    </entry>
+
+    <entry>
+      <name>stage_4_select_count_domains.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <filename>${Internal.Entry.Current.Directory}/stage_4_select_count_domains.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <loglevel>Basic</loglevel>
+      <wait_until_finished>Y</wait_until_finished>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>256</xloc>
+      <yloc>72</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Start</from>
+      <to>stage_4_select_count_domains.ktr</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+  </hops>
+</job>
