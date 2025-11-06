@@ -9,11 +9,18 @@
     <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-    <parameter>
-      <name>LOAD_NEW_YEAR</name>
-      <default_value>2025</default_value>
-      <description>Year to load</description>
-    
+    </parameters>
+    <log>
+      <trans-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <size_limit_lines/>
+        <interval/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
           <name>ID_BATCH</name>
         </field>
         <field>
@@ -678,7 +685,7 @@ S</note>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
     <sql>set search_path=${DATABASE_SCHEMA};
@@ -689,7 +696,7 @@ DECLARE
     rowcount INTEGER;
 BEGIN
     FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -736,9 +743,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>368</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -765,7 +772,7 @@ DECLARE
     rowcount INTEGER;
 BEGIN
     FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -809,8 +816,8 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>528</yloc>
+      <xloc>128</xloc>
+      <yloc>141</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -838,7 +845,7 @@ DECLARE
     rowcount INTEGER;
 BEGIN
     FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -882,9 +889,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>560</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>250</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -900,7 +907,7 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
     <sql>set search_path=${DATABASE_SCHEMA};
@@ -910,8 +917,8 @@ DECLARE
     domain TEXT;
     rowcount INTEGER;
 BEGIN
-    FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  FOR rec IN 
+    SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -958,9 +965,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>528</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>359</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -986,8 +993,8 @@ DECLARE
     domain TEXT;
     rowcount INTEGER;
 BEGIN
-    FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  FOR rec IN 
+    SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -1032,9 +1039,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>640</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>468</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -1050,7 +1057,7 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
     <sql>set search_path=${DATABASE_SCHEMA};
@@ -1060,8 +1067,8 @@ DECLARE
     domain TEXT;
     rowcount INTEGER;
 BEGIN
-    FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  FOR rec IN 
+    SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -1108,9 +1115,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>768</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>577</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step>
@@ -1126,7 +1133,7 @@ END $$;</sql>
     </partitioning>
     <connection>${DATABASE_NAME}</connection>
     <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
     <sql>set search_path=${DATABASE_SCHEMA};
@@ -1136,8 +1143,8 @@ DECLARE
     domain TEXT;
     rowcount INTEGER;
 BEGIN
-    FOR rec IN 
-        SELECT * FROM z_qa_faers_wc_import_log WHERE yr = ${LOAD_NEW_YEAR} AND qtr = '${LOAD_NEW_QUARTER}'
+  FOR rec IN 
+    SELECT * FROM z_qa_faers_wc_import_log WHERE yr = right('${LOAD_NEW_YEAR}',2)::int AND qtr = substring('${LOAD_NEW_QUARTER}' from 2)::int
     LOOP
         -- Extract domain from the filename (first 4 letters, lowercase)
         domain := LOWER(LEFT(rec.filename, 4));
@@ -1184,9 +1191,9 @@ END $$;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>704</yloc>
-      <draw>N</draw>
+      <xloc>128</xloc>
+      <yloc>686</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
