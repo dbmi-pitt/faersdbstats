@@ -1651,7 +1651,7 @@ printf '\n' >> $log_location</script>
       <to>derive_standard_drug_outcome_count.sql</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1798,8 +1798,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>773</width>
-      <heigth>520</heigth>
+      <width>848</width>
+      <heigth>550</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1819,8 +1819,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <note>^creates standard_drug_outcome_count table</note>
       <xloc>32</xloc>
       <yloc>1360</yloc>
-      <width>320</width>
-      <heigth>27</heigth>
+      <width>336</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1840,8 +1840,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <note>^combined_drug_mapping</note>
       <xloc>117</xloc>
       <yloc>1107</yloc>
-      <width>189</width>
-      <heigth>27</heigth>
+      <width>198</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1861,8 +1861,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <note>wants to review</note>
       <xloc>304</xloc>
       <yloc>960</yloc>
-      <width>115</width>
-      <heigth>27</heigth>
+      <width>123</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1883,8 +1883,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
 </note>
       <xloc>160</xloc>
       <yloc>1024</yloc>
-      <width>285</width>
-      <heigth>44</heigth>
+      <width>301</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1904,8 +1904,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <note>bring in our new de-duplication method</note>
       <xloc>528</xloc>
       <yloc>1168</yloc>
-      <width>272</width>
-      <heigth>27</heigth>
+      <width>290</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1925,8 +1925,8 @@ if Java Null Pointer Error (and/or job 'job") restart spoon then rebuild failing
       <note>bring in xiaotong's ddi stats</note>
       <xloc>192</xloc>
       <yloc>1984</yloc>
-      <width>195</width>
-      <heigth>27</heigth>
+      <width>205</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
