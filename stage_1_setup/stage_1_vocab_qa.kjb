@@ -396,7 +396,7 @@ VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', ${DOMAIN_WC}, (SELECT COUNT(*) FROM sta
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
+      <sendOneStatement>T</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -910,6 +910,48 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Generate WC vars file</name>
+      <description>Create properties file with WC counts for all OMOP CSVs</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>props="${BASE_FILE_DIR}/data_new/vocab_wc.properties"; mkdir -p "$(dirname "$props")"; echo "DOMAIN_WC=$(wc -l ${OMOP_FILE_DIR}/DOMAIN.csv | awk '{print $1}')" > "$props"; echo "VOCABULARY_WC=$(wc -l ${OMOP_FILE_DIR}/VOCABULARY.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_CLASS_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_CLASS.csv | awk '{print $1}')" >> "$props"; echo "RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; echo "DRUG_STRENGTH_WC=$(wc -l ${OMOP_FILE_DIR}/DRUG_STRENGTH.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_SYNONYM_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_ANCESTOR_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT.csv | awk '{print $1}')" >> "$props";</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>21</nr>
+      <xloc>656</xloc>
+      <yloc>16</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Set wc variables</name>
+      <description>Load WC counts from properties into JVM variables</description>
+      <type>SET_VARIABLES</type>
+      <attributes/>
+      <replacevars>Y</replacevars>
+      <filename>${BASE_FILE_DIR}/data_new/vocab_wc.properties</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>22</nr>
+      <xloc>912</xloc>
+      <yloc>32</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -928,7 +970,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <to_nr>3</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Insert vocabulary QA</from>
@@ -1004,9 +1046,18 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
     </hop>
     <hop>
       <from>Set job variables</from>
-      <to>Set DOMAIN WC</to>
+      <to>Generate WC vars file</to>
       <from_nr>0</from_nr>
-      <to_nr>11</to_nr>
+      <to_nr>21</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Generate WC vars file</from>
+      <to>Set wc variables</to>
+      <from_nr>21</from_nr>
+      <to_nr>22</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
@@ -1017,7 +1068,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>11</from_nr>
       <to_nr>12</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1026,7 +1077,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>12</from_nr>
       <to_nr>13</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1035,7 +1086,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>13</from_nr>
       <to_nr>14</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1044,7 +1095,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>14</from_nr>
       <to_nr>15</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1053,7 +1104,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>15</from_nr>
       <to_nr>16</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1062,7 +1113,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>16</from_nr>
       <to_nr>17</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1071,7 +1122,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>17</from_nr>
       <to_nr>18</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1080,7 +1131,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>18</from_nr>
       <to_nr>19</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
@@ -1089,8 +1140,17 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <from_nr>19</from_nr>
       <to_nr>1</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set wc variables</from>
+      <to>Set DOMAIN WC</to>
+      <from_nr>22</from_nr>
+      <to_nr>11</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
