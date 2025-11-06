@@ -443,8 +443,8 @@ other domains (demo, drug, etc.) are hidden steps
 test w/ rpsr and then do others</note>
       <xloc>752</xloc>
       <yloc>32</yloc>
-      <width>344</width>
-      <heigth>95</heigth>
+      <width>363</width>
+      <heigth>100</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -580,8 +580,8 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>176</yloc>
+      <xloc>192</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -624,8 +624,8 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>256</yloc>
+      <xloc>128</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -712,7 +712,7 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>208</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -800,8 +800,8 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>576</yloc>
+      <xloc>128</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -844,8 +844,8 @@ WHERE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>656</yloc>
+      <xloc>112</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
