@@ -962,11 +962,13 @@ to see if qtr of data's downloaded first
 
 
 
-</note>
+for new qtr's omop_vocabl_load.ktr...
+(near end of stage_1)
+...is not currently run by default</note>
       <xloc>16</xloc>
       <yloc>720</yloc>
       <width>282</width>
-      <heigth>172</heigth>
+      <heigth>208</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
