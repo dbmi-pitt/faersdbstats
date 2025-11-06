@@ -915,6 +915,30 @@ chmod 774 ${BASE_FILE_DIR}/logs/${LOG_FILENAME}</script>
       <attributes_kjc/>
     </entry>
     <entry>
+      <name>CAN_CREATE_SCHEMAS=1</name>
+      <description>Only run schema creation when explicitly allowed</description>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${CAN_CREATE_SCHEMAS}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
+      <yloc>864</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
       <name>Log Drop All Tables</name>
       <description/>
       <type>SHELL</type>
@@ -997,7 +1021,7 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
+      <xloc>960</xloc>
       <yloc>1968</yloc>
       <attributes_kjc/>
     </entry>
@@ -1301,28 +1325,21 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>752</xloc>
+      <xloc>784</xloc>
       <yloc>1840</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
       <name>entire_database_ddl.sql</name>
-      <description/>
-      <type>SHELL</type>
+      <description>Create schemas and tables using DDL file (variable substitution enabled)</description>
+      <type>SQL</type>
       <attributes/>
-      <filename>${Internal.Entry.Current.Directory}/entire_database_ddl.sql</filename>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
-      <loglevel>Basic</loglevel>
+      <sql/>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>T</sqlfromfile>
+      <sqlfilename>${Internal.Entry.Current.Directory}/entire_database_ddl.sql</sqlfilename>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1356,7 +1373,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     </entry>
     <entry>
       <name>download_faers_fda_data new qtr</name>
-      <description/>
+      <description>Download FAERS FDA data for the current/new quarter using the fix script.</description>
       <type>SHELL</type>
       <attributes/>
       <filename>${BASE_FILE_DIR}/faersdbstats/stage_1_setup/data_from_fda_scripts/download_faers_fda_data_fix.sh</filename>
@@ -1381,7 +1398,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     </entry>
     <entry>
       <name>omop_vocab_umls_auth.sh</name>
-      <description/>
+      <description>Automates UMLS-authenticated OMOP vocabulary fetch/setup (marked untested).</description>
       <type>SHELL</type>
       <attributes/>
       <filename>${Internal.Entry.Current.Directory}/omop_vocab_umls_auth.sh</filename>
@@ -1406,20 +1423,57 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     </entry>
     <entry>
       <name>entire_database_extracted_add_column_comments.sql</name>
-      <description/>
+      <description>Adds column comments across target schema; runs SQL from file with variable substitution.</description>
       <type>SQL</type>
       <attributes/>
       <sql/>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>T</sqlfromfile>
       <sqlfilename>${Internal.Entry.Current.Directory}/entire_database_extracted_add_column_comments.sql</sqlfilename>
-      <sendOneStatement>T</sendOneStatement>
+      <sendOneStatement>F</sendOneStatement>
       <connection>${DATABASE_NAME}</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1088</xloc>
       <yloc>528</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>stage_1_vocab_qa.kjb</name>
+      <description/>
+      <type>JOB</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/stage_1_vocab_qa.kjb</filename>
+      <jobname/>
+      <directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>1968</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1447,7 +1501,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>Set AWS Credentials</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -1528,8 +1582,35 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <to>create_schemas.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>log_init.sh</from>
+      <to>CAN_CREATE_SCHEMAS=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>CAN_CREATE_SCHEMAS=1</from>
+      <to>create_schemas.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>CAN_CREATE_SCHEMAS=1</from>
+      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -1677,15 +1758,6 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>omop_vocab_load</from>
-      <to>Log STAGE 1 COMPLETE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Log FDA Data Upload to S3 Success</from>
       <to>Log STAGE 1 COMPLETE</to>
       <from_nr>0</from_nr>
@@ -1766,6 +1838,24 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>omop_vocab_load</from>
+      <to>stage_1_vocab_qa.kjb</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_1_vocab_qa.kjb</from>
+      <to>Log STAGE 1 COMPLETE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1797,8 +1887,8 @@ Un-sure if OMOP staging_vocabulary schema will import
 </note>
       <xloc>0</xloc>
       <yloc>0</yloc>
-      <width>1009</width>
-      <heigth>452</heigth>
+      <width>1100</width>
+      <heigth>478</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1820,8 +1910,8 @@ Un-sure if OMOP staging_vocabulary schema will import
 if one will drop all and load all "fresh"</note>
       <xloc>768</xloc>
       <yloc>832</yloc>
-      <width>343</width>
-      <heigth>61</heigth>
+      <width>365</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1842,8 +1932,8 @@ if one will drop all and load all "fresh"</note>
 this table structure allows for stage 4 sqls to run w/o error</note>
       <xloc>288</xloc>
       <yloc>1728</yloc>
-      <width>404</width>
-      <heigth>44</heigth>
+      <width>432</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1864,8 +1954,8 @@ this table structure allows for stage 4 sqls to run w/o error</note>
 see stage_1_setup/data_from_fda/readme.md</note>
       <xloc>0</xloc>
       <yloc>1248</yloc>
-      <width>324</width>
-      <heigth>44</heigth>
+      <width>339</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1888,8 +1978,8 @@ resume with...
 run from country_codes_job step</note>
       <xloc>128</xloc>
       <yloc>1392</yloc>
-      <width>232</width>
-      <heigth>78</heigth>
+      <width>244</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1909,8 +1999,8 @@ run from country_codes_job step</note>
       <note>skipped for nov 2024 load</note>
       <xloc>16</xloc>
       <yloc>1584</yloc>
-      <width>182</width>
-      <heigth>27</heigth>
+      <width>194</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1938,8 +2028,8 @@ etc.
 </note>
       <xloc>592</xloc>
       <yloc>1232</yloc>
-      <width>485</width>
-      <heigth>163</heigth>
+      <width>511</width>
+      <heigth>172</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1961,8 +2051,8 @@ needs to be moved to
 before orange book job</note>
       <xloc>256</xloc>
       <yloc>1568</yloc>
-      <width>169</width>
-      <heigth>61</heigth>
+      <width>177</width>
+      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1985,8 +2075,8 @@ before orange book job</note>
 </note>
       <xloc>720</xloc>
       <yloc>512</yloc>
-      <width>160</width>
-      <heigth>78</heigth>
+      <width>194</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -2053,8 +2143,29 @@ TGT is valid for 8 hours, and can be reused to generate new STs
 You used this flow manually to test your access before using cpt.sh</note>
       <xloc>32</xloc>
       <yloc>1808</yloc>
-      <width>664</width>
-      <heigth>826</heigth>
+      <width>707</width>
+      <heigth>874</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>consider reloading / running omop_vocab_load.kjb</note>
+      <xloc>768</xloc>
+      <yloc>1440</yloc>
+      <width>365</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
