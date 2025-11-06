@@ -366,11 +366,14 @@
       <type>SQL</type>
       <attributes/>
       <sql>CREATE TABLE IF NOT EXISTS staging_vocabulary.z_qa_vocab_wc_import_log (
-    log_filename varchar(255) NOT NULL,
-    filename varchar(255) NOT NULL,
-    wc_l_count int4 NOT NULL,
-    loaded_at timestamp DEFAULT CURRENT_TIMESTAMP NULL
-  );</sql>
+	log_filename varchar(255) NOT NULL,
+	filename varchar(255) NOT NULL,
+	wc_l_count int4 NOT NULL,
+	loaded_at timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+	select_count_on_domain int4 NULL,
+	select_count_diff int4 NULL,
+	select_count_diff_pct float8 NULL
+);</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -388,9 +391,9 @@
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, (SELECT COUNT(*) FROM staging_vocabulary.domain), 49 - (SELECT COUNT(*) FROM staging_vocabulary.domain) - 1, ((49 - (SELECT COUNT(*) FROM staging_vocabulary.domain) - 1)::float / 49) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -407,9 +410,9 @@ VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', 49, CURRENT_TIMESTAMP);</sql>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, (SELECT COUNT(*) FROM staging_vocabulary.vocabulary), 75 - (SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - 1, ((75 - (SELECT COUNT(*) FROM staging_vocabulary.vocabulary) - 1)::float / 75) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -426,9 +429,9 @@ VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', 75, CURRENT_TIMESTAMP);</sql>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, (SELECT COUNT(*) FROM staging_vocabulary.concept_class), 434 - (SELECT COUNT(*) FROM staging_vocabulary.concept_class) - 1, ((434 - (SELECT COUNT(*) FROM staging_vocabulary.concept_class) - 1)::float / 434) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -445,9 +448,9 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', 434, CURRENT_TIMESTAMP);</sql>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, (SELECT COUNT(*) FROM staging_vocabulary.relationship), 723 - (SELECT COUNT(*) FROM staging_vocabulary.relationship) - 1, ((723 - (SELECT COUNT(*) FROM staging_vocabulary.relationship) - 1)::float / 723) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -455,7 +458,7 @@ VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, CURRENT_TIMESTAMP);</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>5</nr>
-      <xloc>480</xloc>
+      <xloc>560</xloc>
       <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
@@ -464,9 +467,9 @@ VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', 723, CURRENT_TIMESTAMP);</sql>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, (SELECT COUNT(*) FROM staging_vocabulary.drug_strength), 3020775 - (SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - 1, ((3020775 - (SELECT COUNT(*) FROM staging_vocabulary.drug_strength) - 1)::float / 3020775) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -483,9 +486,9 @@ VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', 3020775, CURRENT_TIMESTAMP);</sq
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym), 3741399 - (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - 1, ((3741399 - (SELECT COUNT(*) FROM staging_vocabulary.concept_synonym) - 1)::float / 3741399) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -502,9 +505,9 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', 3741399, CURRENT_TIMESTAMP);</
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship), 42809727 - (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - 1, ((42809727 - (SELECT COUNT(*) FROM staging_vocabulary.concept_relationship) - 1)::float / 42809727) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -521,9 +524,15 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', 42809727, CURRENT_TIMESTA
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'CONCEPT_ANCESTOR.csv', 85330260, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'CONCEPT_ANCESTOR.csv', 85330260, 
+(SELECT COUNT(*) 
+FROM staging_vocabulary.concept_ancestor), 
+85330260 - (SELECT COUNT(*) 
+				FROM staging_vocabulary.concept_ancestor) - 1, 
+((85330260 - (SELECT COUNT(*) 
+				FROM staging_vocabulary.concept_ancestor) - 1)::float / 85330260) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -540,9 +549,9 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_ANCESTOR.csv', 85330260, CURRENT_TIMESTAMP);
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>INSERT INTO staging_vocabulary.z_qa_faers_wc_import_log (log_filename, filename, wc_l_count, loaded_at)
-VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, CURRENT_TIMESTAMP);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <sql>INSERT INTO staging_vocabulary.z_qa_vocab_wc_import_log (log_filename, filename, wc_l_count, select_count_on_domain, select_count_diff, select_count_diff_pct)
+VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, (SELECT COUNT(*) FROM staging_vocabulary.concept), 7198511 - (SELECT COUNT(*) FROM staging_vocabulary.concept) - 1, ((7198511 - (SELECT COUNT(*) FROM staging_vocabulary.concept) - 1)::float / 7198511) * 100);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -755,7 +764,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', 7198511, CURRENT_TIMESTAMP);</sql>
       <to>Insert concept QA</to>
       <from_nr>9</from_nr>
       <to_nr>10</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
