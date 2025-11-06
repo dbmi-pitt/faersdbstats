@@ -1226,7 +1226,7 @@ echo "Will attempt to download LOAD_NEW_QUARTER's data" >> $log_location</script
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>add domain tables primaryid NOT NULL constraints if not exists</name>
+      <name>add faers domain tables primaryid NOT NULL constraints if not exists</name>
       <description/>
       <type>SQL</type>
       <attributes/>
@@ -1337,6 +1337,118 @@ $$;</sql>
       <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>add laers domain tables isr NOT NULL constraints if not exists</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>-- Enforce non-null isr in legacy domain tables, idempotently
+DO $$
+BEGIN
+-- demo_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'demo_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'demo_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT demo_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'demo_legacy');
+END IF;
+
+-- drug_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'drug_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'drug_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT drug_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'drug_legacy');
+END IF;
+
+-- indi_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'indi_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'indi_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT indi_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'indi_legacy');
+END IF;
+
+-- outc_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'outc_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'outc_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT outc_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'outc_legacy');
+END IF;
+
+-- reac_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'reac_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'reac_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT reac_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'reac_legacy');
+END IF;
+
+-- rpsr_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'rpsr_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'rpsr_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT rpsr_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'rpsr_legacy');
+END IF;
+
+-- ther_legacy
+IF NOT EXISTS (
+SELECT 1
+FROM pg_constraint c
+JOIN pg_class t ON t.oid = c.conrelid
+JOIN pg_namespace n ON n.oid = t.relnamespace
+WHERE c.conname = 'ther_legacy_isr_not_null'
+AND n.nspname = '${DATABASE_SCHEMA}'
+AND t.relname = 'ther_legacy'
+) THEN
+EXECUTE format('ALTER TABLE %I.%I ADD CONSTRAINT ther_legacy_isr_not_null CHECK (isr IS NOT NULL)', '${DATABASE_SCHEMA}', 'ther_legacy');
+END IF;
+END;
+$$;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>768</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1440,7 +1552,7 @@ $$;</sql>
     </hop>
     <hop>
       <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>add domain tables primaryid NOT NULL constraints if not exists</to>
+      <to>add faers domain tables primaryid NOT NULL constraints if not exists</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1448,11 +1560,20 @@ $$;</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>add domain tables primaryid NOT NULL constraints if not exists</from>
-      <to>Log LOAD_ALL_TIME=0 path taken</to>
+      <from>add faers domain tables primaryid NOT NULL constraints if not exists</from>
+      <to>add laers domain tables isr NOT NULL constraints if not exists</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>add laers domain tables isr NOT NULL constraints if not exists</from>
+      <to>Log LOAD_ALL_TIME=0 path taken</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
