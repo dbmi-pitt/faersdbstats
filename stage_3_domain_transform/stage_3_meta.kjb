@@ -12,57 +12,6 @@
   <modified_date>2022/09/08 14:29:12.733</modified_date>
   <parameters>
     </parameters>
-  <connection>
-    <name>${DATABASE_NAME}</name>
-    <server>${DATABASE_HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${DATABASE_NAME}</database>
-    <port>${DATABASE_PORT}</port>
-    <username>${DATABASE_USERNAME}</username>
-    <password>${DATABASE_PASSWORD}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${DATABASE_PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -356,7 +305,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
+      <xloc>192</xloc>
       <yloc>96</yloc>
       <attributes_kjc/>
     </entry>
@@ -449,22 +398,27 @@
           <variable_value>${CEM_ORANGE_BOOK_DOWNLOAD_FILENAME}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>DELETE_CURRENT_QTR</variable_name>
+          <variable_value>${DELETE_CURRENT_QTR}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
+      <xloc>688</xloc>
       <yloc>96</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>SUCCESS IF LOAD_ALL_TIME=1</name>
+      <name>SUCCESS IF DELETE_CURRENT_QTR=1</name>
       <description/>
       <type>SIMPLE_EVAL</type>
       <attributes/>
       <valuetype>variable</valuetype>
       <fieldname/>
-      <variablename>${LOAD_ALL_TIME}</variablename>
+      <variablename>${DELETE_CURRENT_QTR}</variablename>
       <fieldtype>string</fieldtype>
       <mask/>
       <comparevalue>1</comparevalue>
@@ -477,86 +431,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>176</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>stage_3_domain_transformation.ktr</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_3_faers_domain_transform.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>416</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>stage_3_laers_domain_tranform.ktr</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/stage_3_laers_domain_transform.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>189</xloc>
-      <yloc>293</yloc>
+      <xloc>688</xloc>
+      <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -594,8 +470,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
-      <yloc>176</yloc>
+      <xloc>688</xloc>
+      <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -626,67 +502,8 @@ printf '\n\n' >> $log_location</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>752</xloc>
-      <yloc>640</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>laers put yr_var and qtr_var into yr and qtr</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql>update ${DATABASE_SCHEMA}.demo_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.demo_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.drug_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.drug_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.indi_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.indi_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.outc_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.outc_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.reac_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.reac_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.rpsr_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.rpsr_legacy
-	set yr = yr_var::int;
-
-update ${DATABASE_SCHEMA}.ther_legacy
-	set qtr = qtr_var::int;
-
-update ${DATABASE_SCHEMA}.ther_legacy
-	set yr = yr_var::int;
-</sql>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>544</yloc>
+      <xloc>1184</xloc>
+      <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -724,47 +541,8 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
-      <yloc>96</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${FAERSDBSTATS_REPO_LOCATION}/put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>752</xloc>
-      <yloc>544</yloc>
+      <xloc>192</xloc>
+      <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -802,8 +580,8 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
-      <yloc>640</yloc>
+      <xloc>1184</xloc>
+      <yloc>432</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -841,8 +619,8 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>991</xloc>
-      <yloc>656</yloc>
+      <xloc>688</xloc>
+      <yloc>672</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -857,30 +635,12 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
-      <to>stage_3_laers_domain_tranform.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_3_laers_domain_tranform.ktr</from>
-      <to>stage_3_domain_transformation.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <from>SUCCESS IF DELETE_CURRENT_QTR=1</from>
       <to>stage_3_faers_domain_transform_delete_new_qtr_data.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -894,7 +654,7 @@ update ${DATABASE_SCHEMA}.ther_legacy
     </hop>
     <hop>
       <from>set job variables</from>
-      <to>SUCCESS IF LOAD_ALL_TIME=1</to>
+      <to>SUCCESS IF DELETE_CURRENT_QTR=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -902,39 +662,12 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>SUCCESS IF LOAD_ALL_TIME=1</from>
+      <from>SUCCESS IF DELETE_CURRENT_QTR=1</from>
       <to>stage_3_faers_domain_transform_new_qtr.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</from>
-      <to>Log STAGE 3 COMPLETE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_3_domain_transformation.ktr</from>
-      <to>laers put yr_var and qtr_var into yr and qtr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>laers put yr_var and qtr_var into yr and qtr</from>
-      <to>put_yr_var_and_qtr_var_into_yr_and_qtr.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -970,8 +703,8 @@ update ${DATABASE_SCHEMA}.ther_legacy
       <note>This job chooses the correct transforms based on your LOAD_ALL_TIME variable</note>
       <xloc>48</xloc>
       <yloc>32</yloc>
-      <width>544</width>
-      <heigth>27</heigth>
+      <width>574</width>
+      <heigth>28</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -992,45 +725,10 @@ update ${DATABASE_SCHEMA}.ther_legacy
 ${BASE_FILE_DIR}/data_from_s3/faers/${domain}/${domain}_new_qtr.txt
 
 it does not truncate domain tables</note>
-      <xloc>1056</xloc>
-      <yloc>240</yloc>
-      <width>503</width>
-      <heigth>78</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>these 2 transforms load from 
-${BASE_FILE_DIR}/data_from_s3/faers/${domain}/${domain}.txt
-
-
-
-
-
-
-
-
-
-
-
-they truncate domain tables
-you must disable every hop for 1 domain for it to not truncate that domain</note>
-      <xloc>48</xloc>
-      <yloc>256</yloc>
-      <width>506</width>
-      <heigth>265</heigth>
+      <xloc>368</xloc>
+      <yloc>496</yloc>
+      <width>522</width>
+      <heigth>82</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -1049,10 +747,10 @@ you must disable every hop for 1 domain for it to not truncate that domain</note
     <notepad>
       <note>this exists if your new qtr data is loaded multiple times
 (note: no truncation on new qtr use case)</note>
-      <xloc>640</xloc>
-      <yloc>48</yloc>
-      <width>375</width>
-      <heigth>44</heigth>
+      <xloc>32</xloc>
+      <yloc>368</yloc>
+      <width>397</width>
+      <heigth>46</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
