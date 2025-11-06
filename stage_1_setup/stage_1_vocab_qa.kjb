@@ -383,7 +383,7 @@
       <draw>Y</draw>
       <nr>1</nr>
       <xloc>704</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -402,7 +402,7 @@ VALUES ('${LOG_FILENAME}', 'DOMAIN.csv', ${DOMAIN_WC}, (SELECT COUNT(*) FROM sta
       <draw>Y</draw>
       <nr>2</nr>
       <xloc>128</xloc>
-      <yloc>560</yloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -421,7 +421,7 @@ VALUES ('${LOG_FILENAME}', 'VOCABULARY.csv', ${VOCABULARY_WC}, (SELECT COUNT(*) 
       <draw>Y</draw>
       <nr>3</nr>
       <xloc>448</xloc>
-      <yloc>560</yloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -440,7 +440,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_CLASS.csv', ${CONCEPT_CLASS_WC}, (SELECT COU
       <draw>Y</draw>
       <nr>4</nr>
       <xloc>704</xloc>
-      <yloc>560</yloc>
+      <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -459,7 +459,7 @@ VALUES ('${LOG_FILENAME}', 'RELATIONSHIP.csv', ${RELATIONSHIP_WC}, (SELECT COUNT
       <draw>Y</draw>
       <nr>5</nr>
       <xloc>128</xloc>
-      <yloc>688</yloc>
+      <yloc>784</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -478,7 +478,7 @@ VALUES ('${LOG_FILENAME}', 'DRUG_STRENGTH.csv', ${DRUG_STRENGTH_WC}, (SELECT COU
       <draw>Y</draw>
       <nr>6</nr>
       <xloc>448</xloc>
-      <yloc>688</yloc>
+      <yloc>784</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -497,7 +497,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_SYNONYM.csv', ${CONCEPT_SYNONYM_WC}, (SELECT
       <draw>Y</draw>
       <nr>7</nr>
       <xloc>704</xloc>
-      <yloc>688</yloc>
+      <yloc>784</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -516,7 +516,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT_RELATIONSHIP.csv', ${CONCEPT_RELATIONSHIP_WC
       <draw>Y</draw>
       <nr>8</nr>
       <xloc>128</xloc>
-      <yloc>816</yloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -541,7 +541,7 @@ FROM staging_vocabulary.concept_ancestor) - ${CONCEPT_ANCESTOR_WC} + 1)::float /
       <draw>Y</draw>
       <nr>9</nr>
       <xloc>448</xloc>
-      <yloc>816</yloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -560,7 +560,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>10</nr>
       <xloc>704</xloc>
-      <yloc>816</yloc>
+      <yloc>912</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -706,8 +706,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>11</nr>
-      <xloc>704</xloc>
-      <yloc>80</yloc>
+      <xloc>448</xloc>
+      <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -732,7 +732,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>12</nr>
       <xloc>128</xloc>
-      <yloc>192</yloc>
+      <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -757,7 +757,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>13</nr>
       <xloc>448</xloc>
-      <yloc>192</yloc>
+      <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -782,7 +782,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>14</nr>
       <xloc>704</xloc>
-      <yloc>192</yloc>
+      <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -807,7 +807,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>15</nr>
       <xloc>128</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -832,7 +832,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>16</nr>
       <xloc>448</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -857,7 +857,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>17</nr>
       <xloc>704</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -882,7 +882,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>18</nr>
       <xloc>128</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -907,7 +907,7 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <draw>Y</draw>
       <nr>19</nr>
       <xloc>448</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -926,13 +926,23 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>props="${BASE_FILE_DIR}/data_new/vocab_wc.properties"; mkdir -p "$(dirname "$props")"; echo "DOMAIN_WC=$(wc -l ${OMOP_FILE_DIR}/DOMAIN.csv | awk '{print $1}')" > "$props"; echo "VOCABULARY_WC=$(wc -l ${OMOP_FILE_DIR}/VOCABULARY.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_CLASS_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_CLASS.csv | awk '{print $1}')" >> "$props"; echo "RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; echo "DRUG_STRENGTH_WC=$(wc -l ${OMOP_FILE_DIR}/DRUG_STRENGTH.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_SYNONYM_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_ANCESTOR_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv | awk '{print $1}')" >> "$props"; echo "CONCEPT_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT.csv | awk '{print $1}')" >> "$props";</script>
+      <script>props="${BASE_FILE_DIR}/data_new/vocab_wc.properties"; 
+mkdir -p "$(dirname "$props")"; 
+echo "DOMAIN_WC=$(wc -l ${OMOP_FILE_DIR}/DOMAIN.csv | awk '{print $1}')" > "$props"; 
+echo "VOCABULARY_WC=$(wc -l ${OMOP_FILE_DIR}/VOCABULARY.csv | awk '{print $1}')" >> "$props"; 
+echo "CONCEPT_CLASS_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_CLASS.csv | awk '{print $1}')" >> "$props"; 
+echo "RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; 
+echo "DRUG_STRENGTH_WC=$(wc -l ${OMOP_FILE_DIR}/DRUG_STRENGTH.csv | awk '{print $1}')" >> "$props"; 
+echo "CONCEPT_SYNONYM_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv | awk '{print $1}')" >> "$props"; 
+echo "CONCEPT_RELATIONSHIP_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv | awk '{print $1}')" >> "$props"; 
+echo "CONCEPT_ANCESTOR_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT_ANCESTOR.csv | awk '{print $1}')" >> "$props"; 
+echo "CONCEPT_WC=$(wc -l ${OMOP_FILE_DIR}/CONCEPT.csv | awk '{print $1}')" >> "$props";</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>21</nr>
-      <xloc>656</xloc>
-      <yloc>16</yloc>
+      <xloc>720</xloc>
+      <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -948,8 +958,8 @@ VALUES ('${LOG_FILENAME}', 'CONCEPT.csv', ${CONCEPT_WC}, (SELECT COUNT(*) FROM s
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>22</nr>
-      <xloc>912</xloc>
-      <yloc>32</yloc>
+      <xloc>128</xloc>
+      <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
