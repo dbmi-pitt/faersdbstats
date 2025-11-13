@@ -424,7 +424,7 @@ aws configure list</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>304</xloc>
-      <yloc>1616</yloc>
+      <yloc>1536</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1515,35 +1515,8 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>orange_book_job</from>
-      <to>nda</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>country_codes_job</from>
-      <to>orange_book_job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>SUCCESS IF LOAD_ALL_TIME=1</from>
       <to>Drop all tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>nda</from>
-      <to>eu_drug_name_active_ingredient_job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1856,6 +1829,33 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>country_codes_job</from>
+      <to>nda</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>nda</from>
+      <to>orange_book_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>orange_book_job</from>
+      <to>eu_drug_name_active_ingredient_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -2030,29 +2030,6 @@ etc.
       <yloc>1232</yloc>
       <width>511</width>
       <heigth>172</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>create nda table 
-needs to be moved to
-before orange book job</note>
-      <xloc>256</xloc>
-      <yloc>1568</yloc>
-      <width>177</width>
-      <heigth>64</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
