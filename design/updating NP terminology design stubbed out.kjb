@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>updating NP terminology design V2</name>
+  <name>updating NP terminology design stubbed out</name>
   <description/>
   <extended_description/>
   <job_version/>
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2025/01/02 11:29:24.703</created_date>
@@ -1447,7 +1448,7 @@ from rxns inner join nps on rxns.concept_name_rxnorm like concat('%',nps.concept
   </hops>
   <notepads>
     <notepad>
-      <note>Overview of string mapping and vocabulary construction
+      <note>Overview of string mapping and vocabulary construction (note left/right pentaho note "indentation" reflects heirarchy of...)
 https://github.com/rkboyce/NaPDI-pv/wiki/Natural-product-string-mapping#overview-of-string-mapping-and-vocabulary-construction</note>
       <xloc>464</xloc>
       <yloc>80</yloc>
