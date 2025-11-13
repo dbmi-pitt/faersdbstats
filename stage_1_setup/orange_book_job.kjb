@@ -377,7 +377,7 @@
       <type>SHELL</type>
       <attributes/>
       <filename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/orange_download.sh</filename>
-      <work_directory/>
+      <work_directory>${Internal.Entry.Current.Directory}</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>Y</set_logfile>
