@@ -836,7 +836,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1824</yloc>
+      <yloc>1952</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1134,7 +1134,7 @@ printf '\n' >> $log_location</script>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>1712</yloc>
+      <yloc>1824</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1595,6 +1595,38 @@ END $$</sql>
       <yloc>864</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Record QQ YY in _about.about</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>INSERT INTO "_about".about (
+    "schema",
+    "table",
+    "attribute",
+    value,
+    "timestamp"
+)
+VALUES (
+    'vigibase',
+    '*',
+    'version',
+    '${LOAD_NEW_QUARTER}' || ' ' || '${LOAD_NEW_YEAR}',
+    NOW()
+);
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>1712</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1717,15 +1749,6 @@ END $$</sql>
     <hop>
       <from>stage_4_laers_ther_log_qtrs.ktr</from>
       <to>stage_4_faers_demo_log_qtrs.ktr</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>stage_4_faers_ther_log_qtrs.ktr</from>
-      <to>beautify_log.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1951,6 +1974,24 @@ END $$</sql>
     <hop>
       <from>select_count_diff_pct</from>
       <to>SUCCESS IF LOAD_ALL_TIME=1 (2nd time)</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>stage_4_faers_ther_log_qtrs.ktr</from>
+      <to>Record QQ YY in _about.about</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Record QQ YY in _about.about</from>
+      <to>beautify_log.sh</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
