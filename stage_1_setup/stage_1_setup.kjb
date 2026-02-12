@@ -1102,7 +1102,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>624</xloc>
+      <xloc>912</xloc>
       <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
@@ -1367,7 +1367,7 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>640</xloc>
       <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
@@ -1474,6 +1474,33 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <nr>0</nr>
       <xloc>784</xloc>
       <yloc>1968</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Check for tables DATABASE_USER can't select from</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>SELECT
+  n.nspname AS schema_name,
+  c.relname AS table_name
+FROM pg_class c
+JOIN pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN ('r','p') -- table, partitioned table
+  AND n.nspname NOT IN ('pg_catalog', 'information_schema')
+  AND NOT has_table_privilege('${DATABASE_USER}', format('%I.%I', n.nspname, c.relname), 'SELECT')
+ORDER BY 1,2;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1794,15 +1821,6 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Set AWS Credentials</from>
-      <to>BACK_UP_DATABASE=1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>BACK_UP_DATABASE=1</from>
       <to>db backup</to>
       <from_nr>0</from_nr>
@@ -1850,6 +1868,24 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
     <hop>
       <from>orange_book_job</from>
       <to>eu_drug_name_active_ingredient_job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set AWS Credentials</from>
+      <to>Check for tables DATABASE_USER can't select from</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check for tables DATABASE_USER can't select from</from>
+      <to>BACK_UP_DATABASE=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2050,7 +2086,7 @@ etc.
 
 
 </note>
-      <xloc>720</xloc>
+      <xloc>704</xloc>
       <yloc>512</yloc>
       <width>194</width>
       <heigth>82</heigth>
@@ -2143,6 +2179,29 @@ You used this flow manually to test your access before using cpt.sh</note>
       <yloc>1440</yloc>
       <width>365</width>
       <heigth>28</heigth>
+      <fontname>Ubuntu</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>                                          untested                                                   
+
+</note>
+      <xloc>192</xloc>
+      <yloc>592</yloc>
+      <width>349</width>
+      <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
