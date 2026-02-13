@@ -374,7 +374,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>1184</xloc>
       <yloc>656</yloc>
       <attributes_kjc/>
     </entry>
@@ -764,24 +764,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Start</from>
-      <to>clear database cache</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>clear database cache</from>
-      <to>stage_0_set_pentaho_vars.kjb job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>stage_6_sql_counts_trans/stage_6_sql_counts_trans</from>
       <to>stage_6_sql_counts_trans/stage_6_sql_counts_trans_comp  transformation</to>
       <from_nr>0</from_nr>
@@ -831,7 +813,7 @@
       <to>stage_3_meta</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -845,7 +827,25 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>Start</from>
+      <to>stage_0_set_pentaho_vars.kjb job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
       <from>stage_0_set_pentaho_vars.kjb job</from>
+      <to>clear database cache</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>clear database cache</from>
       <to>stage_1_setup job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -966,7 +966,7 @@ for new qtr's omop_vocabl_load.ktr...
 (near end of stage_1)
 ...is not currently run by default</note>
       <xloc>16</xloc>
-      <yloc>720</yloc>
+      <yloc>736</yloc>
       <width>282</width>
       <heigth>208</heigth>
       <fontname>Ubuntu</fontname>
@@ -990,7 +990,7 @@ for new qtr's omop_vocabl_load.ktr...
 
 
 </note>
-      <xloc>384</xloc>
+      <xloc>1120</xloc>
       <yloc>624</yloc>
       <width>154</width>
       <heigth>100</heigth>
