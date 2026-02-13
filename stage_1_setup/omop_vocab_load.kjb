@@ -467,6 +467,11 @@
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.domain" ${DATABASE_NAME}
 psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.domain FROM '${OMOP_FILE_DIR}/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
@@ -495,6 +500,11 @@ psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COP
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD="${DATABASE_PASSWORD}"
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h "${DATABASE_HOST}" -p "${DATABASE_PORT}" -U "${DATABASE_USERNAME}" -c "truncate table staging_vocabulary.vocabulary" "${DATABASE_NAME}"
 psql -h "${DATABASE_HOST}"  -p "${DATABASE_PORT}" -U "${DATABASE_USERNAME}" -c "\COPY staging_vocabulary.vocabulary FROM ${OMOP_FILE_DIR}/VOCABULARY.csv WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" "${DATABASE_NAME}"</script>
       <loglevel>Basic</loglevel>
@@ -522,6 +532,11 @@ psql -h "${DATABASE_HOST}"  -p "${DATABASE_PORT}" -U "${DATABASE_USERNAME}" -c "
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_class" ${DATABASE_NAME}
 psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_class FROM '${OMOP_FILE_DIR}/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
@@ -550,6 +565,11 @@ psql -h ${DATABASE_HOST}  -p "${DATABASE_PORT}" -U ${DATABASE_USERNAME} -c "\COP
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.relationship" ${DATABASE_NAME}
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.relationship FROM '${OMOP_FILE_DIR}/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
@@ -578,6 +598,11 @@ psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY s
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.drug_strength" ${DATABASE_NAME}
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.drug_strength FROM '${OMOP_FILE_DIR}/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
@@ -606,6 +631,11 @@ psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY s
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_synonym" ${DATABASE_NAME}
 psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY staging_vocabulary.concept_synonym FROM '${OMOP_FILE_DIR}/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'" ${DATABASE_NAME}
 </script>
@@ -634,6 +664,11 @@ psql -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\COPY s
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
       <script>export PGPASSWORD=${DATABASE_PASSWORD}
+    CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+    CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+    if [ -x "$CONFIG_HELPER" ]; then
+      "$CONFIG_HELPER" "$CONFIG_PATH" "OMOP_FILE_DIR"
+    fi
 psql -v ON_ERROR_STOP=1 -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "truncate table staging_vocabulary.concept_relationship" ${DATABASE_NAME}
 psql -v ON_ERROR_STOP=1 -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USERNAME} -c "\\COPY staging_vocabulary.concept_relationship FROM '${OMOP_FILE_DIR}/CONCEPT_RELATIONSHIP.csv' WITH (FORMAT csv, HEADER true, DELIMITER E'\t', QUOTE E'\b')" ${DATABASE_NAME}
 # quick sanity: show count after load to surface issues immediately

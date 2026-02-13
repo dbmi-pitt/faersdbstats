@@ -387,6 +387,38 @@
       <attributes_kjc/>
     </entry>
     <entry>
+      <name>Validate QA variables</name>
+      <description>Ensure LOG_FILENAME and QA run vars exist before inserting to z_qa_vocab_wc_import_log</description>
+      <type>SHELL</type>
+      <attributes/>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>CONFIG_HELPER="${Internal.Entry.Current.Directory}/../../stage_0_set_pentaho_vars/check_and_source_config.sh"
+CONFIG_PATH="${Internal.Entry.Current.Directory}/../../faers_config.config"
+if [ -x "$CONFIG_HELPER" ]; then
+  "$CONFIG_HELPER" "$CONFIG_PATH" "LOG_FILENAME,LOAD_NEW_YEAR,LOAD_NEW_QUARTER"
+else
+  echo "Warning: $CONFIG_HELPER not found or not executable; ensure LOG_FILENAME, LOAD_NEW_YEAR, LOAD_NEW_QUARTER are set" >&2
+fi
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>496</xloc>
+      <yloc>544</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
       <name>Insert domain QA</name>
       <description/>
       <type>SQL</type>
