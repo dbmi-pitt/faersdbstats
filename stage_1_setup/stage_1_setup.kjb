@@ -1477,20 +1477,30 @@ echo "\n please check that new data is in the s3 bucket here ^ and other domains
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Check for tables DATABASE_USER can't select from</name>
+      <name>Check for tables DATABASE_USERNAME can't select from</name>
       <description/>
       <type>SQL</type>
       <attributes/>
-      <sql>SELECT
-  n.nspname AS schema_name,
-  c.relname AS table_name
-FROM pg_class c
-JOIN pg_namespace n ON n.oid = c.relnamespace
-WHERE c.relkind IN ('r','p') -- table, partitioned table
-  AND n.nspname NOT IN ('pg_catalog', 'information_schema')
-  AND NOT has_table_privilege('${DATABASE_USER}', format('%I.%I', n.nspname, c.relname), 'SELECT')
-ORDER BY 1,2;
-</sql>
+      <sql>DO $$
+DECLARE
+  example text;
+BEGIN
+  SELECT string_agg(format('%I.%I', n.nspname, c.relname), ', ' ORDER BY n.nspname, c.relname)
+  INTO example
+  FROM (
+    SELECT n.nspname, c.relname
+    FROM pg_class c
+    JOIN pg_namespace n ON n.oid = c.relnamespace
+    WHERE c.relkind IN ('r','p')
+      AND n.nspname NOT IN ('pg_catalog', 'information_schema')
+      AND NOT has_table_privilege('${DATABASE_USER}', format('%I.%I', n.nspname, c.relname), 'SELECT')
+    LIMIT 10
+  ) s(nspname, relname);
+
+  IF example IS NOT NULL THEN
+    RAISE EXCEPTION 'FAIL: % missing SELECT on: %', '${DATABASE_USER}', example;
+  END IF;
+END $$;</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -1876,7 +1886,7 @@ ORDER BY 1,2;
     </hop>
     <hop>
       <from>Set AWS Credentials</from>
-      <to>Check for tables DATABASE_USER can't select from</to>
+      <to>Check for tables DATABASE_USERNAME can't select from</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1884,7 +1894,7 @@ ORDER BY 1,2;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Check for tables DATABASE_USER can't select from</from>
+      <from>Check for tables DATABASE_USERNAME can't select from</from>
       <to>BACK_UP_DATABASE=1</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
