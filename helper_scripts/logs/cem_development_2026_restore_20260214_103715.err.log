@@ -1,0 +1,1 @@
+dropdb: error: database removal failed: ERROR:  database "cem_development_2026" does not exist
