@@ -1,19 +1,36 @@
 #!/bin/bash
 #uncomment source to debug from command line (for dev, might also want to comment out aws s3 sync ~ line 53)
+# note this assumes you faers_config.config is a sibiling/next-to the faersdbstats folder where the repo was cloned
 
-# Source configuration file
-CONFIG_FILE="../../faers_config.config"
-if [ -f "$CONFIG_FILE" ]; then
-    source "$CONFIG_FILE"
-    echo "Configuration file loaded: $CONFIG_FILE"
+set -euo pipefail
+
+ENTRY_DIR="${1:-}"
+
+if [[ -z "$ENTRY_DIR" ]]; then
+  echo "ERROR: missing Entry directory argument (expected \${Internal.Entry.Current.Directory})" >&2
+  echo $ENTRY_DIR was: "$ENTRY_DIR" >&2
+  exit 1
+fi
+
+# Pentaho often gives this as file:///path... so normalize
+ENTRY_DIR="${ENTRY_DIR#file://}"
+
+CONFIG_FILE="${ENTRY_DIR}/../../faers_config.config"
+CONFIG_FILE="$(readlink -f "$CONFIG_FILE" 2>/dev/null || realpath "$CONFIG_FILE" 2>/dev/null || echo "$CONFIG_FILE")"
+
+if [[ -f "$CONFIG_FILE" ]]; then
+  # shellcheck disable=SC1090
+  source "$CONFIG_FILE"
+  echo "Configuration file loaded: $CONFIG_FILE"
 else
-    echo "Configuration file not found: $CONFIG_FILE"
-    exit 1
+  echo "Configuration file not found: $CONFIG_FILE" >&2
+  echo "ENTRY_DIR was: $ENTRY_DIR" >&2
+  echo "PWD was: $(pwd)" >&2
+  exit 1
 fi
 
 echo 'LOAD_NEW_YEAR IS ' $LOAD_NEW_YEAR
 echo 'LOAD_NEW_QUARTER IS ' $LOAD_NEW_QUARTER
-
 
 
 log_location=${BASE_FILE_DIR}/logs/${LOG_FILENAME}
@@ -56,7 +73,7 @@ if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == 1 ] || [ ! -d "${BASE_FILE_DIR}/data_
             mkdir data_from_s3
         fi
     else
-        cp data_from_s3 data_from_s3_b_${run_date}
+        rsync -a data_from_s3 data_from_s3_b_${run_date}
         cd data_from_s3
         #download non-existant text files from s3 to data_from_s3
         echo Performing an aws s3 sync with s3://${AWS_S3_BUCKET_NAME}/data/

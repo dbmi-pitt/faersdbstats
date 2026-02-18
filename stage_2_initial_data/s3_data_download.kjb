@@ -387,6 +387,7 @@ done;
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
+      <argument0>${Internal.Entry.Current.Directory}</argument0>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
