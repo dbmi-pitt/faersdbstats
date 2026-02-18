@@ -54,48 +54,56 @@ cd ${BASE_FILE_DIR}
 
 run_date=$(date "+%m%d%Y")
 
-echo 'REBUILD_ALL_TIME_DATA_LOCALLY is '$REBUILD_ALL_TIME_DATA_LOCALLY
-#check if /data_from s3 does not exist then either create it or delete and recreate it
-if [ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == 1 ] || [ ! -d "${BASE_FILE_DIR}/data_from_s3" ]; then
-        if [ ! -d "data_from_s3" ]; then
-            echo data_from_s3 does not exist, will make - line 26
-            mkdir data_from_s3
-            cd data_from_s3
-            aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/ . --exclude "*" --include "*.txt" 
-        else 
-            echo 'data_from_s3 does exist, will rename/move it then recreate - line 33'
-            if [ ! -d "data_from_s3_${run_date}" ]; then
-                echo renaming data_from_s3 to data_from_s3_${run_date}
-                mv data_from_s3 data_from_s3_${run_date}
-            else 
-                echo data_from_s3_${run_date} already exists
-            fi
-            mkdir data_from_s3
-        fi
-    else
-        rsync -a data_from_s3 data_from_s3_b_${run_date}
-        cd data_from_s3
-        #download non-existant text files from s3 to data_from_s3
-        echo Performing an aws s3 sync with s3://${AWS_S3_BUCKET_NAME}/data/
-        
-        #note this sync does not have the --delete option so it will not remove data from the s3 bucket
-        # should be enabled for production
-        aws s3 sync s3://${AWS_S3_BUCKET_NAME}/data/ . --exclude "*" --include "*.txt" 
+echo "REBUILD_ALL_TIME_DATA_LOCALLY is ${REBUILD_ALL_TIME_DATA_LOCALLY}"
 
+data_root="${BASE_FILE_DIR}/data_from_s3"
+backup_root="${BASE_FILE_DIR}/data_from_s3_b_${run_date}"
+archive_root="${BASE_FILE_DIR}/data_from_s3_${run_date}"
+s3_root="s3://${AWS_S3_BUCKET_NAME}/data/"
+
+mkdir -p "${BASE_FILE_DIR}"
+
+if [[ "${REBUILD_ALL_TIME_DATA_LOCALLY}" == "1" || ! -d "${data_root}" ]]; then
+  # rebuild / fresh create
+  if [[ -d "${data_root}" ]]; then
+    echo "data_from_s3 exists; archiving to ${archive_root}"
+
+    if [[ -d "${archive_root}" ]]; then
+      archive_root="${BASE_FILE_DIR}/data_from_s3_$(date '+%Y%m%d_%H%M%S')"
+      echo "Archive already existed; using ${archive_root}"
+    fi
+
+    mv "${data_root}" "${archive_root}"
+  fi
+
+  mkdir -p "${data_root}"
+  cd "${data_root}"
+
+  echo "Fresh aws s3 sync ${s3_root} -> ${data_root}"
+  aws s3 sync "${s3_root}" . --exclude "*" --include "*.txt"
+
+else
+  # incremental
+  if [[ -d "${backup_root}" ]]; then
+    echo "Backup already exists: ${backup_root} (skipping)"
+  else
+    echo "Creating backup snapshot: ${backup_root}"
+    rsync -a --exclude="data_from_s3_b_*" "${data_root}/" "${backup_root}/"
+  fi
+
+  cd "${data_root}"
+
+  echo "Incremental aws s3 sync ${s3_root} -> ${data_root}"
+  aws s3 sync "${s3_root}" . --exclude "*" --include "*.txt"
 fi
 
 # cd data_from_s3
 
-# laers_or_faers toggle
-if [ ${LOAD_NEW_YEAR} -le 2012 ] && [ ${LOAD_NEW_QUARTER: 1} -le 3]
-then
-    echo we have laers data
-    laers_or_faers='laers';
+if [[ "${LOAD_NEW_YEAR}" -le 2012 && "${LOAD_NEW_QUARTER:1:1}" -le 3 ]]; then
+  laers_or_faers="laers"
 else
-    echo we have faers data
-    laers_or_faers='faers';
+  laers_or_faers="faers"
 fi
-
 
 if [ "${LOAD_ALL_TIME}" = 1 ]; then
 mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
@@ -137,9 +145,10 @@ mkdir -p ${BASE_FILE_DIR}/logs/stage_2_domain_import_file_creation/
                 
                 #blow out old staged files
                     for file in ./**/*_staged_with_lfs_only.txt; do
-                        echo 'deleting w/ rm '"$file"
-                        rm $file
+                      [[ -e "$file" ]] || continue
+                      rm -f "$file"
                     done;
+
                 #for name in "${BASE_FILE_DIR}"/data_from_s3/**/*.txt; do #if data_from_s3 isn't specified it might run /all_data/ and take forever #zsh needed
                 for name in ./**/*.txt; do
                     #substring expansion is thrown off by thefilename is 18Q1_new.txt name is ./2018/Q1/DEMO18Q1_new.txt
@@ -278,8 +287,8 @@ else #not LOAD_ALL_DATA
         #housekeeping
                     #blow out old staged files
                     for file in ./**/*_staged_with_lfs_only.txt; do
-                        echo 'about to rm '"$file"
-                        rm $file
+                      [[ -e "$file" ]] || continue
+                      rm -f "$file"
                     done;
 
                     #blow out old staged files
@@ -292,7 +301,7 @@ else #not LOAD_ALL_DATA
         
             echo '$domain is ' $domain
             
-            domain_level=${BASE_FILE_DIR}/data_from_s3/$faers_or_laers${domain}
+            domain_level="${BASE_FILE_DIR}/data_from_s3/${laers_or_faers}/${domain}"
             echo 'just made domain_level='${domain_level}
 
             s3_bucket_source_path=s3://${AWS_S3_BUCKET_NAME}/data/$laers_or_faers/$domain/${LOAD_NEW_YEAR}/${LOAD_NEW_QUARTER}
