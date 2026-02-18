@@ -293,8 +293,9 @@ else #not LOAD_ALL_DATA
 
                     #blow out old staged files
                     for file in ./**/*_new_qtr.txt; do
+                        [[ -e "$file" ]] || continue
                         echo 'about to rm '"$file"
-                        rm $file
+                        rm -f "$file"
                     done;
 
         for domain in demo drug indi outc reac rpsr ther; do # indi rpsr outc; do
