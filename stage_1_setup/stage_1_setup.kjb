@@ -2042,11 +2042,17 @@ run from country_codes_job step</note>
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>skipped for nov 2024 load</note>
+      <note>loaded for cem dev 26 load (02/26/26)
+
+
+
+
+
+data current as of 2/14/2025</note>
       <xloc>16</xloc>
       <yloc>1584</yloc>
-      <width>194</width>
-      <heigth>28</heigth>
+      <width>264</width>
+      <heigth>129</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
