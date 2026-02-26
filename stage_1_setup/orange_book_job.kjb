@@ -596,6 +596,37 @@ aws configure list</script>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Record orangebook update in _about.about</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <sql>INSERT INTO "_about".about (
+    "schema",
+    "table",
+    "attribute",
+    value,
+    "timestamp"
+)
+VALUES (
+    'faers',
+    'nda',
+    'version',
+    '${LOAD_NEW_QUARTER}' || ' ' || '${LOAD_NEW_YEAR}',
+    NOW()
+);</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>${DATABASE_NAME}</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>496</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -628,6 +659,15 @@ aws configure list</script>
     <hop>
       <from>Set job variables</from>
       <to>orange_download.sh</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>orange_book_transform</from>
+      <to>Record orangebook update in _about.about</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
