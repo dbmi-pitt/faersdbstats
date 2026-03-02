@@ -504,24 +504,6 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>create faers.nda (create_nda_table.sql)</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <sql/>
-      <useVariableSubstitution>T</useVariableSubstitution>
-      <sqlfromfile>T</sqlfromfile>
-      <sqlfilename>${FAERSDBSTATS_REPO_LOCATION}/stage_1_setup/create_nda_table.sql</sqlfilename>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>${DATABASE_NAME}</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>592</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>country_code_transform</name>
       <description/>
       <type>TRANS</type>
@@ -869,15 +851,6 @@ COUNTRY_CODE_ROW_NUM_CEM_CHEX is ${COUNTRY_CODE_ROW_NUM_CEM_CHEX}</logmessage>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>log COUNTRY_CODE_ROW_NUM</from>
-      <to>create faers.nda (create_nda_table.sql)</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
